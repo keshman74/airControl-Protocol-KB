@@ -1,0 +1,52 @@
+ID,Family,Device,Function,Protocol,Command / mechanism,Status,Response / notes
+QRY-A31-STATUS-EX,Linkplay,A31,status,HTTP :80,getStatusEx,CONFIRMED,Extended device status; exposes uart_pass_port=8899 and communication_port=8819 on tested A31.
+QRY-A31-PLAYER-STATUS,Linkplay,A31,playback/status,HTTP :80,getPlayerStatus,CONFIRMED,status/mode/vol/mute plus hex metadata on tested A31.
+QRY-A31-METAINFO,Linkplay,A31,metadata,HTTP :80,getMetaInfo,REJECTED,Returned unknown command on tested A31 firmware; do not generalize to A98/A33.
+CMD-A31-VOLUME,Linkplay,A31,volume,HTTP :80,setPlayerCmd:vol:<0..100>,CONFIRMED,Example vol:15 -> Current volume:15%.
+CMD-A31-MUTE-ON,Linkplay,A31,mute,HTTP :80,setPlayerCmd:mute:1,CONFIRMED,Hardware-tested.
+CMD-A31-MUTE-OFF,Linkplay,A31,mute,HTTP :80,setPlayerCmd:mute:0,CONFIRMED,Hardware-tested.
+CMD-A31-SOURCE-AUX,Linkplay,A31,source,HTTP :80,setPlayerCmd:switchmode:AUX%20In,CONFIRMED,Activates AUX In.
+CMD-A31-SOURCE-USB,Linkplay,A31,source,HTTP :80,setPlayerCmd:switchmode:USB%20Disk,CONFIRMED,Activates USB Disk.
+CMD-A31-SOURCE-LINEIN-AUX,Linkplay,A31,source,HTTP :80,setPlayerCmd:switchmode:LineIn,REJECTED,Did not activate AUX on tested A31.
+CMD-A31-PLAY-URL,Linkplay,A31,playback,HTTP :80,setPlayerCmd:play:<URL>,CONFIRMED,Local HTTP MP3 playback confirmed.
+QRY-A31-USB-LIST,Linkplay,A31,USB,HTTP :80,getLocalPlayList,CONFIRMED,JSON locallist; file is HEX -> UTF-8 /media/sda1/...
+QRY-A31-STATIC-IP,Linkplay,A31,network,HTTP :80,getStaticIP,CONFIRMED,"Observed wifi=0 Static, wifi=1 DHCP, eth=-1 unavailable."
+CMD-A31-DHCP,Linkplay,A31,network,HTTP :80,setDhcp:wifi,CONFIRMED,Response OK.
+CMD-A31-STATIC-IP,Linkplay,A31,network,HTTP :80,"setStaticIP:{""type"":""wifi"",""ip"":""<IP>"",""mask"":""<MASK>"",""gateway"":""<GW>"",""dns"":""<DNS>""}",CONFIRMED,JSON command tested; response OK.
+QRY-A31-MCU-VOLUME,MCU,A31,volume,TCP :8899,MCU+VOL+GET&,CAPTURED,Response AXX+VOL+NNN.
+EVT-A31-MCU-VOLUME,MCU,A31,volume event,TCP :8899,AXX+VOL+NNN,CAPTURED,Asynchronous/response volume state.
+QRY-A31-MCU-VERSION,MCU,A31,device info,TCP :8899,MCU+PAS+RAKOIT:VER&,CAPTURED,MCU/RAKOIT query.
+QRY-A31-MXV,MCU,A31,maximum volume,TCP :8899,MCU+PAS+RAKOIT:MXV&,CAPTURED,Maximum volume query.
+CMD-A31-MXV,MCU,A31,maximum volume,TCP :8899,MCU+PAS+RAKOIT:MXV:<30..100>&,IMPLEMENTED,Set + readback verification implemented.
+QRY-A31-TREBLE,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:TRE&,CAPTURED,Treble query.
+CMD-A31-TREBLE,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:TRE:<n>&,CAPTURED/IMPLEMENTED,Treble state/set path.
+QRY-A31-BALANCE,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:BAL&,CAPTURED,Balance query.
+CMD-A31-BALANCE,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:BAL:<n>&,CAPTURED/IMPLEMENTED,Balance range used by app -100..100.
+CMD-A31-MID,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:MID:<n>&,CAPTURED/IMPLEMENTED,Mid parameter.
+QRY-A31-EQ-PRESET,MCU,A31,EQ preset,TCP :8899,MCU+PAS+RAKOIT:EQS&,CAPTURED,Response EQS:n.
+CMD-A31-EQ-PRESET,MCU,A31,EQ preset,TCP :8899,MCU+PAS+RAKOIT:EQS:<n>&,CAPTURED/IMPLEMENTED,Preset select with readback in app.
+QRY-A31-EQ-PRESET-LIST,MCU,A31,EQ preset,TCP :8899,MCU+PAS+RAKOIT:PEQ&,CAPTURED,Observed Flat/Classical/Pop/Jazz/Rock/Vocal list.
+QRY-A31-EQ-TONE,MCU,A31,EQ,TCP :8899,MCU+PAS+EQGet&,IMPLEMENTED,Used to read bass/treble in airControl.
+CMD-A31-VIRTUAL-BASS,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:VBS:<0|1>&,IMPLEMENTED/VERIFIED-IN-APP,Set then readback path exists.
+CMD-A31-VBI,MCU,A31,EQ,TCP :8899,MCU+PAS+RAKOIT:VBI:<1..100>&,CONFIRMED-WRITE-ONLY,Device accepts set; VBI& gives no usable readback on tested firmware.
+EVT-A31-PLAYBACK,MCU,A31,playback event,TCP :8899,AXX+SNG+INF{...}&,CAPTURED,Asynchronous playback status/event.
+QRY-A31-CFE,MCU,A31,unknown,TCP :8899,MCU+PAS+RAKOIT:CFE&,EXPERIMENTAL,Observed; semantics unresolved.
+QRY-A31-LST,MCU,A31,unknown,TCP :8899,MCU+PAS+RAKOIT:LST&,EXPERIMENTAL,Observed; semantics unresolved.
+PROTO-A31-8819,Linkplay,A31,unknown communication,TCP :8819,communication_port=8819,EXPERIMENTAL,Advertised by getStatusEx; command semantics not confirmed.
+CMD-LP-PLAY,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:play:<URL>,DOCUMENTED/IMPLEMENTED,Hardware confirmation exists on A31 for URL playback.
+CMD-LP-PLAYLIST,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:playlist:<songid>,DOCUMENTED/IMPLEMENTED,Per-device verification required.
+CMD-LP-PAUSE,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:pause,DOCUMENTED/IMPLEMENTED,Per-device evidence required.
+CMD-LP-RESUME,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:resume,DOCUMENTED/IMPLEMENTED,Per-device evidence required.
+CMD-LP-TOGGLE,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:onepause,DOCUMENTED/IMPLEMENTED,Per-device evidence required.
+CMD-LP-PREV,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:prev,DOCUMENTED/IMPLEMENTED,Per-device evidence required.
+CMD-LP-NEXT,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:next,DOCUMENTED/IMPLEMENTED,Per-device evidence required.
+QRY-LP-POSITION,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:getplay:<seconds>,DOCUMENTED/IMPLEMENTED,Position query form in app command catalog.
+CMD-LP-SEEK,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:setplay:<seconds>,DOCUMENTED/IMPLEMENTED,Per-device verification required.
+CMD-LP-STOP,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:stop,DOCUMENTED/IMPLEMENTED,Per-device verification required.
+CMD-LP-VOL-UP,Linkplay,A31/A97/A98,volume,HTTP/S,setPlayerCmd:RemoteVol++,DOCUMENTED/IMPLEMENTED,Per-device verification required.
+CMD-LP-VOL-DOWN,Linkplay,A31/A97/A98,volume,HTTP/S,setPlayerCmd:RemoteVol--,DOCUMENTED/IMPLEMENTED,Per-device verification required.
+CMD-LP-MAX-VOL,Linkplay,A31/A97/A98,volume,HTTP/S,setPlayerCmd:maximumVolume:<value>,DOCUMENTED/IMPLEMENTED,Separate from A31 MCU MXV.
+CMD-LP-CHANNEL,Linkplay,A31/A97/A98,playback,HTTP/S,setChannel:<channel>,DOCUMENTED/IMPLEMENTED,Stereo/left/right.
+CMD-LP-LOOP,Linkplay,A31/A97/A98,playback,HTTP/S,setPlayerCmd:loopmode:<loopmode>,DOCUMENTED/IMPLEMENTED,Loop mode.
+CMD-LP-REBOOT,Linkplay,A31/A97/A98,system,HTTP/S,reboot,DOCUMENTED/IMPLEMENTED,Do not mark hardware-confirmed globally.
+CMD-LP-FACTORY,Linkplay,A31/A97/A98,system,HTTP/S,factory,DOCUMENTED/IMPLEMENTED,Destructive; hardware evidence not assumed.
