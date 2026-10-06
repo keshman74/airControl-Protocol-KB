@@ -1,0 +1,52 @@
+ID,Family,Device,Function,Protocol,Command / mechanism,Status,Response / notes
+CMD-A31-MCU-PRESET,MCU,A31,media preset,TCP :8899,MCU+KEY+<001..010>,IMPLEMENTED/NEEDS-HW-EVIDENCE,Translation of MCUKeyShortClick:1..10 in airControl.
+EVT-A31-EQ-TREBLE,MCU,A31,EQ event,TCP :8899,MCU+PAS+EQ:treble:<NN>&,CAPTURED,Observed after TRE change in saved A31 capture.
+QRY-ACS2-PLAYER-STATUS,ACS2,A33/ACS2,playback/status,HTTP :8000 or HTTPS :8443,getPlayerStatus,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PLAY-URL,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:play:<url>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PLAYLIST,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:playlist:<songid>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PAUSE,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:pause,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-RESUME,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:resume,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-TOGGLE,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:onepause,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PREV,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:prev,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-NEXT,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:next,DOCUMENTED,Official ACS2 API.
+QRY-ACS2-POSITION,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:getplay:<seconds>,DOCUMENTED,Official ACS2 API; source support restrictions documented.
+CMD-ACS2-SEEK-HTTP,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:setplay:<seconds>,DOCUMENTED,Official ACS2 API; distinct from native TCP :23040 seek.
+CMD-ACS2-STOP,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:stop,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-VOLUME,ACS2,A33/ACS2,volume,HTTP :8000 or HTTPS :8443,setPlayerCmd:vol:<value>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-VOL-UP,ACS2,A33/ACS2,volume,HTTP :8000 or HTTPS :8443,setPlayerCmd:RemoteVol++,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-VOL-DOWN,ACS2,A33/ACS2,volume,HTTP :8000 or HTTPS :8443,setPlayerCmd:RemoteVol--,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-MUTE,ACS2,A33/ACS2,mute,HTTP :8000 or HTTPS :8443,setPlayerCmd:mute:<mute>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-MAX-VOLUME,ACS2,A33/ACS2,volume,HTTP :8000 or HTTPS :8443,setPlayerCmd:maximumVolume:<maximumVolume>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-CHANNEL,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setChannel:<channel>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PROMPT-TONE,ACS2,A33/ACS2,device,HTTP :8000 or HTTPS :8443,setPlayerCmd:prompttone:<prompt_tone>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-LOOP,ACS2,A33/ACS2,playback,HTTP :8000 or HTTPS :8443,setPlayerCmd:loopmode:<loopmode>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-REBOOT,ACS2,A33/ACS2,system,HTTP :8000 or HTTPS :8443,reboot,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-FACTORY,ACS2,A33/ACS2,system,HTTP :8000 or HTTPS :8443,factory,DOCUMENTED,Official ACS2 API; destructive.
+CMD-ACS2-SHUTDOWN,ACS2,A33/ACS2,system,HTTP :8000 or HTTPS :8443,shutdown,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-DEVICE-NAME,ACS2,A33/ACS2,device,HTTP :8000 or HTTPS :8443,setPlayerCmd:devicename:<devicename>,DOCUMENTED,Official ACS2 API.
+QRY-ACS2-WIFI-STATE,ACS2,A33/ACS2,network,HTTP :8000 or HTTPS :8443,wlanGetConnectState,DOCUMENTED,Official ACS2 API.
+QRY-ACS2-SCAN-APS,ACS2,A33/ACS2,network,HTTP :8000 or HTTPS :8443,getScanAPs,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-CONNECT-AP,ACS2,A33/ACS2,network,HTTP :8000 or HTTPS :8443,connectToAP:wifiName:<name>:wifiPassword:<password>,DOCUMENTED,Never store real credentials.
+CMD-ACS2-PROMPT-DOWNLOAD,ACS2,A33/ACS2,prompt sound,HTTP :8000 or HTTPS :8443,downloadPromptSound:<audioFileName>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PROMPT-PLAY,ACS2,A33/ACS2,prompt sound,HTTP :8000 or HTTPS :8443,playPromptSound:<audioName>:<volume>,DOCUMENTED,Official/API-console spelling normalized from application catalog; verify manual parameter spelling before CONFIRMED.
+QRY-ACS2-PROMPT-SERVER,ACS2,A33/ACS2,prompt sound,HTTP :8000 or HTTPS :8443,viewServerPromptSound,DOCUMENTED,Official ACS2 API.
+QRY-ACS2-PROMPT-DEVICE,ACS2,A33/ACS2,prompt sound,HTTP :8000 or HTTPS :8443,viewDevicePromptSound,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-PROMPT-DELETE,ACS2,A33/ACS2,prompt sound,HTTP :8000 or HTTPS :8443,deleteSpecifiedAudio:<audioPath>,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-STATIC-SWITCH,ACS2,A33/ACS2,network,HTTP :8000 or HTTPS :8443,setNetIPSwitchState:<switch>,DOCUMENTED/IMPLEMENTED,Official API; airControl uses Disable / W_Enable / E_Enable variants in current code.
+CMD-ACS2-STATIC-IP,ACS2,A33/ACS2,network,HTTP :8000 or HTTPS :8443,setStaticIP:<staticIPInfo JSON>,DOCUMENTED/IMPLEMENTED,Fields W/E StaticIp/Netmask/Gateway documented.
+QRY-UPNP-STREAM-CAPABILITY,UPnP / WiiM Home,Capability-dependent; A31/A97/A98/A33 applicability not yet assigned,stream services capability,UPnP action,"StreamServicesCapability(InstanceID, AppVersion)",SOURCE-CONFIRMED / NOT-HW-VERIFIED,Returns StreamCapability. Chat audit says WiiM Home uses capability to determine supported services including Samba; do not infer solely from chip/model.
+CMD-UPNP-PQ-CREATE,UPnP PlayQueue / WiiM Home,Unassigned,create media queue,UPnP PlayQueue,PlayQueue/CreateQueue(QueueContext),PARTIAL / SOURCE-CONFIRMED / NOT-HW-VERIFIED,Recovered LPPlayMediaData -> getPlayData -> np8.k -> PlayQueue -> CreateQueue chain.
+CMD-UPNP-PQ-PLAY-INDEX,UPnP PlayQueue / WiiM Home,Unassigned,play queue from index,UPnP PlayQueue,PlayQueueWithIndex(...),SOURCE-CONFIRMED / NOT-HW-VERIFIED,Deep audit later recovered exact QueueName and Index.
+CMD-UPNP-PQ-APPEND-EX,UPnP PlayQueue / WiiM Home,Unassigned,append tracks to queue,UPnP PlayQueue,"AppendTracksInQueueEx(QueueContext, Action, StartIndex, Direction, Play)",SOURCE-CONFIRMED / NOT-HW-VERIFIED,Action optional when non-empty; numeric fields are UnsignedIntegerFourBytes.
+CMD-A31-HTTP-VOL-UP-REL,Linkplay HTTP / airScope fallback,A31 / airScope family,relative volume up,HTTP :80,setPlayerCmd:vol++ (URL form setPlayerCmd:vol%2b%2b),IMPLEMENTED / OBSERVED-IN-LOG,Corrected canonical mapping.
+CMD-A31-HTTP-VOL-DOWN-REL,Linkplay HTTP / airScope fallback,A31 / airScope family,relative volume down,HTTP :80,setPlayerCmd:vol--,IMPLEMENTED / OBSERVED-IN-LOG,Corrected canonical mapping.
+QRY-A31-MCU-VOLUME-NATIVE,MCU,A31 / airScope family,native volume read used by gateway,TCP :8899 framed transport,MCU+VOL+GET,IMPLEMENTED / RESPONSE-KNOWN,Gateway waits for AXX+VOL before calculating relative target.
+QRY-UPNP-STREAM-CAPABILITY-EXACT,WiiM Home / UPnP,A31/A97/A98 tested,service capability,RenderingControl /upnp/control/rendercontrol1,"StreamServicesCapability(InstanceID=0, AppVersion=BuildConfig.VERSION_NAME) -> StreamCapability",APK-VERIFIED + HARDWARE-VERIFIED,WiiM Home path recovered and hardware matrices captured.
+PROTO-UPNP-PLAYQUEUE-ENDPOINT,WiiM Home / UPnP,A31/A97/A98,PlayQueue service discovery,UPnP,serviceId urn:wiimu-com:serviceId:PlayQueue ; controlURL /upnp/control/PlayQueue1,APK-VERIFIED + HARDWARE-VERIFIED,Discover endpoint from device description.
+CMD-UPNP-PQ-REPLACE,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,replace queue,UPnP PlayQueue,ReplaceQueue(QueueContext),APK-VERIFIED / NOT-HW-ACTION-VERIFIED,Exact action recovered.
+CMD-UPNP-PQ-APPEND,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,append tracks,UPnP PlayQueue,AppendTracksInQueue(QueueContext),APK-VERIFIED / NOT-HW-ACTION-VERIFIED,Exact action recovered.
+QRY-UPNP-PQ-BROWSE,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,browse queue,UPnP PlayQueue,BrowseQueue(QueueName) -> QueueContext,APK-VERIFIED / NOT-HW-ACTION-VERIFIED,Callback consumes QueueContext.
+CMD-UPNP-PQ-DELETE,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,delete queue,UPnP PlayQueue,DeleteQueue(QueueName),APK-VERIFIED / NOT-HW-ACTION-VERIFIED,Exact action recovered.
+CMD-UPNP-PQ-BACKUP,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,backup queue,UPnP PlayQueue,BackUpQueue(QueueContext),APK-VERIFIED / NOT-HW-ACTION-VERIFIED,No hardware invocation captured yet.
+QRY-UPNP-PQ-INDEX,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,queue index/status,UPnP PlayQueue,"GetQueueIndex(QueueName) -> CurrentIndex, PreloadingIndex, CurrentPage, TrackNums",APK-VERIFIED / NOT-HW-ACTION-VERIFIED,Exact arguments recovered.
+CMD-UPNP-PQ-PLAY-INDEX-EXACT,UPnP PlayQueue / WiiM Home,Capability-dependent Linkplay/WiiM,play queue from index,UPnP PlayQueue,"PlayQueueWithIndex(QueueName, Index)",APK-VERIFIED / NOT-HW-ACTION-VERIFIED,op8 shows exact arguments.
