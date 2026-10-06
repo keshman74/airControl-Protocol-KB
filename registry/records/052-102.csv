@@ -1,0 +1,52 @@
+ID,Family,Device,Function,Protocol,Command / mechanism,Status,Response / notes
+CMD-LP-SHUTDOWN,Linkplay,A31/A97/A98,system,HTTP/S,shutdown,DOCUMENTED/IMPLEMENTED,Per-device support may vary.
+QRY-LP-WIFI-STATE,Linkplay,A31/A97/A98,network,HTTP/S,wlanGetConnectState,DOCUMENTED/IMPLEMENTED,Network state.
+QRY-LP-SCAN-APS,Linkplay,A31/A97/A98,network,HTTP/S,getScanAPs,DOCUMENTED/IMPLEMENTED,Scan Wi-Fi.
+CMD-LP-CONNECT-AP,Linkplay,A31/A97/A98,network,HTTP/S,connectToAP:<wifiName>:<wifiPassword>,DOCUMENTED/IMPLEMENTED,Credential-bearing; never store real password.
+CMD-LP-MR-JOIN,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:JoinGroup:IP=<MASTER_IP>:uuid=<MASTER_UUID>,CONFIRMED-A97,Hardware-tested on A97; do not claim A31-specific test.
+CMD-LP-MR-LEAVE,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:LeaveGroup,CONFIRMED-A97,Hardware-tested on A97.
+QRY-LP-MR-SLAVES,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:getSlaveList,DOCUMENTED,Native Linkplay multiroom.
+CMD-LP-MR-UNGROUP,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:Ungroup,DOCUMENTED,Native Linkplay multiroom.
+CMD-LP-MR-KICK,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:SlaveKickout:<ip>,DOCUMENTED,Verify exact syntax before CONFIRMED.
+CMD-LP-MR-SLAVE-VOL,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:SlaveVolume:<...>,DOCUMENTED,Exact parameterization requires source-specific entry.
+CMD-LP-MR-SLAVE-MUTE,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:SlaveMute:<...>,DOCUMENTED,Exact parameterization requires source-specific entry.
+CMD-LP-MR-SLAVE-CHANNEL,Linkplay,A31/A97/A98,multiroom,HTTP/S,multiroom:SlaveChannel:<...>,DOCUMENTED,Exact parameterization requires source-specific entry.
+QRY-ACS2-STATUS,ACS2,A33/ACS2,status,HTTP :8000 or HTTPS :8443,getStatusEx,DOCUMENTED,Official ACS2 API.
+CMD-ACS2-USB-PLAY,ACS2,A33/ACS2,USB,HTTP :8000 or HTTPS :8443,playFromUsbDisk,DOCUMENTED,OK / Not / Error.
+QRY-ACS2-USB-LIST,ACS2,A33/ACS2,USB,HTTP :8000 or HTTPS :8443,getUsbSongList,DOCUMENTED,JSON numbered /udisk paths.
+CMD-ACS2-USB-SELECT,ACS2,A33/ACS2,USB,HTTP :8000 or HTTPS :8443,selectUsbTracks:<usbSongNum>,DOCUMENTED,OK / Format / Not found / Not / Error.
+CMD-ACS2-SOURCE,ACS2,A33/ACS2,source,HTTP :8000 or HTTPS :8443,setPlayerCmd:switchmode:<mode>,DOCUMENTED,"Modes documented: Network, Bluetooth, LineIn, USBDisk, OpticalIn, HDMIARC, RCAIn, RCA2 In, PHONO In."
+CMD-ACS2-BT-DISCOVERY,ACS2,A33/ACS2,Bluetooth,HTTP :8000 or HTTPS :8443,setDiscoveryBluetooth:<Open|Close>,DOCUMENTED,Bluetooth visibility.
+CMD-ACS2-BT-RESET,ACS2,A33/ACS2,Bluetooth,HTTP :8000 or HTTPS :8443,resetBluetoothPairing,DOCUMENTED,Reset pairing.
+CMD-ACS2-BT-CLEAR,ACS2,A33/ACS2,Bluetooth,HTTP :8000 or HTTPS :8443,clearBluetoothPairingList,DOCUMENTED,Reset + clear pairing list.
+QRY-ACS2-BT-NAME,ACS2,A33/ACS2,Bluetooth,HTTP :8000 or HTTPS :8443,getBluetoothName,DOCUMENTED,JSON status response.
+CMD-ACS2-BT-NAME,ACS2,A33/ACS2,Bluetooth,HTTP :8000 or HTTPS :8443,modifyBluetoothName:<bleName>,DOCUMENTED,Change Bluetooth name.
+QRY-ACS2-META,ACS2,A33/ACS2,metadata,HTTP :8000 or HTTPS :8443,getMetaInfo,DOCUMENTED,Official example includes Title/Artist/Album/Picture/Schedule/Totlen/PlaySource.
+CMD-ACS2-MR-HOST,ACS2,A33,multiroom,HTTP :8000 or HTTPS :8443,multiroom:setHost,DOCUMENTED/IMPLEMENTED,Separate from Linkplay native multiroom.
+CMD-ACS2-MR-SLAVE,ACS2,A33,multiroom,HTTP :8000 or HTTPS :8443,multiroom:setSlave:<host_ip>,DOCUMENTED/IMPLEMENTED,Send to slave.
+CMD-ACS2-MR-DISCONNECT,ACS2,A33,multiroom,HTTP :8000 or HTTPS :8443,multiroom:disconnectSlave,DOCUMENTED/IMPLEMENTED,A33 ACS2.
+CMD-ACS2-MR-BREAK,ACS2,A33,multiroom,HTTP :8000 or HTTPS :8443,multiroom:breakUp,DOCUMENTED/IMPLEMENTED,A33 ACS2.
+QRY-ACS2-MR-INFO,ACS2,A33,multiroom,HTTP :8000 or HTTPS :8443,multiroom:getInformation,DOCUMENTED/IMPLEMENTED,A33 ACS2.
+QRY-ACS2-EQ-TYPE,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,getEqType,DOCUMENTED,Official API.
+CMD-ACS2-EQ-ENABLE,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,eqEnable:<eqSwitch>,DOCUMENTED,Official API.
+CMD-ACS2-EQ-HILO,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,"setEqHighAndLowFrequencies:{""Bass"":""-5..5"",""Treble"":""-5..5""}",DOCUMENTED,OK/FAIL/Bass error/Treble error/Error.
+CMD-ACS2-EQ-PRESET,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,setPresetEq:<presetInfo JSON>,DOCUMENTED,10-band -12..12.
+CMD-ACS2-EQ-PARAM,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,setParameterEq:<parametInfo JSON>,DOCUMENTED,Up to 10 points; filters PK/LS/HS/LP/HP/OFF.
+QRY-ACS2-EQ-INFO,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,getEqInfo:<eqType>,DOCUMENTED,"Types 1,2,3,22,33 documented."
+CMD-ACS2-EQ-ADD,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,addCustomEqInfo:<addEqInfo JSON>,DOCUMENTED,Custom preset/parameter EQ.
+CMD-ACS2-EQ-DELETE,ACS2,ACS2 devices,EQ,HTTP :8000 or HTTPS :8443,delCustomEqInfo:<delEqInfo JSON>,DOCUMENTED,Type 2 preset / 3 parameter.
+CMD-A33-PLAY,A33 Native,A33,playback,TCP :1234 JSON,"{""cmd"":""play""}",CONFIRMED,Hardware-confirmed.
+CMD-A33-PAUSE,A33 Native,A33,playback,TCP :1234 JSON,"{""cmd"":""pause""}",CONFIRMED,Hardware-confirmed.
+CMD-A33-NEXT,A33 Native,A33,playback,TCP :1234 JSON,"{""cmd"":""next""}",CONFIRMED,Hardware-confirmed.
+CMD-A33-PREV,A33 Native,A33,playback,TCP :1234 JSON,"{""cmd"":""prev""}",CONFIRMED,Hardware-confirmed.
+CMD-A33-VOLUME,A33 Native,A33,volume,TCP :1234 JSON,"{""cmd"":""volume"",""level"":<N>}",CONFIRMED,Hardware-confirmed.
+CMD-A33-MUTE-ON,A33 Native,A33,mute,TCP :1234 JSON,"{""cmd"":""mute"",""state"":""on""}",CONFIRMED,Hardware-confirmed.
+CMD-A33-SEEK,A33 Native,A33,seek,TCP :23040 binary,A3 BF … [ASCII 4<seconds>] … FB,CONFIRMED,"Seek 30/60/90/120 sec observed; full intermediate framing must come from source/capture, never guessed."
+EVT-A33-TUNEIN-CONTEXT,A33 Native,A33,online service,TCP :23040,StreamMediaName=tunein + metadata/context,CAPTURED,"TrackTitle/Url/Id/Image, TuneinUrl/Id, TrackContext/Path."
+EVT-A33-QOBUZ-CONTEXT,A33 Native,A33,online service,TCP :23040,StreamMediaName=qobuz + metadata/context,CAPTURED,TrackId/SongList/TrackContext/Path/SongPlay/duration/FormatId; redact Token.
+CMD-A31-MCU-PAUSE,MCU,A31,playback,TCP :8899,MCU+PLY-PUS,IMPLEMENTED/NEEDS-HW-EVIDENCE,airControl maps HTTP pause to this native TCP command with HTTP fallback.
+CMD-A31-MCU-PLAY,MCU,A31,playback,TCP :8899,MCU+PLY-PLA,IMPLEMENTED/NEEDS-HW-EVIDENCE,airControl maps resume/play to this native TCP command with HTTP fallback.
+CMD-A31-MCU-NEXT,MCU,A31,playback,TCP :8899,MCU+PLY+NXT,IMPLEMENTED/NEEDS-HW-EVIDENCE,Native fast path in airControl; preserve HTTP fallback.
+CMD-A31-MCU-PREV,MCU,A31,playback,TCP :8899,MCU+PLY+PRV,IMPLEMENTED/NEEDS-HW-EVIDENCE,Native fast path in airControl; preserve HTTP fallback.
+CMD-A31-MCU-VOLUME,MCU,A31,volume,TCP :8899,MCU+VOL+<NNN>,IMPLEMENTED/NEEDS-HW-EVIDENCE,airControl pads 0..100 to three digits.
+CMD-A31-MCU-MUTE,MCU,A31,mute,TCP :8899,MCU+MUT+00<0|1>,IMPLEMENTED/NEEDS-HW-EVIDENCE,Native fast path in airControl.
