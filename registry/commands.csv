@@ -1,0 +1,10 @@
+# Canonical registry layout
+
+The v0.4.8 baseline contains **204 records** and is stored losslessly in four CSV shards to keep GitHub updates auditable:
+
+- records/001-051.csv
+- records/052-102.csv
+- records/103-153.csv
+- records/154-204.csv
+
+Each shard repeats the CSV header. Future consolidation may generate a single machine file automatically; the record IDs are canonical.
