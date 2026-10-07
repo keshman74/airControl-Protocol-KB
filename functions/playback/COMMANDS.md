@@ -9,3 +9,10 @@
 - `CMD-ACS2-PLAY-URL`, `CMD-ACS2-PLAYLIST`, `CMD-ACS2-PAUSE`, `CMD-ACS2-RESUME`, `CMD-ACS2-TOGGLE`, `CMD-ACS2-PREV`, `CMD-ACS2-NEXT`, `CMD-ACS2-SEEK-HTTP`, `CMD-ACS2-STOP` — **DOCUMENTED**
 - `CMD-UPNP-AVT-PLAY`, `CMD-UPNP-AVT-PAUSE`, `CMD-UPNP-AVT-PREV`, `CMD-UPNP-AVT-NEXT`, `CMD-UPNP-AVT-SEEK` — **APK-VERIFIED**
 - PlayQueue playback: `CMD-UPNP-PQ-CREATE`, `CMD-UPNP-PQ-PLAY-INDEX-EXACT`, `CMD-UPNP-PQ-APPEND-EX-EXACT`, `CMD-UPNP-PQ-TAKE-CONTROL` — see `protocols/upnp/COMMANDS.md`.
+
+
+## WiiM OpenAPI v1.2.0 source import
+Applicability to A97/A98 is **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
+
+- `CMD-WIIM-SET-PLAYER-CMD-HEX-PLAYLIST-URL` — `setPlayerCmd:hex_playlist:url:{index}` — Play a specific track from a playlist by URL and index — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAYER-CMD-SEEK-POSITION` — `setPlayerCmd:seek:position` — Seek — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
