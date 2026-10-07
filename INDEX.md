@@ -39,6 +39,10 @@ Playback · Volume · Mute · Sources · EQ · USB · Bluetooth · Metadata · M
 
 Canonical function files are under `functions/*/COMMANDS.md`.
 
+## Research chats
+- [Research chat registry](CHATS.md) — bidirectional provenance map from research conversations to canonical records.
+- [Chat-to-KB workflow](evidence/chat-audits/README.md)
+
 ## Evidence
 `evidence/` contains proof and provenance only: hardware tests, captures, official docs, application code, reverse engineering and chat audits. Audit files are **not** a parallel technical index.
 
