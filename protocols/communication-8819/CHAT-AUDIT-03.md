@@ -5,9 +5,9 @@ WiiM Home contains a concrete `Socket8819CommThread` implementation, so port 881
 
 ### Framing
 ```text
-offset 0   uint32 magic = 538482200
-offset 4   uint32 payload_length
-offset 8   uint32 0
+offset 0   encoded 32-bit field derived from decimal magic 538482200
+offset 4   encoded 32-bit field derived from payload_length
+offset 8   encoded 32-bit field derived from 0
 offset 12  8 zero bytes
 offset 20  UTF-8 payload
 ```
@@ -18,7 +18,7 @@ Immediately after connect, the app sends:
 {"action":"1888"}
 ```
 
-It then reads response bytes and records connected/duration/size/speed. The audited source also shows a connectivity helper that falls back to TCP port `59152` if the requested port fails.
+It then reads response bytes and records connected/duration/size/speed. Byte order/literal header bytes remain unresolved until `vob.a()` and `mg0.f()` are decoded. A separate generic connectivity helper tests TCP port `59152` if an arbitrary requested port fails; this is NOT proven to be an :8819 protocol fallback.
 
 Status: **APK-VERIFIED / NOT-HW-VERIFIED**.
 

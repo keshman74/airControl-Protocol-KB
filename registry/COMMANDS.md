@@ -1,8 +1,12 @@
 # Master Command Registry
 
-Baseline: **v0.4.8 — 204 canonical records**.
+Current canonical ledger: **221 records**.
 
-All 204 records have been reviewed for structural placement. The CSV shards under `registry/records/` remain the lossless source table, while usable canonical views are distributed into device, protocol and function sections.
+- v0.4.8 baseline: records **1–204**
+- saved-chat audit increment: records **205–214**
+- current-chat/A33M V1.2 normalization: records **215–221**
+
+The CSV shards under `registry/records/` are the lossless source table, while usable canonical views are distributed into device, protocol and function sections.
 
 Chat-audit documents under `evidence/chat-audits/` are provenance only. A finding discovered during a chat audit must be promoted into the canonical structure; it must never exist only in an audit document.
 

@@ -1,0 +1,8 @@
+ID,Family,Device,Function,Protocol,Command / mechanism,Status,Response / notes
+CMD-A33M-PRESET-ADD,A33M,A33M/A33,media preset,ACS2/A33M HTTP/HTTPS,"oneClickPreset:{""PresetNumber"":""x"",""Overwrite"":""yes|no""}",DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"PresetNumber 0 auto-selects empty slot; 1..12 explicit slot. Returns OK/FAIL/Format/Exceed/Error."
+CMD-A33M-PRESET-CHOICE,A33M,A33M/A33,media preset playback,ACS2/A33M HTTP/HTTPS,"choicePreset:<1..12>",DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"Returns OK/Not/Format/Exceed/Error; Not means slot empty."
+CMD-A33M-PRESET-PREV,A33M,A33M/A33,previous media preset,ACS2/A33M HTTP/HTTPS,playPreviousPreset,DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"Returns OK/FAIL/Error."
+CMD-A33M-PRESET-NEXT,A33M,A33M/A33,next media preset,ACS2/A33M HTTP/HTTPS,playNextPreset,DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"Returns OK/FAIL/Error."
+CMD-A33M-PRESET-MOVE,A33M,A33M/A33,move media preset,ACS2/A33M HTTP/HTTPS,"movePresetPosition:{""OldIndex"":""x"",""NewIndex"":""x""}",DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"Returns OK/FAIL/Error."
+CMD-A33M-PRESET-DELETE,A33M,A33M/A33,delete media preset,ACS2/A33M HTTP/HTTPS,"deletePreset:<0..12>",DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"0 clears entire list; 1..12 deletes slot. Returns OK/FAIL/Format/Exceed/Error."
+QRY-A33M-PRESET-LIST,A33M,A33M/A33,media preset list,ACS2/A33M HTTP/HTTPS,getPresetListInfo,DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED,"Success is JSON response; official V1.2 manual does not publish its schema. Do not invent fields."

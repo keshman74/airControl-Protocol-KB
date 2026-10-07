@@ -27,6 +27,8 @@ When a research chat discovers or tests something:
 
 | CHAT-SHARE-6AC59E5A | Shared ChatGPT conversation — https://chatgpt.com/share/6ac59e5a-ab1c-83eb-87d8-a010d7763d0a | Research/evidence source; exact title and protocol scope pending content recovery/audit | Link preserved now. Canonical IDs will be attached after the conversation content is recovered and audited; no technical claims are inferred from the URL alone. |
 
+| CHAT-CURRENT-KB-INTEGRATION | **Current airControl-Protocol-KB integration conversation** (2026-10-07) | KB normalization, chat/project provenance linking, A33M V1.2 preset extraction, TCP :8819 correction | Records 215–221; A33M preset family; correction of generic TCP 59152 rule; KB provenance policy. Hardware preset testing intentionally deferred to the dedicated A33 preset research chat. |
+
 ## Project containers
 
 A ChatGPT Project is a provenance container, not a technical record. Its child research chats are linked individually to canonical IDs when audited. `PRJ-KNX-LINKPLAY-GATE` is the first explicitly linked project container.

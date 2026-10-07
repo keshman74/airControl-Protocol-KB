@@ -683,3 +683,17 @@ setStaticIP:<staticIPInfo JSON>
 ```
 
 **Notes:** Fields W/E StaticIp/Netmask/Gateway documented.
+
+
+## A33M V1.2 — native preset family
+Official A33M envelope supports HTTP `:8000/?Instruct=` and HTTPS `:8443/?Instruct=`.
+
+- `CMD-A33M-PRESET-ADD` — `oneClickPreset:<presetInfo>`
+- `CMD-A33M-PRESET-CHOICE` — `choicePreset:<1..12>`
+- `CMD-A33M-PRESET-PREV` — `playPreviousPreset`
+- `CMD-A33M-PRESET-NEXT` — `playNextPreset`
+- `CMD-A33M-PRESET-MOVE` — `movePresetPosition:<moveInfo>`
+- `CMD-A33M-PRESET-DELETE` — `deletePreset:<0..12>`
+- `QRY-A33M-PRESET-LIST` — `getPresetListInfo`
+
+Status: **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**. The official document states JSON success for `getPresetListInfo` but does not publish its JSON schema.
