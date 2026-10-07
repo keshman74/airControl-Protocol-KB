@@ -11,3 +11,5 @@
 | PROTO-A33-JSON-1234 | A33 | TCP :1234 | bidirectional JSON state/control | CONFIRMED |
 | PROTO-A33-NATIVE-23040 | A33 | TCP :23040 | native commands, seek, service context/metadata | CONFIRMED/CAPTURED |
 | PROTO-UPNP | A31/A33 observed | SSDP/UPnP | discovery/rendering | PARTIAL |
+
+| PROTO-WIIM-HTTPAPI | WiiM/Linkplay; A97/A98 candidates | HTTPS :443 | `/httpapi.asp?command=<command>`; self-signed TLS on WiiM | SOURCE-DOCUMENTED / A97-A98 NOT-HW-VERIFIED |
