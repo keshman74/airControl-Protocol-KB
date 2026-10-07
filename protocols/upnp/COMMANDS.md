@@ -18,7 +18,7 @@
 - `CMD-UPNP-AVT-PAUSE` — **playback** — `Pause` — **APK-VERIFIED**
 - `CMD-UPNP-AVT-PREV` — **playback** — `Previous` — **APK-VERIFIED**
 - `CMD-UPNP-AVT-NEXT` — **playback** — `Next` — **APK-VERIFIED**
-- `CMD-UPNP-AVT-SEEK` — **seek** — `Seek` — **APK-VERIFIED**
+- `CMD-UPNP-AVT-SEEK` — **seek** — `Seek` — **APK-VERIFIED + A31-HARDWARE-VERIFIED (REL_TIME)**
 - `QRY-UPNP-AVT-MEDIAINFO` — **media info** — `GetMediaInfo` — **APK-VERIFIED**
 - `QRY-UPNP-AVT-INFOEX` — **extended transport info** — `GetInfoEx` — **APK-VERIFIED**
 - `PROTO-UPNP-QUEUECONTEXT-XML` — **QueueContext serialization** — `<QueueContext>...<Tracks>...</Tracks>...</QueueContext>` — **APK-VERIFIED / EXACT-BUILDER-RECOVERED**
@@ -64,3 +64,5 @@
 - `CMD-UPNP-PQ-USER-REGISTER` — **online account register** — `UserRegister(QueueName, UserName, PassWord) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 - `CMD-UPNP-PQ-USER-LOGIN` — **online account login** — `UserLogin(AccountSource, Version, UserName, PassWord, SavePass, Code, CodeVerifier, Token, Proxy) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 - `CMD-UPNP-PQ-USER-LOGOUT` — **online account logout** — `UserLogout(AccountSource) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+
+- `TEST-A31-UPNP-SEEK-REL-TIME` — **A31 seek hardware evidence** — `AVTransport Seek(Unit=REL_TIME)` — **HARDWARE-VERIFIED**; exact request/response bytes were not preserved in the audited origin chat, so only the action/unit/result are promoted.
