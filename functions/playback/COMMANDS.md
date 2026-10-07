@@ -16,3 +16,10 @@ Applicability to A97/A98 is **candidate / NOT-HW-VERIFIED** unless separately pr
 
 - `CMD-WIIM-SET-PLAYER-CMD-HEX-PLAYLIST-URL` — `setPlayerCmd:hex_playlist:url:{index}` — Play a specific track from a playlist by URL and index — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
 - `CMD-WIIM-SET-PLAYER-CMD-SEEK-POSITION` — `setPlayerCmd:seek:position` — Seek — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+
+## WiiM OpenAPI v1.2.0 source import
+Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
+
+- `CMD-WIIM-SET-PLAYER-CMD-HEX-PLAYLIST-URL` — `setPlayerCmd:hex_playlist:url:{index}` — Play a specific track from a playlist by URL and index [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAYER-CMD-SEEK-POSITION` — `setPlayerCmd:seek:position` — Seek — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
