@@ -23,6 +23,12 @@ When a research chat discovers or tests something:
 | CHAT-WIIM-PLAYQUEUE | WiiM Home/PlayQueue research; currently provenance overlaps CHAT-AIRCONTROL-300926/041026 | PlayQueue SCPD, QueueContext, local/media-server playback, Qobuz queue execution | `PROTO-UPNP-PLAYQUEUE-ENDPOINT`, Create/Replace/Append/Browse/Delete/Backup/PlayQueueWithIndex/AppendTracksInQueueEx and related SCPD actions. |
 | CHAT-TCP8819 | TCP :8819 focused research; currently provenance overlaps CHAT-AIRCONTROL-300926 | WiiM Home network diagnostic/performance channel | `PROTO-TCP8819-DIAGNOSTIC`, framing, `{"action":"1888"}`, measurement/result behavior, generic 59152 connectivity rule. |
 
+| PRJ-KNX-LINKPLAY-GATE | **KNX to LinkPlay Gate** — ChatGPT Project: https://chatgpt.com/g/g-p-6aab13e5b4888191ad6f6648251277cb-knx-to-linkplay-gate/project | KNX→Linkplay/airScope/airCloud gateway research and implementation; mapping KNX group events to device-control protocols; A31/A97/A98/A33 integration | Links gateway implementation/tests to canonical Linkplay HTTP/HTTPS, MCU :8899, ACS2/A33, discovery, playback, volume, mute, sources, presets and multiroom records. Individual chats inside this project should receive their own `CHAT-*` entries as they are audited. |
+
+## Project containers
+
+A ChatGPT Project is a provenance container, not a technical record. Its child research chats are linked individually to canonical IDs when audited. `PRJ-KNX-LINKPLAY-GATE` is the first explicitly linked project container.
+
 ## Identity policy
 Never invent a ChatGPT conversation URL or UUID. If an exact URL/ID is present in a saved HTML/export, record it. Otherwise keep the descriptive chat identity and mark URL/ID recovery pending.
 
