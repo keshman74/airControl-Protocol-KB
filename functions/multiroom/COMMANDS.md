@@ -28,3 +28,28 @@ Do not merge Linkplay native multiroom with the ACS2 command family merely becau
 - `CMD-UPNP-RC-MULTIPLAY-SLAVE-MASK`
 
 Status: **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**.
+
+
+## WiiM OpenAPI v1.2.0 source import
+Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
+
+- `CMD-WIIM-MULTIROOM-SLAVE-MASK` — `multiroom:SlaveMask:{ip}` — Hide the IP address of a LinkPlay — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SLAVE-UN-MASK` — `multiroom:SlaveUnMask:{ip}` — Releasing a Multi-Room Mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAYER-CMD-SLAVE-VOLUME` — `setPlayerCmd:slave_vol:{volume}` — General Volume Adjustment — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAYER-CMD-SLAVE-MUTE` — `setPlayerCmd:slave_mute:mute` — General activation Mute — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAYER-CMD-SLAVE-UNMUTE` — `setPlayerCmd:slave_mute:unmute` — General Mute Disabling — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SLAVE-SET-DEVICE-NAME` — `multiroom:SlaveSetDeviceName:{ip}:{s}` — Individual definition of the device Name — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-MULTIROOM-CONFIG-GET-REALTIME-CACHE-LIMIT` — `multiroom:ConfigGet:realtime_cache_limit` — Get the real-time cache limit — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-CONFIG-SET-REALTIME-CACHE-LIMIT` — `multiroom:ConfigSet:realtime_cache_limit:{value}` — Set the real-time cache limit — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SLAVE-START-WPS` — `multiroom:SlaveStartWPS:{ip}` — Start WPS on a LinkPlay device — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-MULTIROOM-GET-NAME-GROUP-LIST` — `multiroom:getnamegrouplist` — Get the list of group names in multi-room mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SLAVE-DEVICE-NAME` — `multiroom:SlaveDeviceName:{ip}:{str}` — Multi-room get slave device name — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SUBWOOFER-FORGET` — `multiroom:subwooferForget:{"uuid":"{uuid}"}` — Multi-room subwoofer forget — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SUBWOOFER-GET-PAIR-INFO` — `multiroom:subwooferGetPairInfo` — Multi-room subwoofer get pair info — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-CONFIG-GET-LEADTIME` — `multiroom:ConfigGet:leadtime` — Multi-room get lead time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-SUBWOOFER-PAIR` — `multiroom:subwooferPair:{str}` — Multi-room subwoofer pair — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MULTIROOM-CONFIG-SET-LEADTIME` — `multiroom:ConfigSet:leadtime:{str}` — Multi-room set lead time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MRMSUB-LPF` — `setMRMSubLPF:{str}` — Set multiroom subwoofer LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SUB-LPF` — `getSubLPF` — Get subwoofer LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SUB-LPF` — `setSubLPF:{str}` — Set subwoofer LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MRMSUB-LPF` — `getMRMSubLPF:{str}` — Get multi-room sub LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
