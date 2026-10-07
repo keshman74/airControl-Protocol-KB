@@ -29,3 +29,8 @@
 - `CMD-LP-MR-SLAVE-VOL` — **multiroom** — `multiroom:SlaveVolume:<...>` — **DOCUMENTED**
 - `CMD-LP-MR-SLAVE-MUTE` — **multiroom** — `multiroom:SlaveMute:<...>` — **DOCUMENTED**
 - `CMD-LP-MR-SLAVE-CHANNEL` — **multiroom** — `multiroom:SlaveChannel:<...>` — **DOCUMENTED**
+
+
+## Origin-chat audit additions
+- `RULE-LP-TRANSPORT-BY-HARDWARE` — A97/R328 uses Linkplay HTTPS :443 in the verified airControl transport map; plain HTTP tests are avoided for this classified family — **IMPLEMENTED / HARDWARE-OBSERVED**
+- `RULE-LP-MR-ROLE-PARSING` — native group role is resolved from device topology using `master_ip` / `master_uuid` — **IMPLEMENTED / OBSERVED-IN-APP**
