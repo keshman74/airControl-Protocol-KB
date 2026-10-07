@@ -1,0 +1,66 @@
+# UPnP canonical command view
+
+- `QRY-UPNP-STREAM-CAPABILITY` — **stream services capability** — `StreamServicesCapability(InstanceID, AppVersion)` — **SOURCE-CONFIRMED / NOT-HW-VERIFIED**
+- `CMD-UPNP-PQ-CREATE` — **create media queue** — `CreateQueue(QueueContext)` — **PARTIAL / SOURCE-CONFIRMED / NOT-HW-VERIFIED**
+- `CMD-UPNP-PQ-PLAY-INDEX` — **play queue from index** — `PlayQueueWithIndex(...)` — **SOURCE-CONFIRMED / NOT-HW-VERIFIED**
+- `CMD-UPNP-PQ-APPEND-EX` — **append tracks to queue** — `AppendTracksInQueueEx(QueueContext, Action, StartIndex, Direction, Play)` — **SOURCE-CONFIRMED / NOT-HW-VERIFIED**
+- `QRY-UPNP-STREAM-CAPABILITY-EXACT` — **service capability** — `StreamServicesCapability(InstanceID=0, AppVersion=BuildConfig.VERSION_NAME) -> StreamCapability` — **APK-VERIFIED + HARDWARE-VERIFIED**
+- `PROTO-UPNP-PLAYQUEUE-ENDPOINT` — **PlayQueue service discovery** — `serviceId urn:wiimu-com:serviceId:PlayQueue ; controlURL /upnp/control/PlayQueue1` — **APK-VERIFIED + HARDWARE-VERIFIED**
+- `CMD-UPNP-PQ-REPLACE` — **replace queue** — `ReplaceQueue(QueueContext)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-PQ-APPEND` — **append tracks** — `AppendTracksInQueue(QueueContext)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `QRY-UPNP-PQ-BROWSE` — **browse queue** — `BrowseQueue(QueueName) -> QueueContext` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-PQ-DELETE` — **delete queue** — `DeleteQueue(QueueName)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-PQ-BACKUP` — **backup queue** — `BackUpQueue(QueueContext)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `QRY-UPNP-PQ-INDEX` — **queue index/status** — `GetQueueIndex(QueueName) -> CurrentIndex, PreloadingIndex, CurrentPage, TrackNums` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-PQ-PLAY-INDEX-EXACT` — **play queue from index** — `PlayQueueWithIndex(QueueName, Index)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-PQ-APPEND-EX-EXACT` — **append/move/play queue tracks** — `AppendTracksInQueueEx(QueueContext, Action?, Direction, StartIndex, Play)` — **APK-VERIFIED / NOT-HW-ACTION-VERIFIED**
+- `CMD-UPNP-AVT-PLAY` — **playback** — `Play` — **APK-VERIFIED**
+- `CMD-UPNP-AVT-PAUSE` — **playback** — `Pause` — **APK-VERIFIED**
+- `CMD-UPNP-AVT-PREV` — **playback** — `Previous` — **APK-VERIFIED**
+- `CMD-UPNP-AVT-NEXT` — **playback** — `Next` — **APK-VERIFIED**
+- `CMD-UPNP-AVT-SEEK` — **seek** — `Seek` — **APK-VERIFIED**
+- `QRY-UPNP-AVT-MEDIAINFO` — **media info** — `GetMediaInfo` — **APK-VERIFIED**
+- `QRY-UPNP-AVT-INFOEX` — **extended transport info** — `GetInfoEx` — **APK-VERIFIED**
+- `PROTO-UPNP-QUEUECONTEXT-XML` — **QueueContext serialization** — `<QueueContext>...<Tracks>...</Tracks>...</QueueContext>` — **APK-VERIFIED / EXACT-BUILDER-RECOVERED**
+- `PROTO-WIIM-PLAYLIST-XML` — **playlist serialization** — `<PlayList>...<Tracks>...</Tracks></PlayList>` — **APK-VERIFIED / EXACT-BUILDER-RECOVERED**
+- `RULE-XML-ESCAPING-WIIM` — **protocol encoding** — `escape quote, <, >, &, apostrophe` — **APK-VERIFIED**
+- `CMD-UPNP-PQ-SET-MEDIA-SERVER` — **register remote local media server** — `SetMediaServerInfo(name, uuid, ip, media_port) via :59152 PlayQueue1` — **APK-VERIFIED / NOT-HW-VERIFIED**
+- `QRY-UPNP-RC-GET-VOLUME` — **volume read** — `GetVolume(InstanceID, Channel) -> CurrentVolume` — **SCPD-DOCUMENTED / HARDWARE-ENDPOINT-VERIFIED**
+- `CMD-UPNP-RC-SET-VOLUME` — **volume set** — `SetVolume(InstanceID, Channel, DesiredVolume, ControlSource)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-GET-MUTE` — **mute read** — `GetMute(InstanceID, Channel) -> CurrentMute` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SET-MUTE` — **mute set** — `SetMute(InstanceID, Channel, DesiredMute, ControlSource)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-GET-CHANNEL` — **channel read** — `GetChannel(InstanceID, Channel) -> CurrentChannel` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SET-CHANNEL` — **channel set** — `SetChannel(InstanceID, Channel, DesiredChannel)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-GET-EQ` — **equalizer read** — `GetEqualizer(InstanceID, Channel) -> CurrentEqualizer` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SET-EQ` — **equalizer set** — `SetEqualizer(InstanceID, Channel, DesiredEqualizer)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-LIST-PRESETS` — **list rendering presets** — `ListPresets(InstanceID) -> CurrentPresetNameList` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SELECT-PRESET` — **select rendering preset** — `SelectPreset(InstanceID, PresetName)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-SIMPLE-DEVICE-INFO` — **multiroom/simple device info** — `GetSimpleDeviceInfo(InstanceID)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-CONTROL-DEVICE-INFO` — **multiroom/control device info** — `GetControlDeviceInfo(InstanceID)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-MULTIPLAY-SLAVE-MASK` — **multiroom slave mask** — `MultiPlaySlaveMask(InstanceID, SlaveMask)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SET-ALARM-QUEUE` — **alarm queue** — `SetAlarmQueue(AlarmContext)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-RC-GET-ALARM-QUEUE` — **alarm queue** — `GetAlarmQueue(AlarmName) -> AlarmContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-DELETE-ALARM-QUEUE` — **alarm queue delete** — `DeleteAlarmQueue(AlarmName)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-SET-DEVICE-NAME` — **device rename** — `SetDeviceName(Name)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-AIRPLAY-AUTOSYNC` — **AirPlay sync** — `AirplayAutoSyncDelay(Name=Start|Stop, SyncVersion)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-RC-AUTOSYNC-SUB` — **sync sub** — `AutoSyncDelaySub(Name=Start|Stop)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-APPEND-QUEUE` — **append queue** — `AppendQueue(QueueContext)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-BROWSE-EX` — **browse queue range** — `BrowseQueueEx(QueueName, TrackIndex, TrackNums) -> QueueContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-LOOP` — **queue loop mode** — `SetQueueLoopMode(LoopMode)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-GET-LOOP` — **queue loop mode** — `GetQueueLoopMode() -> LoopMode` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-POLICY` — **queue policy** — `SetQueuePolicy(QueueName)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-APPEND-TRACKS` — **append tracks** — `AppendTracksInQueue(QueueContext)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-REMOVE-TRACKS` — **remove tracks** — `RemoveTracksInQueue(QueueName, Action, RangStart, RangEnd)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-TAKE-CONTROL` — **take playback control** — `TakePlayControl(Source, Switch)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-STREAM-SET-QUALITY` — **online stream quality** — `StreamSetQuality(source, quality)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-STREAM-GET-QUALITY` — **online stream quality** — `StreamGetQuality(source) -> quality` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-RATING` — **online track rating** — `SetRating(Source, TrackID, Rating)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-KEY-MAPPING` — **preset/key mapping** — `SetKeyMapping(QueueContext)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-GET-KEY-MAPPING` — **preset/key mapping** — `GetKeyMapping() -> QueueContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-GET-ONLINE` — **online queue fetch** — `GetQueueOnline(QueueName, QueueID, QueueType, Queuelimit, QueueAutoInsert) -> QueueContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `QRY-UPNP-PQ-SEARCH-ONLINE` — **online queue search** — `SearchQueueOnline(QueueName, SearchKey, Queuelimit) -> QueueContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-QUEUE-RECORD` — **online queue record/favorite** — `SetQueueRecord(QueueName, QueueID, Action)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-SET-SONGS-RECORD` — **online song record/favorite** — `SetSongsRecord(QueueName, SongID, Action)` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-USER-REGISTER` — **online account register** — `UserRegister(QueueName, UserName, PassWord) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-USER-LOGIN` — **online account login** — `UserLogin(AccountSource, Version, UserName, PassWord, SavePass, Code, CodeVerifier, Token, Proxy) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+- `CMD-UPNP-PQ-USER-LOGOUT` — **online account logout** — `UserLogout(AccountSource) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**

@@ -1,5 +1,7 @@
 # Mute command view
 
-- `CMD-A31-MUTE-ON` [A31] `setPlayerCmd:mute:1` — **CONFIRMED**
-- `CMD-A31-MUTE-OFF` [A31] `setPlayerCmd:mute:0` — **CONFIRMED**
-- `CMD-A33-MUTE-ON` [A33] `{"cmd":"mute","state":"on"}` — **CONFIRMED**
+- `CMD-A31-MUTE-ON`, `CMD-A31-MUTE-OFF` — **CONFIRMED**.
+- `CMD-A31-MCU-MUTE` `MCU+MUT+00<0|1>` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**.
+- `CMD-A33-MUTE-ON` — **CONFIRMED**.
+- `CMD-ACS2-MUTE` — **DOCUMENTED**.
+- `QRY-UPNP-RC-GET-MUTE`, `CMD-UPNP-RC-SET-MUTE` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**.

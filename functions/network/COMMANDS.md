@@ -1,8 +1,5 @@
 # Network command view
 
-- `QRY-A31-STATIC-IP` [A31] `getStaticIP` — **CONFIRMED**
-- `CMD-A31-DHCP` [A31] `setDhcp:wifi` — **CONFIRMED**
-- `CMD-A31-STATIC-IP` [A31] `setStaticIP:{"type":"wifi","ip":"<IP>","mask":"<MASK>","gateway":"<GW>","dns":"<DNS>"}` — **CONFIRMED**
-- `QRY-LP-WIFI-STATE` [A31/A97/A98] `wlanGetConnectState` — **DOCUMENTED/IMPLEMENTED**
-- `QRY-LP-SCAN-APS` [A31/A97/A98] `getScanAPs` — **DOCUMENTED/IMPLEMENTED**
-- `CMD-LP-CONNECT-AP` [A31/A97/A98] `connectToAP:<wifiName>:<wifiPassword>` — **DOCUMENTED/IMPLEMENTED**
+- A31: `QRY-A31-STATIC-IP`, `CMD-A31-DHCP`, `CMD-A31-STATIC-IP` — **CONFIRMED**.
+- Linkplay: `QRY-LP-WIFI-STATE`, `QRY-LP-SCAN-APS`, `CMD-LP-CONNECT-AP` — **DOCUMENTED/IMPLEMENTED**.
+- ACS2: `QRY-ACS2-WIFI-STATE`, `QRY-ACS2-SCAN-APS`, `CMD-ACS2-CONNECT-AP`, `CMD-ACS2-STATIC-SWITCH`, `CMD-ACS2-STATIC-IP` — **DOCUMENTED** or **DOCUMENTED/IMPLEMENTED** as recorded in registry.

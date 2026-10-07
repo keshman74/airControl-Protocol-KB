@@ -1,4 +1,8 @@
 # Metadata command view
 
-- `QRY-A31-METAINFO` [A31] `getMetaInfo` — **REJECTED**
-- `QRY-ACS2-META` [A33/ACS2] `getMetaInfo` — **DOCUMENTED**
+- `QRY-A31-METAINFO` [A31] `getMetaInfo` — **REJECTED** on tested A31 firmware.
+- `QRY-ACS2-META` [ACS2] `getMetaInfo` — **DOCUMENTED**.
+- `EVT-A31-PLAYBACK` `AXX+SNG+INF{...}&` — **CAPTURED**.
+- `EVT-A33-TUNEIN-CONTEXT`, `EVT-A33-QOBUZ-CONTEXT` — **CAPTURED**.
+- `QRY-UPNP-AVT-MEDIAINFO`, `QRY-UPNP-AVT-INFOEX` — **APK-VERIFIED**.
+- `PROTO-UPNP-QUEUECONTEXT-XML`, `PROTO-WIIM-PLAYLIST-XML` preserve metadata/service context — **APK-VERIFIED / EXACT-BUILDER-RECOVERED**.
