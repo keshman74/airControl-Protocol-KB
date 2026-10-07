@@ -697,3 +697,7 @@ Official A33M envelope supports HTTP `:8000/?Instruct=` and HTTPS `:8443/?Instru
 - `QRY-A33M-PRESET-LIST` — `getPresetListInfo`
 
 Status: **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**. The official document states JSON success for `getPresetListInfo` but does not publish its JSON schema.
+
+
+## Family-separation rule from origin-chat audit
+- `RULE-MULTIROOM-FAMILY-SEPARATION`: A33 ACS2 multiroom must remain separate from Linkplay native `JoinGroup/LeaveGroup`. Cross-family A33 ↔ A31/A97/A98 grouping is not hardware-verified.
