@@ -44,3 +44,6 @@ Canonical function files are under `functions/*/COMMANDS.md`.
 
 ## Baseline
 v0.4.8 contains **204 canonical records**. Original lossless CSV shards remain under `registry/records/` as an audit-safe baseline.
+
+## Latest normalized audit
+- CHAT-AUDIT-03 findings are already promoted into the canonical protocol/function/device structure. Provenance: `evidence/chat-audits/CHAT-AUDIT-03-300926.md`.
