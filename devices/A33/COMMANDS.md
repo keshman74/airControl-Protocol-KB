@@ -58,3 +58,13 @@
 - `CMD-ACS2-PROMPT-DELETE` — **prompt sound** — `deleteSpecifiedAudio:<audioPath>` — **DOCUMENTED**
 - `CMD-ACS2-STATIC-SWITCH` — **network** — `setNetIPSwitchState:<switch>` — **DOCUMENTED/IMPLEMENTED**
 - `CMD-ACS2-STATIC-IP` — **network** — `setStaticIP:<staticIPInfo JSON>` — **DOCUMENTED/IMPLEMENTED**
+
+## A33M preset API — official V1.2
+
+- `CMD-A33M-PRESET-ADD` — `oneClickPreset:{"PresetNumber":"x","Overwrite":"yes|no"}` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `CMD-A33M-PRESET-CHOICE` — `choicePreset:<1..12>` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `CMD-A33M-PRESET-PREV` — `playPreviousPreset` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `CMD-A33M-PRESET-NEXT` — `playNextPreset` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `CMD-A33M-PRESET-MOVE` — `movePresetPosition:{"OldIndex":"x","NewIndex":"x"}` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `CMD-A33M-PRESET-DELETE` — `deletePreset:<0..12>` (0 clears all) — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+- `QRY-A33M-PRESET-LIST` — `getPresetListInfo` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
