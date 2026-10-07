@@ -323,3 +323,234 @@ MCU+PAS+EQ:treble:<NN>&
 ```
 
 **Notes:** Observed after TRE change in saved A31 capture.
+
+
+# Official Arylic TCP API additions
+Source: Arylic TCP API documentation. Status below is **DOCUMENTED / OFFICIAL-ARYLIC-TCP-API** unless an older record already has stronger hardware/capture evidence.
+
+Transport rules: persistent bidirectional TCP socket on **8899**; at least **200 ms** between commands; documentation states **one connection per client IP**. Packet = 4-byte header `18 96 18 20` + 4-byte little-endian payload length + 4-byte little-endian byte-sum checksum + 8 zero bytes + payload. Payloads longer than 11 bytes normally end in `&`.
+
+## `QRY-A31-TCP-DEVICE-BASIC`
+- **Function:** device info
+- **Command/mechanism:** `MCU+DEV+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+DEV+INF<semicolon fields>&
+
+## `QRY-A31-TCP-DEVICE-INFO`
+- **Function:** device info
+- **Command/mechanism:** `MCU+INF+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+INF+INF{JSON}&; same broad data family as HTTP getStatusEx
+
+## `QRY-A31-TCP-INTERNET`
+- **Function:** network
+- **Command/mechanism:** `MCU+WWW+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+WWW+000|001; device also sends state changes actively
+
+## `QRY-A31-TCP-USB`
+- **Function:** USB
+- **Command/mechanism:** `MCU+USB+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+USB+000|001; device also sends state changes actively
+
+## `QRY-A31-TCP-MUTE`
+- **Function:** mute
+- **Command/mechanism:** `MCU+MUT+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+MUT+000|001
+
+## `CMD-A31-TCP-NAME`
+- **Function:** device
+- **Command/mechanism:** `MCU+NAM+SET<name>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+NAM+SET<name>&
+
+## `CMD-A31-TCP-REBOOT-WIFI`
+- **Function:** system
+- **Command/mechanism:** `MCU+DEV+RST&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Reboots Wi-Fi module; TCP connection drops
+
+## `CMD-A31-TCP-FACTORY`
+- **Function:** system
+- **Command/mechanism:** `MCU+FACTORY`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Factory reset; TCP connection drops
+
+## `CMD-A31-TCP-PLAY-TOGGLE`
+- **Function:** playback
+- **Command/mechanism:** `MCU+PLY+PUS`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Playback status response AXX+PLY+...
+
+## `CMD-A31-TCP-STOP`
+- **Function:** playback
+- **Command/mechanism:** `MCU+PLY-STP`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Playback status response AXX+PLY+...
+
+## `CMD-A31-TCP-LAST-PLAYLIST`
+- **Function:** playback
+- **Command/mechanism:** `MCU+PLY+PUQ`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Start last playlist if playback was previously started in app
+
+## `CMD-A31-TCP-PLAYMODE`
+- **Function:** playback mode
+- **Command/mechanism:** `MCU+PLP+<000..004>`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+PLP+NNN; 000 repeat all, 001 repeat one, 002 repeat all+shuffle, 003 shuffle, 004 sequence
+
+## `QRY-A31-TCP-PLAYMODE`
+- **Function:** playback mode
+- **Command/mechanism:** `MCU+PLP+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+PLP+NNN
+
+## `CMD-A31-TCP-PRESET-NEXT`
+- **Function:** media preset
+- **Command/mechanism:** `MCU+KEY+NXT`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Play next preset playlist
+
+## `CMD-A31-TCP-PRESET-PREV`
+- **Function:** media preset
+- **Command/mechanism:** `MCU+KEY+PRE`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Play previous preset playlist
+
+## `CMD-A31-TCP-PRESET-SAVE`
+- **Function:** media preset
+- **Command/mechanism:** `MCU+PRE+<001..010>`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Example response AXX+PRE+FF2; only sources supporting presets
+
+## `QRY-A31-TCP-INPUT`
+- **Function:** source/status
+- **Command/mechanism:** `MCU+PLM+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+PLM+NNN; documented source-code map
+
+## `QRY-A31-TCP-PROGRESS`
+- **Function:** metadata/status
+- **Command/mechanism:** `MCU+SONGGET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+SNG+INF{curpos,totlen,status,loop}&
+
+## `QRY-A31-TCP-MEDIA`
+- **Function:** metadata
+- **Command/mechanism:** `MCU+MEA+GET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+MEA+DAT{title,artist,album,vendor,skiplimit}&; text fields hex encoded
+
+## `QRY-A31-TCP-NOWPLAYING`
+- **Function:** metadata/status
+- **Command/mechanism:** `MCU+PINFGET`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+PLY+INF{type,ch,mode,loop,eq,status,curpos,offset_pts,totlen,Title,Artist,Album,alarmflag,plicount,plicurr,vol,mute}&
+
+## `EVT-A31-TCP-SPOTIFY`
+- **Function:** online service/status
+- **Command/mechanism:** `(active event)`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AXX+SPY+000|001; Spotify stopped/started
+
+## `CMD-A31-TCP-EQ-TONE`
+- **Function:** EQ
+- **Command/mechanism:** `MCU+PAS+EQSet:<treble|bass>:<0..10>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** MCU+PAS+EQ:<type>:<value>&; 0..10 maps app -5..+5
+
+## `QRY-A31-TCP-AP8064-BOARD`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:GetBoard&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** MCU+PAS+Rakoit:Board:<board>&
+
+## `QRY-A31-TCP-AP8064-COMMIT`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:GetCommit&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `QRY-A31-TCP-AP8064-PROMPT`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:GetPrompt&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-PROMPT`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:SetPrompt:<0|1>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `QRY-A31-TCP-AP8064-API`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:GetAPIVer&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-SENDKEY`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:SendKey:<key>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `QRY-A31-TCP-AP8064-MAXVOL`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:MaxVolume:Get&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-MAXVOL`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:MaxVolume:<mxv>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-VB-INT`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:VB:INT:<value>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Virtual Bass intensity; AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-VB-ENH`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:VB:ENH:<value>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Virtual Bass enhance; AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-VB-TOGGLE`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:VB:SWI&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Toggle Virtual Bass; AP8064 base-board dependent
+
+## `QRY-A31-TCP-AP8064-VB`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:VB:Get&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Get Virtual Bass on/off; AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-VB`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:VB:<en>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** Set Virtual Bass on/off; AP8064 base-board dependent
+
+## `CMD-A31-TCP-AP8064-LED`
+- **Function:** passthrough/AP8064
+- **Command/mechanism:** `MCU+PAS+Rakoit:LED:<en>&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** LED on/off; AP8064 base-board dependent
+
+## `QRY-A31-TCP-BP10XX-VOL`
+- **Function:** passthrough/BP10XX
+- **Command/mechanism:** `MCU+PAS+RAKOIT:VOL&`
+- **Status:** `DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED`
+- **Response/notes:** MCU+PAS+RAKOIT:VOL:<value>&; BP10XX base-board dependent
+
+## Existing records strengthened by official documentation
+The official TCP API also documents existing canonical records for absolute volume `MCU+VOL+NNN`, volume query `MCU+VOL+GET`, mute `MCU+MUT+000|001`, pause `MCU+PLY-PUS`, resume `MCU+PLY-PLA`, next `MCU+PLY+NXT`, previous `MCU+PLY+PRV`, numbered presets `MCU+KEY+001..010`, and `MCU+PAS+EQGet&`. Preserve any stronger CAPTURED/IMPLEMENTED/CONFIRMED status already present.
