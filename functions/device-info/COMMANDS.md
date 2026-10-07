@@ -11,3 +11,9 @@
 Applicability to A97/A98 is **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
 
 - `QRY-WIIM-GET-DEBUG-INFO` — `getDebugInfo` — Get device debug information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+
+## WiiM OpenAPI v1.2.0 source import
+Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
+
+- `QRY-WIIM-GET-DEBUG-INFO` — `getDebugInfo` — Get device debug information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
