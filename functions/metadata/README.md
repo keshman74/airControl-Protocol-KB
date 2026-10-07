@@ -1,2 +1,3 @@
 # Metadata
-Track/status metadata paths.
+
+Seed page. Add commands through the registry and link evidence here.

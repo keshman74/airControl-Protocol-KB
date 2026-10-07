@@ -1,11 +1,39 @@
 # Behavior Rules
 
-1. Hardware confirmation is device/firmware specific.
-2. Preserve rejected commands and regressions.
-3. Do not merge ACS2 with ordinary Linkplay HTTP merely because command strings overlap.
-4. ACS2 has HTTP :8000 and HTTPS :8443 transports.
-5. A33 TCP :23040 is a broader native protocol, not merely a seek port.
-6. Runtime StreamServicesCapability is authoritative for online-service exposure.
-7. UPnP service endpoints should be discovered from device description rather than assumed.
-8. A31 canonical relative volume semantics: VOL+ -> vol++; VOL- -> vol--.
-9. Never store real passwords, OAuth codes, code verifiers, tokens or session credentials in evidence.
+## RULE-DISCOVERY-ONLINE-001
+Saved configuration means previously known, not currently online. Online requires a live response.
+
+## RULE-EVIDENCE-001
+Do not promote a command to CONFIRMED from documentation or code alone.
+
+## RULE-REGRESSION-001
+Do not replace a hardware-confirmed implementation with EXPERIMENTAL behavior without an explicit test.
+
+## RULE-SECURITY-001
+Never commit real auth tokens, passwords, cookies, API session credentials or private identifiers. Use `<REDACTED>`.
+
+## RULE-CROSS-CHIP-MULTIROOM-001
+Do not treat A33 ACS2 multiroom as interchangeable with Linkplay A31/A97/A98 JoinGroup/LeaveGroup. Cross-chip grouping remains unconfirmed until tested.
+
+## RULE-STREAM-CAPABILITY-001
+Streaming/service support must not be inferred only from device chip/model.
+Where available, use the device's `StreamServicesCapability` / `StreamCapability`
+mechanism or hardware evidence before declaring a service supported.
+
+## RULE-A31-VOLUME-001 — Relative volume mapping
+Canonical airScope mapping:
+- VOL+ => TCP target +5; HTTP fallback `setPlayerCmd:vol++`
+- VOL- => TCP target -5; HTTP fallback `setPlayerCmd:vol--`
+
+An earlier reversed HTTP mapping is a known regression and must not be restored.
+
+## RULE-A31-VOLUME-002 — Relative TCP volume state
+When current volume is unknown, query it and wait for `AXX+VOL`.
+For rapid relative changes, calculate from the last successfully transmitted
+absolute target rather than stale feedback, while treating subsequent
+`AXX+VOL` as authoritative confirmation.
+
+## RULE-A31-TCP-RATE-001
+The gateway source explicitly rate-limits native TCP commands using
+`MIN_COMMAND_INTERVAL_MS`. CHAT-AUDIT-02 does not establish the numeric value,
+so the KB must not invent one from this chat alone.

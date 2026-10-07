@@ -1,2 +1,3 @@
 # Volume
-Absolute/relative volume behavior across Linkplay HTTP, MCU, ACS2, A33 native and UPnP.
+
+Seed page. Add commands through the registry and link evidence here.

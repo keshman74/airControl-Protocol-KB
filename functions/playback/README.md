@@ -1,2 +1,3 @@
 # Playback
-Cross-protocol playback functions and evidence are indexed by registry IDs.
+
+Seed page. Add commands through the registry and link evidence here.

@@ -1,8 +1,8 @@
-# Stream Capability Matrix
+# Stream Capability Matrix — hardware evidence from CHAT-AUDIT-02
 
 | Capability | A31 | A97 | A98 |
 |---|---|---|---|
-| StreamCapability | 1.0 | 1.2 | 1.6 |
+| StreamCapability version | 1.0 | 1.2 | 1.6 |
 | Qobuz | 1.2 | 1.6 | 2.2 |
 | Tidal | 2.1 | 2.2 | 2.3 |
 | newTuneIn | 1.1 | 1.1 | 1.2 |
@@ -14,4 +14,5 @@
 | QobuzConnect | not advertised | not listed in captured matrix | 1.0 |
 | YouTubeMusic | not advertised | not listed in captured matrix | 1.0 (WiiM/Pro) |
 
-Runtime `StreamServicesCapability` is authoritative. Do not generalize these captures to every firmware.
+This table records captured capability responses, not universal chip-family guarantees.
+Always prefer runtime `StreamServicesCapability`.

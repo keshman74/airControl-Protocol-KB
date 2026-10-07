@@ -1,36 +1,23 @@
 # airControl Protocol Knowledge Base
 
-Canonical protocol knowledge base for **airControl**, **airKNOB**, **KNX → airScope / airCloud Gateway** and future integrations.
-
-Baseline imported from research snapshot **v0.4.8-CHAT-AUDIT-02-PLAYQUEUE-SCPD**.
-
-## Current baseline
-
-- 204 protocol registry records
-- A31 / A97 / A98 / A33 device families
-- Linkplay HTTP/HTTPS
-- MCU TCP :8899
-- ACS2 HTTP :8000 / HTTPS :8443
-- A33 JSON TCP :1234
-- A33 native TCP :23040
-- UPnP AVTransport / RenderingControl / PlayQueue
-- online-service research: TuneIn, Qobuz, Spotify, TIDAL, Deezer, vTuner, YouTube Music
-- WiiM Home reverse engineering
-
-## Evidence status
-
-Never silently promote evidence.
-
-- CONFIRMED — hardware tested
-- CAPTURED — observed on wire
-- DOCUMENTED — official documentation/source
-- IMPLEMENTED — present in project source
-- SOURCE-CONFIRMED / NOT-HW-VERIFIED — recovered from application/decompiled source
-- EXPERIMENTAL — under investigation
-- REJECTED — tested and known not to work in the stated context
+Canonical shared knowledge base for airControl-compatible devices, protocols, services, projects and research chats.
 
 ## Rule
+Before researching or implementing a device function:
+1. Check `INDEX.md`.
+2. Check `registry/COMPATIBILITY.md`.
+3. Check the relevant `functions/` page.
+4. Prefer `CONFIRMED` evidence over `DOCUMENTED` or `EXPERIMENTAL`.
+5. Never replace a confirmed implementation with an experimental one without hardware testing.
+6. Add every new verified finding to this KB.
 
-Every newly discovered command, response, port, protocol behavior, device compatibility result or reverse-engineering finding must be added here with its evidence status. Negative findings are preserved.
+## Evidence statuses
+- `CONFIRMED` — hardware/practically verified.
+- `CAPTURED` — observed in a real network/protocol capture.
+- `DOCUMENTED` — described by a source/API but not yet hardware-verified here.
+- `IMPLEMENTED` — present in project code; verification may still be required.
+- `EXPERIMENTAL` — reverse-engineered hypothesis or incomplete research.
+- `REJECTED` — tested and known not to work in the stated context.
 
-See `INDEX.md`, `registry/`, `devices/`, `protocols/`, `functions/`, `services/`, `evidence/` and `integrations/`.
+## Security
+Never commit real tokens, passwords, cookies, session credentials or private identifiers. Use `<REDACTED>`.

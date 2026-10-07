@@ -1,2 +1,3 @@
 # Multiroom
-Linkplay native, ACS2 A33 and UPnP topology mechanisms remain separate until cross-tested.
+
+Seed page. Add commands through the registry and link evidence here.

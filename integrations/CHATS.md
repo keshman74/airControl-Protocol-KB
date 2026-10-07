@@ -1,7 +1,12 @@
-# Research Chats
+# Research Chat Registry
 
-CHAT-AUDIT-01 and CHAT-AUDIT-02 preserve research provenance.
+Chats are research sources, not the canonical truth. Findings become canonical only after being entered into the KB with evidence/status.
 
-CHAT-AUDIT-02 includes WiiM Home decompilation, PlayQueue, StreamServicesCapability, Qobuz object flow, A31 gateway traffic and UPnP SCPD recovery.
+| Chat ID | Scope | KB targets |
+|---|---|---|
+| CHAT-AIRCONTROL | airControl development/recovery | devices, protocols, UI behavior, multiroom, library |
+| CHAT-KNOB | airKNOB development | discovery, controls, artwork, presets, network |
+| CHAT-KNX-GATE | KNX gateway | HTTP/HTTPS commands, chip compatibility, discovery |
+| CHAT-A33-SERVICES | A33/BluOS/services/sniffing | A33 native, TuneIn, Qobuz, Spotify, captures |
 
-Future chat audits should update this canonical repository directly.
+When a new chat starts, give it a stable `CHAT-*` ID and list the KB sections it is allowed/expected to update.

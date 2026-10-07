@@ -1,2 +1,2 @@
 # Discovery
-Discovery -> classification -> transport detection -> capability detection.
+Goal: `Find airControl-compatible devices` → classify device → choose transport → load capabilities. Projects should consume this common model rather than hard-code a single chip family.

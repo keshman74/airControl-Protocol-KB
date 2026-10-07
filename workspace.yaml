@@ -1,0 +1,20 @@
+kb:
+  id: airControl-Protocol-KB
+  version: "0.4"
+
+projects:
+  aircontrol:
+    id: PRJ-AIRCONTROL
+    local: "/Users/lab/AI/airControl"
+    repo: "keshman74/airControl"
+    kb: "integrations/PROJECTS.md"
+  airknob:
+    id: PRJ-AIRKNOB
+    local: "/Users/lab/AI/airControl KNOB"
+    repo: "keshman74/airKNOB"
+    kb: "integrations/PROJECTS.md"
+  knx_gateway:
+    id: PRJ-KNX-GATEWAY
+    local: "/Users/lab/AI/airGate KNX-HTTP"
+    repo: "keshman74/airScope-airCloud-KNX-Gate"
+    kb: "integrations/PROJECTS.md"

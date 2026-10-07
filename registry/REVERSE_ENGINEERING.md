@@ -1,13 +1,13 @@
 # Reverse Engineering Registry
 
 ## REV-WIIM-HOME-001
+Application: WiiM Home APK
+Source tree: `/Users/lab/AI/WiiM-Home-decompiled/sources/`
+Evidence: decompiled source extracts + hardware tests recorded in CHAT-AUDIT-02.
 
-Application: WiiM Home APK  
-Source tree used during research: `/Users/lab/AI/WiiM-Home-decompiled/sources/`
-
-Recovered areas:
+Key recovered areas:
 - RenderingControl / StreamServicesCapability
-- PlayQueue SCPD and callbacks
+- PlayQueue service and actions
 - Qobuz capability/version negotiation
 - Qobuz catalog/context URL construction
 - Qobuz playback object pipeline
@@ -15,6 +15,9 @@ Recovered areas:
 - AVTransport callbacks
 - classic Linkplay HTTP builders
 
-Important classes: `np8`, `n42`, `wq7`, `kq`, `op8`, `i27`, `ec9`, `QobuzPlayItem`, `LPPlayItem`, `LPPlayMusicList`, `LPMSPlayData`, `LPPlayMediaData`.
+Important classes/functions:
+`np8`, `n42`, `wq7`, `kq`, `op8`, `i27`, `ec9`,
+`QobuzPlayItem`, `LPPlayItem`, `LPPlayMusicList`,
+`LPMSPlayData`, `LPPlayMediaData`.
 
-Capability name `AudioCast` is not evidence that an AudioCast controller APK was decompiled.
+Do not infer that capability name `AudioCast` means an AudioCast APK was decompiled.

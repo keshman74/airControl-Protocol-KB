@@ -1,24 +1,60 @@
-# airControl Protocol KB — Index
-
-Canonical baseline: **v0.4.8-CHAT-AUDIT-02-PLAYQUEUE-SCPD**  
-Registry records: **204**
-
-## Registry
-- `registry/COMMANDS.md` — master human-readable registry
-- `registry/commands.csv` — machine-readable registry
-- `registry/PROTOCOLS.md`
-- `registry/DEVICES.md`
-- `registry/BEHAVIOR_RULES.md`
-- `registry/STREAM_CAPABILITIES.md`
-- `registry/REVERSE_ENGINEERING.md`
+# INDEX
 
 ## Devices
-`devices/A31`, `devices/A97`, `devices/A98`, `devices/A33`
+- [A31](devices/A31/README.md)
+- [A97](devices/A97/README.md)
+- [A98](devices/A98/README.md)
+- [A33](devices/A33/README.md)
 
-## Protocols
-`linkplay-http-https`, `mcu-8899`, `acs2`, `a33-json-1234`, `a33-native-23040`, `upnp`
+## Registries
+- [Devices](registry/DEVICES.md)
+- [Protocols](registry/PROTOCOLS.md)
+- [Commands](registry/COMMANDS.md)
+- [Services](registry/SERVICES.md)
+- [Discovery](registry/DISCOVERY.md)
+- [Compatibility](registry/COMPATIBILITY.md)
+- [Behavior rules](registry/BEHAVIOR_RULES.md)
+- [Transport detection](registry/TRANSPORT_DETECTION.md)
 
-## Research
-WiiM Home / PlayQueue / RenderingControl / StreamServicesCapability / Qobuz are tracked under `evidence/` and `protocols/upnp/`.
+## Functions
+Playback · Volume · Sources · EQ · USB · Presets · Metadata · Artwork · Multiroom · Discovery · Network · Online Services
 
-This repository is the canonical live KB. New chat audits are merged here instead of becoming isolated documents.
+## Integrations
+- [Projects](integrations/PROJECTS.md)
+- [Chats](integrations/CHATS.md)
+- [How to attach a new project/chat](integrations/ATTACH_NEW.md)
+
+## Evidence
+Hardware tests · Captures · Official docs · Application code · Reverse engineering
+
+## Full recovered command data
+- [Master command registry](registry/COMMANDS.md)
+- [Machine-readable CSV](registry/commands.csv)
+- Protocol-specific command files under `protocols/*/COMMANDS.md`
+- Device-specific command views under `devices/*/COMMANDS.md`
+
+## Audit
+- [v0.4.2 audit report](AUDIT-v0.4.2.md)
+
+## CHAT-AUDIT-01 additions
+- [Audit evidence](evidence/chat-audits/CHAT-AUDIT-01.md)
+- [UPnP PlayQueue](protocols/upnp/playqueue/COMMANDS.md)
+- [UPnP Stream Services](protocols/upnp/stream-services/COMMANDS.md)
+
+## CHAT-AUDIT-02 additions
+- [Audit evidence](evidence/chat-audits/CHAT-AUDIT-02.md)
+- [A31 :8899 volume audit](protocols/mcu-8899/CHAT-AUDIT-02.md)
+
+## CHAT-AUDIT-02 DEEP
+- [Deep audit](evidence/chat-audits/CHAT-AUDIT-02-DEEP.md)
+- [Source coverage](evidence/chat-audits/CHAT-AUDIT-02-SOURCE-COVERAGE.md)
+- [Stream capability matrix](registry/STREAM_CAPABILITIES.md)
+- [Reverse engineering registry](registry/REVERSE_ENGINEERING.md)
+
+- [Exact QueueContext XML](protocols/upnp/QUEUECONTEXT_XML.md)
+- [WiiM PlayList XML](protocols/upnp/PLAYLIST_XML.md)
+
+- [RenderingControl SCPD](protocols/upnp/RENDERINGCONTROL_SCPD.md)
+- [PlayQueue Remote Media Server](protocols/upnp/PLAYQUEUE_REMOTE_MEDIA_SERVER.md)
+
+- [Full PlayQueue SCPD](protocols/upnp/playqueue/FULL_SCPD_ACTIONS.md)

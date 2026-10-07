@@ -1,2 +1,3 @@
 # Sources
-Input/source switching mappings and compatibility.
+
+Seed page. Add commands through the registry and link evidence here.

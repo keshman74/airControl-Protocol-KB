@@ -1,11 +1,26 @@
-# PlayQueue SetMediaServerInfo
+# PlayQueue SetMediaServerInfo — WiiM Home
 
-Recovered from WiiM Home `ylb.java`.
+Recovered from decompiled `ylb.java`.
 
-`POST http://<device-ip>:59152/upnp/control/PlayQueue1`
+WiiM Home constructs a controller-side identity object containing:
+- name = Android_<brand>_<model>_RemoteLocal
+- uuid
+- controller IP
+- media_port
 
-SOAPAction: `urn:schemas-wiimu-com:service:PlayQueue:1#SetMediaServerInfo`
+It then targets:
 
-Controller supplies name, UUID, IP and media_port. Relevant to airControl local-library/media-server playback.
+`http://<device-ip>:59152/upnp/control/PlayQueue1`
+
+with SOAPAction:
+
+`urn:schemas-wiimu-com:service:PlayQueue:1#SetMediaServerInfo`
+
+This is important for airControl local-library playback: it is evidence of a
+protocol path by which the controller advertises its own local media server to
+the renderer.
 
 Status: APK-VERIFIED / NOT-HW-VERIFIED.
+
+Do not assume port 59152 replaces the dynamically discovered PlayQueue endpoint;
+WiiM Home contains multiple PlayQueue access paths.

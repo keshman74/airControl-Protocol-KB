@@ -1,12 +1,16 @@
 {
   "version": "0.4.8-CHAT-AUDIT-02-PLAYQUEUE-SCPD",
-  "records": 204,
-  "canonical_repository": "keshman74/airControl-Protocol-KB",
-  "registry_shards": [
-    "registry/records/001-051.csv",
-    "registry/records/052-102.csv",
-    "registry/records/103-153.csv",
-    "registry/records/154-204.csv"
-  ],
-  "rule": "New verified findings from future chat audits are merged directly into this repository with evidence status."
+  "base": "0.4.4-CHAT-AUDIT-02",
+  "previous_records": 144,
+  "added_by_deep_audit": 17,
+  "total_records": 204,
+  "new_ids": ["QRY-UPNP-STREAM-CAPABILITY-EXACT","PROTO-UPNP-PLAYQUEUE-ENDPOINT","CMD-UPNP-PQ-REPLACE","CMD-UPNP-PQ-APPEND","QRY-UPNP-PQ-BROWSE","CMD-UPNP-PQ-DELETE","CMD-UPNP-PQ-BACKUP","QRY-UPNP-PQ-INDEX","CMD-UPNP-PQ-PLAY-INDEX-EXACT","CMD-UPNP-PQ-APPEND-EX-EXACT","CMD-UPNP-AVT-PLAY","CMD-UPNP-AVT-PAUSE","CMD-UPNP-AVT-PREV","CMD-UPNP-AVT-NEXT","CMD-UPNP-AVT-SEEK","QRY-UPNP-AVT-MEDIAINFO","QRY-UPNP-AVT-INFOEX"],
+  "major_additions": ["WiiM Home reverse-engineering registry","A31/A97/A98 StreamCapability matrix","exact PlayQueue endpoint/actions/arguments","Qobuz feature negotiation and object chain","AVTransport action family","re-read A31 gateway request/response logs"],
+  "status_counts": {"CONFIRMED":19,"REJECTED":2,"CAPTURED":12,"IMPLEMENTED":2,"CAPTURED/IMPLEMENTED":4,"IMPLEMENTED/VERIFIED-IN-APP":1,"CONFIRMED-WRITE-ONLY":1,"EXPERIMENTAL":3,"DOCUMENTED/IMPLEMENTED":28,"CONFIRMED-A97":2,"DOCUMENTED":56,"IMPLEMENTED/NEEDS-HW-EVIDENCE":7,"SOURCE-CONFIRMED / NOT-HW-VERIFIED":3,"PARTIAL / SOURCE-CONFIRMED / NOT-HW-VERIFIED":1,"IMPLEMENTED / OBSERVED-IN-LOG":2,"IMPLEMENTED / RESPONSE-KNOWN":1,"APK-VERIFIED + HARDWARE-VERIFIED":2,"APK-VERIFIED / NOT-HW-ACTION-VERIFIED":8,"APK-VERIFIED":7},
+  "previous_version": "0.4.7-CHAT-AUDIT-02-FULL-SWEEP",
+  "attachment_sweep_added": ["PROTO-UPNP-QUEUECONTEXT-XML","PROTO-WIIM-PLAYLIST-XML","RULE-XML-ESCAPING-WIIM"],
+  "major_new_resolution": "Exact generic QueueContext XML and WiiM PlayList XML builders recovered from decompiled WiiM Home source dump.",
+  "full_sweep_added": ["CMD-UPNP-PQ-SET-MEDIA-SERVER","QRY-UPNP-RC-GET-VOLUME","CMD-UPNP-RC-SET-VOLUME","QRY-UPNP-RC-GET-MUTE","CMD-UPNP-RC-SET-MUTE","QRY-UPNP-RC-GET-CHANNEL","CMD-UPNP-RC-SET-CHANNEL","QRY-UPNP-RC-GET-EQ","CMD-UPNP-RC-SET-EQ","QRY-UPNP-RC-LIST-PRESETS","CMD-UPNP-RC-SELECT-PRESET","QRY-UPNP-RC-SIMPLE-DEVICE-INFO","QRY-UPNP-RC-CONTROL-DEVICE-INFO","CMD-UPNP-RC-MULTIPLAY-SLAVE-MASK","CMD-UPNP-RC-SET-ALARM-QUEUE","QRY-UPNP-RC-GET-ALARM-QUEUE","CMD-UPNP-RC-DELETE-ALARM-QUEUE","CMD-UPNP-RC-SET-DEVICE-NAME","CMD-UPNP-RC-AIRPLAY-AUTOSYNC","CMD-UPNP-RC-AUTOSYNC-SUB"],
+  "major_new_findings": ["PlayQueue SetMediaServerInfo on :59152","expanded RenderingControl SCPD action inventory"],
+  "playqueue_scpd_added": 20
 }

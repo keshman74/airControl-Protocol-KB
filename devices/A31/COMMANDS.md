@@ -1,0 +1,73 @@
+# A31 Command View
+
+- `QRY-A31-STATUS-EX` — **status** — `getStatusEx` — **CONFIRMED**
+- `QRY-A31-PLAYER-STATUS` — **playback/status** — `getPlayerStatus` — **CONFIRMED**
+- `QRY-A31-METAINFO` — **metadata** — `getMetaInfo` — **REJECTED**
+- `CMD-A31-VOLUME` — **volume** — `setPlayerCmd:vol:<0..100>` — **CONFIRMED**
+- `CMD-A31-MUTE-ON` — **mute** — `setPlayerCmd:mute:1` — **CONFIRMED**
+- `CMD-A31-MUTE-OFF` — **mute** — `setPlayerCmd:mute:0` — **CONFIRMED**
+- `CMD-A31-SOURCE-AUX` — **source** — `setPlayerCmd:switchmode:AUX%20In` — **CONFIRMED**
+- `CMD-A31-SOURCE-USB` — **source** — `setPlayerCmd:switchmode:USB%20Disk` — **CONFIRMED**
+- `CMD-A31-SOURCE-LINEIN-AUX` — **source** — `setPlayerCmd:switchmode:LineIn` — **REJECTED**
+- `CMD-A31-PLAY-URL` — **playback** — `setPlayerCmd:play:<URL>` — **CONFIRMED**
+- `QRY-A31-USB-LIST` — **USB** — `getLocalPlayList` — **CONFIRMED**
+- `QRY-A31-STATIC-IP` — **network** — `getStaticIP` — **CONFIRMED**
+- `CMD-A31-DHCP` — **network** — `setDhcp:wifi` — **CONFIRMED**
+- `CMD-A31-STATIC-IP` — **network** — `setStaticIP:{"type":"wifi","ip":"<IP>","mask":"<MASK>","gateway":"<GW>","dns":"<DNS>"}` — **CONFIRMED**
+- `QRY-A31-MCU-VOLUME` — **volume** — `MCU+VOL+GET&` — **CAPTURED**
+- `EVT-A31-MCU-VOLUME` — **volume event** — `AXX+VOL+NNN` — **CAPTURED**
+- `QRY-A31-MCU-VERSION` — **device info** — `MCU+PAS+RAKOIT:VER&` — **CAPTURED**
+- `QRY-A31-MXV` — **maximum volume** — `MCU+PAS+RAKOIT:MXV&` — **CAPTURED**
+- `CMD-A31-MXV` — **maximum volume** — `MCU+PAS+RAKOIT:MXV:<30..100>&` — **IMPLEMENTED**
+- `QRY-A31-TREBLE` — **EQ** — `MCU+PAS+RAKOIT:TRE&` — **CAPTURED**
+- `CMD-A31-TREBLE` — **EQ** — `MCU+PAS+RAKOIT:TRE:<n>&` — **CAPTURED/IMPLEMENTED**
+- `QRY-A31-BALANCE` — **EQ** — `MCU+PAS+RAKOIT:BAL&` — **CAPTURED**
+- `CMD-A31-BALANCE` — **EQ** — `MCU+PAS+RAKOIT:BAL:<n>&` — **CAPTURED/IMPLEMENTED**
+- `CMD-A31-MID` — **EQ** — `MCU+PAS+RAKOIT:MID:<n>&` — **CAPTURED/IMPLEMENTED**
+- `QRY-A31-EQ-PRESET` — **EQ preset** — `MCU+PAS+RAKOIT:EQS&` — **CAPTURED**
+- `CMD-A31-EQ-PRESET` — **EQ preset** — `MCU+PAS+RAKOIT:EQS:<n>&` — **CAPTURED/IMPLEMENTED**
+- `QRY-A31-EQ-PRESET-LIST` — **EQ preset** — `MCU+PAS+RAKOIT:PEQ&` — **CAPTURED**
+- `QRY-A31-EQ-TONE` — **EQ** — `MCU+PAS+EQGet&` — **IMPLEMENTED**
+- `CMD-A31-VIRTUAL-BASS` — **EQ** — `MCU+PAS+RAKOIT:VBS:<0|1>&` — **IMPLEMENTED/VERIFIED-IN-APP**
+- `CMD-A31-VBI` — **EQ** — `MCU+PAS+RAKOIT:VBI:<1..100>&` — **CONFIRMED-WRITE-ONLY**
+- `EVT-A31-PLAYBACK` — **playback event** — `AXX+SNG+INF{...}&` — **CAPTURED**
+- `QRY-A31-CFE` — **unknown** — `MCU+PAS+RAKOIT:CFE&` — **EXPERIMENTAL**
+- `QRY-A31-LST` — **unknown** — `MCU+PAS+RAKOIT:LST&` — **EXPERIMENTAL**
+- `PROTO-A31-8819` — **unknown communication** — `communication_port=8819` — **EXPERIMENTAL**
+- `CMD-LP-PLAY` — **playback** — `setPlayerCmd:play:<URL>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-PLAYLIST` — **playback** — `setPlayerCmd:playlist:<songid>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-PAUSE` — **playback** — `setPlayerCmd:pause` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-RESUME` — **playback** — `setPlayerCmd:resume` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-TOGGLE` — **playback** — `setPlayerCmd:onepause` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-PREV` — **playback** — `setPlayerCmd:prev` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-NEXT` — **playback** — `setPlayerCmd:next` — **DOCUMENTED/IMPLEMENTED**
+- `QRY-LP-POSITION` — **playback** — `setPlayerCmd:getplay:<seconds>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-SEEK` — **playback** — `setPlayerCmd:setplay:<seconds>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-STOP` — **playback** — `setPlayerCmd:stop` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-VOL-UP` — **volume** — `setPlayerCmd:RemoteVol++` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-VOL-DOWN` — **volume** — `setPlayerCmd:RemoteVol--` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-MAX-VOL` — **volume** — `setPlayerCmd:maximumVolume:<value>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-CHANNEL` — **playback** — `setChannel:<channel>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-LOOP` — **playback** — `setPlayerCmd:loopmode:<loopmode>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-REBOOT` — **system** — `reboot` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-FACTORY` — **system** — `factory` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-SHUTDOWN` — **system** — `shutdown` — **DOCUMENTED/IMPLEMENTED**
+- `QRY-LP-WIFI-STATE` — **network** — `wlanGetConnectState` — **DOCUMENTED/IMPLEMENTED**
+- `QRY-LP-SCAN-APS` — **network** — `getScanAPs` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-CONNECT-AP` — **network** — `connectToAP:<wifiName>:<wifiPassword>` — **DOCUMENTED/IMPLEMENTED**
+- `CMD-LP-MR-JOIN` — **multiroom** — `multiroom:JoinGroup:IP=<MASTER_IP>:uuid=<MASTER_UUID>` — **CONFIRMED-A97**
+- `CMD-LP-MR-LEAVE` — **multiroom** — `multiroom:LeaveGroup` — **CONFIRMED-A97**
+- `QRY-LP-MR-SLAVES` — **multiroom** — `multiroom:getSlaveList` — **DOCUMENTED**
+- `CMD-LP-MR-UNGROUP` — **multiroom** — `multiroom:Ungroup` — **DOCUMENTED**
+- `CMD-LP-MR-KICK` — **multiroom** — `multiroom:SlaveKickout:<ip>` — **DOCUMENTED**
+- `CMD-LP-MR-SLAVE-VOL` — **multiroom** — `multiroom:SlaveVolume:<...>` — **DOCUMENTED**
+- `CMD-LP-MR-SLAVE-MUTE` — **multiroom** — `multiroom:SlaveMute:<...>` — **DOCUMENTED**
+- `CMD-LP-MR-SLAVE-CHANNEL` — **multiroom** — `multiroom:SlaveChannel:<...>` — **DOCUMENTED**
+- `CMD-A31-MCU-PAUSE` — **playback** — `MCU+PLY-PUS` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-PLAY` — **playback** — `MCU+PLY-PLA` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-NEXT` — **playback** — `MCU+PLY+NXT` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-PREV` — **playback** — `MCU+PLY+PRV` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-VOLUME` — **volume** — `MCU+VOL+<NNN>` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-MUTE` — **mute** — `MCU+MUT+00<0|1>` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `CMD-A31-MCU-PRESET` — **media preset** — `MCU+KEY+<001..010>` — **IMPLEMENTED/NEEDS-HW-EVIDENCE**
+- `EVT-A31-EQ-TREBLE` — **EQ event** — `MCU+PAS+EQ:treble:<NN>&` — **CAPTURED**
