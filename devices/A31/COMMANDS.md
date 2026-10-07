@@ -174,3 +174,9 @@
 - `CMD-A31-UART-SOP` — **standby on power** — `SOP:{onoff}` — **DOCUMENTED / OFFICIAL-ARYLIC-UART-API / NOT-YET-HW-VERIFIED**
 
 Physical UART: **115200/8/N/1, no flow control, semicolon terminator**. Availability is firmware/model/API-version dependent.
+
+
+## Origin-chat audit additions
+- `RULE-LP-TRANSPORT-BY-HARDWARE` — A31 / UP2STREAM_PRO_V4 uses Linkplay HTTP :80 in the verified airControl transport map — **IMPLEMENTED / HARDWARE-OBSERVED**
+- `RULE-LP-MR-ROLE-PARSING` — `master_ip` / `master_uuid` are retained for native topology; a populated `master_ip` identifies a slave — **IMPLEMENTED / OBSERVED-IN-APP**
+- `TEST-A31-UPNP-SEEK-REL-TIME` — AVTransport `Seek(Unit=REL_TIME)` — **HARDWARE-VERIFIED**
