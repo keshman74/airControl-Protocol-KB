@@ -72,3 +72,7 @@
 ## A33M V1.2 full-manual audit
 All **63/63** API entries in sections 3.1–3.13 are mapped in `protocols/acs2/A33M-V1.2-COMPLETE.md`. Previously missing canonical entry:
 - `QRY-A33M-EQ-SWITCH` — `getEqSwitch` — **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**.
+
+
+## Origin-chat audit additions
+- `RULE-MULTIROOM-FAMILY-SEPARATION` — A33 ACS2 multiroom is a separate family from Linkplay native JoinGroup/LeaveGroup; A33 ↔ A31/A97/A98 grouping remains **UNVERIFIED** and must not be inferred — **IMPLEMENTED / SAFETY-GUARD**
