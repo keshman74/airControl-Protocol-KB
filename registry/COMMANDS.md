@@ -1,6 +1,6 @@
 # Master Command Registry
 
-Current canonical ledger: **317 records**.
+Current canonical ledger: **325 records**.
 
 - v0.4.8 baseline: records **1–204**
 - saved-chat audit increment: records **205–214**
@@ -8,6 +8,7 @@ Current canonical ledger: **317 records**.
 - official Arylic A31 TCP API expansion: records **222–258**
 - official Arylic A31 UART runtime API: records **259–316**
 - A33M V1.2 full 36-page audit: record **317** (getEqSwitch; all other 62 API entries reuse existing canonical IDs)
+- full `CHAT-AIRCONTROL-ORIGIN` audit: records **318–325** (transport/topology rules, A98 artwork, discovery truth, DLNA behavior, playback ownership, family separation, A31 UPnP seek hardware evidence)
 
 The CSV shards under `registry/records/` are the lossless source table, while usable canonical views are distributed into device, protocol and function sections.
 
