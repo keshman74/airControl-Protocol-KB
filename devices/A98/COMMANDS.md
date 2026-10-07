@@ -29,3 +29,9 @@
 - `CMD-LP-MR-SLAVE-VOL` — **multiroom** — `multiroom:SlaveVolume:<...>` — **DOCUMENTED**
 - `CMD-LP-MR-SLAVE-MUTE` — **multiroom** — `multiroom:SlaveMute:<...>` — **DOCUMENTED**
 - `CMD-LP-MR-SLAVE-CHANNEL` — **multiroom** — `multiroom:SlaveChannel:<...>` — **DOCUMENTED**
+
+
+## Origin-chat audit additions
+- `QRY-A98-METAINFO-ARTWORK` — `getMetaInfo` artwork resolved through Electron resolver — **CONFIRMED-IN-AIRCONTROL**
+- `RULE-LP-TRANSPORT-BY-HARDWARE` — A98/WiiM/Amlogic uses Linkplay HTTPS :443 in the verified airControl transport map; self-signed certificate handling is required by the desktop transport — **IMPLEMENTED / HARDWARE-OBSERVED**
+- `RULE-LP-MR-ROLE-PARSING` — native group role is resolved from device topology using `master_ip` / `master_uuid` — **IMPLEMENTED / OBSERVED-IN-APP**
