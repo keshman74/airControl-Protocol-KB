@@ -1,0 +1,162 @@
+# Other
+
+
+## WiiM OpenAPI v1.2.0 source import
+Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately promoted by hardware evidence.
+
+- `QRY-WIIM-GET-REMOTE-VOLUME-STEP` — `get_remote_volume_step` — Get the remote volume step — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-REMOTE-VOLUME-STEP` — `set_remote_volume_step:{n}` — Set the remote volume step — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-REMOTE-SILENCE-UPDATE-TIME` — `getMvRemoteSilenceUpdateTime` — Get the MV remote silence update time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SPDIF-OUT-MAX-CAP` — `getSpdifOutMaxCap` — Get SPDIF output maximum capabilities — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-COAX-OUT-MAX-CAP` — `getCoaxOutMaxCap` — Get the maximum capabilities of the coaxial output — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUX-VOLTAGE-SUPPORT-LIST` — `getAuxVoltageSupportList` — Get auxiliary voltage support list — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-GET-SPEAKER-LIST` — `audio_cast:get_speaker_list` — Audio Cast get speaker list [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-SCAN-SPEAKER` — `audio_cast:scan_speaker` — Audio Cast scan speaker [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-SPEAKER-GET-TRANSCODE-BUFFER-TIME` — `audio_cast:speaker_get_transcode_buffer_time` — Audio Cast get speaker transcode buffer time [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-SPEAKER-GET-TRANSCODE-PROFILE` — `audio_cast:speaker_get_transcode_profile` — Audio Cast get speaker transcode profile [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-SPEAKER-SET-PASSWORD` — `audio_cast:speaker_set_password:{str1}:{str2}` — Audio Cast set speaker password [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUDIO-CAST-SPEAKER-SET-VOLUME` — `audio_cast:speaker_set_volume:{str}:{volume}` — Audio Cast set speaker volume [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SOUND-CARD-MODE-SUPPORT-LIST` — `getSoundCardModeSupportList` — Get sound card mode support list — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-ACTIVE-SOUND-CARD-OUTPUT-MODE` — `getActiveSoundCardOutputMode` — Get the active sound card output mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-LIGHT-OPERATION-BRIGHT-CONFIG` — `setLightOperationBrightConfig:{"auto_sense_enable":{s},"default_bright":{b},"disable":{d}}` — WiiM Ultra enable/disable LCD — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-REMOTE-UPDATE-START-CHECK` — `getMvRemoteUpdateStartCheck` — Search for firmware updates available (check for updates) — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-REMOTE-UPDATE-START` — `getMvRemoteUpdateStart` — Start firmware update — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-REMOTE-UPDATE-STATUS` — `getMvRemoteUpdateStatus` — Status of the update process — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-ROM-BURN-PRECENT` — `getMvRomBurnPrecent` — Status of the update process — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-EASY-LINK-RESPONSE-STOP` — `EasyLinkResponseStop` — EasyLink response stop — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-NOTIFY-UPGRADE-TYPE-FIRMWARE` — `NotifyUpgradeType:firmware` — Notify upgrade type firmware — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-LMPFILTER-CAPABILITY` — `getLMPFilterCapability` — Get LMP filter capability — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-STREAM-SERVICE-CONFIG` — `getStreamServiceConfig:{source}` — Get stream service config for a specific source — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-HANDSHAKE-CODE` — `setHandshakeCode:{str}` — Set handshake code — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GETSYSLOG-IP` — `getsyslog:ip:{str}` — Get system log for a specific IP address — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-STATUS-IP` — `getStatus:ip:{str}` — Get the device status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-WEATHER-INFO` — `getWeatherInfo` — Get weather info — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-ACCESS-PIN` — `setAccessPIN:{"PIN":"{str}"}` — Set access PIN — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-LANGUAGE` — `setLanguage:{str}` — Set language — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-AUTO-PLAY-SET` — `AutoPlaySet` — Auto play setting [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-ROM-DOWNLOAD-STATUS` — `getMvRomDownloadStatus` — Get MV ROM download status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-ROM-DOWNLOAD-V2STATUS` — `getMvRomDownloadV2Status` — Get MV ROM download status V2 — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-HEX-GROUP-NAME` — `setHexGroupName:{str}` — Set hex group name — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MV-REMOTE-SILENCE-OTATIME` — `setMvRemoteSilenceOTATime:{str}` — Set MV remote silence OTA time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-CHECK-ACCESS-PIN` — `checkAccessPIN` — Check access PIN [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-WEATHER-LOCATION` — `setWeatherLocation:{str}` — Set weather location — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-START-CHECK` — `StartCheck` — Start check — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GETBATTERYVAL` — `getbatteryval` — Get battery value [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-ASR-STATUS` — `getAsrStatus` — Get Automatic Speech Recognition Status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-LPAUTH-CODE` — `getLPAuthCode:hostId={str}:clientId={str2}` — Get LP Auth Code — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TOKEN-PARAMS` — `setTokenParams:code={str}:redirect_uri={str2}` — Set token parameters — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-PROMPT` — `talksetPrompt:{n}` — Set talk prompt — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-ALARM-PRE-WAKE` — `talksetAlarmPreWake:{str}` — Set talk alarm pre-wake — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-ALARM-TONE` — `talksetAlarmTone:{n}` — Set talk alarm tone — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-ALARM-TONE-PREVIEW` — `talksetAlarmTonePreview:{n}` — Set talk alarm tone preview — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-ALARM-VOLUME` — `talksetAlarmVolume:{n}` — Set talk alarm volume — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TALKSET-ALARMCOMMON` — `talksetAlarmcommon:prewake:{str}:vol:{n1}:tone:{n2}` — Set talk alarm common settings — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SYNC-PLAY-EXTRA-DELAY` — `SetSyncPlayExtraDelay:{n}` — Set sync play extra delay — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-INITIAL-CONFIGURATION` — `setInitialConfiguration:{n}` — Set initial configuration — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-UI-CONFIG` — `get_ui_config` — Get UI config [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SPDIF-AUTO-SENSE-ENABLE` — `getSpdifAutoSenseEnable` — Get SPDIF auto-sense enable status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SPDIF-IN-NOISE-REMOVE` — `getSpdifInNoiseRemove` — Get SPDIF input noise removal status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-PHONO-MODE-SWITCH-SET` — `PHONO_MODE_SWITCH_SET:{str}` — Phono mode switch set — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAY-MODE-VOLUME-ENABLE` — `setPlayModeVolumeEnable:{str}` — Set play mode volume enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-UI-WALLPAPER-LIST` — `get_ui_wallpaper_list` — Get UI wallpaper list [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAY-MODE-VOLUME-VALUE` — `setPlayModeVolumeValue:{str}` — Set play mode volume value — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-POWER-MODE-TIME` — `setPowerModeTime:{"idleInterval":"{str}"}` — Set power mode time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-BUTTON-VOLUME-STEP` — `get_button_volume_step` — Get the volume step of the buttons — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-BUTTON-VOLUME-STEP` — `set_button_volume_step:{str}` — Set the volume step of the buttons — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUX-AUTO-SENSE-ENABLE` — `getAuxAutoSenseEnable` — Get AUX auto-sense enable status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-UI-CONFIG` — `set_ui_config:{str}` — Set UI config — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SPDIF-AUTO-SENSE-ENABLE` — `setSpdifAutoSenseEnable:{n}` — Set SPDIF auto-sense enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SPDIF-IN-NOISE-REMOVE` — `setSpdifInNoiseRemove:{str}` — Set SPDIF input noise removal — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-CHANNEL-MODE` — `getChannelMode` — Get channel mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUTO-SENSE-ENABLE` — `getAutoSenseEnable` — Get auto-sense enable status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-START-REBOOT-TIME` — `StartRebootTime:1` — Start reboot time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-LED-SWITCH-GET` — `LED_SWITCH_GET` — Get LED switch status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MQARECEIVER-CAP` — `getMQAReceiverCap` — Get MQA receiver capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-RELOAD-BUTTON-GET` — `Reload_Button_GET` — Reload button status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-AUX-AUTO-SENSE-ENABLE` — `setAuxAutoSenseEnable:{n}` — Set AUX auto-sense enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-LOW-PRIORITY-PROMPT-DISABLE` — `getLowPriorityPromptDisable` — Get low priority prompt disable status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SOFT-MUTE` — `getSoftMute` — Get soft mute status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-LINE-IN-MAX-CAP` — `getLineInMaxCap` — Get LINE IN maximum capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUX-IN-MAX-CAP` — `getAuxInMaxCap` — Get AUX input maximum capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-UAC-OUT-MAX-CAP` — `getUacOutMaxCap` — Get UAC output maximum capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-HDMIAUTO-SENSE-ENABLE` — `getHDMIAutoSenseEnable` — Get HDMI auto-sense enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-CHANNEL-MODE` — `setChannelMode:{n}` — Set channel mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SYNC-PLAY-EXTRA-DELAY` — `GetSyncPlayExtraDelay` — Get sync play extra delay — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-LIGHT-OPERATION-BRIGHT-CONFIG` — `getLightOperationBrightConfig` — Get light operation brightness configuration — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-UI-WALLPAPER-LIST` — `set_ui_wallpaper_list:{str}` — Set UI wallpaper list — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MAIN-SUB-EXTRA-DELAY` — `getMainSubExtraDelay` — Get main/sub extra delay — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-CAST-DISABLE` — `Cast:Disable` — Disable Cast — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-CAST-DISABLE-USAGE-REPORT` — `Cast:DisableUsageReport` — Disable usage report for Cast — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-AUTO-SENSE-ENABLE` — `setAutoSenseEnable:{str}` — Set auto-sense enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-PHONO-MODE-SWITCH-GET` — `PHONO_MODE_SWITCH_GET` — Get phono mode switch state — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-PLAY-MODE-VOLUME-ENABLE` — `getPlayModeVolumeEnable` — Get play mode volume enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-VOLUME-CONTROL` — `setVolumeControl:{n}` — Set volume control — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-PLAY-MODE-VOLUME-VALUE` — `getPlayModeVolumeValue` — Get play mode volume value — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MQARECEIVER-CAP` — `setMQAReceiverCap:{str}` — Set MQA receiver capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-POWER-MODE-TIME` — `getPowerModeTime` — Get power mode time — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MAX-VOLUME` — `setMaxVolume:{n}` — Set max volume — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-ENABLE-CAST` — `Cast:EnableCast` — Enable Cast — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-RELOAD-BUTTON-UPDATE` — `Reload_Button_UPDATE:{str}` — Reload button update — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-ENABLE-CAST-USAGE-REPORT` — `Cast:EnableUsageReport` — Enable usage report for Cast — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-DISABLE-LOW-PRIORITY-PROMPT` — `disableLowPriorityPrompt:{str}` — Disable low priority prompt — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SOFT-MUTE` — `setSoftMute:{str}` — Set soft mute — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-HDMIAUTO-SENSE-ENABLE` — `setHDMIAutoSenseEnable:{n}` — Set HDMI auto-sense enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SPDIF-OUT-MAX-CAP` — `setSpdifOutMaxCap:{str}` — Set SPDIF output max capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-COAX-OUT-MAX-CAP` — `setCoaxOutMaxCap:{str}` — Set coaxial output max capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-LINE-IN-MAX-CAP` — `setLineInMaxCap:{str}` — Set line input max capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-AUX-IN-MAX-CAP` — `setAuxInMaxCap:{str}` — Set auxiliary input max capacity — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-UAC-OUT-MAX-CAP` — `setUacOutMaxCap:{str}` — Set UAC out max cap — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-ENABLE-SYS-INFO` — `EnableSysInfo:{n}` — Enable system information output — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AIRPLAY-EXTRA-DELAY` — `GetAirplayExtraDelay` — Get AirPlay extra delay — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-CURRENT-WIRELESS-CONNECT` — `GetCurrentWirelessConnect` — Get current wireless connection information [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SLAVE-ALERT-GET` — `SlaveIP:{ip}:alertget` — Slave alert get — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SLAVE-TALK-SET-ALARM-VOLUME` — `SlaveIP:{ip}:talksetAlarmVolume:{n}` — Slave set alarm volume — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SQUEEZELITE-AUTO-CONNECT-ENABLE` — `Squeezelite:autoConnectEnable:{n}` — Squeezelite auto connect enable — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SQUEEZELITE-CONNECT-SERVER` — `Squeezelite:connectServer:{ip}` — Squeezelite connect server — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SQUEEZELITE-DISCOVER` — `Squeezelite:discover` — Squeezelite discover — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SQUEEZELITE-GET-STATE` — `Squeezelite:getState` — Squeezelite get state — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-SETUP-ROUTER-INFO` — `getSetupRouterInfo` — Get setup router information [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-SETUP-ROUTER-INFO` — `setSetupRouterInfo:{str}` — Set setup router information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-ALERT-GET` — `alertget` — Alert get — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TVS-LOGOUT` — `TvsLogout` — TVS logout — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-TVS-STATE` — `TvsState` — Get TVS state — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-TVS-DEV-INFO` — `getTvsDevInfo` — Get TVS device information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TVSACCESS-TOKEN` — `setTVSAccessToken:{str}` — Set TVS access token — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TVSDEBUG-MODE` — `setTVSDebugMode:{str}` — Set TVS debug mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TVS-CLIENT-ID` — `setTvsClientID:{str}` — Set TVS client ID — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-CREATE-ROUTINE` — `createRoutine:{str}` — Create routine — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-ALL-ROUTINES` — `getAllRoutines` — Get all routines — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-ROUTINE-CAPABILITY` — `getRoutineCapability` — Get routine capability — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUDIO-INPUT-CAPABILITY` — `getAudioInputCapbility` — Get audio input capability — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUDIO-OUT-MAX32BIT` — `getAudioOutMax32bit` — Get audio output maximum 32-bit support — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-AUDIO-OUT-MAX32BIT` — `setAudioOutMax32bit:{n}` — Set audio output maximum 32-bit support — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUDIO-OUTPUT-VRMS` — `getAudioOutputVrms:{str}` — Get audio output VRMS for a specific output — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-AUDIO-OUTPUT-VRMS-SUPPORT-LIST` — `getAudioOutputVrmsSupportList` — Get list of audio outputs that support VRMS — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-AUDIO-OUTPUT-VRMS` — `setAudioOutputVrms:{str}` — Set audio output VRMS for a specific output — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-CBLSTATUS` — `getCBLStatus` — Get CBL status [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-CEC-POWER-CTRL` — `getCecPowerCtrl` — Get CEC power control status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-CEC-POWER-CTRL` — `setCecPowerCtrl:{n}` — Set CEC power control status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-CXDISH-PRECENT` — `getCxdishPrecent` — Get CXDISH percentage — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-DIGITAL-FILTER-TYPE-SUPPORT-LIST` — `getDigitalFilterTypeSupportList` — Get list of supported digital filter types — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-DIGITAL-FILTER-TYPE` — `getDigitalFilterType` — Get current digital filter type — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-DIGITAL-FILTER-TYPE` — `setDigitalFilterType:{n}` — Set digital filter type — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-OUTPUT-DIGITAL-FILTER-TYPE` — `getOutputDigitalFilterType:{str}` — Get current output digital filter type — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-OUTPUT-DIGITAL-FILTER-TYPE-SUPPORT-LIST` — `getOutputDigitalFilterTypeSupportList` — Get list of supported output digital filter types — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-OUTPUT-DIGITAL-FILTER-TYPE` — `setOutputDigitalFilterType:{str}` — Set output digital filter type — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-DIGITAL-INPUT-AUDIO-TYPE-SUPPORT` — `getDigitalInputAudioTypeSupport` — Get supported digital input audio types — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-OUTPUT-VOLTAGE` — `getOutputVoltage` — Get output voltage — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-OUTPUT-VOLTAGE` — `setOutputVoltage:{n}` — Set output voltage — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-FEATURE-CAPABILITY` — `getFeatureCapbility` — Get feature capability — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-PLAY-MODE-GAIN-CONFIG` — `getPlayModeGainConfig` — Get play mode gain configuration — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-PLAY-MODE-GAIN-CONFIG` — `setPlayModeGainConfig:{str}` — Set play mode gain configuration — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MEDIASERVER-SCAN` — `mediaserver:scan` — Media server scan — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-MEDIASERVER-UDISKUMOUNT` — `mediaserver:udiskumount` — Media server USB disk unmount — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-INPUT-MODE-SUPPORT-LIST` — `getInputModeSupportList` — Get list of supported input modes — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MODE-RENAME` — `getModeRename` — Get input mode rename information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MODE-RENAME` — `setModeRename:{str}` — Set input mode rename information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-MUSIC-EXPLICIT` — `setMusicExplicit:{n}` — Set music explicit content filter — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `QRY-WIIM-GET-MV-REMOTE-UPDATE-DEVICE-OTA-INFO` — `getMvRemoteUpdateDeviceOtaInfo` — Get MV remote update device OTA information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TUNEIN-FAVORITE-STATE` — `setTuneinFavoriteState:songId={songId}:statu={status}` — Set TuneIn favorite state for a song — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TUNEIN-LOCATION` — `setTuneinLocation:latitude={latitude}:longitude={longitude}:serial={serial}` — Set TuneIn location information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-SET-TUNEIN-TOKEN` — `setTuneinToken:username={username}:token={token}:refreshToken={refreshToken}:expires_in={expires_in}:userid={userid}` — Set TuneIn authentication token information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+- `CMD-WIIM-TIDAL-LOGIN` — `tidallogin:oauthcode={str}` — Tidal login using OAuth code — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
