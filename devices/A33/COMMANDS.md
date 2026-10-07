@@ -76,3 +76,7 @@ All **63/63** API entries in sections 3.1–3.13 are mapped in `protocols/acs2/A
 
 ## Origin-chat audit additions
 - `RULE-MULTIROOM-FAMILY-SEPARATION` — A33 ACS2 multiroom is a separate family from Linkplay native JoinGroup/LeaveGroup; A33 ↔ A31/A97/A98 grouping remains **UNVERIFIED** and must not be inferred — **IMPLEMENTED / SAFETY-GUARD**
+
+
+## AudioCast / DLNA-UPnP cross-family research candidate
+A97/A98 WiiM-source AudioCast exposes network-speaker discovery/list, transcode-profile/buffer queries and remote speaker volume. User observation from the native WiiM app identifies AudioCast UI behavior as sending audio to compatible UPnP/DLNA devices. **A33 participation is NOT VERIFIED.** Test only as a candidate renderer/bridge path: determine whether A33 advertises a compatible DLNA/UPnP renderer, accepts the AudioCast stream, and can maintain usable synchronization/latency. Do not treat this as native A33<->Linkplay multiroom or relax `RULE-MULTIROOM-FAMILY-SEPARATION` without hardware evidence.
