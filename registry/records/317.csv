@@ -1,0 +1,2 @@
+ID,Family,Device,Function,Protocol,Command / mechanism,Status,Response / notes
+"QRY-A33M-EQ-SWITCH","A33M","A33M/A33","EQ current switch","ACS2/A33M HTTP :8000 or HTTPS :8443","getEqSwitch","DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED","Text response; values use eqEnable map 0000,0001,0010,0011,0100,0101; Error on API command error."

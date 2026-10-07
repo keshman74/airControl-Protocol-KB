@@ -68,3 +68,7 @@
 - `CMD-A33M-PRESET-MOVE` — `movePresetPosition:{"OldIndex":"x","NewIndex":"x"}` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
 - `CMD-A33M-PRESET-DELETE` — `deletePreset:<0..12>` (0 clears all) — **DOCUMENTED / NOT-YET-HW-VERIFIED**
 - `QRY-A33M-PRESET-LIST` — `getPresetListInfo` — **DOCUMENTED / NOT-YET-HW-VERIFIED**
+
+## A33M V1.2 full-manual audit
+All **63/63** API entries in sections 3.1–3.13 are mapped in `protocols/acs2/A33M-V1.2-COMPLETE.md`. Previously missing canonical entry:
+- `QRY-A33M-EQ-SWITCH` — `getEqSwitch` — **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**.
