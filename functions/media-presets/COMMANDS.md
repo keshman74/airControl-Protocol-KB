@@ -6,7 +6,7 @@ Transport follows the A33M API envelope:
 - HTTP: `http://<ip>:8000/?Instruct=<params>`
 - HTTPS: `https://<ip>:8443/?Instruct=<params>`
 
-Status for the seven commands below: **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**.
+Status: **DOCUMENTED / OFFICIAL-A33M-V1.2**. Hardware-confirmed on A33 (2026-10-10): `choicePreset:1`, `choicePreset:2` select slots (the latter returned `Not` but switched); `getPresetListInfo` returns 12 entries. `setPlayerCmd:resume` starts playback after selecting slot 2. Remaining preset commands not yet hardware verified. See `tests/A33-PRESETS-HW-2026-10-10.md`.
 
 ### CMD-A33M-PRESET-ADD — add/save current state to a preset
 `oneClickPreset:<presetInfo>`
