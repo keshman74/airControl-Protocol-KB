@@ -1,6 +1,6 @@
 # A33 Command View
 
-- `QRY-ACS2-STATUS` — **status** — `getStatusEx` — **DOCUMENTED**
+- `QRY-ACS2-STATUS` — **status** — `getStatusEx` — **DOCUMENTED / HW-CONFIRMED (2026-10-09, Cloudix A33, CL-BOPro, firmware 2.35.0023.33, HTTP :8000)**
 - `CMD-ACS2-USB-PLAY` — **USB** — `playFromUsbDisk` — **DOCUMENTED**
 - `QRY-ACS2-USB-LIST` — **USB** — `getUsbSongList` — **DOCUMENTED**
 - `CMD-ACS2-USB-SELECT` — **USB** — `selectUsbTracks:<usbSongNum>` — **DOCUMENTED**
@@ -80,3 +80,12 @@ All **63/63** API entries in sections 3.1–3.13 are mapped in `protocols/acs2/A
 
 ## AudioCast / DLNA-UPnP cross-family research candidate
 A97/A98 WiiM-source AudioCast exposes network-speaker discovery/list, transcode-profile/buffer queries and remote speaker volume. User observation from the native WiiM app identifies AudioCast UI behavior as sending audio to compatible UPnP/DLNA devices. **A33 participation is NOT VERIFIED.** Test only as a candidate renderer/bridge path: determine whether A33 advertises a compatible DLNA/UPnP renderer, accepts the AudioCast stream, and can maintain usable synchronization/latency. Do not treat this as native A33<->Linkplay multiroom or relax `RULE-MULTIROOM-FAMILY-SEPARATION` without hardware evidence.
+
+## Hardware verification — getStatusEx (2026-10-09)
+
+- Device: Cloudix (A33 / ACS2), project `CL-BOPro`, firmware `2.35.0023.33`, Ethernet IP `192.168.0.31` (test network; not a fixed protocol requirement).
+- Request: `GET http://<device-ip>:8000/?Instruct=getStatusEx`.
+- Observed: `HTTP/1.1 200 OK`, `Content-Type: application/json`, valid JSON with `ProjectName`, `DevName`, `UserDevName`, `VERSION`, `TCPIP`, `NetworkMode`, `DevFunction`, `DevVolumeL`, `DevVolumeR`, `PlayState`, `MultiroomType`, `MultiroomStatus` and other fields.
+- Observed values: `DevName=Cloudix`, `NetworkMode=eth0`, `PlayState=stop`, `MultiroomType=none`, `MultiroomStatus=free`.
+- Verification source: direct device curl response supplied by hardware tester in airALARM development conversation.
+- Scope: confirms `getStatusEx` on this specific A33 firmware over HTTP port 8000. Does not verify prompt-sound commands, automatic discovery, or HTTPS port 8443.
