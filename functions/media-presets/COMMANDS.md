@@ -98,3 +98,7 @@ Design recommendation for airControl (NOT YET IMPLEMENTED):
 - Missing/failed current artwork must not leave a previous unrelated album/station visible.
 - Associate all artwork fields with original KeyN, not compacted display position.
 - TuneIn thumbnails can use .jpg as well as .png: observed logoq.jpg is hardware readback. KNOB v0.8.10 currently rewrites only logog.png; JPG rewrite not implemented yet.
+
+### Follow-up current metadata after Key5 selection — 2026-10-13
+**CONFIRMED user readback**: after the requested manual selection of Key5, GetPositionInfo returned title Hit FM Ukraine and albumArtURI http://cdn-profiles.tunein.com/s6122/images/logog.png?t=636486210612100000. This matches stored Key5 Metadata/albumArtURI and PicUrl. Previous current readback was Space Station Soma (Key3).
+Thus the current metadata source updated across this observed station change. The selection transport/native app used was not identified by this output; do not claim an MCU playback command was verified. No screenshot or KNOB artwork-display result was supplied in this test.
