@@ -22,3 +22,13 @@ Observed Spotify Connect advertisement: `_spotify-connect._tcp.local`.
 
 ## Global online rule
 A persisted/saved device is not automatically Online. Online requires a real discovery or successful status response.
+
+## Fast progressive zone discovery — DISC-FAST-ZONES-001
+
+**CONFIRMED — overall practical result on KNOB v0.8.5, 2026-10-12.** User reports much faster discovery and all expected zones found in the tested LAN. No measured timings or per-chip inventory supplied.
+
+Canonical algorithm, API routing, bounded ESP32 profile, desktop comparison, source references and evidence limits: [FAST_ZONE_DISCOVERY.md](FAST_ZONE_DISCOVERY.md).
+
+Supporting rules: **RULE-DISCOVERY-NONBLOCKING-001** and **RULE-DISCOVERY-CANCEL-GENERATION-001** — IMPLEMENTED + HOST-TESTED. Continuously receive SSDP/LOCATION/NOTIFY and A33 IP hints, queue candidates, validate separately, emit verified zones immediately, bound retries and ignore stale results after cancellation. Cache entries remain hints, not Online evidence.
+
+[Hardware/practical report](../evidence/hardware-tests/KNOB-DISCOVERY-v0.8.5-2026-10-12.md).

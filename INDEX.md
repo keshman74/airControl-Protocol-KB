@@ -14,6 +14,7 @@ Canonical knowledge is organized by **device**, **protocol**, and **function**. 
 - [Protocols](registry/PROTOCOLS.md)
 - [Services](registry/SERVICES.md)
 - [Discovery](registry/DISCOVERY.md)
+- [Fast progressive zone discovery](registry/FAST_ZONE_DISCOVERY.md) — KNOB v0.8.5 user-confirmed baseline
 - [Compatibility](registry/COMPATIBILITY.md)
 - [Stream capabilities](registry/STREAM_CAPABILITIES.md)
 - [Behavior rules](registry/BEHAVIOR_RULES.md)

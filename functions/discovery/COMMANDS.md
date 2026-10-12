@@ -4,3 +4,7 @@ Discovery is mechanism-oriented rather than a command-only API. Canonical mechan
 
 - `QRY-UPNP-STREAM-CAPABILITY-EXACT` — runtime capability discovery after UPnP device/service discovery — **APK-VERIFIED + HARDWARE-VERIFIED**
 - `PROTO-UPNP-PLAYQUEUE-ENDPOINT` — discover PlayQueue service/controlURL from device description — **APK-VERIFIED + HARDWARE-VERIFIED**
+
+- `DISC-FAST-ZONES-001` — [fast progressive zone discovery](../../registry/FAST_ZONE_DISCOVERY.md) — **CONFIRMED on KNOB v0.8.5 (overall user-reported result)**.
+- `RULE-DISCOVERY-NONBLOCKING-001` — separate continuous receipt from bounded network validation; emit results progressively — **IMPLEMENTED + HOST-TESTED**.
+- `RULE-DISCOVERY-CANCEL-GENERATION-001` — generation IDs reject late results after stop/restart; select while scanning — **IMPLEMENTED + HOST-TESTED**.
