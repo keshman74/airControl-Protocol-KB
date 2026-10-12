@@ -48,3 +48,17 @@ If artwork is missing, rejected or fails to decode, do not show a prior station/
 A transient OFFLINE indicator is a separate issue; none of these image tests proves a panel/player restart.
 
 Evidence: [user test record](../evidence/hardware-tests/KNOB-ARTWORK-LIMITS-2026-10-13.md).
+
+## RULE-KNOB-SERVICE-THUMBNAIL-001 — v0.8.10
+Status: **IMPLEMENTED / HOST-TESTED; CDN responses VERIFIED; KNOB hardware validation pending**.
+Source commit: bf073dde952e848a44b85859572753e7e6dd610f in airKNOB experimental/multichip-v0.8.0.
+
+Allowlisted URL rules:
+- Exact host static.qobuz.com, path /images/covers/: filename suffix _600.jpg, _1200.jpg, _max.jpg or _300.jpg -> _150.jpg.
+- Exact host cdn-profiles.tunein.com, path /s<numeric-station-id>/images/logog.png -> /s<numeric-station-id>/images/logoq.png.
+- Preserve scheme and query/fragment. Other hosts/paths and local airControl radio-cover URLs are unchanged.
+- Try the thumbnail first; if download/decode fails, try the original URL once. A successful cover remains cached against its original metadata URL, preventing repeat downloads just because a thumbnail was selected.
+- No proxy, flash-file decoder or increased image limits added.
+
+Direct retrieval evidence (2026-10-13): Qobuz cover rde5qkxdqq1bf_150.jpg returned HTTP 200, JPEG 150×150, 12455 bytes; TuneIn s227824 logoq.png returned HTTP 200, PNG 145×144, 21010 bytes; TuneIn s55142 logoq.png returned HTTP 200, PNG 145×145, 9659 bytes.
+These are specific server observations, not a guarantee that every substituted URL exists. Firmware runtime fallback is mandatory. URL mapping itself is a tested pattern, not claimed as an official service-wide API guarantee.
