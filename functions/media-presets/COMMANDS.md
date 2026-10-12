@@ -62,3 +62,10 @@ Returns a **JSON response** on success; the V1.2 manual does not publish an exam
 - `QRY-UPNP-PQ-GET-KEY-MAPPING` — **preset/key mapping** — `GetKeyMapping() -> QueueContext` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 
 Do not conflate A33M's 12-slot preset API with A31's MCU key/preset mechanism or UPnP RenderingControl presets.
+
+## QRY-A31-UPNP-KEY-MAPPING — hardware readback 2026-10-13
+**CONFIRMED on tested A31**: SSDP LOCATION -> :49152/description.xml advertises serviceType urn:schemas-wiimu-com:service:PlayQueue:1, controlURL /upnp/control/PlayQueue1.
+SOAP GetKeyMapping has no input arguments and returns QueueContext XML with KeyList / Key0..Key20, MaxNumber, ListName, Metadata, Name, PicUrl, Source, Url.
+User readback returned seven nonempty Name values, including Cyrillic. Names carry a suffix _#~YYYY-MM-DD HH:MM:SS in observed entries.
+Key numbering, occupancy and relationship to MCU+KEY button indices are **NOT YET CONFIRMED**: first diagnostic printed names without their Key ancestors. Do not infer Key0=physical preset 1.
+Evidence: [A31 key mapping](../../evidence/hardware-tests/A31-KEY-MAPPING-2026-10-13.md).
