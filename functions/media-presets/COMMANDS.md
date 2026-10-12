@@ -76,3 +76,25 @@ User confirmed MaxNumber=20; Key0 has no name; Key1..Key7 respectively contain C
 KNOB v0.8.11 implementation (a0d9649a6882b95a92f07c57e4842d8248597026): read on entering Presets or explicit Refresh; strip observed timestamp suffix; list nonempty names with original Key IDs, not compacted menu indices; Key0 excluded. A31/Linkplay launch commands above slot10 remain blocked pending evidence.
 A33 uses getPresetListInfo / PresetNumber / PresetName, with filtered JSON parsing and choicePreset:<N> for selection. No automatic resume was added; previously observed A33 selection vs playback behavior remains relevant.
 A97/A98 use the same PlayQueue read candidate, **not yet hardware validated for preset lists**. Fixed :49152 endpoint is verified on this A31; dynamic alternate-port discovery is not implemented in this version. A failed read shows READ FAILED and no fabricated titles.
+
+## QRY-A31-PRESET-ARTWORK — confirmed readback 2026-10-13
+Status: **CONFIRMED on tested A31; proposed UI priority not yet implemented**.
+GetKeyMapping returns artwork via KeyN/PicUrl and optionally embedded Metadata/DIDL albumArtURI. These fields are independent; do not assume PicUrl is always a station logo, always a thumbnail or always current.
+Observed:
+- Key1 CLARK: PicUrl Qobuz /images/covers/37/51/0801061025137_600.jpg.
+- Key2 THE SECOND BITE: PicUrl Qobuz /images/covers/jd/rt/kzlq5t2zsrtjd_600.jpg.
+- Key3 Space Station Soma: metadata albumArtURI TuneIn s53125/images/logog.jpg; PicUrl same station /images/logoq.jpg. Query retained in actual response.
+- Key4 DEF CON Radio: metadata albumArtURI TuneIn profiles s227824/images/logog.png; PicUrl TuneIn albums /gn/HTXMLDNHJ0g.jpg (different artwork source; album-vs-station interpretation is an inference from URL hosts).
+- Key5 Hit FM Ukraine: metadata albumArtURI and PicUrl both profiles s6122/images/logog.png.
+- Key6 Люкс ФМ Україна - Lux FM Ukraine: both profiles s55142/images/logog.png.
+- Key7 DEF CON Radio: PicUrl profiles s227824/images/logog.png; no nested metadata artwork printed.
+Current GetPositionInfo returned title Space Station Soma and albumArtURI profiles s53125/images/logog.jpg, matching Key3 metadata artwork.
+This confirms stored artwork reading and one current-source comparison; it does **not** prove a Key3 playback command or a Key5 before/after switch (that test remains pending).
+
+Design recommendation for airControl (NOT YET IMPLEMENTED):
+- For radio preset tiles prefer stored metadata albumArtURI, then PicUrl when missing.
+- For album/music presets use PicUrl when available; preserve other metadata rather than force radio logic on music.
+- For Now Playing use current transport artwork; a saved preset image is only a provisional image for that selected preset, never proof of the current song/album cover.
+- Missing/failed current artwork must not leave a previous unrelated album/station visible.
+- Associate all artwork fields with original KeyN, not compacted display position.
+- TuneIn thumbnails can use .jpg as well as .png: observed logoq.jpg is hardware readback. KNOB v0.8.10 currently rewrites only logog.png; JPG rewrite not implemented yet.
