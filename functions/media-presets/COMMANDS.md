@@ -111,3 +111,15 @@ After selection, a nonblocking timer waits at least 2000ms; one getPlayerStatus 
 Never repeat choicePreset on Not. A new preset, KNOB manual Play/Pause, source change or endpoint change cancels the timer. Zone mismatch/slave mode cancels; unsent volume takes priority; jobs expire 6000ms after due time rather than starting stale playback after a long outage.
 No blocking delay(2000), no continuous preset polling, no A31/A97/A98 behavior change.
 The 2026-10-13 user again reported A33 selection without playback. This confirms the symptom, not the new firmware fix.
+
+### Hardware feedback and response handling — 2026-10-13
+User confirmed A31 preset selection works and KNOB returns to Player. On A33 the selected preset begins playing, but KNOB reports PRESET FAILED and stays in Presets. Slot, installed version, HTTP status and response body were not supplied in that feedback; do not infer all slots or a precise network cause.
+This proves the displayed failure does not necessarily represent a failed action on the tested A33.
+
+v0.8.13 (3d6384a55a3fb218717a997dc5ccde191c7bd445) **IMPLEMENTED / HOST-TESTED; hardware fix unconfirmed**:
+- Dedicated A33 choice classification uses HTTP status plus body. HTTP200 OK/Not/empty treated as accepted request; unknown-command and explicit plain Error/Failed/Unsupported/false rejected.
+- Connection-lost(-5), read-timeout(-11), HTTP5xx treated as unconfirmed (may have acted); return to Player with CHECKING, query normal state, do not resend choice or auto-resume an uncertain selection.
+- Accepted selection keeps the v0.8.12 delayed resume policy.
+- Other connection errors/HTTP4xx stay rejected.
+- Log slot, HTTP code, byte length and result only, not response data/secrets.
+HTTP200 is request acceptance, not proof of the selected slot; a later state read is separate. Exact failure cause in user feedback remains unknown.
