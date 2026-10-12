@@ -17,6 +17,7 @@ Canonical knowledge is organized by **device**, **protocol**, and **function**. 
 - [Fast progressive zone discovery](registry/FAST_ZONE_DISCOVERY.md) — KNOB v0.8.5 user-confirmed baseline
 - [Compatibility](registry/COMPATIBILITY.md)
 - [Stream capabilities](registry/STREAM_CAPABILITIES.md)
+- [KNOB artwork preparation and limits](registry/KNOB_ARTWORK.md)
 - [Behavior rules](registry/BEHAVIOR_RULES.md)
 - [Transport detection](registry/TRANSPORT_DETECTION.md)
 - [Reverse engineering](registry/REVERSE_ENGINEERING.md)

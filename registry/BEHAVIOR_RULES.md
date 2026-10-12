@@ -37,3 +37,6 @@ absolute target rather than stale feedback, while treating subsequent
 The gateway source explicitly rate-limits native TCP commands using
 `MIN_COMMAND_INTERVAL_MS`. CHAT-AUDIT-02 does not establish the numeric value,
 so the KB must not invent one from this chat alone.
+
+## RULE-KNOB-ARTWORK-PREP-001
+Provide a cached 152×152 aspect-preserving 8-bit non-interlaced PNG or baseline JPEG variant for KNOB while preserving the original. **Adopted design rule; not yet implemented.** See [artwork limits and evidence](KNOB_ARTWORK.md).
