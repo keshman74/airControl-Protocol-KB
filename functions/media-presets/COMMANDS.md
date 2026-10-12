@@ -69,3 +69,10 @@ SOAP GetKeyMapping has no input arguments and returns QueueContext XML with KeyL
 User readback returned seven nonempty Name values, including Cyrillic. Names carry a suffix _#~YYYY-MM-DD HH:MM:SS in observed entries.
 Key numbering, occupancy and relationship to MCU+KEY button indices are **NOT YET CONFIRMED**: first diagnostic printed names without their Key ancestors. Do not infer Key0=physical preset 1.
 Evidence: [A31 key mapping](../../evidence/hardware-tests/A31-KEY-MAPPING-2026-10-13.md).
+
+### Follow-up slot structure readback
+User confirmed MaxNumber=20; Key0 has no name; Key1..Key7 respectively contain CLARK, THE SECOND BITE, SomaFM: Space Station Soma, SomaFM: DEF CON Radio, Hit FM Ukraine, Люкс ФМ Україна - Lux FM Ukraine, SomaFM: DEF CON Radio; Key8..Key20 have no names.
+**CONFIRMED readback**, not proof that MCU+KEY supports every declared slot or a fresh playback test.
+KNOB v0.8.11 implementation (a0d9649a6882b95a92f07c57e4842d8248597026): read on entering Presets or explicit Refresh; strip observed timestamp suffix; list nonempty names with original Key IDs, not compacted menu indices; Key0 excluded. A31/Linkplay launch commands above slot10 remain blocked pending evidence.
+A33 uses getPresetListInfo / PresetNumber / PresetName, with filtered JSON parsing and choicePreset:<N> for selection. No automatic resume was added; previously observed A33 selection vs playback behavior remains relevant.
+A97/A98 use the same PlayQueue read candidate, **not yet hardware validated for preset lists**. Fixed :49152 endpoint is verified on this A31; dynamic alternate-port discovery is not implemented in this version. A failed read shows READ FAILED and no fabricated titles.
