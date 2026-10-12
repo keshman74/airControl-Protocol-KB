@@ -102,3 +102,12 @@ Design recommendation for airControl (NOT YET IMPLEMENTED):
 ### Follow-up current metadata after Key5 selection — 2026-10-13
 **CONFIRMED user readback**: after the requested manual selection of Key5, GetPositionInfo returned title Hit FM Ukraine and albumArtURI http://cdn-profiles.tunein.com/s6122/images/logog.png?t=636486210612100000. This matches stored Key5 Metadata/albumArtURI and PicUrl. Previous current readback was Space Station Soma (Key3).
 Thus the current metadata source updated across this observed station change. The selection transport/native app used was not identified by this output; do not claim an MCU playback command was verified. No screenshot or KNOB artwork-display result was supplied in this test.
+
+### A33 preset auto-start — KNOB v0.8.12
+Status: **IMPLEMENTED / HOST-TESTED; KNOB hardware confirmation pending**.
+Source commit: 674ad97b9764919bcedac0da300eed30ccbfdbf0 (airKNOB experimental/multichip-v0.8.0).
+Uses the 2026-10-10 hardware-tested choicePreset -> 2s -> setPlayerCmd:resume sequence.
+After selection, a nonblocking timer waits at least 2000ms; one getPlayerStatus query uses PlayStatus/status. If playing, skip resume. If paused/stopped, resume once. If unavailable/unrecognized, use the tested unconditional-resume fallback once; not a universal service guarantee.
+Never repeat choicePreset on Not. A new preset, KNOB manual Play/Pause, source change or endpoint change cancels the timer. Zone mismatch/slave mode cancels; unsent volume takes priority; jobs expire 6000ms after due time rather than starting stale playback after a long outage.
+No blocking delay(2000), no continuous preset polling, no A31/A97/A98 behavior change.
+The 2026-10-13 user again reported A33 selection without playback. This confirms the symptom, not the new firmware fix.
