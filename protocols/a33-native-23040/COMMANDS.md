@@ -105,3 +105,18 @@ Do not require a literal `OK` or `Yes` response. After the request, asynchronous
 **Implementation note (KNOB/airControl):** treating the first received frame after `03 70` as the command response can produce a false `preset failed` even though playback starts. Match responses by command ID and Logo.
 
 **airControl hardware verification (2026-10-13):** the corrected persistent TCP parser/waiter implementation successfully activates A33 presets without the previous false `Preset failed`. The UI also successfully displays preset artwork when mapped from `MusicData.TrackImage`.
+
+## airControl stable baseline — v5.0.0
+
+- **Status:** `STABLE / HARDWARE VERIFIED`
+- **Date:** 2026-10-13
+- **Application repository:** `keshman74/airControl`
+- **Stable tag:** `v5.0.0`
+- **Baseline commit:** `3e898c2a011c39e103919f51079abdcbeaeae038`
+- **Branch at fixation:** `feature/device-presets-a31-a33`
+- **Version files:** `VERSION.txt = 5.0.0`, `package.json version = 5.0.0`
+- **Production Vite build:** passed before commit/tag.
+
+This baseline freezes the working Device Presets implementation used for the hardware verification above. In particular, preserve the A33 native preset activation behavior (`03 70` + `Logo` correlation), persistent TCP frame parsing/waiting, and A33 preset artwork mapping from `MusicData.TrackImage`. A31 preset behavior must remain non-regressed.
+
+Use tag `v5.0.0` / commit `3e898c2a011c39e103919f51079abdcbeaeae038` as the rollback/reference point before subsequent preset, packaging, EXE, or DMG changes.
