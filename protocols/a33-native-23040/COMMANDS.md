@@ -55,6 +55,18 @@ RX data: http://<device-ip>/preset_list.txt
 
 **Discovery evidence:** A33 UDP announcement to port 53308 contained `"port":"16800"`; application decoding is hexadecimal value shifted right by 2: `0x16800 >> 2 = 23040`. TCP :23040 was then hardware-verified.
 
+### Preset record fields — hardware verified
+
+For filled A33 presets, these fields have distinct roles:
+
+- `PresetNumber` — preset slot / button number.
+- `PresetName` — display name.
+- `Logo` — native preset identifier used by `CMD-A33-PRESET-ACTIVE (03 70)`; it is not necessarily an image URL.
+- `MusicData.TrackImage` — artwork URL for the preset. Hardware-verified with both Qobuz (`https://static.qobuz.com/...`) and TuneIn (`http://cdn-profiles.tunein.com/...`).
+- `StreamMediaName` / `MusicData.StreamMediaName` — service identifier, observed `qobuz` and `tunein`.
+
+**airControl implementation rule:** keep `Logo` separately as the activation identifier and use `MusicData.TrackImage` for preset artwork. Do not treat `Logo` as artwork unless a future capture explicitly shows a URL there.
+
 ## `CMD-A33-PRESET-ACTIVE`
 - **Device:** A33 (hardware test: EC04)
 - **Function:** activate/start native preset
@@ -91,3 +103,5 @@ The preset started playing successfully.
 Do not require a literal `OK` or `Yes` response. After the request, asynchronous state/event frames can arrive before the matching `03 70` response (observed examples: `00 06` Network, `03 74` MusicData, `00 47` DevVolume, `02 57`, `00 48` VolumeState, `00 60` track context, `00 10` loop mode). A controller must ignore unrelated intermediate frames and wait for `CMD 03 70` with the matching `Logo` before declaring preset activation success.
 
 **Implementation note (KNOB/airControl):** treating the first received frame after `03 70` as the command response can produce a false `preset failed` even though playback starts. Match responses by command ID and Logo.
+
+**airControl hardware verification (2026-10-13):** the corrected persistent TCP parser/waiter implementation successfully activates A33 presets without the previous false `Preset failed`. The UI also successfully displays preset artwork when mapped from `MusicData.TrackImage`.
