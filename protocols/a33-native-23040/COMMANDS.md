@@ -120,3 +120,16 @@ Do not require a literal `OK` or `Yes` response. After the request, asynchronous
 This baseline freezes the working Device Presets implementation used for the hardware verification above. In particular, preserve the A33 native preset activation behavior (`03 70` + `Logo` correlation), persistent TCP frame parsing/waiting, and A33 preset artwork mapping from `MusicData.TrackImage`. A31 preset behavior must remain non-regressed.
 
 Use tag `v5.0.0` / commit `3e898c2a011c39e103919f51079abdcbeaeae038` as the rollback/reference point before subsequent preset, packaging, EXE, or DMG changes.
+
+### Packaged release verification — macOS ARM64
+
+- **Status:** `HARDWARE VERIFIED / WORKING`
+- **Date:** 2026-10-13
+- **Artifact:** `airControl-5.0.0-arm64.dmg`
+- **Architecture:** Apple Silicon ARM64
+- **Artifact size:** approximately 98 MB
+- **SHA-256:** `7d2399afe719198263f79a14a6e04119845848525cba25bc68cb6810559518d6`
+- **Signing state:** unsigned / not notarized test build
+- **Verification result:** installed macOS application was launched and user confirmed the packaged airControl v5.0.0 works correctly. This verifies that the stable v5.0.0 baseline survives Electron packaging into the ARM64 DMG.
+
+Preserve this DMG hash as the reference for the hardware-tested macOS ARM64 v5.0.0 artifact.
