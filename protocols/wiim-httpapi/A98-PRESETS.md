@@ -1,0 +1,91 @@
+# A98 presets — hardware verification
+
+## Test device
+
+- Chip/platform: **A98**
+- Test IP: `192.168.0.21`
+- Transport: **HTTPS**
+- Endpoint form: `https://<device-ip>/httpapi.asp?command=<command>`
+- TLS test client: `curl -k` (device/local certificate handling)
+
+## `getPresetInfo`
+
+**Canonical ID:** `QRY-WIIM-GET-PRESET-INFO`
+
+**Status:** **HARDWARE VERIFIED on A98**
+
+Request:
+
+```text
+https://192.168.0.21/httpapi.asp?command=getPresetInfo
+```
+
+Observed response structure:
+
+```json
+{
+  "preset_num": 7,
+  "preset_list": [
+    {
+      "number": 1,
+      "name": "Liked Music",
+      "url": "unknow",
+      "source": "YouTubeMusic",
+      "picurl": "https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-songs-delhi-1200.png"
+    }
+  ]
+}
+```
+
+Observed field semantics:
+
+- `preset_num` — number of populated presets returned; observed `7`.
+- `preset_list` — array of populated preset entries.
+- `number` — preset slot number. Slots need not be contiguous; observed populated slots: **1, 2, 3, 4, 5, 6, 10**.
+- `name` — display name.
+- `url` — observed as literal `"unknow"` for all tested entries; do not depend on it as a playable URL.
+- `source` — service/source identifier.
+- `picurl` — artwork/logo URL; observed both HTTPS and HTTP artwork URLs.
+
+Observed sources in this hardware response:
+
+- `YouTubeMusic`
+- `Qobuz`
+- `newTuneIn`
+- `CalmRadio`
+- `WiiMRadio`
+- `Deezer2`
+
+### airControl implementation notes
+
+- Use `number` as the preset slot identifier.
+- Use `name` as the UI label.
+- Use `picurl` for preset artwork.
+- Preserve `source` for service identification.
+- Do not assume populated presets are sequential.
+- Do not use `preset_num` as the highest slot number: observed `preset_num=7` while slot `10` is populated.
+- Mixed-content artwork is possible because `picurl` may be HTTP even though the device API transport is HTTPS.
+
+## Preset activation
+
+Source documentation defines:
+
+```text
+MCUKeyShortClick:{n}
+```
+
+for preset slots 1–12, and:
+
+```text
+MCUKeyShortClick:{n}:{t}
+```
+
+for preset + track number.
+
+**A98 activation status:** SOURCE-DOCUMENTED / **NOT YET HARDWARE VERIFIED in this record**.
+
+Next hardware test example:
+
+```text
+https://192.168.0.21/httpapi.asp?command=MCUKeyShortClick:1
+```
