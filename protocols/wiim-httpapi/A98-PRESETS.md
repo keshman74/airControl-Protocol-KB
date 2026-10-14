@@ -394,3 +394,30 @@ Bluetooth activation was observed with `TransportState=PAUSED_PLAYBACK`, followe
 Active input preset algorithm: resolve `GetKeyMapping KeyN.RoutineId` through `getAllRoutines`; normalize the routine `steps[].payload.input` value and compare it with AVTransport `CurrentTrackURI`, `AVTransportURI`, or `PlaybackStorageMedium`. Known normalization pairs include `optical ↔ OPTICAL`, `line-in ↔ LINE-IN`, and `bluetooth ↔ BLUETOOTH`.
 
 Combined A98 active-preset model is now hardware verified for the tested media and input cases: media presets can be correlated by PlayQueue `CurretPlayListName == GetKeyMapping KeyN.Name`; routine-backed input presets 7/8/9 can be correlated through AVTransport input identity plus `getAllRoutines`.
+
+
+## airControl end-to-end active preset eventing verification
+
+**Status:** HARDWARE VERIFIED on A98 in airControl v5.0.x development branch
+
+The combined active-preset model documented above has now been verified end-to-end in the airControl application, including changes initiated by the native WiiM Home controller rather than by airControl itself.
+
+Implementation behavior verified on the test A98:
+
+- airControl subscribes to both PlayQueue `/upnp/event/PlayQueue1` and AVTransport `/upnp/event/rendertransport1` on port `59152`.
+- For media presets, PlayQueue `CurretPlayListName` is matched exactly against the full timestamped `GetKeyMapping KeyN.Name`.
+- For routine-backed input presets, `KeyN.RoutineId` is resolved through HTTPS `getAllRoutines`, and normalized `steps[].payload.input` is matched against AVTransport `CurrentTrackURI`, `AVTransportURI`, or `PlaybackStorageMedium`.
+- AVTransport events containing only transport state do not clear the remembered input preset.
+- A positively identified AVTransport input overrides stale PlayQueue media state.
+- A newly identified PlayQueue media preset can replace a previously active input preset.
+- The active preset highlight in airControl follows external preset changes made in WiiM Home without a manual Refresh.
+
+Hardware verification covered the important cross-type transitions, including media -> input and input -> media, confirming that stale PlayQueue playlist identity after an input switch does not prevent the correct input preset from becoming active in the airControl UI.
+
+airControl implementation checkpoint:
+
+- branch: `feature/v5.0.x-active-presets-a98`
+- commit: `02f030e`
+- commit message: `Add hardware-verified A98 active preset eventing`
+
+This is application-level confirmation of the protocol/event correlation rules above; it does not introduce or imply a standalone device `activePresetIndex` API.
