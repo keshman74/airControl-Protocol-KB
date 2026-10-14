@@ -123,3 +123,19 @@ v0.8.13 (3d6384a55a3fb218717a997dc5ccde191c7bd445) **IMPLEMENTED / HOST-TESTED; 
 - Other connection errors/HTTP4xx stay rejected.
 - Log slot, HTTP code, byte length and result only, not response data/secrets.
 HTTP200 is request acceptance, not proof of the selected slot; a later state read is separate. Exact failure cause in user feedback remains unknown.
+
+## QRY-WIIM-PRESET-LIST / CMD-WIIM-PRESET-PLAY — A97/A98 implementation
+Status: **DOCUMENTED (official WiiM HTTP API v1.2) / IMPLEMENTED / HOST-TESTED; user hardware confirmation pending**.
+Sources: https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf sections 2.8.1-2.8.2; user reference https://cvdlinden.github.io/wiim-httpapi/tags/Presets.html.
+These are WiiM product commands, not a guarantee for every product sharing an A97/A98 chip.
+
+- List: HTTP/HTTPS /httpapi.asp?command=getPresetInfo.
+- JSON preset_num is occupied count, not highest slot; preset_list rows contain number (1-based), name, url, source, picurl.
+- Launch: MCUKeyShortClick:<1..12>. User reference also describes optional track suffix :<track>, 1-based; NOT implemented in KNOB here.
+- Preserve original number in sparse lists. KNOB v0.8.14 parses only number/name, sorts by slot, skips invalid/duplicate/unnamed rows, accepts an empty valid list, and clears stale data on failed reads.
+- For known A97/A98, use selected verified endpoint HTTP80 or HTTPS443 for list/launch. No speculative TCP8899 preset command and no automatic fallback from rejected getPresetInfo to a fabricated list.
+- Read only on menu entry or Refresh; no background preset polling.
+- A31 remains hardware-confirmed UPnP GetKeyMapping plus existing launch mechanism with 1..10 bound; its rejected getPresetInfo is NOT reintroduced.
+- A33 remains getPresetListInfo / choicePreset with delayed resume and response policy.
+Source: airKNOB experimental/multichip-v0.8.0 commit 2602c104e5b1ffa6acc79ec9f7172da663603274, version0.8.14.
+Host tests compile the actual parser/filter against ArduinoJson6.21.6 and actual selection helper: sparse slots1/6/12, Cyrillic, sorted11/12, invalid/duplicate/type rejection and command routing isolation.
