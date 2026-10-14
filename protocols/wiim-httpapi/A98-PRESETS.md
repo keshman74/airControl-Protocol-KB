@@ -160,3 +160,15 @@ After `MCUKeyShortClick:3` (known preset 3 = Radio Record / newTuneIn), the devi
 `getStatusEx.preset_key` remained `"12"`, confirming again that this is the supported preset-key/slot count, not the active preset number.
 
 No active preset-number field was observed in either `getPlayerStatus` or `getStatusEx`. For network/service presets, `mode=10` plus `vendor` identifies the playback/service context, but does not by itself identify which preset slot launched it.
+
+## Native WiiM app active-preset observation
+
+**Status:** USER/HARDWARE OBSERVED
+
+The native WiiM app shows the full 12-slot preset screen, including media/service presets, saved input presets, and empty slots. Observed layout on the test A98:
+
+1 Liked Music (YouTube Music); 2 A Hum Of Maybe (Qobuz); 3 Radio Record; 4 GREEN NOISE (Calm Radio); 5 Saffron and Smoke (YouTube Music); 6 NATURE RADIO SLEEP (WiiM Radio); 7 Optical In; 8 Line In; 9 Bluetooth; 10 Top Tracks (Deezer); 11 Empty; 12 Empty.
+
+Crucially, the native app highlights the currently selected preset even when that preset was activated from **another controller/device**. Therefore the active preset state is available to the WiiM app through some device/state synchronization mechanism and is not merely local UI state from the app's own button press. This is strong evidence that an active-preset identifier/state exists outside the currently documented `getPlayerStatus` / `getStatusEx` fields observed so far.
+
+Research implication: capture native-app traffic while the Presets screen is open, then activate different preset slots from another controller. Look for a poll, event, MQTT/state notification, or other API response whose value changes with the active preset number. This is higher-value than guessing undocumented commands.
