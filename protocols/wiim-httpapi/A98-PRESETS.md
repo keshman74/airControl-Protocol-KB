@@ -127,3 +127,19 @@ Further hardware tests completed:
 Thus the tested A98 input-mode mapping is **40 = Line In, 41 = Bluetooth, 43 = Optical**. All three saved input slots 7–9 are hardware-verified to activate successfully through the same `MCUKeyShortClick:{n}` command, despite being omitted from `getPresetInfo`.
 
 For Bluetooth, `status="stop"` after switching does not mean the preset activation failed: the device returned `OK` and switched to Bluetooth; no Bluetooth media playback was active at the moment of the status query.
+
+## Reload_Button_GET experiment
+
+**Status:** HARDWARE VERIFIED on A98, but **not a preset-slot enumeration API**.
+
+Command:
+
+`Reload_Button_GET`
+
+Observed response:
+
+```json
+{"version":"1.0","buttons":[{"index":"play/pause","value":"play/pause"},{"index":"VolumeUp","value":"VolumeUp"},{"index":"VolumeDown","value":"VolumeDown"},{"index":"smartButton","value":"smartButton"},{"index":"factoryreset","value":"factoryreset"},{"index":"wpssetup","value":"wpssetup"},{"index":"btpair","value":"btpair"}]}
+```
+
+Conclusion: this query reports physical/control button assignments (play/pause, volume, smart button, factory reset, WPS, Bluetooth pairing). It does **not** expose the 12 preset-slot contents and therefore cannot be used to discover hidden saved input presets 7–9.
