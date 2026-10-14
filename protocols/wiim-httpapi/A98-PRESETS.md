@@ -41,7 +41,7 @@ Observed field semantics:
 
 - `preset_num` — number of populated presets returned; observed `7`.
 - `preset_list` — array of populated preset entries.
-- `number` — preset slot number. Slots need not be contiguous; observed populated slots: **1, 2, 3, 4, 5, 6, 10**.
+- `number` — preset slot number. `getPresetInfo` returned media/service presets in slots **1, 2, 3, 4, 5, 6, 10**. Hardware observation additionally confirms that slots **7, 8, 9 are occupied by saved input presets** (Optical, Line In, Bluetooth respectively), even though they were not present in this `getPresetInfo` response.
 - `name` — display name.
 - `url` — observed as literal `"unknow"` for all tested entries; do not depend on it as a playable URL.
 - `source` — service/source identifier.
@@ -62,8 +62,8 @@ Observed sources in this hardware response:
 - Use `name` as the UI label.
 - Use `picurl` for preset artwork.
 - Preserve `source` for service identification.
-- Do not assume populated presets are sequential.
-- Do not use `preset_num` as the highest slot number: observed `preset_num=7` while slot `10` is populated.
+- Do not assume `getPresetInfo` enumerates every occupied preset slot. On the tested A98, slots **7=Optical, 8=Line In, 9=Bluetooth** are occupied input presets but were omitted from the returned `preset_list`.
+- Treat `preset_num` as the count represented by the returned preset list, not as the total number of occupied hardware preset slots and not as the highest slot number. Observed `preset_num=7`, while slots 7–9 are separately occupied inputs and slot 10 is returned as a media preset.
 - Mixed-content artwork is possible because `picurl` may be HTTP even though the device API transport is HTTPS.
 
 ## Preset activation
