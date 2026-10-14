@@ -82,10 +82,16 @@ MCUKeyShortClick:{n}:{t}
 
 for preset + track number.
 
-**A98 activation status:** SOURCE-DOCUMENTED / **NOT YET HARDWARE VERIFIED in this record**.
+**A98 activation status:** **HARDWARE VERIFIED**.
 
-Next hardware test example:
+On the test A98 (`192.168.0.21`), `MCUKeyShortClick:3` successfully started preset slot 3 (`Radio Record`, source `newTuneIn`). This confirms preset activation by the `number` returned from `getPresetInfo`.
+
+Hardware-verified example:
 
 ```text
-https://192.168.0.21/httpapi.asp?command=MCUKeyShortClick:1
+https://192.168.0.21/httpapi.asp?command=MCUKeyShortClick:3
 ```
+
+Observed result: preset 3 started playback successfully.
+
+Input-preset activation for slots 7–9 remains to be tested separately.
