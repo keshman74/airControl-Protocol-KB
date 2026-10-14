@@ -116,4 +116,14 @@ After activating slot 7 with `MCUKeyShortClick:7`, the device switched to the sa
 
 The useful discriminator for the active source is therefore currently `getPlayerStatus.mode`; `getStatusEx` does not directly label the active input as Optical in this observation. Do **not** interpret `preset_key = "12"` as the active preset number: it denotes the device's **12 available preset buttons/slots**. Slot 7 was active while the field remained `"12"`.
 
-Next experiment: activate known slots 8 (Line In) and 9 (Bluetooth), query `getPlayerStatus`, and record their `mode` values. This can establish an A98 mode-to-input mapping without relying on `getPresetInfo`, which omits these input presets.
+Further hardware tests completed:
+
+| Preset slot | Saved input | `getPlayerStatus.mode` | Activation response | Player status |
+|---|---|---:|---|---|
+| 7 | Optical | `43` | `OK` | `play` |
+| 8 | Line In | `40` | `OK` | `play` |
+| 9 | Bluetooth | `41` | `OK` | `stop` in the observed test |
+
+Thus the tested A98 input-mode mapping is **40 = Line In, 41 = Bluetooth, 43 = Optical**. All three saved input slots 7–9 are hardware-verified to activate successfully through the same `MCUKeyShortClick:{n}` command, despite being omitted from `getPresetInfo`.
+
+For Bluetooth, `status="stop"` after switching does not mean the preset activation failed: the device returned `OK` and switched to Bluetooth; no Bluetooth media playback was active at the moment of the status query.
