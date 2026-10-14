@@ -316,3 +316,18 @@ After activating known preset 3 (Radio Record / newTuneIn), `getPlayerStatus` ag
 The tested A98 advertises these PlayQueue actions: `CreateQueue`, `ReplaceQueue`, `DeleteQueue`, `BackUpQueue`, `AppendQueue`, `BrowseQueue`, `BrowseQueueEx`, `SetQueueLoopMode`, `GetQueueLoopMode`, `SetQueuePolicy`, `PlayQueueWithIndex`, `AppendTracksInQueue`, `RemoveTracksInQueue`, `MoveTracksInQueue`, `AppendTracksInQueueEx`, `SetKeyMapping`, `GetKeyMapping`, `GetQueueOnline`, `SearchQueueOnline`, `SetQueueRecord`, `SetSongsRecord`, `UserRegister`, `UserLogin`, `UserLogout`, `GetUserInfo`, `GetUserAccountHistory`, `SetUserFavorites`, `GetUserFavorites`, `GetQueueIndex`, `SetSpotifyPreset`, `DeleteActionQueue`, `GetBasicUserInfo`, `TakePlayControl`, and `SetRating`.
 
 There is no advertised `GetCurrentQueueInfo` action, matching the hardware 401 invalid-action result. There is also no explicit advertised `GetActivePreset`/active-preset-index action. `GetQueueIndex` requires an input `QueueName` and returns `CurrentIndex`, `PreloadingIndex`, `CurrentPage`, and `TrackNums`; these are queue-track indices, not established preset-slot indices. `BrowseQueue` likewise requires a QueueName. Do not infer an active preset number from these actions without additional evidence.
+
+## GetKeyMapping active-state comparison — hardware verified negative result
+
+**Status:** HARDWARE VERIFIED on A98
+
+A controlled comparison was performed after activating presets 1, 3, and 7 via `MCUKeyShortClick:N`. After each activation, both `getPlayerStatus` and PlayQueue `GetKeyMapping` were read.
+
+Observed:
+- preset 3: `getPlayerStatus mode=10, vendor=newTuneIn, status=load`
+- preset 7: `getPlayerStatus mode=43, vendor="", status=play`
+- `GetKeyMapping` remained structurally/content-identical across the captured preset 1 / 3 / 7 reads: same `ListName=KeyMappingQueue`, `MaxNumber=21`, media key metadata, RoutineIds for keys 7/8/9, and empty keys.
+
+Conclusion: `GetKeyMapping` is configuration/key-assignment state, not active-preset state. It does not mark the currently active key in these observations. Active highlighting in WiiM Home must therefore be derived from other current playback/input state and/or event state.
+
+Caution on the preset-1 sample: immediately after `MCUKeyShortClick:1`, the sampled `getPlayerStatus` still showed `vendor=newTuneIn`, `status=stop`, and the previous Radio Record title. This snapshot should not be used as evidence that preset 1 failed or that YouTubeMusic maps to newTuneIn; it may represent transitional/asynchronous state. A longer/timed poll is needed for reliable media-preset matching.
