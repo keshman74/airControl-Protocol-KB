@@ -210,3 +210,40 @@ On test A98 at `192.168.0.21`, HTTP GET to `http://192.168.0.21:59152/descriptio
 - `eventSubURL = /upnp/event/PlayQueue1`
 
 This independently confirms on hardware the PlayQueue service/port/control path found by APK reverse engineering. The `GetKeyMapping` action itself remains hardware-test pending until a SOAP request is executed.
+
+## GetKeyMapping — hardware verified complete key map
+
+**Status:** HARDWARE VERIFIED on A98
+
+SOAP action `GetKeyMapping` on `http://<device>:59152/upnp/control/PlayQueue1` returned `QueueContext` containing an XML `KeyList`.
+
+Observed structure:
+
+- `ListName = KeyMappingQueue`
+- `MaxNumber = 21`
+- keys are represented as `Key0` through `Key21`
+- `Key1..Key12` correspond to the device's 12 user preset buttons/slots on the tested WiiM Pro/A98 UI; higher key records are present in the mapping structure but are not exposed as the 12 user preset buttons observed in the native app.
+
+Observed key data:
+
+| Key | Mapping returned by GetKeyMapping |
+|---:|---|
+| 0 | `RoutineId=Empty` |
+| 1 | Liked Music; Source=YouTubeMusic; ContentType=songlist |
+| 2 | A Hum Of Maybe; Source=Qobuz; ContentType=songlist |
+| 3 | Radio Record; Source=newTuneIn; ContentType=station |
+| 4 | GREEN NOISE; Source=CalmRadio; ContentType=station |
+| 5 | Saffron and Smoke; Source=YouTubeMusic |
+| 6 | NATURE RADIO SLEEP; Source=WiiMRadio; ContentType=radio |
+| 7 | `RoutineId=ECA625C2-828F-4E7B-B7D3-4F05B2F002D8` |
+| 8 | `RoutineId=D4C3F57E-71FB-442C-96F0-A079E5443E5E` |
+| 9 | `RoutineId=089DB687-F75E-4550-BE35-5864D29A08BD` |
+| 10 | Top Tracks; Source=Deezer2; ContentType=songlist |
+| 11 | `RoutineId=Empty` |
+| 12 | `RoutineId=Empty` |
+
+Hardware/UI correlation already established separately: Key7 = Optical In, Key8 = Line In, Key9 = Bluetooth. Therefore saved input presets are represented in `GetKeyMapping` by non-empty `RoutineId` UUIDs rather than by `Name/Source/PicUrl` fields. `getPresetInfo` omits these routine-backed input slots, while `GetKeyMapping` exposes that they are occupied.
+
+Media preset `Name` values contain a suffix in the observed form `_#~YYYY-MM-DD HH:MM:SS`; the native UI displays the name without this suffix. Artwork and source fields match the media preset information previously observed via `getPresetInfo`.
+
+Important: `MaxNumber=21` is the maximum/key-map structure size returned by PlayQueue and must not be confused with `getStatusEx.preset_key=12`, which is the number of user preset buttons/slots exposed on this device.
