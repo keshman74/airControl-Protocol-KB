@@ -421,3 +421,10 @@ airControl implementation checkpoint:
 - commit message: `Add hardware-verified A98 active preset eventing`
 
 This is application-level confirmation of the protocol/event correlation rules above; it does not introduce or imply a standalone device `activePresetIndex` API.
+
+
+## KNOB integration checkpoint — v0.8.15
+Status: **IMPLEMENTED / HOST-TESTED; KNOB hardware verification pending**.
+Source: airKNOB experimental/multichip-v0.8.0 commit a12f4507f4f32e1136cb1498df1e000acd7322cd.
+The existing A98 hardware evidence above remains the canonical protocol description; passing host tests does not promote the KNOB firmware to hardware verified.
+See [KNOB implementation and validation](../../integration/KNOB-A98-PRESETS.md).
