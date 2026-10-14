@@ -361,3 +361,13 @@ Hardware-supported media-preset matching rule: the strongest observed discrimina
 In both Key1 and Key5 observations CurrentIndex was 1, proving it is not the preset key number. It is queue/playback indexing state.
 
 This rule is verified for media presets 1 and 5 only. Routine-backed input presets still require separate active-state correlation.
+
+## PlayQueue event after routine-backed input activation
+
+**Status:** HARDWARE VERIFIED observation on A98
+
+After activating known Key7 = Optical In via MCUKeyShortClick:7 while subscribed to PlayQueue events, a NOTIFY was received, but it did NOT identify Optical/Key7. Instead it retained the previous media playlist identity (Saffron and Smoke / OnlineMusic) and only TrackNums changed to 0.
+
+Therefore PlayQueue LastChange CurretPlayListName is sufficient evidence for active media-preset correlation when a media queue is active, but it cannot be used as the active-state source for routine-backed input presets. On switching to an input, stale previous media queue identity may remain in PlayQueue events.
+
+Input-preset active highlighting must be derived from another current-state source/event (consistent with the APK trace that uses current audio-input resolution). Known polling fallback remains getPlayerStatus.mode: 43 Optical, 40 Line In, 41 Bluetooth on the tested A98, correlated with getAllRoutines steps[].payload.input.
