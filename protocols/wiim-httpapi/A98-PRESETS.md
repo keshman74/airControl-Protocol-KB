@@ -345,3 +345,19 @@ After `MCUKeyShortClick:1` for known Key1 = Liked Music / YouTubeMusic, repeated
 Thus an immediate status read after `MCUKeyShortClick:N` is not reliable for identifying a media preset. The device clears/transitions current playback state before the target service becomes visible. Implementations should wait/poll until playback state stabilizes rather than interpreting the first response.
 
 For this known preset, stable `getPlayerStatus.vendor=YouTubeMusic` matches `GetKeyMapping Key1.Source=YouTubeMusic`, but Source/vendor alone is **not sufficient to uniquely identify a preset slot** because multiple keys may share a service (e.g. more than one YouTubeMusic preset). No active preset number is exposed by this observation.
+
+## PlayQueue event active media-preset correlation
+
+**Status:** HARDWARE VERIFIED on A98 for media presets 1 and 5
+
+UPnP subscription to the advertised PlayQueue event endpoint produced NOTIFY LastChange events after external preset activation.
+
+Known Key1 activation produced CurretPlayListName exactly equal to the full Key1 Name (including its timestamp suffix), with MusicSource YouTubeMusic.
+
+Known Key5 activation produced CurretPlayListName exactly equal to the full Key5 Name: Saffron and Smoke_#~2026-03-31 20:20:29. The event reported MusicSource OnlineMusic, while GetKeyMapping Key5.Source is YouTubeMusic. Therefore MusicSource must NOT be required to equal KeyItem.Source for active-preset matching.
+
+Hardware-supported media-preset matching rule: the strongest observed discriminator is exact equality of PlayQueue event CurretPlayListName and GetKeyMapping KeyN.Name. This distinguishes Key1 and Key5 even though both are YouTubeMusic presets. Treat MusicSource as playback context only, not as a mandatory preset-key identity field.
+
+In both Key1 and Key5 observations CurrentIndex was 1, proving it is not the preset key number. It is queue/playback indexing state.
+
+This rule is verified for media presets 1 and 5 only. Routine-backed input presets still require separate active-state correlation.
