@@ -172,3 +172,27 @@ The native WiiM app shows the full 12-slot preset screen, including media/servic
 Crucially, the native app highlights the currently selected preset even when that preset was activated from **another controller/device**. Therefore the active preset state is available to the WiiM app through some device/state synchronization mechanism and is not merely local UI state from the app's own button press. This is strong evidence that an active-preset identifier/state exists outside the currently documented `getPlayerStatus` / `getStatusEx` fields observed so far.
 
 Research implication: capture native-app traffic while the Presets screen is open, then activate different preset slots from another controller. Look for a poll, event, MQTT/state notification, or other API response whose value changes with the active preset number. This is higher-value than guessing undocumented commands.
+
+## WiiM Home APK reverse-engineering: full key mapping / preset slots
+
+**Status:** APK-REVERSE-ENGINEERED / HARDWARE TEST PENDING
+
+Source inspected: WiiM Home Android 3.6.10.260924 (`com.linkplay.wiimhome`).
+
+The native preset screen (`DeviceMuzo2PresetContentActivity`) registers with `LPDeviceObserverManager`. Its `updateMediaInfo(LPNotification)` refreshes the preset adapter when notifications of type `CURRENT_QUEUE_CHANGED` or `TRANSPORT_STATE_CHANGED` arrive. This explains how the Presets screen can react to state changes initiated by another controller; the exact active-slot derivation still needs hardware/traffic confirmation.
+
+More importantly, the APK contains a separate **PlayQueue key-mapping API** used by the preset UI:
+
+- UPnP service ID: `urn:wiimu-com:serviceId:PlayQueue`
+- service type: `urn:schemas-wiimu-com:service:PlayQueue:1`
+- control URL embedded for this device family: `/upnp/control/PlayQueue1`
+- device description string: `:59152/description.xml`
+- control endpoint string: `:59152/upnp/control/PlayQueue1`
+- action: `GetKeyMapping`
+- `GetKeyMapping` has one **out** argument: `QueueContext`
+- action: `SetKeyMapping`
+- `SetKeyMapping` has one **in** argument: `QueueContext`
+
+The APK classes `LPPresetData` / `LPPresetList` expose `getKeyMapping`, `setKeyMapping`, `getIndex`, `setIndex`, and queue conversion via `KeyItem.covert2PresetList`. The preset-content flow calls the Linkplay DLNA provider path that executes `GetKeyMapping`.
+
+This is currently the strongest candidate for retrieving the **complete 12 preset-key configuration**, including input presets omitted by HTTPS `getPresetInfo`. Do not mark the endpoint/response semantics hardware-verified until tested on the A98.
