@@ -143,3 +143,20 @@ Observed response:
 ```
 
 Conclusion: this query reports physical/control button assignments (play/pause, volume, smart button, factory reset, WPS, Bluetooth pairing). It does **not** expose the 12 preset-slot contents and therefore cannot be used to discover hidden saved input presets 7–9.
+
+## Network preset status experiment — slot 3 Radio Record
+
+**Status:** HARDWARE VERIFIED observation on A98
+
+After `MCUKeyShortClick:3` (known preset 3 = Radio Record / newTuneIn), the device returned `OK`. Two seconds later `getPlayerStatus` showed:
+
+- `mode = "10"`
+- `vendor = "newTuneIn"`
+- `status = "load"`
+- `plicount = "0"`
+- `plicurr = "0"`
+- `Title` contained hex-encoded station metadata
+
+`getStatusEx.preset_key` remained `"12"`, confirming again that this is the supported preset-key/slot count, not the active preset number.
+
+No active preset-number field was observed in either `getPlayerStatus` or `getStatusEx`. For network/service presets, `mode=10` plus `vendor` identifies the playback/service context, but does not by itself identify which preset slot launched it.
