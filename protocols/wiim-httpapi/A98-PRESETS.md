@@ -97,3 +97,23 @@ Observed result: preset 3 started playback successfully.
 Input-preset activation is also **HARDWARE VERIFIED** for slot 7. On the test A98, `MCUKeyShortClick:7` switched the device to the saved **Optical** input preset successfully.
 
 This confirms that the same `MCUKeyShortClick:{n}` mechanism can activate both a media/service preset (verified slot 3, Radio Record) and a saved input preset (verified slot 7, Optical). Slots 8 (Line In) and 9 (Bluetooth) are known occupied input presets but have not yet been individually activation-tested in this record.
+
+## Hidden input preset identification experiment
+
+**Status:** HARDWARE VERIFIED observation on A98
+
+After activating slot 7 with `MCUKeyShortClick:7`, the device switched to the saved **Optical** input and returned:
+
+- `getPlayerStatus.mode = "43"`
+- `status = "play"`
+- `Title/Artist/Album = "556E6B6E6F776E"` (hex for `Unknown`)
+- `getStatusEx.preset_key = "12"`
+- `getStatusEx.security = "https/2.0"`
+- `getStatusEx.public_https_version = "1.0"`
+- firmware observed: `Linkplay.4.8.827634`
+- project: `WiiM_Pro_with_gc4a`
+- hardware field: `AmlogicA113`
+
+The useful discriminator for the active source is therefore currently `getPlayerStatus.mode`; `getStatusEx` does not directly label the active input as Optical in this observation. Do **not** interpret `preset_key = "12"` as the active preset number: slot 7 was activated while this field remained `"12"`; it is likely capability/configuration metadata rather than current slot state.
+
+Next experiment: activate known slots 8 (Line In) and 9 (Bluetooth), query `getPlayerStatus`, and record their `mode` values. This can establish an A98 mode-to-input mapping without relying on `getPresetInfo`, which omits these input presets.
