@@ -269,3 +269,11 @@ This strongly indicates that WiiM Home computes the visual "currently selected" 
 For routine-backed input slots (the hardware-verified Key7/8/9 mappings), the APK resolves the non-empty `RoutineId` through its routine repository and can inspect an `AUDIOINPUT` step. This explains how the native UI can label/highlight Optical In / Line In / Bluetooth even though `GetKeyMapping` itself returns only RoutineId UUIDs for those keys.
 
 Further work: determine the exact media-preset matching fields used by adapter `ct1`, and inspect the UPnP event payload(s) feeding `CURRENT_QUEUE_CHANGED` / `TRANSPORT_STATE_CHANGED`. Do not document a standalone active-preset-number command unless hardware/API evidence is found.
+
+### WiiM APK: Routine repository behind input preset UUIDs
+
+**Status:** APK-REVERSE-ENGINEERED / HARDWARE TEST PENDING
+
+Further inspection of WiiM Home 3.6.10.260924 shows a dedicated `RoutineRepository` in the preset feature. The APK contains methods/logging for `getAllRoutines`, `getRoutineCapability`, `createRoutine`, and `updateRoutine`, including command-building strings such as `getAllRoutines:`, `command=createRoutine:`, and `command=updateRoutine:`.
+
+This repository is the next candidate for resolving the non-empty `RoutineId` UUIDs returned by `GetKeyMapping` for input-backed preset slots (hardware-correlated Key7 Optical, Key8 Line In, Key9 Bluetooth). The exact transport/request syntax for `getAllRoutines` is not yet hardware verified; treat it as APK evidence only until tested.
