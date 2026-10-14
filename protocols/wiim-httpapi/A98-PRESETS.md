@@ -302,3 +302,9 @@ Each returned routine also contains `index`, and it matched the preset key numbe
 4. Use `routine.name` as the display label and `steps[].payload.input` as the machine-readable input identifier.
 
 This closes the previously missing mapping for routine-backed input presets on the tested A98.
+
+## PlayQueue GetCurrentQueueInfo experiment
+
+**Status:** HARDWARE VERIFIED negative result on A98
+
+After activating known preset 3 (Radio Record / newTuneIn), `getPlayerStatus` again showed `mode=10`, `vendor=newTuneIn`, `status=load`, with no active preset index. A SOAP call to PlayQueue action `GetCurrentQueueInfo` at `http://<device>:59152/upnp/control/PlayQueue1` returned UPnP error **401 / invalid action**. Therefore `GetCurrentQueueInfo` is not a supported PlayQueue action on this tested A98 and must not be used/documented as an available command. The next action names should be taken directly from the device's `/upnp/PlayQueueSCPD.xml` rather than guessed.
