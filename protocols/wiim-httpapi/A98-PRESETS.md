@@ -371,3 +371,9 @@ After activating known Key7 = Optical In via MCUKeyShortClick:7 while subscribed
 Therefore PlayQueue LastChange CurretPlayListName is sufficient evidence for active media-preset correlation when a media queue is active, but it cannot be used as the active-state source for routine-backed input presets. On switching to an input, stale previous media queue identity may remain in PlayQueue events.
 
 Input-preset active highlighting must be derived from another current-state source/event (consistent with the APK trace that uses current audio-input resolution). Known polling fallback remains getPlayerStatus.mode: 43 Optical, 40 Line In, 41 Bluetooth on the tested A98, correlated with getAllRoutines steps[].payload.input.
+
+## A98 MediaRenderer event services
+
+**Status:** HARDWARE VERIFIED from device description.xml
+
+The tested A98 advertises five event-capable services on port 59152: AVTransport (/upnp/event/rendertransport1), ConnectionManager (/upnp/event/renderconnmgr1), RenderingControl (/upnp/event/rendercontrol1), PlayQueue (/upnp/event/PlayQueue1), and QPlay (/upnp/event/QPlay1). No separate AudioInput event service is advertised in this MediaRenderer description. Therefore the next candidate for input-state notifications is AVTransport, consistent with the WiiM Home APK reacting to TRANSPORT_STATE_CHANGED/current playback state.
