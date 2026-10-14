@@ -277,3 +277,28 @@ Further work: determine the exact media-preset matching fields used by adapter `
 Further inspection of WiiM Home 3.6.10.260924 shows a dedicated `RoutineRepository` in the preset feature. The APK contains methods/logging for `getAllRoutines`, `getRoutineCapability`, `createRoutine`, and `updateRoutine`, including command-building strings such as `getAllRoutines:`, `command=createRoutine:`, and `command=updateRoutine:`.
 
 This repository is the next candidate for resolving the non-empty `RoutineId` UUIDs returned by `GetKeyMapping` for input-backed preset slots (hardware-correlated Key7 Optical, Key8 Line In, Key9 Bluetooth). The exact transport/request syntax for `getAllRoutines` is not yet hardware verified; treat it as APK evidence only until tested.
+
+## getAllRoutines — hardware verified input-preset resolver
+
+**Status:** HARDWARE VERIFIED on A98 (`192.168.0.21`)
+
+Read-only HTTPS command:
+
+`https://<device>/httpapi.asp?command=getAllRoutines`
+
+returned a JSON object with `routines`. On the tested A98 it exactly resolved the three non-empty `RoutineId` UUIDs from PlayQueue `GetKeyMapping`:
+
+| Preset index | Routine ID | name | step type | payload.input |
+|---:|---|---|---|---|
+| 7 | `ECA625C2-828F-4E7B-B7D3-4F05B2F002D8` | Optical In | `audioInput` | `optical` |
+| 8 | `D4C3F57E-71FB-442C-96F0-A079E5443E5E` | Line In | `audioInput` | `line-in` |
+| 9 | `089DB687-F75E-4550-BE35-5864D29A08BD` | Bluetooth | `audioInput` | `bluetooth` |
+
+Each returned routine also contains `index`, and it matched the preset key number (7/8/9). Therefore the complete input-preset UI can be reconstructed dynamically without hard-coding slot meanings:
+
+1. Read `GetKeyMapping` via PlayQueue.
+2. For a key with non-empty/non-`Empty` `RoutineId`, read HTTPS `getAllRoutines`.
+3. Match `KeyN.RoutineId == routine.id` (and the observed `routine.index == N`).
+4. Use `routine.name` as the display label and `steps[].payload.input` as the machine-readable input identifier.
+
+This closes the previously missing mapping for routine-backed input presets on the tested A98.
