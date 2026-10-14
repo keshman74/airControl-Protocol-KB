@@ -377,3 +377,20 @@ Input-preset active highlighting must be derived from another current-state sour
 **Status:** HARDWARE VERIFIED from device description.xml
 
 The tested A98 advertises five event-capable services on port 59152: AVTransport (/upnp/event/rendertransport1), ConnectionManager (/upnp/event/renderconnmgr1), RenderingControl (/upnp/event/rendercontrol1), PlayQueue (/upnp/event/PlayQueue1), and QPlay (/upnp/event/QPlay1). No separate AudioInput event service is advertised in this MediaRenderer description. Therefore the next candidate for input-state notifications is AVTransport, consistent with the WiiM Home APK reacting to TRANSPORT_STATE_CHANGED/current playback state.
+
+## AVTransport event active input identification
+
+**Status:** HARDWARE VERIFIED on A98 for Key7 Optical, Key8 Line In, and Key9 Bluetooth.
+
+After subscribing to `/upnp/event/rendertransport1`, routine-backed input preset activation generates AVTransport LastChange events that identify the current physical input.
+
+Observed mappings:
+- Key7 / Optical: `CurrentTrackURI=optical`, `AVTransportURI=optical`, `PlaybackStorageMedium=OPTICAL`.
+- Key8 / Line In: `CurrentTrackURI=LINE-IN`, `AVTransportURI=LINE-IN`, `PlaybackStorageMedium=LINE-IN`.
+- Key9 / Bluetooth: `CurrentTrackURI=BLUETOOTH`, `AVTransportURI=BLUETOOTH`, `PlaybackStorageMedium=BLUETOOTH`.
+
+Bluetooth activation was observed with `TransportState=PAUSED_PLAYBACK`, followed immediately by a transport-state-only `STOPPED` event. Therefore `TransportState` is not the input identity and must not clear a previously identified input when URI/medium fields are absent.
+
+Active input preset algorithm: resolve `GetKeyMapping KeyN.RoutineId` through `getAllRoutines`; normalize the routine `steps[].payload.input` value and compare it with AVTransport `CurrentTrackURI`, `AVTransportURI`, or `PlaybackStorageMedium`. Known normalization pairs include `optical ↔ OPTICAL`, `line-in ↔ LINE-IN`, and `bluetooth ↔ BLUETOOTH`.
+
+Combined A98 active-preset model is now hardware verified for the tested media and input cases: media presets can be correlated by PlayQueue `CurretPlayListName == GetKeyMapping KeyN.Name`; routine-backed input presets 7/8/9 can be correlated through AVTransport input identity plus `getAllRoutines`.
