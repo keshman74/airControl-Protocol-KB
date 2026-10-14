@@ -247,3 +247,25 @@ Hardware/UI correlation already established separately: Key7 = Optical In, Key8 
 Media preset `Name` values contain a suffix in the observed form `_#~YYYY-MM-DD HH:MM:SS`; the native UI displays the name without this suffix. Artwork and source fields match the media preset information previously observed via `getPresetInfo`.
 
 Important: `MaxNumber=21` is the maximum/key-map structure size returned by PlayQueue and must not be confused with `getStatusEx.preset_key=12`, which is the number of user preset buttons/slots exposed on this device.
+
+## WiiM Home active-preset UI — APK correction and deeper trace
+
+**Status:** APK-REVERSE-ENGINEERED; active-slot algorithm partially resolved
+
+A deeper DEX trace corrects an earlier inference: the strings/methods `getPresetIndex` / `setPresetIndex` found in this WiiM Home build belong to `com.wifiaudio.feature.alarm.model.AlarmContextItem`. In `DeviceMuzo2PresetContentActivity`, `setPresetIndex` is used while building an alarm context (`PresetSongs`). It is **not evidence of a device API field carrying the currently active preset number**.
+
+The Presets screen itself registers with `LPDeviceObserverManager`. Its `updateMediaInfo(LPNotification)` checks the notification UUID/type and refreshes the RecyclerView adapter for current-queue / transport-state changes. The adapter is obfuscated class `ct1`.
+
+The adapter's bind path uses the current device/playback state rather than a directly observed `presetIndex` field. Relevant calls/inputs found in the binding logic include:
+
+- `DeviceInfoExt.getDlnaPlayStatus()`
+- preset `KeyItem.Source` and `KeyItem.Name`
+- the routine repository / routine model
+- audio-input resolution helpers; routine steps can be of type `AUDIOINPUT` and expose their input payload
+- current audio-input item/name resolution
+
+This strongly indicates that WiiM Home computes the visual "currently selected" state by correlating the current playback/input state with each KeyMapping item/routine, then rebinds the list when queue or transport notifications arrive. It does **not**, based on the code traced so far, simply read a public `activePresetIndex` value.
+
+For routine-backed input slots (the hardware-verified Key7/8/9 mappings), the APK resolves the non-empty `RoutineId` through its routine repository and can inspect an `AUDIOINPUT` step. This explains how the native UI can label/highlight Optical In / Line In / Bluetooth even though `GetKeyMapping` itself returns only RoutineId UUIDs for those keys.
+
+Further work: determine the exact media-preset matching fields used by adapter `ct1`, and inspect the UPnP event payload(s) feeding `CURRENT_QUEUE_CHANGED` / `TRANSPORT_STATE_CHANGED`. Do not document a standalone active-preset-number command unless hardware/API evidence is found.
