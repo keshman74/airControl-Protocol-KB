@@ -94,4 +94,6 @@ https://192.168.0.21/httpapi.asp?command=MCUKeyShortClick:3
 
 Observed result: preset 3 started playback successfully.
 
-Input-preset activation for slots 7–9 remains to be tested separately.
+Input-preset activation is also **HARDWARE VERIFIED** for slot 7. On the test A98, `MCUKeyShortClick:7` switched the device to the saved **Optical** input preset successfully.
+
+This confirms that the same `MCUKeyShortClick:{n}` mechanism can activate both a media/service preset (verified slot 3, Radio Record) and a saved input preset (verified slot 7, Optical). Slots 8 (Line In) and 9 (Bluetooth) are known occupied input presets but have not yet been individually activation-tested in this record.
