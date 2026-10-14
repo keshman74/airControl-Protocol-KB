@@ -308,3 +308,11 @@ This closes the previously missing mapping for routine-backed input presets on t
 **Status:** HARDWARE VERIFIED negative result on A98
 
 After activating known preset 3 (Radio Record / newTuneIn), `getPlayerStatus` again showed `mode=10`, `vendor=newTuneIn`, `status=load`, with no active preset index. A SOAP call to PlayQueue action `GetCurrentQueueInfo` at `http://<device>:59152/upnp/control/PlayQueue1` returned UPnP error **401 / invalid action**. Therefore `GetCurrentQueueInfo` is not a supported PlayQueue action on this tested A98 and must not be used/documented as an available command. The next action names should be taken directly from the device's `/upnp/PlayQueueSCPD.xml` rather than guessed.
+
+## A98 PlayQueue SCPD action inventory — hardware verified
+
+**Status:** HARDWARE VERIFIED from device `/upnp/PlayQueueSCPD.xml`
+
+The tested A98 advertises these PlayQueue actions: `CreateQueue`, `ReplaceQueue`, `DeleteQueue`, `BackUpQueue`, `AppendQueue`, `BrowseQueue`, `BrowseQueueEx`, `SetQueueLoopMode`, `GetQueueLoopMode`, `SetQueuePolicy`, `PlayQueueWithIndex`, `AppendTracksInQueue`, `RemoveTracksInQueue`, `MoveTracksInQueue`, `AppendTracksInQueueEx`, `SetKeyMapping`, `GetKeyMapping`, `GetQueueOnline`, `SearchQueueOnline`, `SetQueueRecord`, `SetSongsRecord`, `UserRegister`, `UserLogin`, `UserLogout`, `GetUserInfo`, `GetUserAccountHistory`, `SetUserFavorites`, `GetUserFavorites`, `GetQueueIndex`, `SetSpotifyPreset`, `DeleteActionQueue`, `GetBasicUserInfo`, `TakePlayControl`, and `SetRating`.
+
+There is no advertised `GetCurrentQueueInfo` action, matching the hardware 401 invalid-action result. There is also no explicit advertised `GetActivePreset`/active-preset-index action. `GetQueueIndex` requires an input `QueueName` and returns `CurrentIndex`, `PreloadingIndex`, `CurrentPage`, and `TrackNums`; these are queue-track indices, not established preset-slot indices. `BrowseQueue` likewise requires a QueueName. Do not infer an active preset number from these actions without additional evidence.
