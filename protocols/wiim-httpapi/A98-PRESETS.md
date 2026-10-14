@@ -196,3 +196,17 @@ More importantly, the APK contains a separate **PlayQueue key-mapping API** used
 The APK classes `LPPresetData` / `LPPresetList` expose `getKeyMapping`, `setKeyMapping`, `getIndex`, `setIndex`, and queue conversion via `KeyItem.covert2PresetList`. The preset-content flow calls the Linkplay DLNA provider path that executes `GetKeyMapping`.
 
 This is currently the strongest candidate for retrieving the **complete 12 preset-key configuration**, including input presets omitted by HTTPS `getPresetInfo`. Do not mark the endpoint/response semantics hardware-verified until tested on the A98.
+
+## A98 PlayQueue endpoint hardware confirmation
+
+**Status:** HARDWARE VERIFIED endpoint discovery
+
+On test A98 at `192.168.0.21`, HTTP GET to `http://192.168.0.21:59152/description.xml` returned the UPnP MediaRenderer description and explicitly advertised:
+
+- `serviceType = urn:schemas-wiimu-com:service:PlayQueue:1`
+- `serviceId = urn:wiimu-com:serviceId:PlayQueue`
+- `SCPDURL = /upnp/PlayQueueSCPD.xml`
+- `controlURL = /upnp/control/PlayQueue1`
+- `eventSubURL = /upnp/event/PlayQueue1`
+
+This independently confirms on hardware the PlayQueue service/port/control path found by APK reverse engineering. The `GetKeyMapping` action itself remains hardware-test pending until a SOAP request is executed.
