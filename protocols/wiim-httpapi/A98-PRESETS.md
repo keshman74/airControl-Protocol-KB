@@ -331,3 +331,17 @@ Observed:
 Conclusion: `GetKeyMapping` is configuration/key-assignment state, not active-preset state. It does not mark the currently active key in these observations. Active highlighting in WiiM Home must therefore be derived from other current playback/input state and/or event state.
 
 Caution on the preset-1 sample: immediately after `MCUKeyShortClick:1`, the sampled `getPlayerStatus` still showed `vendor=newTuneIn`, `status=stop`, and the previous Radio Record title. This snapshot should not be used as evidence that preset 1 failed or that YouTubeMusic maps to newTuneIn; it may represent transitional/asynchronous state. A longer/timed poll is needed for reliable media-preset matching.
+
+## Media preset transition timing — hardware verified (Preset 1 / YouTubeMusic)
+
+**Status:** HARDWARE VERIFIED on A98
+
+After `MCUKeyShortClick:1` for known Key1 = Liked Music / YouTubeMusic, repeated `getPlayerStatus` polling showed an asynchronous transition:
+
+- initial samples: `mode=10`, empty `vendor`, `status=stop`, empty Title/Artist/Album
+- subsequent sample: `vendor=YouTubeMusic`, `status=load`, with new title metadata
+- later samples: `vendor=YouTubeMusic`, `status=play`, increasing `curpos/offset_pts`, stable nonzero `totlen`
+
+Thus an immediate status read after `MCUKeyShortClick:N` is not reliable for identifying a media preset. The device clears/transitions current playback state before the target service becomes visible. Implementations should wait/poll until playback state stabilizes rather than interpreting the first response.
+
+For this known preset, stable `getPlayerStatus.vendor=YouTubeMusic` matches `GetKeyMapping Key1.Source=YouTubeMusic`, but Source/vendor alone is **not sufficient to uniquely identify a preset slot** because multiple keys may share a service (e.g. more than one YouTubeMusic preset). No active preset number is exposed by this observation.
