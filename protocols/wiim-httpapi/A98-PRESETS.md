@@ -107,13 +107,13 @@ After activating slot 7 with `MCUKeyShortClick:7`, the device switched to the sa
 - `getPlayerStatus.mode = "43"`
 - `status = "play"`
 - `Title/Artist/Album = "556E6B6E6F776E"` (hex for `Unknown`)
-- `getStatusEx.preset_key = "12"`
+- `getStatusEx.preset_key = "12"` — on this A98 this indicates the device supports **12 preset keys/slots**, not the currently active preset
 - `getStatusEx.security = "https/2.0"`
 - `getStatusEx.public_https_version = "1.0"`
 - firmware observed: `Linkplay.4.8.827634`
 - project: `WiiM_Pro_with_gc4a`
 - hardware field: `AmlogicA113`
 
-The useful discriminator for the active source is therefore currently `getPlayerStatus.mode`; `getStatusEx` does not directly label the active input as Optical in this observation. Do **not** interpret `preset_key = "12"` as the active preset number: slot 7 was activated while this field remained `"12"`; it is likely capability/configuration metadata rather than current slot state.
+The useful discriminator for the active source is therefore currently `getPlayerStatus.mode`; `getStatusEx` does not directly label the active input as Optical in this observation. Do **not** interpret `preset_key = "12"` as the active preset number: it denotes the device's **12 available preset buttons/slots**. Slot 7 was active while the field remained `"12"`.
 
 Next experiment: activate known slots 8 (Line In) and 9 (Bluetooth), query `getPlayerStatus`, and record their `mode` values. This can establish an A98 mode-to-input mapping without relying on `getPresetInfo`, which omits these input presets.
