@@ -59,3 +59,11 @@ Strings found:
 - `.rodata` `GNOTIFY=volume_prompt_end` at 0x00408b84, `GNOTIFY=volume_prompt_start` at 0x00408c6c — evidence of start/end notification strings, but dispatch semantics and causal relation to radio restoration not yet proven.
 - No strings matching mixer/alsa/gain/softvol in this exact `izz` search; absence does not rule out binary volume handling.
 **Next:** inspect xrefs to two GNOTIFY strings and main/entrypoint argument parsing. Pending smplayer output backend; fixed acoustic loudness remains UNSOLVED.
+
+
+## Update: smplayer GNOTIFY xrefs and main (2026-10-17)
+Operator ran `radare2 -q -e bin.relocs.apply=true -c 'aaa; axt @ 0x00408b84; axt @ 0x00408c6c; afl~main; q' smplayer`.
+- `main` identified at **0x00402760**, size **904 bytes** (25 basic blocks).
+- **0x00402a00** in `main`: reference to string `GNOTIFY=volume_prompt_start` (rodata **0x00408c6c**).
+- **0x00402aa0** in `main`: reference to string `GNOTIFY=volume_prompt_end` (rodata **0x00408b84**).
+- Confirmed: both notification literals are referenced directly in smplayer's main; the destination mechanism and any link to radio pause/resume are **not established** until inspecting surrounding calls. Inspect `pd 24 @ 0x004029d0` and `pd 24 @ 0x00402a70`; examine argv parsing within main separately.
