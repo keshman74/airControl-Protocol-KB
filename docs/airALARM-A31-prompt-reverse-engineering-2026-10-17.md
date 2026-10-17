@@ -67,3 +67,14 @@ Operator ran `radare2 -q -e bin.relocs.apply=true -c 'aaa; axt @ 0x00408b84; axt
 - **0x00402a00** in `main`: reference to string `GNOTIFY=volume_prompt_start` (rodata **0x00408c6c**).
 - **0x00402aa0** in `main`: reference to string `GNOTIFY=volume_prompt_end` (rodata **0x00408b84**).
 - Confirmed: both notification literals are referenced directly in smplayer's main; the destination mechanism and any link to radio pause/resume are **not established** until inspecting surrounding calls. Inspect `pd 24 @ 0x004029d0` and `pd 24 @ 0x00402a70`; examine argv parsing within main separately.
+
+
+## Update: confirmed smplayer start/end notification transport (2026-10-17)
+New read-only disassembly of original smplayer main at 0x004029d0 and 0x00402a70:
+- At 0x004029f8, imported `SocketClientReadWriteMsg`; `0x00402a00` supplies second argument `GNOTIFY=volume_prompt_start`, `0x00402a08` invokes the function. First argument is a separate string (address from GP base); socket endpoint is **not yet decoded**.
+- At `0x00402a14–0x00402a2c`, `CAudioProcessor.instance__` and start setup. Actual `start_char__int_` invocation lies just beyond this first snippet; inspect a wider slice before documenting its exact call location or args.
+- At `0x00402a70–0x00402a84`, `CAudioProcessor.instance__` then `CAudioProcessor.waitFinish__`.
+- At `0x00402a98`, imported `SocketClientReadWriteMsg`; `0x00402aa0` supplies `GNOTIFY=volume_prompt_end`, `0x00402aa8` invokes it.
+- This establishes sequential socket notifications around audio processing/wait; **which receiver**, whether notification triggers radio pause/resume, and exact audio gain handling remain unverified. Correlation with hardware-resumed radio is not a proven causal link.
+
+Next static inspection: `pd 48 @ 0x00402760` (argc/argv handling at start of main) and `pd 32 @ 0x00402a10` (audio start/wait flow). Do not change hardware or firmware v0.1.26.
