@@ -78,3 +78,13 @@ New read-only disassembly of original smplayer main at 0x004029d0 and 0x00402a70
 - This establishes sequential socket notifications around audio processing/wait; **which receiver**, whether notification triggers radio pause/resume, and exact audio gain handling remain unverified. Correlation with hardware-resumed radio is not a proven causal link.
 
 Next static inspection: `pd 48 @ 0x00402760` (argc/argv handling at start of main) and `pd 32 @ 0x00402a10` (audio start/wait flow). Do not change hardware or firmware v0.1.26.
+
+
+## Update: smplayer argv and CAudioProcessor.start (2026-10-17)
+User's read-only disassembly `pd 48 @ 0x00402760; pd 32 @ 0x00402a10`:
+- smplayer `main` at 0x00402760 retains `argv` in `s1` (0x00402798), `argc` in `s3` (0x0040279c), and loads `argv[1]` into `s0` (0x004027a4, delay slot of WiimuContextGet).
+- `0x004027ac` passes `argv[1]` as path to `stat`, and `0x004027c8` saves it as `file_name`; no argument-null/argc validation is proven by this fragment.
+- At `0x00402a14–0x00402a34` calls `CAudioProcessor.instance__` and `CAudioProcessor.start_char__int_`, passing `a1=s0` (path) and `a2=s4` (integer). **Where s4 comes from is still unknown**; do not yet claim it equals CLI gain or an independent channel setting.
+- `0x00402a38` branches on nonzero return to `waitFinish` path; zero return enters log/error path at `0x00402a40–0x00402a64` and returns without the normal wait/completion notification (requires wider control-flow audit).
+- At `0x00402a70–0x00402a84` calls `CAudioProcessor.waitFinish` after accepted `start`.
+Next: inspect main middle `pd 100 @ 0x00402800` to find s4 assignment/argv parsing, then `pdf @ method.CAudioProcessor.start_char__int_` to identify integer semantics. The device and airALARM v0.1.26 remain untouched.
