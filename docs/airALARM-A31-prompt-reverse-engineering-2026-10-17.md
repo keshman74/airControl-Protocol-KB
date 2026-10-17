@@ -51,3 +51,11 @@ Investigate role of terminalPidbyName; verify mapping startup_vol to offset 0x3B
 Hardware VERIFIED: prompt URL + numeric suffix affects perceived sound; auto resume radio; sound still master-volume-dependent.
 Static binary VERIFIED: stated strings, functions, shared-memory offsets, branching, command-line construction.
 HYPOTHESES: smplayer parameter maps to gain; startup_vol name for offset 0x3BC pending direct reference confirmation; constant independent acoustic alert loudness remains UNSOLVED.
+
+## Update: smplayer string inspection (2026-10-17)
+Operator executed read-only radare2 `aa; izz~volume; izz~mixer; izz~alsa; izz~gain; izz~softvol` against original `/system/workdir/bin/smplayer`.
+Strings found:
+- `.dynstr` `self_dither_volume` at 0x004013fb, `other_dither_volume` at 0x004018ff — imported/dynamic symbol strings; no proof they control output amplitude.
+- `.rodata` `GNOTIFY=volume_prompt_end` at 0x00408b84, `GNOTIFY=volume_prompt_start` at 0x00408c6c — evidence of start/end notification strings, but dispatch semantics and causal relation to radio restoration not yet proven.
+- No strings matching mixer/alsa/gain/softvol in this exact `izz` search; absence does not rule out binary volume handling.
+**Next:** inspect xrefs to two GNOTIFY strings and main/entrypoint argument parsing. Pending smplayer output backend; fixed acoustic loudness remains UNSOLVED.
