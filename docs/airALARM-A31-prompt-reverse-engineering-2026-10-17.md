@@ -340,3 +340,38 @@ The extended ALSA DMIX plugin likely has a mixer-state callback activated by `sn
 
 ### Tenth offline batch prepared
 Created `a31_alsa_boot_audit.sh` to inspect source firmware for startup/initialization shell/RC files and binary strings mentioning `ALSA_CONFIG_PATH`, `asoundrc`, `dmixer.conf`, `/tmp/alsa`, and audio setup. It also copies the key ALSA configs plus relevant scripts to a ZIP. The script was verified with `bash -n` and an end-to-end synthetic test that detected a test boot setup script. **It has not yet run against the user’s original firmware.** Defaults output to `/Users/lab/AI/airALARM/A31_ALSA_BOOT_<timestamp>.zip`; source extracted firmware at `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Operator: `cd /Users/lab/AI/airALARM && bash a31_alsa_boot_audit.sh`. Read-only and does not contact live A31 or alter airALARM v0.1.26.
+
+
+## Tenth offline bundle: A31_ALSA_BOOT_20261020_023634.zip (2026-10-20)
+User supplied ZIP; verified original contents include `relevant_scripts/system/workdir/live.sh` (3383 bytes), `evn.sh` (950 bytes), `alsa.conf`, `asoundrc`, `dmixer.conf`, `dmixer_48k.conf` and script search reports; scan reports 7 matching scripts/80 binaries. Read-only STATIC firmware analysis only.
+
+### SIGNIFICANT NEW CONFIRMATION: startup copies ALSA config to the exact runtime path
+In `system/workdir/live.sh`, these excerpts appear in this order:
+
+```sh
+. /sbin/config.sh
+. /sbin/global.sh
+. ./evn.sh
+...
+cp /system/workdir/lib/alsa /tmp/ -fr
+...
+rootApp 2>&1 | lplogd 1024 /tmp/sys_app.log 1 &
+```
+
+In `system/workdir/evn.sh`, invoked before the copy/rootApp startup:
+
+```sh
+export ALSA_CONFIG_DIR=/tmp/alsa/
+export ALSA_CONFIG_PATH=$ALSA_CONFIG_DIR/alsa.conf
+```
+
+The copied `alsa.conf` defines `@hooks` loading `/etc/asound.conf` and `/tmp/alsa/asoundrc` (`errors false`). The latter exists in firmware, has a leading config include `</tmp/alsa/dmixer.conf>`, and defines `pcm.!default` as `type plug; slave.pcm "asymed"`, `pcm.asymed` as playback `"dmixer"`, capture `"hw:0,0"`. `dmixer.conf` defines `pcm.dmixer` as `type dmix` on `hw:0,0`, `rate 44100`, `format S16_LE`. Hence the **intended startup playback chain** when `live.sh` executes and this config is not subsequently overridden:
+`smplayer snd_pcm_open("default") → plug → asymed → dmixer (dmix) → hw:0,0`.
+
+This closes the previously unresolved question of **how copied firmware ALSA configs reach the /tmp/alsa runtime path**. It strongly supports practical use of the earlier discovered dmix callback, beyond mere existence of an unused config. It is still not a capture of the effective running A31 chain: `/sbin/config.sh`, `/sbin/global.sh`, `/etc/asound.conf`, later overrides, process environment, and possible alternate boot paths are not verified. Do not call the actual running-device routing hardware-confirmed.
+
+### Additional observation
+`logs/binary_string_matches.txt` detected `snd_pcm_mix_vol` also in `system/workdir/bin/intercom`, in addition to previously analyzed `smplayer`. No evidence yet that intercom is relevant to Prompt or changes master-volume control.
+
+### Interpretation boundary
+The independently controlled digital sample gain and DMIX stateful mixer logic are now sufficiently understood as **static binary + intended boot configuration**. The original user goal—fixed acoustic alert volume across zone master levels—**remains UNSOLVED**. Next higher-value task: investigate where the **shared downstream master volume** is applied and/or inspect live ALSA config/process state read-only; do not modify volume, NVRAM, firmware or working airALARM v0.1.26.
