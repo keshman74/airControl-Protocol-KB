@@ -236,3 +236,39 @@ User supplied ZIP and its content was inspected. Files: `libasound.txt` (58,556 
 Actual script `a31_dmix_ops_batch.sh` authored and verified with `bash -n` and mock end-to-end report ZIP run. After operator downloads to `/Users/lab/AI/airALARM`, runs `bash a31_dmix_ops_batch.sh`: dumps `0x0007e880` with `af/pdf`, adjacent callbacks `0x0007fa30` and `0x0007ead8`, xrefs, actual mix dispatch and smplayer callsites. Lists candidate ALSA config filenames from *extracted firmware only*. Defaults report + ZIP to `/Users/lab/AI/airALARM`; script does not connect to A31 or alter original binaries. **Not yet run on user's genuine libasound.**
 
 Status: fixed acoustic Prompt volume independent of zone master output remains UNSOLVED. Preserve airALARM v0.1.26 and A31 NVRAM.
+
+
+## Seventh offline bundle: A31_DMIX_OPS_20261020_015752.zip (2026-10-20)
+Operator uploaded report bundle; inspected `libasound.txt`, `smplayer.txt`, `alsa_config_paths.txt` and recorded SHA256. libasound and smplayer checksums match earlier bundles; this is read-only static analysis, **not a live-device test**.
+
+### CONFIRMED: concrete DMIX mix_vol callback setter at 0x0007e880
+The 16-word table at libasound VA `0x000c64a8` contains function pointer `0x0007e880` at `+0x30` (`0x000c64d8`). Direct disassembly:
+```asm
+0x0007e880  lw v0, 0x104(a0)    ; PCM private context
+0x0007e884  beqz a1, 0x7e8a0
+0x0007e888  lw v0, 0xac(v0)     ; private mixer-state pointer (delay slot)
+0x0007e88c  addiu v1, zero, 1
+0x0007e890  sw v1, 0(v0)        ; state enabled
+0x0007e894  sw a2, 8(v0)        ; numeric threshold/min (exact semantics beyond state use unproven)
+0x0007e898  jr ra
+0x0007e89c  sw a3, 0xc(v0)      ; numeric fixed/max (delay slot)
+0x0007e8a0  sw zero, 0(v0)      ; disabled branch
+0x0007e8a4  sw zero, 8(v0)
+0x0007e8a8  sw zero, 0xc(v0)
+0x0007e8ac  jr ra
+```
+Thus `snd_pcm_mix_vol` **dispatches to a configuration setter**, NOT an autonomous gain amplifier or master-volume override. The callback retains `(enabled, a2, a3)` in PCM private state. The setter contains no PCM multiplication and returns without calculated amplitude.
+`smplayer` invokes `snd_pcm_mix_vol(pcm_handle,1,0x2000,0x10000)` during `CAudioProcessor.setAudioParams` (`0x00403bf4–0x00403c14`), and invokes `(pcm_handle,0,0,0)` at forceclose (`0x004032d0–0x004032dc`) and releaseProcessor (`0x00403640–0x00403648`). The flag is therefore enabled for playback and cleared on teardown.
+
+### CONFIRMED: DMIX write actually reads configured mixer-state
+`snd_pcm_dmix_writei` at `0x0007f358` obtains `private=*(pcm+0x104)`, then `s6=*(private+0xac)` at `0x0007f3a8`; this is the **same mixer-state pointer** set by callback. Reads `*(s6+0)` as flag at `0x0007f3f4`, `*(s6+8)` at `0x0007f488`, and `*(s6+0xc)` at `0x0007f498`, branching and updating gain intermediate before passing PCM samples through `fcn.0007e70c` (Q16 scaling). It also evaluates global pause/mute flags. Thus callback parameters participate in actual PCM gain/attenuation algorithm, but real acoustic dependence on downstream master zone volume **remains untested and unknown**.
+More specific: the callback's a2=8192 and a3=65536 are used as configured numeric lower/upper boundaries by branches. The global PCM gain variable seen in radare2 GP-addressed code at around `0x0007f468–0x0007f560` appears to be further adjusted depending on flags. Precise state evolution needs analysis; *do not describe this as a fixed-volume override*.
+
+### Firmware configuration candidates (filename verification only)
+The report's `alsa_config_paths.txt` identifies:
+- `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED/system/workdir/lib/alsa/alsa.conf`
+- `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED/system/workdir/lib/alsa/pcm/dmix.conf`
+Their **contents were not included**; no proof yet that ALSA `default` on live A31 routes via this DMIX ops table. Next prioritize inspecting actual config, plugin routing and any remaining master volume stage before claiming fixed acoustic loudness.
+
+### Next phase, strictly offline
+Prepare a combined batch collecting config file contents, `snd_pcm_dmix_writei` complete control flow, `snd_pcm_dmix_open` callback install and `smplayer` playback/cleanup sites, plus search other volume-control components. Output reports + ZIP under `/Users/lab/AI/airALARM`. Do not modify firmware or NVRAM. **Open goal:** fixed perceived alert loudness independent of master zone volume.
