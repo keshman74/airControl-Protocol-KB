@@ -272,3 +272,7 @@ Their **contents were not included**; no proof yet that ALSA `default` on live A
 
 ### Next phase, strictly offline
 Prepare a combined batch collecting config file contents, `snd_pcm_dmix_writei` complete control flow, `snd_pcm_dmix_open` callback install and `smplayer` playback/cleanup sites, plus search other volume-control components. Output reports + ZIP under `/Users/lab/AI/airALARM`. Do not modify firmware or NVRAM. **Open goal:** fixed perceived alert loudness independent of master zone volume.
+
+
+### Batch tooling added after seventh bundle
+Created **`a31_audio_route_batch.sh`** (bash syntax-checked, smoke-tested with a mock radare2 and test ALSA config fixture; **not yet executed on original extracted firmware**). It batches read-only `libasound` DMIX writer, Q16 helper, mixer callback, `snd_pcm_mix_vol` dispatch and `smplayer` audio setup; additionally copies exact ALSA config candidates `alsa.conf`, `dmix.conf`, `pcm.conf`, `asound.conf`, `default.conf`, `hw.conf`, `plug.conf`, `softvol.conf`, `.asoundrc` from **original extracted firmware only**. It records text matches to `default/dmix/hw/slave/softvol` to establish a possible PCM configuration route. ZIP & reports default under `/Users/lab/AI/airALARM`, source ELF files remain unchanged. Run from project directory: `bash a31_audio_route_batch.sh`; upload ZIP. This is not an alternative to verifying the live device's effective audio route.
