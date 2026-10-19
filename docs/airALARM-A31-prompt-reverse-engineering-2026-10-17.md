@@ -88,3 +88,16 @@ User's read-only disassembly `pd 48 @ 0x00402760; pd 32 @ 0x00402a10`:
 - `0x00402a38` branches on nonzero return to `waitFinish` path; zero return enters log/error path at `0x00402a40–0x00402a64` and returns without the normal wait/completion notification (requires wider control-flow audit).
 - At `0x00402a70–0x00402a84` calls `CAudioProcessor.waitFinish` after accepted `start`.
 Next: inspect main middle `pd 100 @ 0x00402800` to find s4 assignment/argv parsing, then `pdf @ method.CAudioProcessor.start_char__int_` to identify integer semantics. The device and airALARM v0.1.26 remain untouched.
+
+
+## Update: smplayer CLI integer processing and lookup table (2026-10-20)
+Static disassembly supplied by operator for `main` range `0x00402800–0x0040298c`. **Confirmed code behavior**:
+- `0x004028b4`: branch on `argc < 3`, delay slot initializes `s4=0`. For argc >= 3, `0x004028c0–0x004028c4` does `atoi(argv[2])`.
+- `0x004028c8–0x004028ec`: computes `index = 100 - atoi(argv[2])`, uses four-byte table entry `table[index]`, stores entry into global `self_dither_volume`. Table base from PIC gp pointer offset `-0x7350`; numeric content/units and bounds unknown.
+- At argc==3 `0x004028f4` branches to `0x00402ae0` (not inspected yet). **Do not assume** this branch always enters the same audio playback path as argc>=4.
+- For argc>=4 `0x004028fc–0x00402908`: `atoi(argv[3])` then `s4 = (atoi(argv[3]) == 1) ? 1 : 0`. `s4` reaches `CAudioProcessor.start_char__int_` as its integer argument at `0x00402a34`.
+- For argc>=5 `0x00402918–0x0040293c`: computes `100 - atoi(argv[4])`, uses same coefficient table and stores result in `other_dither_volume`. Subsequent checks test argc==5.
+- The existing hardware-tested `playPromptUrl:URL%20N` takes an apparent two-token CLI form, but the exact rootApp shell string, argv handling and `argc==3` special branch still need comparison before mapping every case.
+- Strong indication numerical CLI args select software gain/dither lookup coefficients. **Not yet proof** of absolute independence from master/zone volume, table units, mixer interaction, or valid range checks. In this visible code, table index is not explicitly clamped; **do not test out-of-range values**.
+
+Next priority: `pd 45 @ 0x00402ad0` for special argc==3 path, `pdf @ method.CAudioProcessor.start_char__int_`, and xrefs to `obj.self_dither_volume` and `obj.other_dither_volume` to find application to PCM signal. Preserve airALARM v0.1.26.
