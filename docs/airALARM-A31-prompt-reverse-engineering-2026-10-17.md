@@ -148,3 +148,31 @@ Operator successfully ran the updated read-only script on Mac. Reports generated
 ### Further offline batch: script provided
 New targeted `a31_gain_deep_batch.sh` (syntax checked with `bash -n`; **not run on operator firmware yet**) creates outputs under `/Users/lab/AI/airALARM`, dumps table (101 4-byte entries from VA `0x00408cb0` inferred from root table base at 0x004028dc), attempts to export coefficients to CSV, dumps PCM/silence routines, and searches libs for `snd_pcm_mix_vol` provider. Command on operator Mac after downloading into project directory: `cd /Users/lab/AI/airALARM && bash a31_gain_deep_batch.sh`.
 Need verify table address/format and ALSA exported provider from new batch; tool output is authoritative. No device interactions or firmware changes; working airALARM v0.1.26 remains baseline.
+
+
+## Third batch: A31_GAIN_DEEP_20261020_012845.zip (2026-10-20)
+User uploaded and we inspected original static analysis bundle. All binaries SHA256 matched prior runs; no hardware commands or firmware modifications. Bundle contains `smplayer.txt`, `libmvmsg.txt`, `rootApp.txt`, `dither_table_raw.json` (404 bytes), `dither_coefficients.csv` (101 rows), and provider search.
+
+### VERIFIED: original 101-point smplayer lookup table
+Source is smplayer `.rodata`, VA `0x00408cb0`, 101 little-endian uint32 entries; main indexes as `table[100 - atoi(argv[2])]` and stores result in `self_dither_volume`. Complete machine-extracted values separately preserved at **[a31-smplayer-dither-coefficients-2026-10-20.csv](data/a31-smplayer-dither-coefficients-2026-10-20.csv)**.
+Observed values (CLI level -> coeff/65536, approximate digital attenuation relative to full scale):
+| CLI | uint32 coefficient | PCM factor | theoretical 20log10(factor) |
+| ---: | ---: | ---: | ---: |
+| 0 | 368 | 0.005615 | -45.0 dB |
+| 10 | 4608 | 0.070313 | -23.1 dB |
+| 30 | 9216 | 0.140625 | -17.0 dB |
+| 50 | 14336 | 0.218750 | -13.2 dB |
+| 70 | 19456 | 0.296875 | -10.5 dB |
+| 80 | 36864 | 0.562500 | -5.0 dB |
+| 100 | 65536 | 1.000000 | 0.0 dB |
+All 101 coefficients are unique and strictly increasing. The curve rises much faster above roughly 70. **This is calculated PCM amplitude gain**, not measured SPL, and does not establish independence from downstream master/zone gain. Even level=0 maps to nonzero 368; do not assume mute. No safe out-of-range argument bounds verified.
+
+### VERIFIED: custom ALSA mixer provider
+`alsa_provider_search.txt` confirms original `system/workdir/lib/libasound.so.2.0.0` exports **`snd_pcm_mix_vol` at 0x00041e70** (`nm -D`: `00041e70 T snd_pcm_mix_vol`). In smplayer `CAudioProcessor.setAudioParams`, 0x00403bf4–0x00403c14 sets global `other_dither_volume` to 8192 and calls `snd_pcm_mix_vol(pcm_handle, 1, 8192, 65536)`.
+Important correction: at 0x00403bfc `other_dither_volume` **address** is loaded and then **overwritten** at 0x00403c08, not read for the mixer call. Its initial or argv-defined value therefore may be discarded at this point. Extended ALSA API function semantics unknown pending its implementation disassembly.
+Original smplayer digital frame scaling remains confirmed: `self_dither_volume` multiplication in `fcn.00402c80` (0x00402c98), post-scaling shift 16; frame sends PCM to ALSA `snd_pcm_writei`.
+
+### Next package
+Prepared **a31_mixer_deep_batch.sh** (tested with `bash -n` and end-to-end mock command invocation; **not yet run against original libasound on Mac**): read-only r2 disassembly of `snd_pcm_mix_vol` in `libasound.so.2.0.0`, smplayer setAudioParams, forceclose/release, gain setup. Reports plus ZIP automatically under `/Users/lab/AI/airALARM`, source bins remain under `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Run from project directory using `bash a31_mixer_deep_batch.sh`; upload ZIP. Continue preserving v0.1.26.
+
+**Status: constant acoustic alert volume across master-zone levels remains UNSOLVED.**
