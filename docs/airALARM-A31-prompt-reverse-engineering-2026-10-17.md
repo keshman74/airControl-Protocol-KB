@@ -276,3 +276,24 @@ Prepare a combined batch collecting config file contents, `snd_pcm_dmix_writei` 
 
 ### Batch tooling added after seventh bundle
 Created **`a31_audio_route_batch.sh`** (bash syntax-checked, smoke-tested with a mock radare2 and test ALSA config fixture; **not yet executed on original extracted firmware**). It batches read-only `libasound` DMIX writer, Q16 helper, mixer callback, `snd_pcm_mix_vol` dispatch and `smplayer` audio setup; additionally copies exact ALSA config candidates `alsa.conf`, `dmix.conf`, `pcm.conf`, `asound.conf`, `default.conf`, `hw.conf`, `plug.conf`, `softvol.conf`, `.asoundrc` from **original extracted firmware only**. It records text matches to `default/dmix/hw/slave/softvol` to establish a possible PCM configuration route. ZIP & reports default under `/Users/lab/AI/airALARM`, source ELF files remain unchanged. Run from project directory: `bash a31_audio_route_batch.sh`; upload ZIP. This is not an alternative to verifying the live device's effective audio route.
+
+
+## Eighth offline bundle: A31_AUDIO_ROUTE_20261020_020954.zip (2026-10-20)
+
+User uploaded read-only batch ZIP. Contents include original extracted firmware ALSA configs `system/workdir/lib/alsa/alsa.conf`, `system/workdir/lib/alsa/pcm/default.conf`, and `system/workdir/lib/alsa/pcm/dmix.conf` together with radare2 disassembly. Original SHA256 still unchanged: libasound `3bff4704868e35833092cd77b5b0192431aa4e5fdfcd341d535154e96f211dac`, smplayer `baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac`. The archive is STATIC evidence, not running-device verification.
+
+### IMPORTANT: default PCM is NOT necessarily DMIX
+- `smplayer`'s `CAudioProcessor.setAudioParams` calls `snd_pcm_open(..., "default", ...)` at VA `0x00403960–0x00403974`.
+- Extracted `pcm/default.conf` defines `pcm.!default` as `type empty`, `slave.pcm` resolving `cards.<card-driver>.pcm.default:CARD=$CARD` if present, and **fallback** `type plug` with `slave.pcm { type hw; card $CARD }` if no card-specific definition is found. The fallback is **plug -> hw**, not explicit `dmix`.
+- Separate `pcm/dmix.conf` defines `pcm.!dmix` as `type dmix`, `slave.pcm { type hw; card $CARD; device $DEV; subdevice $SUBDEV }`. Its mere presence proves the plugin is available but does NOT show `default` uses it.
+- `alsa.conf` declares `pcm.default cards.pcm.default`, `pcm.dmix cards.pcm.dmix`; DMIX defaults include `48000` Hz and `S16_LE`, but neither is proof of the active Prompt stream. Its `@hooks` load **`/etc/asound.conf`** and **`/tmp/alsa/asoundrc`** (errors ignored), so device-time overrides can change the final route.
+- The collected bundle does not contain these live override files or card-specific `cards/<driver>.conf` configurations; **effective live-device PCM chain unresolved**.
+- Radare2 `smplayer.stderr.txt` contains an irrelevant failure to resolve requested `method.CAudioProcessor.decode_audio` name; already-supported direct `snd_pcm_open("default")` is visible. `libasound.stderr.txt` similarly contains a failed disassembly of unnamed `0x0007e880`; the callback is already resolved and disassembled in seventh bundle. Do not treat those missing command dumps as contradictory evidence.
+- `snd_pcm_dmix_writei` 0x0007f358: retains earlier confirmed mix-state updates, pause/mute checks, and sample-scaling via `fcn.0007e70c`. Its implementation alone cannot establish that it is called in a deployed audio chain.
+
+### Revised inference / next experiment
+Until the runtime `default` PCM config and downstream master-volume location are known, the hypothesized DMIX route for Prompt and any independent gain benefit are **UNVERIFIED**. Prior findings about callback and PCM math remain valid **conditionally when this plugin is in the chain**.
+
+A read-only collection script `a31_alsa_route_inventory.sh` was prepared and tested (`bash -n` plus end-to-end test with a synthetic extracted firmware tree). It searches under the extracted firmware only for card-specific `*.conf` ALSA definitions, other `asound.conf` files and audio route references in startup scripts, copying only relevant configs into ZIP under `/Users/lab/AI/airALARM`. Command: `cd /Users/lab/AI/airALARM && bash a31_alsa_route_inventory.sh`. This script DOES NOT connect to the A31 or modify original binaries or working airALARM v0.1.26. No claim yet that archived configs equal those deployed on running A31.
+
+**Open goal:** fixed acoustic Alert/Prompt loudness regardless of master-zone volume is not demonstrated.
