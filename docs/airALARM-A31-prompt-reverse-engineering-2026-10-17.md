@@ -197,3 +197,24 @@ At `libasound.so.2.0.0` VA `0x00041e70`, symbol size 156 bytes:
 `a31_dmix_callback_batch.sh` was written and syntax-checked plus mock end-to-end smoke-tested (NOT on original Mac ELF). Defaults reports and zip under `/Users/lab/AI/airALARM`. Inspects `snd_pcm_dmix_writei`, `snd_pcm_dmix_open`, `_snd_pcm_dmix_open`, the mix notification string's xrefs and smplayer call sites. User should run `cd /Users/lab/AI/airALARM && bash a31_dmix_callback_batch.sh` after saving script there and upload ZIP.
 
 **Status:** independent constant audible Prompt level across master-zone levels remains UNSOLVED. Preserve original A31 and working airALARM v0.1.26; do not modify NVRAM.
+
+
+## Fifth offline bundle: A31_DMIX_CALLBACK_20261020_014011.zip (2026-10-20)
+Original Mac batch report uploaded and inspected. Files: libasound.txt (88596 bytes), smplayer.txt (20297 bytes), stderr, manifest and radare2 command files. SHA256 of original libasound `3bff4704868e35833092cd77b5b0192431aa4e5fdfcd341d535154e96f211dac`; smplayer `baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac` (same as previous reports). Static analysis **only**; no A31 acoustic tests.
+
+### CONFIRMED: DMIX samples and system pause/mute logic
+- `snd_pcm_dmix_writei` VA `0x0007f358` (816 bytes): at `0x0007f368` accesses PCM private state; calls `snd_pause_flag_get` at `0x0007f3ac` and `snd_mute_flag_get` at `0x0007f3c8`; also uses `g_pause_local` and flags from private PCM data. Combines those values in branches around `0x0007f3f4–0x0007f468`.
+- Branches near `0x0007f4f4–0x0007f5f0` load 16-bit samples (`lh`), call **`fcn.0007e70c`** at `0x0007f56c` and `0x0007f5dc`, and store transformed 16-bit samples back (`sh` at `0x0007f57c` and `0x0007f5ec`). This is **a second sample-processing stage inside patched libasound**, distinct from smplayer's self_dither_volume sample gain.
+- Function eventually dispatches to `snd_pcm_mmap_writei` at `0x0007f680`. The exact mathematics of `fcn.0007e70c` and interpretation of the auxiliary mixer / min / fixed-volume values are **not yet recovered**.
+- Diagnostics in the same function at `0x0007f62c` reference `snd_pcm_dmix_writei alexa_flag = %d, pause_flag=%d, mute_flag=%d, mixer=%d, vol_min=%d, fixed_vol=%d`. That proves those diagnostic labels are present, NOT the user-accessible ability to set fixed gain or route around master zone volume.
+- `snd_pcm_dmix_open` VA `0x00080bb4` creates PCM and at `0x00080dcc–0x00080de4` installs the main PCM operations table at **VA 0x000c64a8** into PCM struct offset `0xF4` (via `0x00080dd4: sw v1,0xf4(v0)`). `snd_pcm_mix_vol` reads an operations table from `pcm+0xF4`, then its callback at `ops+0x30`. **Thus candidate callback slot for this DMIX operations table is VA 0x000c64d8**; its content has NOT yet been dumped, nor proven to be the receiver in the deployed `default` PCM chain. Flagging its location as static analysis target rather than claiming callback resolution.
+- DMIX opener contains diagnostic text "dmix plugin can be only connected to hw plugin", showing its intended chained structure, but does **not** prove how A31's actual `default` PCM route is configured.
+
+### Next focused static batch
+`a31_dmix_trace_batch.sh` written; `bash -n` and mock end-to-end ZIP test passed; NOT run against original Rakoit binaries in this session. It dumps:
+1. `pxw` operations table VA 0x000c64a8 and callback slot VA 0x000c64d8;
+2. `fcn.0007e70c` disassembly and xrefs;
+3. DMIX writer / helper calls and original smplayer ALSA caller.
+Operator should save it in `/Users/lab/AI/airALARM` and run `bash a31_dmix_trace_batch.sh`; outputs ZIP in **that same project directory**. Do NOT change v0.1.26, NVRAM or A31 volume.
+
+**Interpretation boundary:** confirmed second ALSA PCM sample-processing path; independent fixed audible Prompt volume remains UNSOLVED.
