@@ -115,3 +115,17 @@ Source: user's radare2 output `pd 24 @ 0x00402ad0; pdf @ method.CAudioProcessor.
 The accompanying downloadable helper `a31_re_batch.sh` was created and syntax-checked; tested its orchestration against mock radare2 and mock ELF paths (NOT yet executed against real extracted firmware in this chat). Usage on operator Mac: `bash ~/Downloads/a31_re_batch.sh`. Optional positional args: `[RAKOIT_EXTRACTED_DIR] [OUTPUT_DIR]`. Defaults to `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED` and a timestamped directory inside `~/AI/A31_Firmware/A31_RE_REPORTS/`.
 It runs **read-only** radare2 batches against `smplayer`, `libmvmsg.so`, `rootApp`, collecting main argument parsing, `CAudioProcessor.start`, first 160 instructions of decodeThread, `self_dither_volume`/`other_dither_volume` xrefs, original volume_pormpt_direct, MaxPromptVolume and shared-memory accesses. Produces `smplayer.txt`, `libmvmsg.txt`, `rootApp.txt`, `manifest.txt`, `README.md`, reproducible `r2_commands/*.r2` and a `.zip` ready for review. It performs no device-side experiments, HTTP calls, firmware flash or NVRAM writes.
 Remaining research: trace coefficient table into PCM/audio backend; check if master output volume is multiplied afterward. Preserve airALARM v0.1.26.
+
+## Batch report received 2026-10-20 00:33 local
+User executed script successfully on Mac; uploaded `A31_RE_BATCH_20261020_003338.zip`; all three r2 jobs completed: smplayer 742 lines, libmvmsg 193 lines, rootApp 347 lines. Static-only; A31 and v0.1.26 untouched. Original SHA256 manifest:
+- smplayer: `baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac`
+- libmvmsg.so: `59e57f72f35a4ccb9a6bd5b0011ae34fcbd8343c03a8a672c670ac5e805828e3`
+- rootApp: `0314cbeb5961127bef4668317183f66e7b8cec7eeb1f323445c622dd20992a97`
+**New static evidence from cross-references:**
+- `self_dither_volume`: assigned in `main` at `0x004028ec`; independently **read** in `fcn.00402c80` at `0x00402c8c` / `0x00402c94`.
+- `other_dither_volume`: assigned in `main` at `0x0040293c`; **read and written** by `CAudioProcessor.setAudioParams(int,unsigned int,unsigned short)` at `0x00403bfc` and `0x00403c08` respectively. Further disassembly required to explain use/overwrite.
+- `CAudioProcessor.decodeThread(void*)` at `0x00404718` calls `CAudioProcessor.decode_audio()` at `0x00404740`, which is the next relevant playback processing path. Audio frame function present as `CAudioProcessor.playAudioFrame(mad_pcm*)` at `0x00403cf8`. The present batch did NOT yet dump complete `decode_audio` / `playAudioFrame` / `fcn.00402c80`.
+- **Do not infer** gain independence from shared/master volume from presence of self/other dither coefficients.
+
+## Output location requirement (user, 2026-10-20)
+All next airALARM/A31 research report archives and report directories default under `/Users/lab/AI/airALARM` rather than `/Users/lab/AI/A31_Firmware/A31_RE_REPORTS`. An updated `a31_re_batch.sh` sets `OUT="${2:-$HOME/AI/airALARM/A31_RE_BATCH_$STAMP}"`, while the source binaries continue to be read from `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. The script syntax was checked with `bash -n`. It also includes extra dumps for `fcn.00402c80`, `CAudioProcessor.setAudioParams`, `scale`, `playAudioFrame` and `decode_audio`. Operator must replace local script before next run.
