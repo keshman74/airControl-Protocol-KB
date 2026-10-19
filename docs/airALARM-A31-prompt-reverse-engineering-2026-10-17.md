@@ -101,3 +101,12 @@ Static disassembly supplied by operator for `main` range `0x00402800–0x0040298
 - Strong indication numerical CLI args select software gain/dither lookup coefficients. **Not yet proof** of absolute independence from master/zone volume, table units, mixer interaction, or valid range checks. In this visible code, table index is not explicitly clamped; **do not test out-of-range values**.
 
 Next priority: `pd 45 @ 0x00402ad0` for special argc==3 path, `pdf @ method.CAudioProcessor.start_char__int_`, and xrefs to `obj.self_dither_volume` and `obj.other_dither_volume` to find application to PCM signal. Preserve airALARM v0.1.26.
+
+
+## Update: argc==3 and CAudioProcessor.start (2026-10-20)
+Source: user's radare2 output `pd 24 @ 0x00402ad0; pdf @ method.CAudioProcessor.start_char__int_` on original smplayer.
+- `0x00402ae0: b 0x402980` with delay slot `0x00402ae4: move s4, zero`. When `argc==3` (two tokens after executable: audio file + numeric arg), main explicitly resets s4 to zero before common processing. **The argv[2]-derived self_dither_volume lookup/write already occurred** earlier (0x004028bc–0x004028ec).
+- C++ method `CAudioProcessor::start(char*,int)` at **0x004030b4**, disassembly 320 bytes; stores `a2` (integer passed by main from s4) to instance **offset 0xE8** at `0x004030f8`, stores duplicated file path pointer into offset 0xE4 at 0x004030fc. Thus `s4` is a separate start *mode/flag* field, **not identical to argv[2]-derived gain table coefficient**.
+- At `0x00403100`, calls `CAudioProcessor.ParseFileType`; at `0x0040315c`, calls `pthread_create` with `CAudioProcessor.decodeThread(void*)` at **0x00404718**. Then waits briefly on a condition variable and returns 1. Audio output logic is in decodeThread or functions it invokes, rather than shown in start itself.
+- Caution: lack of observed CLI input range validation around table indexing; only inspect files and use prior hardware-tested values 10..100 if necessary. Independent absolute Prompt loudness still UNSOLVED.
+- Next: batch static analysis of smplayer main, decodeThread and global gain xrefs, libmvmsg command builder, rootApp settings/call sites.
