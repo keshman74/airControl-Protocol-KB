@@ -129,3 +129,22 @@ User executed script successfully on Mac; uploaded `A31_RE_BATCH_20261020_003338
 
 ## Output location requirement (user, 2026-10-20)
 All next airALARM/A31 research report archives and report directories default under `/Users/lab/AI/airALARM` rather than `/Users/lab/AI/A31_Firmware/A31_RE_REPORTS`. An updated `a31_re_batch.sh` sets `OUT="${2:-$HOME/AI/airALARM/A31_RE_BATCH_$STAMP}"`, while the source binaries continue to be read from `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. The script syntax was checked with `bash -n`. It also includes extra dumps for `fcn.00402c80`, `CAudioProcessor.setAudioParams`, `scale`, `playAudioFrame` and `decode_audio`. Operator must replace local script before next run.
+
+## Batch analysis #2: A31_RE_BATCH_20261020_011946.zip (2026-10-20)
+Operator successfully ran the updated read-only script on Mac. Reports generated in user-requested directory `/Users/lab/AI/airALARM/A31_RE_BATCH_20261020_011946`, ZIP `/Users/lab/AI/airALARM/A31_RE_BATCH_20261020_011946.zip`. Uploaded and inspected: `smplayer.txt` 1478 lines, `libmvmsg.txt` 193, `rootApp.txt` 347; original binary SHA256 unchanged vs prior batch. This is **static reverse engineering**, not a new live-device test.
+
+### Definitive digital gain processing path in smplayer
+- `main`: parse `atoi(argv[2])`, calculate 0..100-derived lookup `table[100 - value]` (0x004028c0–0x004028e4), write coefficient to `self_dither_volume` (0x004028ec). No verified bounds checking immediately before table indexing; **never issue out-of-range values**.
+- `fcn.00402c80` at 0x00402c80: loads `self_dither_volume` at 0x00402c8c/0x00402c94, multiplies incoming sample by it (`mul` at **0x00402c98**), applies a conditional low-coefficient dither/noise-shaping branch if coefficient less than `0x10000` (0x00402c9c–0x00402cd8), then arithmetic shift by **16 bits** (0x00402ce0). This resembles Q16 fixed-point amplitude scaling; exact table values, dB curve and dynamic range remain unmeasured.
+- `CAudioProcessor.playAudioFrame(mad_pcm*)` at 0x00403cf8: calls `CAudioProcessor.scale(int)` on libmad samples (0x00403e68), then calls `fcn.00402c80` **0x00403e84** and stores resulting 16-bit PCM (0x00403e90); channel-specific equivalent calls around 0x00403ee4. Calls `snd_pcm_writei` at **0x00403db0** to write PCM to ALSA.
+- `CAudioProcessor.decode_audio()` at **0x004044cc** opens ALSA PCM **`default`** via `snd_pcm_open` (0x004045a4–0x004045b8), initializes libmad and calls `playAudioFrame` at 0x00404640 or 0x004046a4. Thread wrapper `decodeThread` calls `decode_audio`.
+- Thus numeric suffix influences digital PCM amplitude **before ALSA**. Actual analog acoustic output can still be affected by master/zone gain downstream; this report does **not** show a master-independent path.
+
+### Additional ALSA mixing path requiring research
+- `CAudioProcessor.setAudioParams` at **0x004038fc** configures ALSA hw/sw params. At 0x00403960–0x00403974 it may open PCM `default`; at 0x00403bfc loads **address** of `other_dither_volume`, at **0x00403c08** sets its value to `0x2000` (8192). This is a **write**, not evidence its prior value is used in that function. An earlier quick summary described it as 'read'; corrected here.
+- At **0x00403c10**, calls imported nonstandard/extended `snd_pcm_mix_vol` with `a0=pcm_handle`, `a1=1`, `a2=0x2000` (8192), `a3=0x10000` (65536). Exact semantics of this custom API are currently unknown; do not assert it provides independent analog/hardware gain.
+- There is also `set_pcm_stream_info` call at 0x00403c24, and `switch_mode_get_silence` around 0x00403c7c. These may interact with prompt vs main stream mixing; no causal proof yet.
+
+### Further offline batch: script provided
+New targeted `a31_gain_deep_batch.sh` (syntax checked with `bash -n`; **not run on operator firmware yet**) creates outputs under `/Users/lab/AI/airALARM`, dumps table (101 4-byte entries from VA `0x00408cb0` inferred from root table base at 0x004028dc), attempts to export coefficients to CSV, dumps PCM/silence routines, and searches libs for `snd_pcm_mix_vol` provider. Command on operator Mac after downloading into project directory: `cd /Users/lab/AI/airALARM && bash a31_gain_deep_batch.sh`.
+Need verify table address/format and ALSA exported provider from new batch; tool output is authoritative. No device interactions or firmware changes; working airALARM v0.1.26 remains baseline.
