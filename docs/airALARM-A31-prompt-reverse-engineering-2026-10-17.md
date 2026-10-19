@@ -218,3 +218,21 @@ Original Mac batch report uploaded and inspected. Files: libasound.txt (88596 by
 Operator should save it in `/Users/lab/AI/airALARM` and run `bash a31_dmix_trace_batch.sh`; outputs ZIP in **that same project directory**. Do NOT change v0.1.26, NVRAM or A31 volume.
 
 **Interpretation boundary:** confirmed second ALSA PCM sample-processing path; independent fixed audible Prompt volume remains UNSOLVED.
+
+
+## Sixth offline bundle: A31_DMIX_TRACE_20261020_014854.zip (2026-10-20)
+User supplied ZIP and its content was inspected. Files: `libasound.txt` (58,556 bytes), `smplayer.txt` (15,893 bytes), manifest and r2 command files. Original SHA256 unchanged from fifth bundle: libasound `3bff4704868e35833092cd77b5b0192431aa4e5fdfcd341d535154e96f211dac`, smplayer `baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac`. Read-only static analysis; not a new hardware test.
+
+### Confirmed: DMIX ops callback slot resolves to 0x0007e880
+- `snd_pcm_dmix_open` sets PCM `ops` pointer to VA `0x000c64a8` via instruction `0x00080dd4: sw v1,0xf4(v0)`.
+- Read-only `pxw` reports at VA `0x000c64d8` (ops+0x30) the function pointer `0x0007e880`. Subsequent words at `0x000c64dc` and `0x000c64e0` are `0x0007fa30`, `0x0007ead8`.
+- `snd_pcm_mix_vol` is an indirect dispatcher: `0x00041eb8` obtains `ops`, `0x00041ebc` reads `ops+0x30`, then `0x00041ee0` dispatches the callback, possibly using a wrapped PCM if the immediate one lacks the callback. Thus **0x0007e880 is the candidate concrete DMIX mix-volume callback**. Its disassembly has **not yet been captured**; do not claim its arithmetic or input parameter meaning until confirmed. Nor is actual A31 `default` PCM plugin chain yet established.
+
+### Confirmed: additional Q16-style gain/dither stage
+- `fcn.0007e70c` is 92 bytes, called twice from `snd_pcm_dmix_writei` at `0x0007f56c` and `0x0007f5dc`. It begins with `mul v0,a1,a0` (multiply sample and coefficient), compares coefficient to `0x10000`, and performs additional conditional low-gain sample correction / state update when it is below that value (`0x0007e724–0x0007e75c`). Function returns `sra v0,v0,16` at `0x0007e764` in delay slot of `jr ra`. Approximate idealized output `sample * coefficient / 65536`; integer overflow, signedness, bias/dither, and input clipping can make exact output differ.
+- `snd_pcm_dmix_writei` reads 16-bit input samples (`lh`), calls this gain helper, and writes 16-bit samples (`sh` at `0x0007f57c`, `0x0007f5ec`). It also processes pause/mute flags. This confirms a second digital sample amplitude stage in patched ALSA code, following smplayer's own `self_dither_volume` handling. It does **not** prove hardware-independent acoustic volume.
+
+### Next targeted static analysis bundle
+Actual script `a31_dmix_ops_batch.sh` authored and verified with `bash -n` and mock end-to-end report ZIP run. After operator downloads to `/Users/lab/AI/airALARM`, runs `bash a31_dmix_ops_batch.sh`: dumps `0x0007e880` with `af/pdf`, adjacent callbacks `0x0007fa30` and `0x0007ead8`, xrefs, actual mix dispatch and smplayer callsites. Lists candidate ALSA config filenames from *extracted firmware only*. Defaults report + ZIP to `/Users/lab/AI/airALARM`; script does not connect to A31 or alter original binaries. **Not yet run on user's genuine libasound.**
+
+Status: fixed acoustic Prompt volume independent of zone master output remains UNSOLVED. Preserve airALARM v0.1.26 and A31 NVRAM.
