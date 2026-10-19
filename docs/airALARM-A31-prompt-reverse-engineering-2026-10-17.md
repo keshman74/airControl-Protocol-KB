@@ -176,3 +176,24 @@ Original smplayer digital frame scaling remains confirmed: `self_dither_volume` 
 Prepared **a31_mixer_deep_batch.sh** (tested with `bash -n` and end-to-end mock command invocation; **not yet run against original libasound on Mac**): read-only r2 disassembly of `snd_pcm_mix_vol` in `libasound.so.2.0.0`, smplayer setAudioParams, forceclose/release, gain setup. Reports plus ZIP automatically under `/Users/lab/AI/airALARM`, source bins remain under `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Run from project directory using `bash a31_mixer_deep_batch.sh`; upload ZIP. Continue preserving v0.1.26.
 
 **Status: constant acoustic alert volume across master-zone levels remains UNSOLVED.**
+
+## Fourth batch: A31_MIXER_DEEP_20261020_013500.zip (2026-10-20)
+Operator supplied ZIP; unpacked and examined `libasound.txt` (149484 bytes), `smplayer.txt` (46915 bytes), `alsa_symbols.txt`, manifests and radare2 command scripts. Original SHA256: `libasound.so.2.0.0 = 3bff4704868e35833092cd77b5b0192431aa4e5fdfcd341d535154e96f211dac`; `smplayer = baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac`. Static analysis only.
+
+### IMPORTANT CORRECTION / refinement: `snd_pcm_mix_vol` is a dispatcher, not direct mixer gain arithmetic
+At `libasound.so.2.0.0` VA `0x00041e70`, symbol size 156 bytes:
+- `0x00041e8c–0x00041eb4`: assert PCM handle not null (`pcm.c` line 732 as reflected by assert immediate 0x2dc).
+- `0x00041eb8`: load operations table from `pcm + 0xF4`; `0x00041ebc`: load callback pointer from `ops + 0x30`. If callback exists, `0x00041ee0` calls it indirectly, substituting the plugin/slave PCM handle as first argument (taken from `pcm + 0xFC`), while MIPS a1/a2/a3 still contain the passed arguments. If absent, descend to wrapped PCM at `pcm + 0x100`, look for its callback, and invoke if present. **Which PCM plugin/callback actually receives the call remains unknown.**
+- After callback/skip, `0x00041ef4/0x00041ef8`: set flag value 1 at `pcm + 0x108` and wrapped PCM struct `*(pcm+0x100) + 0x108`; return zero. This wrapper performs **no explicit gain multiplication** itself.
+- Therefore previous speculation that `snd_pcm_mix_vol(handle,1,8192,65536)` sets an independent output gain is **not supported by this wrapper**. It forwards parameters to a plugin callback; operational effect must be identified in plugin logic and live-device measurements.
+
+### More clues from libasound and smplayer
+- Symbols: `_snd_pcm_dmix_open` 0x0008140c, `snd_pcm_dmix_open` 0x00080bb4, `snd_pcm_dmix_writei` 0x0007f358.
+- `.rodata` VA 0x000ae6a8 diagnostic text: `snd_pcm_dmix_writei alexa_flag = %d, pause_flag=%d, mute_flag=%d, mixer=%d, vol_min=%d, fixed_vol=%d\n`; suggests patched/extended DMIX mixing logic with flags, but the origin and actual use of each field is NOT YET ESTABLISHED.
+- `smplayer` setAudioParams uses `snd_pcm_mix_vol(handle, 1, 8192, 65536)` at 0x00403c10; before this, overwrites global `other_dither_volume` with `0x2000` (8192) at 0x00403c08. Afterward calls `set_pcm_stream_info` at 0x00403c24.
+- `smplayer` forceclose at 0x004032d8 and releaseProcessor at 0x00403648 invoke `snd_pcm_mix_vol` with a2=0,a3=0 before `snd_pcm_close`; full surrounding a1 and receiver callback have not been independently resolved.
+
+### Next offline batch (created)
+`a31_dmix_callback_batch.sh` was written and syntax-checked plus mock end-to-end smoke-tested (NOT on original Mac ELF). Defaults reports and zip under `/Users/lab/AI/airALARM`. Inspects `snd_pcm_dmix_writei`, `snd_pcm_dmix_open`, `_snd_pcm_dmix_open`, the mix notification string's xrefs and smplayer call sites. User should run `cd /Users/lab/AI/airALARM && bash a31_dmix_callback_batch.sh` after saving script there and upload ZIP.
+
+**Status:** independent constant audible Prompt level across master-zone levels remains UNSOLVED. Preserve original A31 and working airALARM v0.1.26; do not modify NVRAM.
