@@ -297,3 +297,46 @@ Until the runtime `default` PCM config and downstream master-volume location are
 A read-only collection script `a31_alsa_route_inventory.sh` was prepared and tested (`bash -n` plus end-to-end test with a synthetic extracted firmware tree). It searches under the extracted firmware only for card-specific `*.conf` ALSA definitions, other `asound.conf` files and audio route references in startup scripts, copying only relevant configs into ZIP under `/Users/lab/AI/airALARM`. Command: `cd /Users/lab/AI/airALARM && bash a31_alsa_route_inventory.sh`. This script DOES NOT connect to the A31 or modify original binaries or working airALARM v0.1.26. No claim yet that archived configs equal those deployed on running A31.
 
 **Open goal:** fixed acoustic Alert/Prompt loudness regardless of master-zone volume is not demonstrated.
+
+
+## Ninth offline bundle: A31_ALSA_ROUTE_20261020_022956.zip (2026-10-20)
+User uploaded and inspected ZIP; contains 68 copied firmware ALSA configuration files, config inventory and search matches (89 eligible text files searched). **Static extracted firmware evidence only; not proof of live loading.** Critical new files `system/workdir/lib/alsa/asoundrc`, `dmixer.conf`, `dmixer_48k.conf`. Existing 8th-batch observation about generic `pcm/default.conf` fallback remains accurate but **the firmware contains a likely custom override that changes the expected default playback chain**.
+
+### Confirmed file content: custom override defines default → dmix
+`system/workdir/lib/alsa/asoundrc` (327 bytes; SHA256 `d7f13942de02113c5f7f88b2818c469d9e4346311958eabcd3b9980da1fefdaf`):
+```
+</tmp/alsa/dmixer.conf>
+
+pcm.mv_audio { type hw; card 0; device 0 }
+pcm_slave.mv_rate { pcm mv_audio; rate 44100 }
+pcm.rate_convert { type rate; slave mv_rate }
+pcm.asymed { type asym; playback.pcm "dmixer"; capture.pcm "hw:0,0" }
+pcm.!default { type plug; slave.pcm "asymed" }
+ctl.dmixer { type hw; card 0 }
+```
+The leading `<...>` line is an ALSA **configuration include** referencing absolute runtime path `/tmp/alsa/dmixer.conf`, not a shell redirection. `pcm.!default` would supersede the generic library default if this file is effectively loaded. Its playback path points via `plug`, `asym`, `dmixer` to PCM card 0 device 0. `rate_convert` and `mv_rate` exist but are not directly referenced by `pcm.!default` in this file; avoid falsely asserting they're in default playback chain.
+
+`system/workdir/lib/alsa/dmixer.conf` (177 bytes; SHA256 `eab66e789146370c2fdf330f12dc87f7d26eeeca3b94bf0443227d2fed29b8ee`):
+```
+pcm.dmixer {
+  type dmix
+  ipc_key 1024
+  slave { pcm "hw:0,0"; rate 44100; format S16_LE; period_size 2048; buffer_size 16384 }
+  bindings { 0 0; 1 1 }
+}
+```
+`system/workdir/lib/alsa/dmixer_48k.conf` (162 bytes; SHA256 `efc4f510a9540bd257137363f8976c63440df5a411f5fb418f3047ab3c04ab38`) defines same DMIX chain at **48000 Hz**. Which runtime file is active is unknown.
+
+### Environment setup recovered from script matches
+`system/workdir/evn.sh` (in search results but not copied into ninth archive) contains:
+```sh
+export ALSA_CONFIG_DIR=/tmp/alsa/
+export ALSA_CONFIG_PATH=$ALSA_CONFIG_DIR/alsa.conf
+```
+Combined with `alsa.conf`'s `@hooks` loading `/tmp/alsa/asoundrc`, this provides a **plausible intended boot-time route**: create `/tmp/alsa` tree, install `alsa.conf`, `asoundrc` plus chosen `dmixer.conf`, export paths and start smplayer. However **the actual initialization/copy commands are not in this report**, and no evidence of live process environment or active ALSA PCM chain was collected. Do not promote intended config to hardware-confirmed route.
+
+### Implications for independent alert loudness
+The extended ALSA DMIX plugin likely has a mixer-state callback activated by `snd_pcm_mix_vol` during Prompt, and if this config is active, DMIX will process samples before `hw:0,0`. However a later volume control (e.g. codec mixer/master) could still reduce both prompt and radio. Independent **constant audible** alert loudness relative to zone master remains UNVERIFIED / UNSOLVED.
+
+### Tenth offline batch prepared
+Created `a31_alsa_boot_audit.sh` to inspect source firmware for startup/initialization shell/RC files and binary strings mentioning `ALSA_CONFIG_PATH`, `asoundrc`, `dmixer.conf`, `/tmp/alsa`, and audio setup. It also copies the key ALSA configs plus relevant scripts to a ZIP. The script was verified with `bash -n` and an end-to-end synthetic test that detected a test boot setup script. **It has not yet run against the user’s original firmware.** Defaults output to `/Users/lab/AI/airALARM/A31_ALSA_BOOT_<timestamp>.zip`; source extracted firmware at `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Operator: `cd /Users/lab/AI/airALARM && bash a31_alsa_boot_audit.sh`. Read-only and does not contact live A31 or alter airALARM v0.1.26.
