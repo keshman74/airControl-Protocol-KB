@@ -55,7 +55,7 @@ KNX_EXIT_CODE=0
 - `--probe-api`: read loopback API, no audio writes (**CONFIRMED v0.7**).
 - `--control-mute`: bounded two-event Mute control with readback (**CONFIRMED v0.7**).
 - Only a manual process in volatile `/tmp`; no autostart, permanent install, or firmware flashing was performed.
-- Native KNX→Mute and volume control are hardware-confirmed on the tested A31 as of v0.9 (details below). Transport commands were accepted by the local HTTP API, but playback effects were not read back. Presets, sources, reboot persistence, permanent service/autostart, unattended long-duration operation, alternate interfaces and other chips are **UNVERIFIED**.
+- Native KNX→Mute and volume control are hardware-confirmed on the tested A31 as of v0.9 (details below). Transport commands were accepted by the local HTTP API, but playback effects were not read back. Presets 1 and 2 are hardware-confirmed via physical playback switching in v0.9, with operator confirmation; presets 3–10, sources, reboot persistence, permanent service/autostart, unattended long-duration operation, alternate interfaces and other chips are **UNVERIFIED**.
 - Scope distinction: the confirmed *KNX control integration* applies to this A31 device. It does not change existing device/API command statuses for other platforms.
 
 Provenance: physical-device SSH log supplied by project operator, 2026-10-20; binaries `A31_KNX_NATIVE_V06`, `A31_KNX_NATIVE_V07` verified through hardware tests.
@@ -77,7 +77,7 @@ Build artifact `A31_KNX_NATIVE_V09.zip`: static MIPS32 LE ELF with C/assembly so
 
 - New opt-in `--run-all` mode: continuous UDP KNX receiving; fixed sender filter `1.1.22` and configurable KNX GA mapping.
 - Transports via **local** Linkplay HTTP API: `setPlayerCmd:onepause`, `resume`, `pause`, `next`, `prev` (from existing KB; no rediscovery). Mute has readback and volume uses getPlayerStatus read/absolute set/readback with step 2.
-- Native presets via official framed **TCP :8899**: binary header `18 96 18 20`, little-endian payload length and byte sum, 8 reserved zero bytes, `MCU+KEY+001..010`. Default mapped KNX GA `3/2/0..3` (slots 1–4), other slots only after explicit GA configuration. Each preset is **transmitted but not playback-confirmed** by this code; the TCP8899 local-loopback path requires device validation. At least 200ms is enforced between preset commands.
+- Native presets via official framed **TCP :8899**: binary header `18 96 18 20`, little-endian payload length and byte sum, 8 reserved zero bytes, `MCU+KEY+001..010`. Default mapped KNX GA `3/2/0..3` (slots 1–4), other slots only after explicit GA configuration. Presets **1 and 2 are confirmed to change playback** by the operator's direct observation of the physical device during the v0.9 test; the log itself records TCP transmission but does not include native MCU acknowledgement or readback. Presets 3–10 remain unverified. At least 200ms is enforced between preset commands.
 - Optional source AUX and USB use previously CONFIRMED A31 HTTP switchmode forms, but KNX source mappings default OFF.
 - Only KNX value 1 triggers button actions; value 0 is a release. Mute treats both 0 and 1 as states. Repeat button telegrams within 350ms are suppressed.
 - Local command mode remains temporary-only under `/tmp`; no flash/autostart. Previous hardware-confirmed v0.7 remains the rollback baseline.
@@ -109,12 +109,12 @@ HTTP_ACCEPTED_NOT_STATE_VERIFIED
 HEARTBEAT seconds=420 accepted=25 verified=25
 ```
 
-The native program ran in temporary `/tmp` only; no firmware or permanent startup modifications have been performed. The next highest-value integration check is **one preset button press** and observed playback; do not needlessly re-test established Linkplay HTTP commands.
+The native program ran in temporary `/tmp` only; no firmware or permanent startup modifications have been performed. The later operator confirmation of preset playback (see next section) completes the requested preset-button test. Do not needlessly re-test established Linkplay HTTP commands.
 
 
 ### Physical device follow-up — native preset transmission via TCP :8899 (2026-10-20)
 
-**HARDWARE-OBSERVED / TRANSMIT-ONLY**, not playback-confirmed: A31 v0.9 `--run-all` accepted 11 KNX events and reported the following four native preset transmissions:
+**HARDWARE-CONFIRMED PLAYBACK CHANGE FOR SLOTS 1–2 (operator observed); LOG TRANSMIT-ONLY**: A31 v0.9 `--run-all` accepted 11 KNX events and reported the following four native preset transmissions:
 ```text
 KNX_EVENT 5 src=1.1.22 ga=3/2/0 action=PRESET_1 value=1
 PRESET_TCP_SEND_RC=0 slot=1
@@ -129,8 +129,15 @@ KNX_EVENT 8 src=1.1.22 ga=3/2/0 action=PRESET_1 value=1
 PRESET_TCP_SEND_RC=0 slot=1
 PRESET_TRANSMITTED playback_not_readback_verified
 ```
-The TCP send returning zero is not a positive A31 MCU acknowledgement. No state readback or observed preset playback is included in this log. **Do not mark preset selection/playback CONFIRMED** until the operator reports the actual station/playlist switch or a playback-status correlation proves it. TCP :8899 on-loopback connection and write **succeeded** to the extent that the caller reported no error, but no RX packet is shown.
+The TCP send returning zero is not a positive A31 MCU acknowledgement. No state readback or independent native MCU acknowledgement is included in this log. **Following this trace, the operator explicitly confirmed that KNX preset buttons 1 and 2 switched between their respective stored presets and started playback on the actual A31. Therefore the end-to-end KNX→TCP8899→preset playback behavior is CONFIRMED for slots 1 and 2, by operator observation, while the trace alone remains transmit-only.** TCP :8899 on-loopback connection and write **succeeded** to the extent that the caller reported no error, but no RX packet is shown.
 
 The same follow-up includes 2 Mute state transitions with `READBACK_MATCH`; 3 volume-down operations with `VOLUME_READBACK_MATCH` (90→88→86→84); and two `PLAY_PAUSE` commands with HTTP acceptance only. The final reported volume is **84%**, so an appropriate maximum-volume clamp remains an outstanding safety requirement. `HEARTBEAT accepted=7 verified=7` **overcounts** actual state-verified actions, because preset and transport dispatches are included in the current verified counter.
 
 This trace ended manually with Ctrl+C; no persistence or unattended soak-time claims follow from it.
+
+
+### Operator confirmation — presets 1 and 2 really switched and played (2026-10-20)
+
+Operator answer after reviewing the above log: **«да переключались»**, explicitly confirming that physical A31 changed between KNX-triggered Preset 1 (`3/2/0`) and Preset 2 (`3/2/1`) and played the selected presets. **Status: CONFIRMED on physical device for these two KNX→A31 native TCP 8899 preset paths.** This evidence is direct operator observation, not a readback field or MCU acknowledgement; keep those categories distinct.
+
+Next engineering work: configurable max volume below 100 (previous tests reached 99%), hold/repeat behavior, split `verified` vs `accepted` statistics, service lifecycle reliability and *only then* consider persistent startup after a separate safety review. Presets 3–10 are not claimed as hardware-tested through KNX here.
