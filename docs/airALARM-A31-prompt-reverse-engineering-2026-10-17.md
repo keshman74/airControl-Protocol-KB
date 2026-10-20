@@ -426,3 +426,37 @@ echo "SSH_ALSA_CONFIG_PATH=$ALSA_CONFIG_PATH"
 `echo $ALSA_CONFIG_PATH` only reveals this SSH shell's own environment; it does not prove rootApp/smplayer inherited identical variables. If files/commands absent, errors are expected and non-destructive. Avoid editing `/tmp/alsa`, master volume, NVRAM, or airALARM v0.1.26.
 
 **Open goal remains** Prompt audible alert loudness independent from zone master volume; no proof yet of bypass or successful master-independent amplitude path.
+
+
+## Live A31 SSH follow-up — PCM hardware and process inventory (2026-10-20)
+
+**HARDWARE-VERIFIED on `192.168.0.35:24678`:** A31 BusyBox v1.12.1 shell successfully read both custom runtime ALSA config files:
+- `/tmp/alsa/asoundrc` has the previously documented `pcm.!default {type plug; slave.pcm "asymed"}`, `pcm.asymed` playback `"dmixer"`, and includes `</tmp/alsa/dmixer.conf>`.
+- `/tmp/alsa/dmixer.conf` content:
+```conf
+pcm.dmixer {
+ type dmix
+ ipc_key 1024
+ slave {
+  pcm "hw:0,0"
+  rate 44100
+  format S16_LE
+  period_size 2048
+  buffer_size 16384
+ }
+ bindings {
+  0 0
+  1 1
+ }
+}
+```
+- `cat /proc/asound/cards`: `0 [mtksnd]: noop - mtk_snd`; `mtk_snd (noop)`. **Caution:** driver label includes `noop`; do not assume native DAC/analog master mixer is directly represented by this PCM interface or physically downstream hardware mapping.
+- `cat /proc/asound/pcm`: `00-00: mtk pcm noop-0 : : playback 1 : capture 1`.
+- `ps` (user field `admin`) lists running `rootApp` PID 676, `volumeprompt` PID 773, `hdl` PID 678, `mv_ioguard` PID 711, `a01controller` PID 807, `wmrmplayer` PID 880, `intercom` PID 806, `dropbear` PID 672, plus supporting services. No standalone `smplayer` present in the *snapshot*; absence in one snapshot does not prove it is never executed (Prompt was not reported active).
+- `id`, `whoami`, `tr` commands were `not found` in shell (BusyBox 1.12.1 limited applets/links). `echo "SSH_ALSA_CONFIG_PATH=$ALSA_CONFIG_PATH"` returned `SSH_ALSA_CONFIG_PATH=`, thus **interactive SSH shell** variable empty; this says nothing about `rootApp` / spawned `smplayer` environment (different launch ancestry).
+- Confirms **on-device installed config** `default → plug → asymed → dmixer (dmix) → hw:0,0` for processes that load it. Still NOT demonstrated that `smplayer` actually inherits `ALSA_CONFIG_PATH` and uses this config, nor how the master-zone volume is implemented.
+- Additional semantic caution: `mtk_snd (noop)` might front a vendor-specific audio path; investigate before claiming end-to-end physical PCM ownership or bypassing shared gain.
+
+**Safe next read-only checks:** `busybox --list` to identify `tr`/other applets; `grep -E 'libasound|alsa' /proc/676/maps` and equivalent for `volumeprompt`/player processes; if `busybox tr` supported, *only show filtered ALSA_CONFIG_* process env values*, not entire `/proc/<pid>/environ` as it could contain secrets. No device write or master-volume adjustment.
+
+The hardware-level independent acoustic alert-loudness requirement **remains UNSOLVED**. Keep airALARM v0.1.26 baseline, no NVRAM changes.
