@@ -57,3 +57,19 @@ KNOB address for this test: 192.168.0.41.
 - Missing evidence: A31 GetKeyMapping response structure; KNOB reset reason/serial panic or watchdog log for the A98 restart. Static inspection shows synchronous preset reads can overlap the periodic background worker; causality remains unverified.
 
 Promotion to the main OTA channel earlier that day was at the user's request. Build/host-test success must not be represented as hardware regression clearance. Do not label the A31/A98 preset issues fixed until hardware retesting.
+
+## Hardware follow-up and A98 menu hardening — 2026-10-20
+
+- User confirmed A31 presets fixed after installing0.8.18. Promote the A31 MaxNumber21 parser fix to **USER/HARDWARE-VERIFIED on the tested A31**, while preserving the separate prior body-read failure as an unconfirmed intermittent issue.
+- On A98 selected192.168.0.21,0.8.18 health after another restart showed uptime3, reset_reason4, loop_stack_watermark_raw3808, worker_stack_watermark_raw4012, free_heap108072, min_free_heap104696, largest_free_block98292.
+- **Reset-code correction:** ESP-IDF4.4.7 defines ESP_RST_PANIC as4 and ESP_RST_INT_WDT as5. The assistant initially called4 an interrupt watchdog, then corrected that statement after checking the source. Treat this capture as panic/exception, not a proven watchdog, low-RAM or stack-overflow diagnosis. Source: https://github.com/espressif/esp-idf/blob/v4.4.7/components/esp_system/include/esp_system.h .
+- Stack high-water marks in this response belong to the new boot; they do not describe stack usage at the prior panic.
+
+### KNOB0.8.19 implemented changes — hardware confirmation pending
+
+Source: https://github.com/keshman74/airKNOB/commit/11603ff19371d03bbb4895e8657a6b5ecbc08a52 .
+A98 menu entry/Refresh schedules a one-shot read. The UI loop executes it after the button handler returns and after any background status/artwork job completes and is drained. Pending reads block new periodic jobs and A98 maintenance. Menu/zone/chip changes cancel obsolete work; OTA, discovery and pending volume defer it. Failed attempts pace metadata retry. A persistent UI-only scratch Model replaces the temporary12-key model on the loop-task stack; mapping() resets it before each load.
+A31 and A33 retain existing preset-read paths, including the hardware-confirmed A31 fix.
+
+Actual deferred-reader host regression passed: no overlapping network read while worker busy, single execution, cancellation, OTA/reboot/volume/scan gates, retry pacing, and A31/A33 isolation. The complete build/test result is tracked at https://github.com/keshman74/airKNOB/actions/runs/39482167685 .
+These changes remove concrete overlap/stack-depth risks; they do not establish the observed panic's root cause or prove a hardware fix. If reproduced, obtain serial exception/Backtrace plus post-boot /health. Do not disable watchdogs or erase settings as a substitute for evidence.
