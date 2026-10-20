@@ -55,7 +55,7 @@ KNX_EXIT_CODE=0
 - `--probe-api`: read loopback API, no audio writes (**CONFIRMED v0.7**).
 - `--control-mute`: bounded two-event Mute control with readback (**CONFIRMED v0.7**).
 - Only a manual process in volatile `/tmp`; no autostart, permanent install, or firmware flashing was performed.
-- No hardware evidence yet for persistent service, operation across a reboot, multicasting on different network interfaces, continuous long-term operation, or KNX control of volume, sources, presets, transport, A97, A98 or A33. These are **UNVERIFIED**.
+- Native KNX→Mute and volume control are hardware-confirmed on the tested A31 as of v0.9 (details below). Transport commands were accepted by the local HTTP API, but playback effects were not read back. Presets, sources, reboot persistence, permanent service/autostart, unattended long-duration operation, alternate interfaces and other chips are **UNVERIFIED**.
 - Scope distinction: the confirmed *KNX control integration* applies to this A31 device. It does not change existing device/API command statuses for other platforms.
 
 Provenance: physical-device SSH log supplied by project operator, 2026-10-20; binaries `A31_KNX_NATIVE_V06`, `A31_KNX_NATIVE_V07` verified through hardware tests.
@@ -71,9 +71,9 @@ v0.8 was compiled as a MIPS32 LE static ELF and passed **offline** KNX decoding,
 - Experimental `--control-volume` (two KNX button presses) / `--run-volume`: read `getPlayerStatus.vol`, step ±2, issue `setPlayerCmd:vol:<n>`, verify vol readback. **A31 KNX→volume path not yet hardware-tested.**
 - No autostart, flash writes, daemon installation, other-chip support, or automatic DHCP address migration. The device should only run one instance of this program per KNX listener test.
 
-## Native KNX v0.9 — all-action build (HOST-COMPILED, HW-INTEGRATION-PENDING)
+## Native KNX v0.9 — partial hardware confirmation (2026-10-20)
 
-Build artifact `A31_KNX_NATIVE_V09.zip`: static MIPS32 LE ELF with C/assembly source, runtime configuration and host tests. Built and verified offline (ELF32, MIPS32r2, no dynamic linkage), but not yet executed on the A31 device. **Do not upgrade v0.9 to CONFIRMED until device log confirms the new integration path.**
+Build artifact `A31_KNX_NATIVE_V09.zip`: static MIPS32 LE ELF with C/assembly source, runtime configuration and host tests. **CONFIRMED on physical A31 only for the functions explicitly evidenced below; other functions remain UNVERIFIED.**
 
 - New opt-in `--run-all` mode: continuous UDP KNX receiving; fixed sender filter `1.1.22` and configurable KNX GA mapping.
 - Transports via **local** Linkplay HTTP API: `setPlayerCmd:onepause`, `resume`, `pause`, `next`, `prev` (from existing KB; no rediscovery). Mute has readback and volume uses getPlayerStatus read/absolute set/readback with step 2.
@@ -83,3 +83,30 @@ Build artifact `A31_KNX_NATIVE_V09.zip`: static MIPS32 LE ELF with C/assembly so
 - Local command mode remains temporary-only under `/tmp`; no flash/autostart. Previous hardware-confirmed v0.7 remains the rollback baseline.
 
 Suggested single end-to-end integration run: after copying the ELF and config into `/tmp`, manually execute `--run-all` and press the existing KNX transport/volume/Mute/preset buttons. Verify observed behavior in the player rather than retesting each underlying HTTP API from scratch.
+
+### Physical device log: v0.9 `--run-all` (2026-10-20)
+
+- Platform: A31 Wi-Fi interface `apcli0`, IP `192.168.0.35`, source filter `1.1.22`. Config loaded; multicast `224.0.23.12:3671` JOIN_OK.
+- `33` accepted KNX events during >420s elapsed runtime, with HEARTBEAT at 60s intervals until 420s; SSH session stopped manually with Ctrl+C. **CONFIRMED** extended interactive run (not a long-term soak test, not auto-start or reboot persistence).
+- **Mute GA `3/1/6`: CONFIRMED.** 11 accepted mute events: 1 correctly skipped unchanged OFF state, 10 state-changing HTTP writes; all 10 state-changing writes had `READBACK_MATCH`.
+- **Volume GA `3/1/0`, `3/1/1`: CONFIRMED.** 12 accepted volume commands (4 down, 8 up), each followed by `VOLUME_READBACK_MATCH` after HTTP set and player status read. The reported volume traveled 91 → 83 → 99. **Risk:** uncontrolled button repetition raised volume to 99%; add an explicit maximum level, preferably user-configurable. Logs included several `DEBOUNCE_SKIPPED`; tune repeat/debounce to not lose intentional holds.
+- **Transport GA `3/0/0`, `3/0/1`, `3/0/2`, `3/0/4`, `3/0/5`: API ACCEPTED only, NOT PLAYBACK-STATE-VERIFIED.** 10 events logged with `HTTP_ACTION_RC=0` and `HTTP_ACCEPTED_NOT_STATE_VERIFIED`: 2 PlayPause, 2 Play, 2 Pause, 2 Next, 2 Prev. Do not imply that playback transition was independently confirmed by this log.
+- **Presets GA `3/2/0..3`: NOT TESTED** in this trace (no PRESET events). Preset 5–10 KNX addresses OFF. Native TCP :8899 preset launch integration requires separate device evidence. **Sources AUX/USB: NOT TESTED** (groups OFF).
+- Runtime's `HEARTBEAT verified=25` is not a pure readback count: it includes actions merely dispatched/accepted. Use distinct counters for `received`, `write_sent`, `readback_confirmed`, `http_accepted_without_readback`, and `skipped` in future releases.
+
+Evidence excerpts:
+
+```text
+JOIN_OK group=224.0.23.12:3671 on 192.168.0.35
+KNX_EVENT 12 src=1.1.22 ga=3/1/1 action=VOL_DOWN value=1
+VOL_BEFORE=91 REQUEST=89
+HTTP_VOLUME_WRITE_RC=0 target=89
+VOL_READBACK_RC=0 actual=89 expected=89
+VOLUME_READBACK_MATCH
+KNX_EVENT 30 src=1.1.22 ga=3/0/1 action=PLAY value=1
+HTTP_ACTION_RC=0 action=PLAY
+HTTP_ACCEPTED_NOT_STATE_VERIFIED
+HEARTBEAT seconds=420 accepted=25 verified=25
+```
+
+The native program ran in temporary `/tmp` only; no firmware or permanent startup modifications have been performed. The next highest-value integration check is **one preset button press** and observed playback; do not needlessly re-test established Linkplay HTTP commands.
