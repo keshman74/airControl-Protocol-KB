@@ -139,3 +139,19 @@ These are WiiM product commands, not a guarantee for every product sharing an A9
 - A33 remains getPresetListInfo / choicePreset with delayed resume and response policy.
 Source: airKNOB experimental/multichip-v0.8.0 commit 2602c104e5b1ffa6acc79ec9f7172da663603274, version0.8.14.
 Host tests compile the actual parser/filter against ArduinoJson6.21.6 and actual selection helper: sparse slots1/6/12, Cyrillic, sorted11/12, invalid/duplicate/type rejection and command routing isolation.
+
+### A31 key-map MaxNumber=21 — hardware readback and KNOB parser correction, 2026-10-20
+
+Status: **HARDWARE-CAPTURED structure / IMPLEMENTED parser fix / HOST-TESTED; firmware hardware retest pending**.
+
+The user's current A31 at192.168.0.35 returns GetKeyMapping QueueContext with MaxNumber=21, Key0..Key21, populated Key1 Space Station Soma, Key2 DEF CON Radio, Key3 Suburbs of Goa, Key4 Synphaera Radio, and empty Key0/Key5..Key21. QueueContext contains an escaped KeyList and further-escaped DIDL Metadata. This is an additional confirmed variant; do not require MaxNumber=20 based on the older capture.
+
+KNOB0.8.17 parseKeyPresets explicitly rejected maximum>20, before processing any key. The user's pasted MaxNumber21 therefore explains the captured HTTP200/10740-byte/xml_structure rejection. It does not explain the separate zero-byte http_or_body failure, which remains unresolved.
+
+KNOB0.8.18 accepts a bounded map maximum1..64 but iterates only Key1..Key20 to fit its20-entry storage. Original slot IDs and display-name timestamp cleanup are retained. Key21 support for display or launch is not implied. A31 launch remains bounded1..10 pending evidence.
+
+Source: [3eeb389cca4e5360751a37a70a001bfcce725281](https://github.com/keshman74/airKNOB/commit/3eeb389cca4e5360751a37a70a001bfcce725281).
+The actual parser regression test reconstructs the reported SOAP/KeyList/nested-Metadata shape and verifies the four original slot names; an all-populated21-key case verifies storage remains bounded20, and invalid MaxNumber65 is rejected. User serial/service tokens were not committed.
+CI: [39479866247](https://github.com/keshman74/airKNOB/actions/runs/39479866247). Parser step passed; consult final workflow result for firmware build status.
+
+Separate A98 KNOB restart remains unconfirmed as to cause.0.8.18 adds numeric ESP reset_reason and raw loop/worker stack high-water marks in /health. These values support diagnosis, not a claim that A98 restart is fixed. User-confirmed A33 preset behavior is preserved.
