@@ -155,3 +155,18 @@ The actual parser regression test reconstructs the reported SOAP/KeyList/nested-
 CI: [39479866247](https://github.com/keshman74/airKNOB/actions/runs/39479866247). Parser step passed; consult final workflow result for firmware build status.
 
 Separate A98 KNOB restart remains unconfirmed as to cause.0.8.18 adds numeric ESP reset_reason and raw loop/worker stack high-water marks in /health. These values support diagnosis, not a claim that A98 restart is fixed. User-confirmed A33 preset behavior is preserved.
+
+### KNOB0.8.20 — A97 preset menu integration
+
+Status: **IMPLEMENTED / HARDWARE TEST PENDING on A97**. Source: https://github.com/keshman74/airKNOB/commit/1360ce68a2acf628b4d56b0820ada1d08ab4762c .
+Build/tests: https://github.com/keshman74/airKNOB/actions/runs/39484592774 .
+
+A97 uses the selected HTTP80/HTTPS443 endpoint for getPresetInfo and MCUKeyShortClick:N,1..12. Original sparse number values are preserved; empty/invalid rows are not converted to fabricated menu slots.
+
+The deferred read from0.8.19 is generalized to both A97/A98: menu entry/Refresh requests one load; the main loop waits until the background worker is finished and drained, then loads outside the button handler. Pending volume, OTA and discovery defer work; menu/zone/chip changes cancel old work. A31/A33 retain their existing paths.
+
+A97 /health reports actual preset HTTP status and received byte count plus http_or_body/json_parse/json_structure. wiim_presets_pending covers both chips; a98_presets_pending remains an A98-only alias.
+
+Tests cover actual A97 list-loading branch with HTTP/HTTPS endpoint snapshots, Cyrillic and sparse slots3/12, transport failure, malformed JSON, invalid list structure, empty list, and existing1..12 launch routing. Deferred-reader tests exercise both chips and preserve A31/A33 isolation. Test/build success must be taken from the completed CI run, not inferred from this implementation note.
+
+A98 PlayQueue+AVTransport+routines active-preset correlation remains A98-specific. It is not copied to A97 without device evidence; A97 external active-preset highlighting and hidden input-slot enumeration are not claimed by this update. API applicability is per product/firmware, not guaranteed by the chip name alone.
