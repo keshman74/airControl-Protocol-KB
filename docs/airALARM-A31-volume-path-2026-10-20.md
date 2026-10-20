@@ -359,3 +359,21 @@ A complete ESP32 **v0.1.28 TEST CANDIDATE** was prepared, based on hardware-conf
 **Priority rule (user-confirmed):** confirmed air alert preempts `Хвилина мовчання` scheduled audio; current ESP32 event queue's ~65s gap must NOT delay urgent alert notification; when alert begins, stop scheduled audio promptly (physical device stop method still to be hardware-tested) and trigger alert. Browser should reflect alert and link/connection status promptly via LAN state updates. A cloud relay will be a new external dependency: failure fallback polling needed.
 
 **Status:** discovery/architecture proposal only, not deployed or tested. Preserve the user hardware-verified v0.1.28 A31 master temporary prompt volume restoration and current-volume mode.
+
+
+## Cloudflare serverless webhook decision + 10-second REST fallback request (2026-10-20)
+
+User chooses **managed cloud rather than own VPS**, specifically requests reducing the fallback official Ukraine Alert API polling from **30 to 10 seconds**. Cloudflare Workers + Durable Objects (WebSocket Hibernation, SQLite-backed state) is a feasible candidate: Cloudflare official docs https://developers.cloudflare.com/durable-objects/best-practices/websockets/ and https://developers.cloudflare.com/durable-objects/platform/pricing/. This is a design selection, **not yet deployed/connected**.
+
+Architecture target: official `POST /api/v3/webhook` subscription → publicly reachable Worker → validate official webhook signature (canonical docs reference /webhook-signature-validation.html, **verification algorithm not yet retrieved: must not invent**), dedupe/sequence/region/type validation → Durable Object broadcast through long-lived authenticated outgoing-from-ESP32 WSS → ESP32 local priority state machine and LAN web UI; fallback API reconciliation/recovery via `GET /api/v3/alerts/{regionId}` and optionally revision `GET /api/v3/alerts/status`. Alarm > `Хвилина мовчання`; canceled/timed audio must not block urgent event processing. The official provider's timing and network issues preclude a zero-delay guarantee.
+
+**10 seconds is a user-requested local poll interval, not an official API-prescribed rate.** The canonical OpenAPI bundle at `Ukraine-Alert-API.txt` contains no explicit polling quota/rate directive, and official docs could not verify permission for 6 requests/minute per ESP. 10-second local polling = **8,640 requests/device/day** if continuously enabled; multiple devices under one key require checking provider quota. Plan: 10-second REST fallback when WSS push unavailable, low-frequency periodic reconciliation when WSS healthy (frequency to be confirmed), HTTP 429 `Retry-After` and exponential backoff. Do NOT interpret alternate provider rate limits as limits for UkraineAlert API.
+
+**Prepared isolated experimental source ZIP** `airALARM_v0.1.28_POLL10_TEST.zip`, derived from fully hardware-tested v0.1.28 candidate with ONLY scheduling change and error backoff:
+- `POLL_MS=10000`.
+- `HTTPClient.collectHeaders({"Retry-After"})`, on 429 respects numeric header seconds (up to 3600 sec); if missing/non-numeric uses 60 sec.
+- Other non-200 failures trigger exponential backoff (20→40→80→160→320 sec), and other HTTP 4xx retry at least 60 sec. Reset failure count on confirmed valid 200.
+- No changes to A31 Pause/Prompt/Restore implementation, zones, UI, schedules, OTA, webhook, A33 or relay state.
+- ZIP structure and basic static source invariants verified; **NOT COMPILED or HARDWARE TESTED**. Run `cd /Users/lab/AI/airALARM/airALARM_v0.1.28_POLL10_TEST && ~/.platformio/penv/bin/pio run` on Mac; flash only to test ESP32 after successful compile.
+
+**High priority security finding:** current v0.1.28 `pollApi()` uses `WiFiClientSecure::setInsecure()`, disabling TLS certificate verification of official API (prototype only). Must implement CA certificate trust/pinning and secure webhook authentication before safety-critical field deployment. Preserve working v0.1.28 baseline as rollback; do not deploy test patch as sole safety alarm.
