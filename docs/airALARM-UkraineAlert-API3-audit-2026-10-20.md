@@ -108,3 +108,12 @@ Generated **complete source ZIP** `airALARM_v0.1.30_SCHEDULE_TEST.zip` (source S
 - Mac test build: `cd /Users/lab/AI/airALARM/airALARM_v0.1.30_SCHEDULE_TEST && ~/.platformio/penv/bin/pio run`. Flash ONLY test ESP32, no flash erase/uploadfs. Test local NTP time + scheduled short non-emergency MP3 at low master volume, restoration, AJAX test and simulated high priority interruption, inspect serial `[SILENCE]`/`[PRIORITY]` logs.
 
 This increment should NOT replace the proven airALARM v0.1.28 working acoustic baseline or v0.1.29 UI-tested source until compilation and targeted hardware verification. It is not certified for sole emergency public notification.
+
+
+## v0.1.30 schedule candidate: actual Mac compiler failure and minimal FIX1 (2026-10-20)
+
+User executed `~/.platformio/penv/bin/pio run` in `airALARM_v0.1.30_SCHEDULE_TEST`. **Build FAILED**, 11.19 sec, with fatal `src/main.cpp:116:79 error: cannot convert 'StringSumHelper' to 'const char*' in assignment` inside `mp3ServeTask`. It assigned `"/sil"+part+".mp3"` (Arduino String expression) into `const char* filePath`. Other output were nonfatal deprecation warnings `NetworkServer::available()` (renamed accept) and `NetworkUDP::flush()` (renamed clear).
+
+**Produced FIX1 source ZIP**: `airALARM_v0.1.30_SCHEDULE_TEST_FIX1.zip`. Minimal surgical fix, hoisted existing `String dynamicFile;` to before both silN and tN audio path branches and changed scheduled MP3 branch to `dynamicFile="/sil"+part+".mp3"; filePath=dynamicFile.c_str();`. This pointer remains valid across LittleFS.exists/open (no intervening String modification for that path); same pattern already used for tN paths. Original source roundtrip comparison verified *only* the affected fragment changed. ZIP CRC passed, archive SHA256 `8dbbc7c99dd2630cae1ff04822b1407dad17dfca3e21792a665f7d875eda862f`, 12 files. README added. **Assistant environment does not have PlatformIO; FIX1 not yet compiled nor hardware verified.**
+
+Mac command: `cd /Users/lab/AI/airALARM/airALARM_v0.1.30_SCHEDULE_TEST_FIX1 && ~/.platformio/penv/bin/pio run`. Preserve v0.1.28 hardware-working firmware and v0.1.29 menu UI-tested baseline, and do NOT flash FIX1 until Mac reports SUCCESS. All prior unresolved safety limitations (unverified urgent stopping A31 Prompt, fallback API quotas, insecure TLS etc.) still apply.
