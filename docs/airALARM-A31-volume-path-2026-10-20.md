@@ -73,3 +73,37 @@ This strongly suggests dual volume handling via MCU control and codec driver sta
 Prepared and syntax-checked `a31_codec_mcu_trace_batch.sh`; test run with mock radare2 sources produced a valid ZIP. It dumps `sym.MCUCommandSend`, `VolumeSetCodec`, `PromptCodec`, `MuteCodec`, `SendDataByI2S`, event parser section, `LPML_ALSA_fade`, scale helper `0x00000bd0`, and rootApp startup/state context. Reports and ZIP default to `/Users/lab/AI/airALARM`, original firmware input `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Execute on user's Mac `bash a31_codec_mcu_trace_batch.sh` and upload ZIP. **Original binary run pending**.
 
 **Goal remains UNSOLVED:** fixed acoustic air alert volume independent of zone master volume. Preserve working airALARM v0.1.26, no NVRAM changes, no commands to MCU or codec.
+
+
+## A31 MCU command framing, LPML Q16 processing (2026-10-20 04:04)
+
+Operator supplied `A31_CODEC_MCU_TRACE_20261020_040432.zip`. Inspected original static radare2 reports: `mv_ioguard.txt` (1199 lines), `liblpml_alsa.txt` (279 lines), `rootApp.txt` (293 lines), README and manifest. All report stderr contains analysis INFO only, no command errors. Binary SHA256s match prior batches (`mv_ioguard 41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3`, `liblpml_alsa.so 1edfefb68a7be62f2dbcd9b11b2fad8cc6bd431127674c15cf99264806282a7a`, `rootApp 0314cbeb5961127bef4668317183f66e7b8cec7eeb1f323445c622dd20992a97`). **Entirely offline binary evidence, not a live hardware experiment.**
+
+### Confirmed: MCUCommandSend is a dual-destination command formatter
+
+- `mv_ioguard` `sym.MCUCommandSend` starts at `0x0040c8dc` (symbol size 3144 bytes); arguments `a0=command_id`, `a1=destination bitmask`, `a2=data pointer`, `a3=length`. MIPS prologue zeroes a `0x2000` (8192-byte) formatted-command buffer at `sp+0x20`; `0x0040c924–0x0040c950` checks `command_id < 50` and dispatches by a GP-relative **jump table**. `pdf` skipped the jump-table cases; therefore **the exact format for command ID 9 was NOT decoded by this batch**. Do not claim this is a raw UART byte command or a known wire format.
+- At `0x0040d4bc–0x0040d50c`, after a nonempty formatted command is assembled, `destination bit0 (1)` invokes `*(g_mcu_opt+8)`, and `bit1 (2)` invokes `*(g_socket_opt+8)`; a1=`3` therefore requests BOTH paths when their callbacks are installed. These are callbacks, not yet proof of transport identity (UART/MCU and socket are inferred from names).
+- `VolumeSetCodec` at `0x0040f118–0x0040f128` invokes `MCUCommandSend(9,3,&volume,4)`. Conditional secondary call after a 20ms delay: `MCUCommandSend(10,3,&zero,4)` at `0x0040f28c–0x0040f2a0`. The conditions relate to codec state/force-mute; **never reproduce these MCU calls on hardware without a controlled safety plan**.
+- `MuteCodec` at `0x0040ef70–0x0040ef84` invokes `MCUCommandSend(0x23,3,formatted_text,0x40)`. Confirms the dispatcher handles both integer-like and formatted-text inputs, but each ID may serialize differently.
+- `ParseCommonMCUEvent` invokes `MCUCommandSend(9,a1,&(g_wiimu_shm->field_0x3BC),4)` at `0x004171e0–0x004171f8`. This independently ties **command ID 9 to SHM offset 0x3BC (zone volume)**.
+- `PromptCodec` at `0x0040efc4` only modifies a 40-byte codec-state struct's prompt-active counter `+0x0C` via read/write (increment arg1=1; reset arg1=-1; decrement other arg values while >0); it is not an amplitude setter in this function.
+
+### Confirmed: SendDataByI2S is structured framed device I/O, NOT demonstrated PCM volume
+
+`sym.SendDataByI2S` at `0x0040e528` pads payload to a 4-byte boundary, allocates `padded_size+20`, opens a device path stored in rodata (actual string **not decoded yet**), invokes `ioctl` requests `0xC0045005`, `0xC0045006`, `0xC0045002` with parameters (`16`, `2`, `0xAC44`) and writes a framed packet with markers including `0x20174564` and `0x45642017`. This may be a special device/MCU transfer routine but must not be used as evidence of audio PCM transmission or master gain. **No attempt to call it on the device.**
+
+### Confirmed: LPML software PCM scaling
+
+- `LPML_snd_pcm_writei` `0x00000ab8` invokes `LPML_ALSA_fade` on its PCM buffer and then actual `snd_pcm_writei` (`0x00000b0c`). 
+- `LPML_ALSA_fade` `0x00000cf8` examines helper getters for mute, overall volume, self volume, fade status and fade step; iterates over signed 16-bit samples, passes them to scaler `fcn.00000bd0` and writes transformed 16-bit samples back at `0x00000ee8` or `0x00000f34`.
+- `fcn.00000bd0` multiplies sample by coefficient at `0x00000be0`, applies conditional quantization/dither below `0x10000`, then `sra v0,v0,16` at `0x00000c28`: Q16-style digital gain. This is independent of smplayer's other coefficient-stage, but **its use by running native URL Prompt has NOT been demonstrated**. The runtime owner/path matters.
+
+### Particularly relevant: rootApp STARTUP prompt compensation formula
+
+`rootApp` `sym.StartupMusic` reads `MaxPromptVolume` at `SHM+0x3D8` and zone volume at `SHM+0x3BC`. At `0x004031a0–0x004031c4` it conditionally computes `MaxPromptVolume*100/zoneVolume` and passes a derived `s1` value to `volume_pormpt_direct(...,1,s1)` at `0x00403284`. If zone volume is below MaxPromptVolume or MaxPromptVolume is zero, `s1` remains zero; the branch for a quotient of 100 also special-cases zero. This shows **some Rakoit startup prompts account for zone gain**, but does **NOT** establish the behavior of `playPromptUrl` or a supported way to get fixed audible alert volume.
+
+### Next focused static batch
+
+Prepared `a31_mcu_routing_batch.sh` to extract 50-entry GP-relative command dispatch table of `MCUCommandSend` at `0x00428840` and automatically disassemble cases `9`, `10`, `35` after validating target addresses stay within `0x0040c8dc..0x0040d524`. Also dumps startup ratio and LPML scale for context. Uses radare2 + python3; stores reports and ZIP in `/Users/lab/AI/airALARM`, original extracted binaries read-only. `bash -n` and mocked radare2 table decoder, ZIP complete run passed. **Not yet run against genuine MIPS binaries.** Operator should download into project directory and run `bash a31_mcu_routing_batch.sh`.
+
+**Status:** master-independent fixed acoustic volume for airALARM remains UNSOLVED; no NVRAM or firmware changes.
