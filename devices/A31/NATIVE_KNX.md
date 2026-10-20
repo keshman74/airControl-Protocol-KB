@@ -59,3 +59,14 @@ KNX_EXIT_CODE=0
 - Scope distinction: the confirmed *KNX control integration* applies to this A31 device. It does not change existing device/API command statuses for other platforms.
 
 Provenance: physical-device SSH log supplied by project operator, 2026-10-20; binaries `A31_KNX_NATIVE_V06`, `A31_KNX_NATIVE_V07` verified through hardware tests.
+
+## Experimental next step — v0.8 (HOST-BUILT, NOT HARDWARE-CONFIRMED)
+
+v0.8 was compiled as a MIPS32 LE static ELF and passed **offline** KNX decoding, group/source parsing, configuration and Linkplay HTTP response-parser tests. Artifact: `A31_KNX_NATIVE_V08.zip`, with C/assembly sources, a `/tmp/knx-audio.conf` example and Russian instructions. **Do not mark v0.8 features CONFIRMED until A31 logs are supplied.**
+
+- New **read-only** `--monitor-10m` and indefinite `--monitor` modes; 60-second heartbeat, safe UDP reconnect after 300 seconds idle.
+- Runtime configurable KNX sender, A31 interface IPv4 and named group addresses: Mute `3/1/6`, Volume Up `3/1/0`, Volume Down `3/1/1`, PlayPause `3/0/0`, Play `3/0/1`, Pause `3/0/2`, Next `3/0/4`, Previous `3/0/5`, Presets1–4 `3/2/0..3` (defaults). Invalid or conflicting mappings abort before network activity. Only sender `1.1.22` is accepted by default.
+- Play/pause, next/previous, source switching and presets are **decoded as observations only**, with **no audio writes**; hardware execution is future work.
+- Active `--run-mute` is **opt-in** and retains strict getPlayerStatus readback and stop after 3 consecutive failures, but **long-running operation is unverified**. Previous `--control-mute` two-event bounded mode remains available.
+- Experimental `--control-volume` (two KNX button presses) / `--run-volume`: read `getPlayerStatus.vol`, step ±2, issue `setPlayerCmd:vol:<n>`, verify vol readback. **A31 KNX→volume path not yet hardware-tested.**
+- No autostart, flash writes, daemon installation, other-chip support, or automatic DHCP address migration. The device should only run one instance of this program per KNX listener test.
