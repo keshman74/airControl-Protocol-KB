@@ -98,3 +98,20 @@ ACTION_READBACK_VERIFIED
 The transcript stops without showing Ctrl+C or elapsed runtime; make no claim about process exit, multi-hour stability or persistence. Prior v0.10 and v0.9 presets 1/2 were independently confirmed by operator observation, but those observations cannot substitute for a new physical playback report in v0.11.
 
 **Next architecture milestone:** package and stage `/vendor/knx/{knx-audio,knx-map.csv,knx-audio.conf}` with backups and verify the executable+CSV on persistent mount, only with explicit device-write approval. Native boot path `/home/user.sh` uses `/vendor/user/hdl` as the **replacement** for stock essential `/home/bin/hdl`, not a generic hook. Do not activate `/vendor/user/hdl` or touch stock service without separately agreed recovery and rollback mechanism. Also note boot's possible /vendor format on error or FORCE_FORMAT_FLAG.
+
+## First persistent data install — staged, NOT YET RUN (2026-10-21)
+
+After physical `v0.11 --map /tmp/knx-map.csv --run-all` confirmed table-driven Mute ON/OFF with readback and Preset1 TCP transmission, the operator explicitly **authorized writing exactly the native binary, map CSV and config to `/vendor/knx` on A31 `192.168.0.35`**. Autostart, hdl, flash images, system scripts and reboot were **not authorized**.
+
+Package `A31_KNX_VENDOR_INSTALL_V1.zip` was prepared and verified offline, but **the operator has not yet executed it**. Its contents include immutable v0.11 MIPS32 LE static ELF, one Mac installer, a temporary remote install script, read-only verifier, checksum list and Russian README.
+
+First install only, deliberate fail-closed path:
+1. Mac SSH reads **current live tested** `/tmp/knx-audio.conf` and `/tmp/knx-map.csv` from A31 to a private Mac `backup-YYYYMMDD-HHMMSS` directory; uses the v0.11 executable.
+2. Mac streams these three files plus a remote helper as a `tar` stream to a uniquely named **RAM** staging directory.
+3. Remote helper checks admin UID0, `/dev/mtdblock9 /vendor jffs2 rw` mount, **≥512 KiB free**, nonempty inputs, and that `/vendor/knx` does not already exist. It runs `--show-map` from RAM before any persistent write.
+4. If all checks pass, it stages exactly three files under a uniquely named `/vendor/.knx-firstinstall-<pid>` directory, `chmod 700` binary/dir, `chmod 600` mapping/config, then **renames the directory** to `/vendor/knx` within the same JFFS2 filesystem.
+5. Runs `--show-map` from installed paths; Mac reads all three back and confirms exact byte matches using `cmp`.
+
+No modification of `/vendor/user/hdl`, `/home/user.sh`, `live.sh`, `rcS`, stock audio player, raw MTD, or activation of autostart. On installation error or missing tar/SSH capability, stop and inspect logs; **do not run ad-hoc flash commands**. Read-only verification command is shipped as `VERIFY_INSTALLED.sh`. Until a real installation log is returned, persistent installation is **UNVERIFIED / NOT CLAIMED COMPLETE**.
+
+Next milestone after successful install is to inspect installed persistent files and separately design/review a reversible startup shim. The established boot hook **overrides** essential `hdl`, so it must never be activated without a separate risk assessment, board recovery and explicit approval.
