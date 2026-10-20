@@ -305,3 +305,22 @@ Actual uploaded file `A31_PROMPT_COMPENSATION_20261020_164039.zip` inspected. ZI
 Illustrative reference chosen in script is zone=30, smplayer CLI=50, target product=0.30*0.21875=0.06562500. *Assuming unverified linear master gain M(zone)=zone/100*, lookup chooses CLI 83 at zone10, 73 at zone20, 50 at zone30, 28 at zone50, 18 at zone70, and 8 at zone100. At 0 or 5 the hypothetical target cannot be achieved, since smplayer software gain <=1.0. These are **predictions only**, not safe operational settings.
 
 The table is consistent with canonical smplayer Q16 data. Next step should obtain isolated controlled **non-emergency test tone/MP3** and microphone amplitude observations at zone settings 10,20,30,40,50,70,90 to establish actual physical amplitude attenuation, **without changing the device's configured master volume permanently**, restoring any touched settings after each test. Do not present predicted CLI levels as verified alert behavior. Independent alarm loudness is still UNSOLVED and unavailable at true analog mute with this path.
+
+
+## Practical solution selected: temporary master volume + restore; v0.1.27 TEST CANDIDATE (2026-10-20)
+
+The user's immediate requirement is functional airALARM announcements with a USER-CHOSEN loudness, restoring zone master volume afterwards. They explicitly accepted **temporarily changing the zone/master volume during MP3**, rather than requiring a physically independent simultaneous path. The previous digital-gain compensation research is not necessary for this practical first version; keep it as protocol research.
+
+Derived complete ESP32 source archive `airALARM_v0.1.27_TEST_CANDIDATE.zip` from the original, available `airALARM_v0.1.26.zip` (~80KB main.cpp, Arduino ESP32/PlatformIO). The new version preserves API poll, zone discovery, zone selection, A33 WAV, type-aware audio, relay outputs, local MP3 file serving. It modifies A31 audio functions only and zone settings, adding:
+1. `getPlayerStatus` obtains `vol` strict 0..100. Abort if missing/invalid; no volume write.
+2. `PromptEnable` before volume change, require HTTP 200 success.
+3. Persist old volume + IP + pending flag in ESP32 NVS Preferences **BEFORE** changing A31 master.
+4. `setPlayerCmd:vol:<zone promptVolume>`, verify via `getPlayerStatus`.
+5. `playPromptUrl:<MP3-url>%20100` (smplayer software gain 100; user-selected prompt volume is now the **temporary master volume**, not smplayer gain).
+6. After configured zone `promptSeconds` 5..55 (default 25, must exceed actual MP3 play length), attempt `setPlayerCmd:vol:<saved>`, verify via getPlayerStatus, clear pending marker only when verified.
+7. Restore retry every 5 sec upon network errors, or immediately after ESP32 reboot/reconnect; do not launch overlapping A31 announcements to same IP while original-volume snapshot is pending.
+8. A31 automatic type event, manual test and simulation routes call the same helper; A33 remains unchanged. Zone UI exposes desired prompt master volume and duration; UI reports pending restorations.
+
+**STATUS: SOURCE ONLY, NOT COMPILED NOR TESTED ON HARDWARE**. PlatformIO is not installed in the assistant execution environment. Static structural checks pass; compilation and actual listening/rollback tests are required on user's Mac. Keep airALARM v0.1.26 backup, do not erase flash/uploadfs or alter A31 firmware. No live hardware commands were sent by the assistant.
+
+**Limitations**: timer is not actual smplayer end; too short restores during MP3, too long prolongs altered master after MP3; manual volume changes during announcement are overwritten on restoration; network outage may delay return until connectivity; ESP32 reboot attempts immediate restore. This is a pragmatic method, **not a truly independent output gain path**. Until hardware verification, NOT approved as sole life-safety public warning.
