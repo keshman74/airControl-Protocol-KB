@@ -47,3 +47,7 @@ The offline bundle includes an HTML/JS table editor and Python CLI CSV editor. B
 `FIRMWARE_OVERLAY_STAGE` is a non-bootable/non-flashable placement candidate. Before any stock firmware repack/OTA: fetch **read-only** mount/partition data from the actual A31, verify firmware provenance and storage space, secure recovery/backups and test a spare unit. Never use donor Youyishi `wifiaudio` startup scripts on Rakoit; they initialize other audio stacks and may disrupt playback.
 
 **Evidence:** v0.11 source, host test executable, static ELF, schema and editor included in `A31_KNX_NATIVE_V11.zip`; physical A31 v0.11 test PENDING.
+
+## Live flash inventory — 2026-10-21
+
+The actual A31 has two writable JFFS2 mounts: `/mnt` on mtd8 (512 KiB raw) and `/vendor` on mtd9 (2 MiB raw); root SquashFS is read-only and `/tmp`, `/etc`, `/var` are ramfs. `/vendor/knx/` is a **candidate** persistent location, not an approved write target until free space and vendor file responsibilities are reviewed. See [read-only A31 storage evidence](STORAGE_LAYOUT_2026-10-21.md). No flash writes, service installation or autostart yet.
