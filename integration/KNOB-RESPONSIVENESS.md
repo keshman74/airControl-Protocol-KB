@@ -43,3 +43,17 @@ The user supplied a working BMP screenshot showing the Presets READ FAILED state
 All 25 host regression test suites passed, and ESP32-S3 PlatformIO build/publish succeeded in [GitHub Actions run 39416413210](https://github.com/keshman74/airKNOB/actions/runs/39416413210).
 Firmware: airControl-KNOB-v0.8.17.bin; 1342832 bytes; MD5 99efec4f7b097ceda9ecf551317a6c33.
 Linker reports static RAM 171928/327680 bytes (52.5%) and flash 1342465/3342336 bytes (40.2%); these are not runtime heap measurements. Dependency macro/attribute warnings remain; the build succeeded.
+
+## Hardware regression report — 2026-10-20, v0.8.17
+
+Status: USER-OBSERVED / HEALTH-CAPTURED. Root causes and firmware fixes are not yet verified.
+
+KNOB address for this test: 192.168.0.41.
+
+- A33: user reports preset menu/operation normal. Preserve this behavior; this is not a claim that every A33 function is validated.
+- A31 at 192.168.0.35: Presets presents Refresh rather than populated entries. First health sample: HTTP200, preset_bytes0, preset_error=http_or_body, uptime6825. Later: HTTP200, preset_bytes10740, preset_error=xml_structure, uptime6908. Thus both body-read failure and parser rejection were captured; the actual 10740-byte XML has not been supplied. Do not assert a MaxNumber, namespace or encoding cause without that payload.
+- A98 at 192.168.0.21: before failure, health showed HTTP200, preset_bytes4340, preset_error empty, uptime6930, zone_epoch3. Next sample: uptime2, zone_epoch0, HTTP-1/body0. This confirms that KNOB restarted around the reported preset-menu failure. It does not prove that the player rebooted, that polling overload caused it, or that low heap alone caused it.
+- Before A98 restart: free_heap87920, min_free_heap74956, largest_free_block73716, psram_free8307731. After restart: free_heap106024, min_free_heap105912, largest_free_block94196. These are observations, not a confirmed memory leak.
+- Missing evidence: A31 GetKeyMapping response structure; KNOB reset reason/serial panic or watchdog log for the A98 restart. Static inspection shows synchronous preset reads can overlap the periodic background worker; causality remains unverified.
+
+Promotion to the main OTA channel earlier that day was at the user's request. Build/host-test success must not be represented as hardware regression clearance. Do not label the A31/A98 preset issues fixed until hardware retesting.
