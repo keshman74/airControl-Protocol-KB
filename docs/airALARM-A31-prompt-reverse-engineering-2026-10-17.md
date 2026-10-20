@@ -375,3 +375,54 @@ This closes the previously unresolved question of **how copied firmware ALSA con
 
 ### Interpretation boundary
 The independently controlled digital sample gain and DMIX stateful mixer logic are now sufficiently understood as **static binary + intended boot configuration**. The original user goal—fixed acoustic alert volume across zone master levels—**remains UNSOLVED**. Next higher-value task: investigate where the **shared downstream master volume** is applied and/or inspect live ALSA config/process state read-only; do not modify volume, NVRAM, firmware or working airALARM v0.1.26.
+
+
+## First live A31 SSH evidence: 2026-10-20 — active /tmp/alsa/asoundrc confirmed
+**HARDWARE-VERIFIED ON A31** `192.168.0.35`, Rakoit `4.6.415156` (as operator identifies target): operator successfully logged in via SSH on TCP 24678 as `admin` (authorization worked; do not store credentials/secrets here). Shell banner: `BusyBox v1.12.1 () built-in shell (ash)`. Minimal environment: `whoami` and `tr` binaries unavailable, so commands relying on these failed. These failures are not evidence of ALSA or SSH malfunction.
+
+Operator ran `cat /tmp/alsa/asoundrc` over the real SSH session. **Live file content**:
+```conf
+</tmp/alsa/dmixer.conf>
+
+pcm.mv_audio {
+  type hw
+  card 0
+  device 0
+}
+pcm_slave.mv_rate {
+  pcm mv_audio
+  rate 44100
+}
+pcm.rate_convert {
+  type rate
+  slave mv_rate
+}
+pcm.asymed {
+  type asym
+  playback.pcm "dmixer"
+  capture.pcm "hw:0,0"
+}
+pcm.!default {
+  type plug
+  slave.pcm "asymed"
+}
+ctl.dmixer {
+  type hw
+  card 0
+}
+```
+
+**Interpretation:** Live `/tmp/alsa/asoundrc` is present and agrees with the extracted firmware asoundrc. This **hardware-confirms the custom runtime config file**, and supports the *configured* default playback chain `default → plug → asymed → dmixer` (and, assuming the included dmixer.conf matches the extracted firmware, `dmixer → hw:0,0`). **Do not yet call it proven that the active smplayer process loads this config**; its process environment and effective PCM chain were not read, nor was live `/tmp/alsa/dmixer.conf` displayed yet. The prior on-disk `live.sh` copying ALSA configs aligns with the observed result.
+
+**Next read-only BusyBox-compatible diagnostic** from the same SSH shell:
+```sh
+id
+cat /tmp/alsa/dmixer.conf
+cat /proc/asound/cards
+cat /proc/asound/pcm
+ps
+echo "SSH_ALSA_CONFIG_PATH=$ALSA_CONFIG_PATH"
+```
+`echo $ALSA_CONFIG_PATH` only reveals this SSH shell's own environment; it does not prove rootApp/smplayer inherited identical variables. If files/commands absent, errors are expected and non-destructive. Avoid editing `/tmp/alsa`, master volume, NVRAM, or airALARM v0.1.26.
+
+**Open goal remains** Prompt audible alert loudness independent from zone master volume; no proof yet of bypass or successful master-independent amplitude path.
