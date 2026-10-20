@@ -66,3 +66,35 @@ User SSH output from physical A31 at `192.168.0.35` shows successful upload to `
 - The first transfer prompted one SSH `Permission denied` after an incorrect password attempt, but a retry succeeded. Final `--show-map` output verifies the binary and CSV were both accessible on the target.
 - **Status: HARDWARE-CONFIRMED for CSV loading, parsing, mapping and printing only.** `--show-map` does **not** execute KNX→player commands. The table-driven `--run-all` path, persistence after reboot, and install/autostart remain unverified.
 - No flash writes or boot-script changes were made by this test. Previous v0.10 KNX command behavior remains a separate hardware baseline. Recommended next single integration run (after stopping older active versions): `/tmp/knx-audio-v11 --map /tmp/knx-map.csv --run-all`; observe one mapped preset and one Mute action, then proceed to staged persistent install with explicit permission and safe rollback.
+
+## v0.11 physical A31 command dispatch using CSV — 2026-10-21
+
+User executed on real A31: `/tmp/knx-audio-v11 --map /tmp/knx-map.csv --run-all`, after `--show-map` had already demonstrated 12 parsed rows. **Status: HARDWARE-CONFIRMED for CSV-driven GroupAddress→action dispatch; Mute state effect readback confirmed; Preset 1 TCP sent but playback not yet explicitly reconfirmed for this v0.11 run.**
+
+Exact excerpt:
+```text
+MAP_TABLE mode=CSV rows=12 path=/tmp/knx-map.csv
+PROBE_LOOPBACK_RC=0 mute=0
+API_OK endpoint=127.0.0.1 original_mute=0
+ACTIVE_INSTANCE_GUARD_OK port=43997
+MODE=RUN_ALL audio_writes=MUTE_VOLUME_TRANSPORT_PRESETS
+JOIN_OK group=224.0.23.12:3671 on 192.168.0.35
+KNX_EVENT 1 src=1.1.22 ga=3/2/0 action=PRESET_1 value=1 param=1
+PRESET_TCP_SEND_RC=0 slot=1
+PRESET_TRANSMITTED playback_not_readback_verified
+ACTION_PRESET_TRANSMITTED_UNACKNOWLEDGED
+KNX_EVENT 2 src=1.1.22 ga=3/1/6 action=MUTE value=1 param=0
+HTTP_MUTE_WRITE_RC=0 requested=1
+READBACK_RC=0 actual=1 expected=1
+READBACK_MATCH
+ACTION_READBACK_VERIFIED
+KNX_EVENT 3 src=1.1.22 ga=3/1/6 action=MUTE value=0 param=0
+HTTP_MUTE_WRITE_RC=0 requested=0
+READBACK_RC=0 actual=0 expected=0
+READBACK_MATCH
+ACTION_READBACK_VERIFIED
+```
+
+The transcript stops without showing Ctrl+C or elapsed runtime; make no claim about process exit, multi-hour stability or persistence. Prior v0.10 and v0.9 presets 1/2 were independently confirmed by operator observation, but those observations cannot substitute for a new physical playback report in v0.11.
+
+**Next architecture milestone:** package and stage `/vendor/knx/{knx-audio,knx-map.csv,knx-audio.conf}` with backups and verify the executable+CSV on persistent mount, only with explicit device-write approval. Native boot path `/home/user.sh` uses `/vendor/user/hdl` as the **replacement** for stock essential `/home/bin/hdl`, not a generic hook. Do not activate `/vendor/user/hdl` or touch stock service without separately agreed recovery and rollback mechanism. Also note boot's possible /vendor format on error or FORCE_FORMAT_FLAG.
