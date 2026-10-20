@@ -377,3 +377,7 @@ Architecture target: official `POST /api/v3/webhook` subscription → publicly r
 - ZIP structure and basic static source invariants verified; **NOT COMPILED or HARDWARE TESTED**. Run `cd /Users/lab/AI/airALARM/airALARM_v0.1.28_POLL10_TEST && ~/.platformio/penv/bin/pio run` on Mac; flash only to test ESP32 after successful compile.
 
 **High priority security finding:** current v0.1.28 `pollApi()` uses `WiFiClientSecure::setInsecure()`, disabling TLS certificate verification of official API (prototype only). Must implement CA certificate trust/pinning and secure webhook authentication before safety-critical field deployment. Preserve working v0.1.28 baseline as rollback; do not deploy test patch as sole safety alarm.
+
+## Ukraine Alert API 3.0 deep audit (2026-10-20)
+
+See dedicated cross-cutting integration report: [airALARM-UkraineAlert-API3-audit-2026-10-20.md](./airALARM-UkraineAlert-API3-audit-2026-10-20.md). Reviewed official OpenAPI, generated official clients, Stfalcon example, official Linux custom-script integration and official contract; includes ALL endpoints, /alerts/status index optimization, webhook validation unknowns, rate policy unknowns, region/type hierarchy and concrete airALARM v0.1.28 integration fixes. No cloud or device changes deployed.
