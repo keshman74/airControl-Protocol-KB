@@ -59,3 +59,13 @@ MaxNumber21 describes the returned mapping capacity/structure; it is not the cou
 - Hardware verification of the corresponding future KNOB list integration remains pending; this record confirms the direct terminal read, not a firmware fix.
 
 Provenance: user terminal output in the airControl KNOB development conversation on2026-10-20, following the read-only advertised-service/SCPD diagnostic. No service tokens, serials or raw media metadata are included here.
+
+
+## KNOB implementation checkpoint — 0.8.21
+- Implemented in airKNOB main, source commit 56b3224fecb0aceace7e3d00e1ceea2e7b8c6eca (including the preceding feature commit).
+- A97 list read tries HTTP SOAP GetKeyMapping on port49152, then59152. A valid empty mapping is accepted. getPresetInfo remains only a final compatibility fallback when both SOAP reads fail.
+- Original KeyN identities are retained; the A97 menu exposes supported slots1–12, with bounded response/storage handling and serialized deferred reads. /health reports preset_source and preset_port.
+- Existing A31, A33 and A98 paths are preserved; regression tests cover their separate read routes. A97 host tests cover both SOAP ports, fallback, malformed replies, empty/error handling and original slot limits.
+- GitHub Actions build and tests passed: https://github.com/keshman74/airKNOB/actions/runs/39488634901
+- Published OTA version:0.8.21; binary https://raw.githubusercontent.com/keshman74/airKNOB/main/firmware/airControl-KNOB-v0.8.21.bin (1344976 bytes; MD5 afbe7a1cab3cffcfe4632b25e28986e9).
+- Firmware menu behavior on the physical A97 and preset launch still require user verification. The passing build/tests do not change the hardware evidence boundary above.
