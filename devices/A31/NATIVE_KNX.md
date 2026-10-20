@@ -110,3 +110,27 @@ HEARTBEAT seconds=420 accepted=25 verified=25
 ```
 
 The native program ran in temporary `/tmp` only; no firmware or permanent startup modifications have been performed. The next highest-value integration check is **one preset button press** and observed playback; do not needlessly re-test established Linkplay HTTP commands.
+
+
+### Physical device follow-up — native preset transmission via TCP :8899 (2026-10-20)
+
+**HARDWARE-OBSERVED / TRANSMIT-ONLY**, not playback-confirmed: A31 v0.9 `--run-all` accepted 11 KNX events and reported the following four native preset transmissions:
+```text
+KNX_EVENT 5 src=1.1.22 ga=3/2/0 action=PRESET_1 value=1
+PRESET_TCP_SEND_RC=0 slot=1
+PRESET_TRANSMITTED playback_not_readback_verified
+KNX_EVENT 6 src=1.1.22 ga=3/2/1 action=PRESET_2 value=1
+PRESET_TCP_SEND_RC=0 slot=2
+PRESET_TRANSMITTED playback_not_readback_verified
+KNX_EVENT 7 src=1.1.22 ga=3/2/1 action=PRESET_2 value=1
+PRESET_TCP_SEND_RC=0 slot=2
+PRESET_TRANSMITTED playback_not_readback_verified
+KNX_EVENT 8 src=1.1.22 ga=3/2/0 action=PRESET_1 value=1
+PRESET_TCP_SEND_RC=0 slot=1
+PRESET_TRANSMITTED playback_not_readback_verified
+```
+The TCP send returning zero is not a positive A31 MCU acknowledgement. No state readback or observed preset playback is included in this log. **Do not mark preset selection/playback CONFIRMED** until the operator reports the actual station/playlist switch or a playback-status correlation proves it. TCP :8899 on-loopback connection and write **succeeded** to the extent that the caller reported no error, but no RX packet is shown.
+
+The same follow-up includes 2 Mute state transitions with `READBACK_MATCH`; 3 volume-down operations with `VOLUME_READBACK_MATCH` (90→88→86→84); and two `PLAY_PAUSE` commands with HTTP acceptance only. The final reported volume is **84%**, so an appropriate maximum-volume clamp remains an outstanding safety requirement. `HEARTBEAT accepted=7 verified=7` **overcounts** actual state-verified actions, because preset and transport dispatches are included in the current verified counter.
+
+This trace ended manually with Ctrl+C; no persistence or unattended soak-time claims follow from it.
