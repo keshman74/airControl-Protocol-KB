@@ -50,3 +50,11 @@ A97/A98 changes in0.8.22 remain IMPLEMENTED / HOST-TESTED / BUILD-PASSED, HARDWA
 Arduino-ESP32 2.0.17 HTTPClient keep-alive, end/disconnect and response framing:
 https://github.com/espressif/arduino-esp32/blob/2.0.17/libraries/HTTPClient/src/HTTPClient.cpp
 These source semantics do not prove that either tested player supports persistent HTTPS sessions.
+
+## User hardware comparison after 0.8.22 — 2026-10-20
+User report in the KNOB development conversation: «на а98 заметно стало быстрее а на а97 еще притормаживает крутилка громкости».
+
+- A98: qualitative hardware confirmation of noticeably faster control after the 0.8.22 update in this test sequence. No latency numbers or health trace supplied; this does not independently prove HTTPS keep-alive support or long-term stability.
+- A97: encoder volume still lags; treat as an unresolved responsiveness issue. Do not mark A97 speed optimization hardware-verified successful.
+- Need a health snapshot before/after turning with the A97 selected, including firmware, zone_chip, wiim_volume_sends, wiim_volume_last_ms/max_ms, wiim_https_requests/reused, background job/state and memory. Counters are boot-wide, so compare deltas with the same zone selected rather than attributing totals across multiple chips.
+- Root cause remains unproven: separate request/TLS duration from worker contention or UI/rendering symptoms before further transport changes. Do not switch A97 to A31 TCP or plain HTTP on the basis of this report.
