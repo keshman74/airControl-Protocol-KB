@@ -120,3 +120,27 @@ The GP-relative dispatch table at ELF VA `0x00428840` decoded successfully as **
 **Prior conclusions unchanged:** `VolumeSetCodec` dispatches ID 9 to callback mask 3; `PromptCodec` handles prompt counter and has no gain arithmetic itself; `rootApp.StartupMusic` contains conditional quotient `MaxPromptVolume*100/zoneVolume` for startup prompt, not confirmed for URL Prompt. Master-independent constant acoustic alert loudness remains UNSOLVED.
 
 Next static batch `a31_mcu_format_batch.sh` was generated and validated with `bash -n` (not yet run against original firmware). It reads the inferred string addresses `0x00425634/44/54/64/74/84` using radare2 `ps`, grabs hex bytes for cross-check, and dumps case blocks, saving ZIP under `/Users/lab/AI/airALARM`. User should download script there and run `bash a31_mcu_format_batch.sh`.
+
+
+## Original MCU wire-text formats extracted from mv_ioguard (2026-10-20 04:24)
+
+Source: original uploaded `A31_MCU_FORMAT_20261020_042412.zip`; `reports/format_strings.txt` and `reports/rodata_hex.txt`. Binary SHA256 `41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3`, ELF 32-bit little-endian MIPS32 rel2. **OFFLINE STATIC CONFIRMATION ONLY — not hardware-tested commands**.
+
+At `mv_ioguard` virtual addresses:
+- `0x00425634`: literal `AXX+VOL+00%d\\n`; branch at `0x0040c9dc` for input less than 10 (signed negative also enters this branch; constrain usage to 0..100, do not say negative is rejected).
+- `0x00425644`: literal `AXX+VOL+0%d\\n`; branch for integer >=10 and <100.
+- `0x00425654`: literal `AXX+VOL+100\\n`; branch only for input exactly 100, otherwise no formatted VOL string emitted.
+- `0x00425664`: `AXX+CHN+%03d\\n` (another command ID, not VOL).
+- `0x00425674`: `AXX+EQS+%03d\\n`.
+- `0x00425684`: `AXX+MUT+00%d\\n` (MCU command ID 10, with separate parameter pointer and >=4-byte payload).
+- `0x00425694`: `AXX+PMT+002\\n`.
+- `0x004256a4`: `AXX+PMT+001\\n`.
+- `0x004256b4`: `AXX+PMT+000\\n`.
+
+MIPS handler `0x0040cad8..0x0040cb48` dispatches input integer 2 => PMT+002; 1 => PMT+001; other => PMT+000. These values are **prompt command modes**, not demonstrated amplitudes, and need not represent a dedicated prompt gain level. Literal newline `0x0a` terminates strings before NUL. The above commands originate from the internal MCU formatter; **not HTTP API commands**, and no direct UART/MCU injection is authorized or advisable.
+
+Prior binary analysis showed `VolumeSetCodec` calls `MCUCommandSend(9,3,&volume,4)`; the formatted text then passes to two callback paths selected by mask 3. Which active physical transport sends each callback is not fully demonstrated. The existence of separate `AXX+PMT` commands is a new lead for investigating alert ducking/mode, not evidence of master-independent alert loudness.
+
+Runtime issue: `reports/format_strings.stderr.txt` emits radare2 hint `Relocs not applied`; raw rodata bytes and direct disassembly validate the literal formats regardless. Future calls may set `-e bin.relocs.apply=true` for symbol readability.
+
+**NEXT FOCUS:** cross-reference call sites and dispatch ID (likely PMT modes, but verify) for `AXX+PMT` and compare with SHM MaxPromptVolume / the URL Prompt entry path. Stay offline/read-only, preserve airALARM v0.1.26; do not confuse fixed digital gain with fixed acoustic loudness.
