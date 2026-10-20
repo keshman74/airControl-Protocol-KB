@@ -141,3 +141,18 @@ This trace ended manually with Ctrl+C; no persistence or unattended soak-time cl
 Operator answer after reviewing the above log: **«да переключались»**, explicitly confirming that physical A31 changed between KNX-triggered Preset 1 (`3/2/0`) and Preset 2 (`3/2/1`) and played the selected presets. **Status: CONFIRMED on physical device for these two KNX→A31 native TCP 8899 preset paths.** This evidence is direct operator observation, not a readback field or MCU acknowledgement; keep those categories distinct.
 
 Next engineering work: configurable max volume below 100 (previous tests reached 99%), hold/repeat behavior, split `verified` vs `accepted` statistics, service lifecycle reliability and *only then* consider persistent startup after a separate safety review. Presets 3–10 are not claimed as hardware-tested through KNX here.
+
+
+## Native KNX v0.10 — safety and reliability update (HOST TESTED, A31 PENDING)
+
+Artifact: `A31_KNX_NATIVE_V10.zip` (MIPS32 LE static ELF, C and assembly sources, README, config example and offline host tests). On the host: build succeeded, ELF32/O32/MIPS32r2 static format checked, unit tests passed for KNX decoding, configuration, HTTP parser, preset frame, safe volume targeting and repeat elapsed-time calculations. **Physical A31 test has not happened yet**. Keep v0.9 as hardware-confirmed baseline until a fresh operator log is available.
+
+Retains unchanged trusted v0.9 functions: `decode_event`, `http_get`, `open_udp`, `probe_api`, `make_preset_frame`, `send_preset_to`. Existing Mute, transport, preset 1/2 tested pathways, input mappings and HTTP/TCP protocol operations are not redesigned.
+
+- `max_volume=70` by default, configurable 1–100; only limits **KNX-origin VOL_UP**, not global device volume or other controllers. If current volume is already greater than the cap, an increase is skipped; VOL_DOWN continues in `volume_step=2` decrements. Never abruptly force an existing higher volume down to the cap.
+- KNX repeat handling now has separate tunables `volume_repeat_ms=90` and `button_debounce_ms=250`, compared with a single 350ms debounce in v0.9. These are proposed defaults; real-world hold-button responsiveness on v0.10 remains unverified.
+- Correctly split command outcome categories: `readback_ok`, `http_sent`, `preset_sent`, `unchanged`, `suppressed`, `debounce_dropped`, `errors`; `accepted` counts decoded, non-debounced events. No HTTP 200 / TCP-send action is promoted into `readback_ok`.
+- Fail-closed after 3 consecutive failures is retained. v0.10's active-mode singleton guard is loopback `127.0.0.1:43997` (no persistent files): a second active v0.10 process fails, but **older v0.9 cannot be detected by this guard**, so stop v0.9 first.
+- Manual-only `/tmp` execution; no overwrite of existing `/tmp/knx-audio.conf`, flash writes, service setup or autostart.
+
+Hardware validation request: run `--show-config` then a single brief `--run-all` integration session, observe Mute/Volume/PlayPause/Preset 1 or 2 and the new HEARTBEAT counters, checking for no regressions. No repeated discovery of established Linkplay commands.
