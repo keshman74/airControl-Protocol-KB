@@ -143,9 +143,9 @@ Operator answer after reviewing the above log: **«да переключалис
 Next engineering work: configurable max volume below 100 (previous tests reached 99%), hold/repeat behavior, split `verified` vs `accepted` statistics, service lifecycle reliability and *only then* consider persistent startup after a separate safety review. Presets 3–10 are not claimed as hardware-tested through KNX here.
 
 
-## Native KNX v0.10 — safety and reliability update (HOST TESTED, A31 PENDING)
+## Native KNX v0.10 — safety and reliability update (PARTIALLY HARDWARE-CONFIRMED)
 
-Artifact: `A31_KNX_NATIVE_V10.zip` (MIPS32 LE static ELF, C and assembly sources, README, config example and offline host tests). On the host: build succeeded, ELF32/O32/MIPS32r2 static format checked, unit tests passed for KNX decoding, configuration, HTTP parser, preset frame, safe volume targeting and repeat elapsed-time calculations. **Physical A31 test has not happened yet**. Keep v0.9 as hardware-confirmed baseline until a fresh operator log is available.
+Artifact: `A31_KNX_NATIVE_V10.zip` (MIPS32 LE static ELF, C and assembly sources, README, config example and offline host tests). On the host: build succeeded, ELF32/O32/MIPS32r2 static format checked, unit tests passed for KNX decoding, configuration, HTTP parser, preset frame, safe volume targeting and repeat elapsed-time calculations. **Physical A31 test subsequently confirmed selected features (see log below)**. Keep v0.9 as a known-good baseline until v0.10's volume limit and preset playback are physically checked.
 
 Retains unchanged trusted v0.9 functions: `decode_event`, `http_get`, `open_udp`, `probe_api`, `make_preset_frame`, `send_preset_to`. Existing Mute, transport, preset 1/2 tested pathways, input mappings and HTTP/TCP protocol operations are not redesigned.
 
@@ -156,3 +156,18 @@ Retains unchanged trusted v0.9 functions: `decode_event`, `http_get`, `open_udp`
 - Manual-only `/tmp` execution; no overwrite of existing `/tmp/knx-audio.conf`, flash writes, service setup or autostart.
 
 Hardware validation request: run `--show-config` then a single brief `--run-all` integration session, observe Mute/Volume/PlayPause/Preset 1 or 2 and the new HEARTBEAT counters, checking for no regressions. No repeated discovery of established Linkplay commands.
+
+### v0.10 physical A31 run — 2026-10-21
+
+**Hardware CONFIRMED for loading/starting v0.10, KNX receive, Mute readback, loopback API, log-accounting behavior; transport and presets transmitted but not independently playback-confirmed during this v0.10 run.**
+
+- Manually uploaded the MIPS ELF to `/tmp/knx-audio-v10` and ran `--show-config`; configuration loaded from existing `/tmp/knx-audio.conf` with source `1.1.22`, interface `192.168.0.35`, default 12 mapped addresses, source and presets 5–10 OFF.
+- Safety parameters parsed: `max_volume=70 volume_step=2 volume_repeat_ms=90 button_debounce_ms=250`. **Parsing confirmed; neither real max-volume clamping nor repeat/debounce response was exercised in this run.**
+- `PROBE_LOOPBACK_RC=0 mute=0`, `ACTIVE_INSTANCE_GUARD_OK port=43997`, `JOIN_OK group=224.0.23.12:3671`. Guard acquisition confirmed; two simultaneous v0.10 instances not tested.
+- 10 accepted KNX events: four Mute transitions with `READBACK_MATCH` and `ACTION_READBACK_VERIFIED`, four `PLAY_PAUSE` commands with `HTTP_ACTION_RC=0` and `ACTION_HTTP_ACCEPTED_NOT_READBACK_VERIFIED`, and two Preset sends (`PRESET_1`, `PRESET_2`) with `PRESET_TCP_SEND_RC=0` and `ACTION_PRESET_TRANSMITTED_UNACKNOWLEDGED`.
+- Heartbeat at 60 s: `accepted=10 readback_ok=4 http_sent=4 preset_sent=2 unchanged=0 suppressed=0 debounce_dropped=0 errors=0`. **New outcome counters match the 10 observed events, correcting the older misleading `verified` counter.**
+- Exited intentionally by Ctrl+C; no program exception shown. A one-minute run is not a long-term stability or restart-persistence guarantee. No flash writes, autostart or service installation.
+- **No volume KNX events** occurred. Previous hardware-confirmed v0.9 volume behavior remains baseline until v0.10 cap/repeat use is observed.
+- v0.9 Preset 1/2 playback was previously confirmed by operator. Here, v0.10 log proves transmission only; the user's new physical playback observation has not been recorded yet.
+
+Next useful check: set a safe low physical volume, then check v0.10 KNX Volume Up reaches and respects the 70% cap and Volume Down still works. Also obtain one affirmative operator observation that Preset1/2 switches playback in v0.10, then test runtime longer. Keep v0.9 rollback available.
