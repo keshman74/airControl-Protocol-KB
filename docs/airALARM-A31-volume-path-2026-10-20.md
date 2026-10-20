@@ -242,3 +242,14 @@ User uploaded `A31_PROMPT_HTTP_CONDITIONS_20261020_050723.zip`. Offline rootApp 
 - `axt @ obj.g_wiimu_shm` not sufficient to find all readers of offset 0x3C8; next step is targeted static references to the specific field and writers, plus cross-checking downstream codec gain.
 
 **Original objective STILL OPEN:** software PCM Prompt gain is master-zone-dependent in prior live tests, not demonstrated fixed acoustic level. Do not change baseline airALARM v0.1.26 or any device gain/NVRAM.
+
+
+## PROMPT_GATE bundle 2026-10-20 05:12 — no writer identified yet
+
+User uploaded `A31_PROMPT_GATE_20261020_051234.zip`; archive contains `rootApp.txt` (75,461 bytes), `mv_ioguard.txt` (37,330 bytes), their radare2 scripts and stderr. Source hashes match prior validated extracts. **Static code evidence only**.
+
+- The rootApp `playPromptUrl` branch at `0x0040fc20–0x0040fc30` **reconfirms** load from `g_wiimu_shm + 0x3C8` (`lw v0,0x3c8(v0)`) and signed `slti v0,v0,0x28` (value <40). It also reconfirms the `strstr(s2,"mp3")` gate and `snprintf("smplayer %s &", s2)` call. This repeats already verified facts, not a new semantic interpretation.
+- The report dumps `ReadGeneralConfig`, `MCUContextInit`, `StartupMusic` and sections of `mv_ioguard`. In these dumps there is **no established writer of offset 0x3C8** and no evidence tying it to master volume, Prompt gain or a timing parameter. The report is not an exhaustive scan, so writer absence in shown samples is **not proof that no writer exists**.
+- Earlier interpretation of `SHM+0x3BC` as zone volume and `SHM+0x3D8` as MaxPromptVolume is preserved; do not conflate those fields with unknown `0x3C8`.
+- Next static scan `a31_shm_field_scan.sh` (Bash syntax checked, **not run on operator's original binaries**) searches executable MIPS32 ELF segments in rootApp/mv_ioguard/a01controller/wmrmplayer for load/store opcodes using immediates 0x3BC/0x3C8/0x3D0/0x3D8 and emits contextual radare2 dumps, matches CSV and ZIP in `/Users/lab/AI/airALARM`. It excludes SP-relative references; false positives in unrelated structs remain possible. This will help locate actual writes but cannot automatically establish which base pointers are g_wiimu_shm. No device connection or firmware write.
+- Fixed acoustic alarm volume independent of zone master remains UNSOLVED.
