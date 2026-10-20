@@ -153,3 +153,19 @@ From the **previously uploaded** original MCU routing jump-table CSV (static fir
 Prepared **`a31_pmt_trace_batch.sh`** to search static code references to `MCUCommandSend` and `PromptCodec`, fully dump ID18 formatter, rootApp `StartupMusic`, `libmvmsg` prompt helpers, and `smplayer` start/end notices. Defaults to original firmware `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`; report and ZIP under `/Users/lab/AI/airALARM`. Tested with `bash -n` and end-to-end mocked radare2/ZIP workflow, **not yet executed on original firmware**. Mac run: `cd /Users/lab/AI/airALARM && bash a31_pmt_trace_batch.sh`. No SSH/device operations, NVRAM writes, audio play or volume changes.
 
 Research objective remains UNSOLVED: fixed perceived alarm loudness independent of zone/master volume. Preserve airALARM v0.1.26.
+
+
+## PMT notification call trace: user bundle 2026-10-20 04:32
+
+Operator uploaded `A31_PMT_TRACE_20261020_043252.zip`. Its read-only radare2 reports include `mv_pmt.txt`, `mv_callers.txt`, `root_prompt.txt`, `lib_prompt.txt`, `sm_prompt.txt`. All binaries' hashes match preceding original Rakoit archives (mv_ioguard SHA256 41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3; smplayer baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac).
+
+**NEW static-binary-confirmed callsites**:
+- `mv_ioguard.sym.cmdSocket_recive` invokes `sym.PromptCodec` at `0x00411c54`, `0x00411d0c`, `0x00411dc4`. These cross-references show **three paths from the socket message handler into PromptCodec**, but the current report does not dump enough caller context to accurately assign START, END or reset semantics per path; avoid inventing event names.
+- `PromptCodec` at `0x0040efc4` still confirmed to modify the local codec prompt-active counter at struct offset +0x0C by read/write under mutex (arg1=1 increments, arg1=-1 zeroes, other inputs decrement if positive). It does not directly compute amplitude.
+- `smplayer` literal notification strings `GNOTIFY=volume_prompt_start` (VA 0x00408c6c) and `GNOTIFY=volume_prompt_end` (VA 0x00408b84) are present and prior code analysis showed their send path. **A complete source-to-destination mapping to `cmdSocket_recive` branches is not yet shown by this bundle.**
+- `MCUCommandSend` ID18 at 0x0040cad8 still maps values 0/1/2 to `AXX+PMT+000/001/002\\n`. **It is not established whether the three `PromptCodec` callsites also issue ID18**, nor what the MCU does when it receives PMT.
+- `rootApp.StartupMusic` still uses conditional `MaxPromptVolume*100/zoneVolume` but only for startup prompt; the user-facing `playPromptUrl` path has not been proven to do the same.
+
+**Next focused read-only batch**: `a31_pmt_callpath_batch.sh` created and `bash -n` checked. It dumps wide `cmdSocket_recive` disassembly near 0x00411a80–0x00411e30, PMT handler, smplayer prompt notices and URL string xrefs. Works only with extracted ELF files, creates ZIP under `/Users/lab/AI/airALARM`. It was not yet run on original Mac firmware. Preserve airALARM v0.1.26, do not send direct MCU commands.
+
+**Status:** independent fixed acoustic Prompt volume remains UNSOLVED.
