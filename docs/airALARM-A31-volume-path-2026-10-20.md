@@ -269,3 +269,19 @@ User uploaded `A31_SHM_FIELD_SCAN_20261020_160549.zip`. Read-only MIPS32 executa
 **Next targeted offline batch:** created `a31_m_mode_batch.sh` with `radare2` disassembly of full `Get_M_MODE`, `Set_M_MODE`, their xrefs, `CNodeMan_Init` and rootApp guard/status code. `bash -n` syntax checked; **not executed against original user's binaries**. Inputs are original Rakoit extracted firmware at `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`, outputs ZIP under `/Users/lab/AI/airALARM`. User can run `bash a31_m_mode_batch.sh`. This script is read-only and makes no network/device calls.
 
 **Research goal still unsolved:** independent fixed acoustic alert loudness under variable master zone volume. Preserve airALARM v0.1.26.
+
+
+## Offline M_MODE deep batch 2026-10-20 16:17
+
+Source: operator uploaded `A31_M_MODE_20261020_161720.zip`; extracted original `a01controller.txt` (~56 KB), `rootApp.txt`, `mv_ioguard.txt`, manifests/radare2 scripts. This is STATIC ELF evidence, not a hardware M_MODE test.
+
+- `a01controller.Get_M_MODE` at 0x0041a170 reads signed **16-bit** `lh v0,0x3c8(v0)` from `g_wiimu_shm` at 0x0041a188. `Set_M_MODE` at 0x0041a18c stores incoming mode (`s0=a0` at 0x0041a1b8) as full 32-bit `sw s0,0x3c8(v0)` at 0x0041a4bc, in MIPS delay slot of `process_unlock`.
+- `CNodeMan_Init` initializes same shared-memory mode to signed **-1** at 0x0041fe4c: `sw v1,0x3c8(v0)` where v1=-1, g_wiimu_shm pointer loaded 0x0041fe1c–0x0041fe28. This confirms the previously suspected initialization write.
+- `Set_M_MODE` first calls `AudioCaptureBypassLoad`. At 0x0041a1c8–0x0041a210 it computes `mode-40` and tests `(unsigned)(mode-40)<20`, i.e. **mode in 40..59 inclusive**; then conditionally starts audio capture when entering that range and stops it otherwise based on `IsAudioCaptureStart`. Exact individual mode enum labels remain unknown.
+- Its further logic examines g_wiimu_shm+0x3dc and other conditions, dispatches socket messages, runs `process_lock/process_unlock`, updates SHM+0xfa0 to -1, and stores M_MODE. Also uses comparisons to 0, 1, and 99 in later branch; do not infer their public enum labels from these tests alone.
+- Callers of `Set_M_MODE` include `CStandaloneNode_SwitchModeToStorage`, `CStandaloneNode_SwitchDAC`, `CStandaloneNode_SwitchSourceMode`, `CStandaloneNode_parse_avs_play`, `CStandaloneNode_parseCmd_rmc`, `ParseRenderCmd`, `evtSocket_thread`, `show_song_info_from_Udisk`; Get_M_MODE is used widely in playback/status paths.
+- `rootApp.GoaheadCmdParsethread` HTTP `playPromptUrl` still tests **signed M_MODE < 40** at 0x0040fc28–0x0040fc30. IMPORTANT subtlety: initialization value -1 is **less than 40**, so `M_MODE<40` alone is not proof of an actively playing supported mode or specific source. HTTP branch additionally requires 'mp3' substring. This is a gating rule, NOT an independent alert-volume solution.
+- `rootApp` also reads same field for status text at 0x0040b2f8; no enum mapping recovered from this report.
+- No gain changes, device SSH commands, or changes to working airALARM v0.1.26 were performed.
+
+**Open problem:** fixed acoustic Prompt loudness regardless of master-volume setting remains unsolved; next highest-value research should avoid overfocus on M_MODE enum and instead trace URL Prompt relative to downstream master gain / codec state or seek noninvasive recordings at different zone levels.
