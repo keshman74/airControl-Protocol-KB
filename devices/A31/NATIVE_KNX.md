@@ -70,3 +70,16 @@ v0.8 was compiled as a MIPS32 LE static ELF and passed **offline** KNX decoding,
 - Active `--run-mute` is **opt-in** and retains strict getPlayerStatus readback and stop after 3 consecutive failures, but **long-running operation is unverified**. Previous `--control-mute` two-event bounded mode remains available.
 - Experimental `--control-volume` (two KNX button presses) / `--run-volume`: read `getPlayerStatus.vol`, step ±2, issue `setPlayerCmd:vol:<n>`, verify vol readback. **A31 KNX→volume path not yet hardware-tested.**
 - No autostart, flash writes, daemon installation, other-chip support, or automatic DHCP address migration. The device should only run one instance of this program per KNX listener test.
+
+## Native KNX v0.9 — all-action build (HOST-COMPILED, HW-INTEGRATION-PENDING)
+
+Build artifact `A31_KNX_NATIVE_V09.zip`: static MIPS32 LE ELF with C/assembly source, runtime configuration and host tests. Built and verified offline (ELF32, MIPS32r2, no dynamic linkage), but not yet executed on the A31 device. **Do not upgrade v0.9 to CONFIRMED until device log confirms the new integration path.**
+
+- New opt-in `--run-all` mode: continuous UDP KNX receiving; fixed sender filter `1.1.22` and configurable KNX GA mapping.
+- Transports via **local** Linkplay HTTP API: `setPlayerCmd:onepause`, `resume`, `pause`, `next`, `prev` (from existing KB; no rediscovery). Mute has readback and volume uses getPlayerStatus read/absolute set/readback with step 2.
+- Native presets via official framed **TCP :8899**: binary header `18 96 18 20`, little-endian payload length and byte sum, 8 reserved zero bytes, `MCU+KEY+001..010`. Default mapped KNX GA `3/2/0..3` (slots 1–4), other slots only after explicit GA configuration. Each preset is **transmitted but not playback-confirmed** by this code; the TCP8899 local-loopback path requires device validation. At least 200ms is enforced between preset commands.
+- Optional source AUX and USB use previously CONFIRMED A31 HTTP switchmode forms, but KNX source mappings default OFF.
+- Only KNX value 1 triggers button actions; value 0 is a release. Mute treats both 0 and 1 as states. Repeat button telegrams within 350ms are suppressed.
+- Local command mode remains temporary-only under `/tmp`; no flash/autostart. Previous hardware-confirmed v0.7 remains the rollback baseline.
+
+Suggested single end-to-end integration run: after copying the ELF and config into `/tmp`, manually execute `--run-all` and press the existing KNX transport/volume/Mute/preset buttons. Verify observed behavior in the player rather than retesting each underlying HTTP API from scratch.
