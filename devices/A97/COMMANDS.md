@@ -57,3 +57,13 @@ Source: cvdlinden/wiim-httpapi OpenAPI v1.2.0. These entries are imported as **S
 
 ## AudioCast interoperability candidate
 WiiM-source AudioCast commands are candidate functionality for A97. User observation from the native WiiM app indicates AudioCast is presented as audio transmission to compatible UPnP/DLNA devices. The OpenAPI does not itself identify the target protocol, and A97 hardware support is not yet verified. Preserve this as a test candidate for possible DLNA/UPnP bridging to otherwise incompatible multiroom families (including A33), not as confirmed compatibility.
+
+## getPresetInfo — negative hardware result, 2026-10-20
+
+Status: **HARDWARE-OBSERVED UNSUPPORTED on the tested A97-labelled device**.
+Selected zone: Кухня,192.168.0.99, HTTPS443; device firmware/version was not supplied in this sample.
+A direct curl -k HTTPS /httpapi.asp?command=getPresetInfo returned literal unknown command with HTTP200. KNOB0.8.20 health independently reported preset_http200, preset_bytes15, preset_error=http_or_body, and the user confirmed the list does not appear.
+
+This negative result overrides the source-documented WiiM command candidate for this tested product/firmware. HTTP200 is not API success. Do not claim all A97 products support getPresetInfo merely because WiiM API documentation lists it. Launch MCUKeyShortClick:N has not been tested by this result.
+
+Next read-only candidate: discover the advertised PlayQueue service through the device description/SCPD and, only if advertised, test GetKeyMapping. Do not assume A31 port49152, A98 port59152, returned mapping semantics, or A98 routine/active-state support for A97 until observed. The currently failing read used the correct selected HTTPS endpoint; switching blindly to HTTPS is not a fix.
