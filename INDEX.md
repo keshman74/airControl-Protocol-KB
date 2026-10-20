@@ -3,7 +3,7 @@
 Canonical knowledge is organized by **device**, **protocol**, and **function**. Audit files are evidence/provenance only; no technical finding may exist only in an audit index.
 
 ## Devices
-- [A31](devices/A31/README.md) · [commands](devices/A31/COMMANDS.md)
+- [A31](devices/A31/README.md) · [commands](devices/A31/COMMANDS.md) · [native KNX (hardware confirmed)](devices/A31/NATIVE_KNX.md)
 - [A97](devices/A97/README.md) · [commands](devices/A97/COMMANDS.md)
 - [A98](devices/A98/README.md) · [commands](devices/A98/COMMANDS.md)
 - [A33](devices/A33/README.md) · [commands](devices/A33/COMMANDS.md)
