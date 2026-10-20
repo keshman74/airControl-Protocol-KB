@@ -175,3 +175,16 @@ Next useful check: set a safe low physical volume, then check v0.10 KNX Volume U
 ### v0.10 physical playback confirmation — 2026-10-21
 
 Upon direct follow-up about the v0.10 test, the operator answered **«да переключились»** to whether Presets 1 and 2 actually switched music. Consequently, **KNX `3/2/0` → Preset 1 and `3/2/1` → Preset 2 are both HARDWARE-CONFIRMED in v0.10** via real player behavior. This complements the four transport/preset HTTP/TCP send records and two preset transmissions in the v0.10 test; it is not an independent MCU acknowledgment or automatic readback. **No regression from v0.9 for these two presets.** Remaining v0.10-specific unverified work: max-volume cap, hold/repeat responsiveness, duplicate-instance rejection test, multi-hour stability, and restart/autostart.
+
+## Native KNX v0.10.1 — default max volume 100 (HOST-VERIFIED, A31 PENDING)
+
+The operator explicitly chose **configurable maximum volume with 100% as the factory/default value** for KNX-origin VOL_UP. The 70% default in v0.10 was not a requirement.
+
+- **New built-in default:** `max_volume=100` (was `70`).
+- **Configurable range stays 1..100** using `max_volume=<value>` in `/tmp/knx-audio.conf`. Explicit values from an existing config override the built-in default; do not overwrite an existing user's KNX mapping file.
+- Cap affects only KNX-origin Volume Up in this custom process, not the device's global volume ceiling or volume set by airControl/native mobile app.
+- The change does not adjust the currently set volume, repeat timings, volume step, Mute API, transport API or TCP 8899 preset frame.
+- Code diff against hardware-tested v0.10 consists of exactly the default integer initialization and version banner; example config, README, changelog and offline tests were updated accordingly.
+- Offline assertions cover 100% default, 98→100, no value above 100, and a user-set 70% limit including protection when current volume is already higher.
+- Artifact: `A31_KNX_NATIVE_V10_1.zip` with source, MIPS32 static ELF, build script, tests, config example and checksums.
+- **Status:** HOST BUILD + OFFLINE TESTS PASSED; NOT YET TESTED ON PHYSICAL A31. No firmware write, autostart or persistent install.
