@@ -229,3 +229,16 @@ Source: uploaded original `A31_PROMPT_HTTP_HANDLER_20261020_045715.zip`, includi
 - The exact format literal at `0x00420a94` reads `smplayer %s &`; `smplayer` literal at `0x00420a88`, command literal `playPromptUrl` at `0x00420a78`.
 
 Prepared `a31_prompt_http_conditions_batch.sh` (syntax checked with bash -n, device run pending) to extract the `strstr` needle VA 0x0041baec, command bytes and surrounding branch, report under `/Users/lab/AI/airALARM`. It reads only original firmware `rootApp`; no SSH, audio playback or device writes. **Alert independent of master volume remains UNSOLVED.**
+
+
+## HTTP handler acceptance condition resolved (2026-10-20 05:07)
+User uploaded `A31_PROMPT_HTTP_CONDITIONS_20261020_050723.zip`. Offline rootApp SHA256 `0314cbeb5961127bef4668317183f66e7b8cec7eeb1f323445c622dd20992a97` unchanged. Original r2 text confirms:
+- `rootApp.GoaheadCmdParsethread`, `strncmp(input,"playPromptUrl",13)` at 0x0040fbd8; `s2=input+14` at 0x0040fc00.
+- `strstr(s2, "mp3")` at 0x0040fc10, with **needle literal exactly `mp3` at VA 0x0041baec**. This is substring matching, not an extension/MIME validation. No case-insensitive handling demonstrated.
+- If match is non-NULL, `g_wiimu_shm->field_0x3C8 < 40` check (`slti v0,v0,0x28` at 0x0040fc2c). This is a signed comparison; if false, reject branch at 0x0040fca0. **Field purpose unknown** and must not be described as current zone volume. Threshold is *not* a gain value.
+- If both pass: `terminalPidbyName("smplayer")`, `snprintf(...,"smplayer %s &", s2)`, `system(...)`, then short socket OK response. This handler does not calculate MaxPromptVolume-based gain or synthesize an extra gain parameter. Caller supplies arguments including any numeric suffix, while smplayer's argv[2] adjusts Q16 PCM amplitude as previously decoded.
+- `ps @ 0x0041baec` returns `mp3`, backed by raw hex `6d 70 33 00`. Adjacent literal `linkplay_bonjour` is unrelated.
+- Not all HTTP playPromptUrl strings necessarily reach smplayer (two guards); don't generalize from hardware success with one mp3 URL.
+- `axt @ obj.g_wiimu_shm` not sufficient to find all readers of offset 0x3C8; next step is targeted static references to the specific field and writers, plus cross-checking downstream codec gain.
+
+**Original objective STILL OPEN:** software PCM Prompt gain is master-zone-dependent in prior live tests, not demonstrated fixed acoustic level. Do not change baseline airALARM v0.1.26 or any device gain/NVRAM.
