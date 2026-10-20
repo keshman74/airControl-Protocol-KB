@@ -185,3 +185,19 @@ Source: user-uploaded `A31_PMT_CALLPATH_20261020_044307.zip` containing original
 **Implication:** PCM prompt state and MCU PMT notification are coupled at the runtime socket event layer. This is NOT evidence PMT gives independent output amplitude or that it is safe to call on its own. The acoustic fixed-alert-volume requirement remains UNSOLVED.
 
 Next investigation: extract exactly three incoming notification strings, cross-check their payload and senders; separately inspect how `playPromptUrl` reaches `smplayer`. Do NOT send low-level MCU commands or modify airALARM v0.1.26.
+
+
+## PMT event strings definitively resolved from firmware (2026-10-20 04:49)
+
+Uploaded bundle `A31_PMT_EVENT_STRINGS_20261020_044925.zip`, inspected original `mv_ioguard.txt`, `sm.txt`, `root.txt`, r2 command files, manifest. Confirmed original ELF SHA256 hashes unchanged: mv_ioguard 41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3; smplayer baec063cdba06156ef399d0792ba76ab8009bfba9d38aadf1fdb9925a313f1ac; rootApp 0314cbeb5961127bef4668317183f66e7b8cec7eeb1f323445c622dd20992a97.
+
+**STATIC BINARY CONFIRMED:**
+- mv_ioguard incoming socket notification literal at 0x00426b78: `GNOTIFY=volume_prompt_start`, corresponding to `cmdSocket_recive` call `PromptCodec(1)` at 0x00411c54 and conditional `MCUCommandSend(18,3,...)` sending **PMT 000**.
+- Literal at 0x00426b94: `GNOTIFY=volume_prompt_end`, corresponding to `PromptCodec(0)` at 0x00411d0c and conditional MCU **PMT 001**.
+- Literal at 0x00426bb0: `GNOTIFY=volume_prompt_init`, corresponding to `PromptCodec(-1)` at 0x00411dc4, local reset; no MCU PMT send confirmed in that branch.
+- `smplayer` contains exact `GNOTIFY=volume_prompt_start` and `GNOTIFY=volume_prompt_end` strings, with send-path in main established previously. This is compelling binary-level source/receiver string match; actual packets between processes have **not** been live-captured.
+- rootApp `playPromptUrl` is present at VA 0x00420a78; `axt @ 0x00420a78` yielded no references in current radare2 analysis. Therefore URL Prompt HTTP parser → smplayer startup → volume argument chain is **not fully traced**. Lack of xref is not evidence of unsupported API; URL Prompt works in earlier hardware tests.
+
+**Important correction:** In previously captured start/end handler branches, PMT start sends 0 and end sends 1 when conditions allow. Do NOT claim PMT 002 is sent at start from these branches. Meaning of PMT 002 on MCU and analog output remains unknown. PMT is **mode signaling, not proven separate gain**. Fixed acoustic airALARM loudness across master-zone volume levels is still UNSOLVED.
+
+Prepared next offline script `a31_prompt_url_trace_batch.sh` (bash syntax verified, actual operator execution pending) for consolidated rootApp HTTP command parser, smplayer and notification receiver analysis; output ZIP under `/Users/lab/AI/airALARM`. No live device control, firmware modification or NVRAM changes.
