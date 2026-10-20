@@ -107,3 +107,16 @@ Operator supplied `A31_CODEC_MCU_TRACE_20261020_040432.zip`. Inspected original 
 Prepared `a31_mcu_routing_batch.sh` to extract 50-entry GP-relative command dispatch table of `MCUCommandSend` at `0x00428840` and automatically disassemble cases `9`, `10`, `35` after validating target addresses stay within `0x0040c8dc..0x0040d524`. Also dumps startup ratio and LPML scale for context. Uses radare2 + python3; stores reports and ZIP in `/Users/lab/AI/airALARM`, original extracted binaries read-only. `bash -n` and mocked radare2 table decoder, ZIP complete run passed. **Not yet run against genuine MIPS binaries.** Operator should download into project directory and run `bash a31_mcu_routing_batch.sh`.
 
 **Status:** master-independent fixed acoustic volume for airALARM remains UNSOLVED; no NVRAM or firmware changes.
+
+
+## MCU routing table batch: 2026-10-20 04:17
+
+Operator supplied `A31_MCU_ROUTING_20261020_041758.zip`. Read-only static analysis of original `mv_ioguard` SHA256 `41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3`; no live MCU or device writes.
+
+The GP-relative dispatch table at ELF VA `0x00428840` decoded successfully as **50 entries indexed command_id 0–49**. All 50 targets reside in `MCUCommandSend` function `0x0040c8dc..0x0040d524`. Important targets: ID 9 => `0x0040c9dc`; ID 10 => `0x0040caa4`; ID 11 => `0x0040ca5c`; ID 12 => `0x0040ca80`; ID 35 (0x23) => `0x0040d1e0`. Several entries intentionally route to common final dispatch at `0x0040d4bc`. Full table retained in user-supplied archive CSV `reports/jump_table_decoded.csv`.
+
+**Confirmed ID 9 formatting:** handler loads input integer through `lw a3,(s0)`, splits cases `value < 10` (format-string VA `0x00425634`), `10 <= value < 100` (VA `0x00425644`), and `value == 100` (literal VA `0x00425654`). Other values >100 are not accepted by the third branch; **negative values** would enter first branch, so do not state that the handler rejects negatives. Both formatted branches use `snprintf`, exact strings NOT YET EXTRACTED. ID 10 invokes `snprintf` with input integer and format VA `0x00425684`; ID 35 does `strncpy(output,input,0x1fff)` then common send path. The header/payload of the serial/wire protocol remains UNKNOWN until these strings are extracted. Do not assume safe or correct to issue raw ID 9/10 commands to A31.
+
+**Prior conclusions unchanged:** `VolumeSetCodec` dispatches ID 9 to callback mask 3; `PromptCodec` handles prompt counter and has no gain arithmetic itself; `rootApp.StartupMusic` contains conditional quotient `MaxPromptVolume*100/zoneVolume` for startup prompt, not confirmed for URL Prompt. Master-independent constant acoustic alert loudness remains UNSOLVED.
+
+Next static batch `a31_mcu_format_batch.sh` was generated and validated with `bash -n` (not yet run against original firmware). It reads the inferred string addresses `0x00425634/44/54/64/74/84` using radare2 `ps`, grabs hex bytes for cross-check, and dumps case blocks, saving ZIP under `/Users/lab/AI/airALARM`. User should download script there and run `bash a31_mcu_format_batch.sh`.
