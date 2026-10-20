@@ -48,3 +48,22 @@ Boot cmdline: `console=ttyS1,57600n8 root=/dev/mtdblock6`. **Never write raw MTD
 Collect using `df -k /mnt /vendor`, `du -k /mnt /vendor`, `ls -la /mnt /vendor`, inspect (read-only) `/etc/inittab`, `/etc/init.d`, `/system/workdir` and known startup hooks. Mac-side helper `A31_FLASH_BOOT_AUDIT_READONLY.sh` produces `A31_FLASH_BOOT_AUDIT.txt` via SSH; it does not write to the player.
 
 **Validation status:** physical layout confirmed; flash free space / safe install path / persistent service startup **NOT YET CONFIRMED**.
+
+## Live read-only storage and boot audit — 2026-10-21
+
+Operator supplied `A31_FLASH_BOOT_AUDIT.txt` collected on the actual A31 (`192.168.0.35`).
+
+```text
+/dev/mtdblock8  512 KiB total   216 KiB used   296 KiB free   42%  /mnt
+/dev/mtdblock9 2048 KiB total   212 KiB used  1836 KiB free   10%  /vendor
+```
+
+- `/vendor/knx/` has sufficient **reported** free-space headroom for the ~46KiB native KNX v0.11 ELF plus config and mapping. This is a **candidate**, not a verified safe runtime/install path. Filesystem wear, 64KiB erase blocks, vendor ownership and possible wipe-on-update must be accounted for.
+- `/mnt` currently holds `totalqueue.xml`, `qobuz_account.json`, `keymap.xml`. Preserve these player settings; do not overwrite or replace them.
+- `/vendor` top-level directories: `wiimu`, `user`, `misc`, `data`; retain them. No `/vendor/bin`, `/vendor/etc` or `/vendor/init.d` exists in this live audit.
+- `/etc/init.d` is a symlink to `/etc_ro/init.d`, but `NO_INIT_D_DIRECTORY` was returned by the probe (may be absent or a dangling symlink). `/etc/inittab`, `/etc/rcS`, `/etc/rc.local` are absent. These findings **do not rule out** other boot paths.
+- `/system/workdir/` on the live device contains `live.sh`, `userrestore.sh`, `factory.sh`, `evn.sh`, `script/`, and `bin/`. Their **contents and invocation order were not inspected in this audit**. In a previously archived *different firmware image* (`RAKOIT_2024_all_scripts.txt`) `live.sh` invoked `/home/user.sh`, and the old `live.sh` contained automatic reformat logic for JFFS2 under some error conditions. **Do not assume the archived scripts match the current running 2022 A31 build**; verify on the physical device before selecting any hook.
+- `/system/workdir` has writable Unix mode bits, but the provided mounts report root SquashFS read-only. Do not infer that it is a persistent writable location.
+- **No writes to Flash, firmware, init scripts, or autostart were performed** in the audit.
+
+Next read-only diagnostic: `A31_BOOT_CHAIN_READONLY.sh` retrieves exact live startup-file metadata and *selected* hook lines from `/etc_ro/rcS`, `/home/user.sh`, `/system/workdir/live.sh`, `/system/workdir/userrestore.sh`, `/system/workdir/evn.sh`, and `/sbin/lan.sh`. This is the final design input before proposing an installation method; avoid modifying existing boot scripts until a rollback/recovery plan exists. If no supported persistent hook exists, evaluate a controlled rootfs repack/stock OTA path rather than hijacking legacy `/vendor/user/hdl` or modifying unrelated services.
