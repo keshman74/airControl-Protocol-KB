@@ -78,3 +78,15 @@ Inspected local complete `/mnt/data/airALARM_v0.1.28/src/main.cpp` (hardware-wor
 3. Is WebHook one callback per token? Are events sent for all Ukraine or filterable by region? Does `status` have defined enums? Any ordering guarantee? How should duplicates be handled?
 4. Is Cloudflare Workers callback URL on shared global IP acceptable under the offer's «публічний сервіс ... унікальна IP адреса» definition? Is optional domain/registration requirement?
 5. Are there recommended publication latency/availability targets or status feed alternatives for embedded devices? Is the official Linux client's transport accessible as a public API?
+
+
+## Canonical machine-readable OpenAPI URL and menu labels (2026-10-20)
+
+User supplied **direct official OpenAPI JSON**: https://api.ukrainealarm.com/swagger/v3/swagger.json . A live fetch succeeds; document reports `"openapi":"3.0.4"` and `"info.version":"3.0"`. Treat this as the machine-readable canonical Ukraine Alert API 3.0 specification; Swagger UI is https://api.ukrainealarm.com/swagger/index.html . Checked official operations `/api/v3/alerts`, `/api/v3/alerts/{regionId}`, `/api/v3/alerts/status`, `/api/v3/regions`, `/api/v3/webhook` methods POST/PATCH/DELETE. Source reference must not be interpreted as authorization to exceed unpublished rate limits.
+
+**User-requested Ukrainian web UI renames for next version**:
+- `Мережа ESP32 — Wi-Fi, DHCP / Static IP` → `Мережа — Wi-Fi, DHCP / Static IP`.
+- `Голосові повідомлення — WAV та тест` → `Голосові повідомлення — файли та тест`.
+- `Релейні виходи ESP32` → `Релейні виходи` (also section H3).
+
+A source-only **`airALARM_v0.1.29_MENU_TEST.zip`** was generated from `airALARM_v0.1.28_POLL10_TEST` with precisely these four visible text substitutions and UI version label change. Diff verified, ZIP CRC and file count verified; API audio/relay implementation and network configuration untouched. **Not yet PlatformIO compiled or hardware verified**; previous 10-second test cadence remains experimental, not a certified provider API quota. This is an isolated UI patch, **not** completion of planned scheduler, Cloudflare WebHook, OTA or 1-second prompt timing. Working v0.1.28 hardware baseline remains as rollback.
