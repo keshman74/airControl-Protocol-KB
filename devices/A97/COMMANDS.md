@@ -67,3 +67,7 @@ A direct curl -k HTTPS /httpapi.asp?command=getPresetInfo returned literal unkno
 This negative result overrides the source-documented WiiM command candidate for this tested product/firmware. HTTP200 is not API success. Do not claim all A97 products support getPresetInfo merely because WiiM API documentation lists it. Launch MCUKeyShortClick:N has not been tested by this result.
 
 Next read-only candidate: discover the advertised PlayQueue service through the device description/SCPD and, only if advertised, test GetKeyMapping. Do not assume A31 port49152, A98 port59152, returned mapping semantics, or A98 routine/active-state support for A97 until observed. The currently failing read used the correct selected HTTPS endpoint; switching blindly to HTTPS is not a fix.
+
+
+## A97 PlayQueue preset read — confirmed 2026-10-20
+**HARDWARE CONFIRMED on tested A97 Кухня192.168.0.99:** GetKeyMapping succeeds over HTTP on both49152 and59152,3538-byte responses, MaxNumber21, six named Key1..Key6 records. HTTPS443 getPresetInfo is rejected as unknown command. Preset launch and active-slot tracking remain unverified by this experiment. Canonical response details, request and limits: [A97-PRESETS.md](../../protocols/upnp/playqueue/A97-PRESETS.md).

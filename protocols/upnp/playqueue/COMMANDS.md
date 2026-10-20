@@ -54,3 +54,7 @@ Known parameter names:
 Status: `SOURCE-CONFIRMED / NOT-HW-VERIFIED`
 
 Do not invent parameter value domains or device compatibility until captured/tested.
+
+
+## GetKeyMapping — A97 hardware-confirmed read
+The tested A97 supports advertised GetKeyMapping on both HTTP49152 and59152. See [A97 presets readback and limits](A97-PRESETS.md). This confirmation is specific to GetKeyMapping; it does not promote the other actions above to hardware-confirmed status.
