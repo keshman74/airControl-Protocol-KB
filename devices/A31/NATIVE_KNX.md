@@ -188,3 +188,7 @@ The operator explicitly chose **configurable maximum volume with 100% as the fac
 - Offline assertions cover 100% default, 98→100, no value above 100, and a user-set 70% limit including protection when current volume is already higher.
 - Artifact: `A31_KNX_NATIVE_V10_1.zip` with source, MIPS32 static ELF, build script, tests, config example and checksums.
 - **Status:** HOST BUILD + OFFLINE TESTS PASSED; NOT YET TESTED ON PHYSICAL A31. No firmware write, autostart or persistent install.
+
+## v0.11 — firmware-stage editable KNX group table (HOST-TESTED, A31 PENDING)
+
+A complete native **in-memory 64-entry KNX mapping** and external `GA,ACTION,PARAM,TRIGGER` CSV were built as `A31_KNX_NATIVE_V11.zip`, with an offline HTML editor, Python CLI editor and read-only storage inventory script. Full specification and current limitations: **[KNX_MAPPING_TABLE.md](KNX_MAPPING_TABLE.md)**. `/tmp` is **volatile**; the persistent writable partition has not been identified from the device yet. This package is not a flashable OTA image and does not install autostart. Previous working v0.10 remains the hardware baseline. Offline unit tests pass, physical validation for v0.11 is pending. No repeat tests of already known Linkplay commands are needed; next check is the external table parsing/mapping and real flash layout.
