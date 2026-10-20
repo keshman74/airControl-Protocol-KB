@@ -53,3 +53,8 @@ v0.4.8 contains **204 canonical records**. Original lossless CSV shards remain u
 
 ## Latest normalized audit
 - CHAT-AUDIT-03 findings are already promoted into the canonical protocol/function/device structure. Provenance: `evidence/chat-audits/CHAT-AUDIT-03-300926.md`.
+
+## KNOB integration
+- [Responsiveness, background work and resource use](integration/KNOB-RESPONSIVENESS.md) — v0.8.17, host-tested and build-passed; hardware validation pending.
+- [RAM and screenshot capture](integration/KNOB-RAM-CAPTURE.md)
+- [A98 preset integration](integration/KNOB-A98-PRESETS.md)
