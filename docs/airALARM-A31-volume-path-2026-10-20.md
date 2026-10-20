@@ -214,3 +214,18 @@ User uploaded original `A31_PROMPT_URL_TRACE_20261020_045428.zip`; extracted and
 **Next targeted offline bundle prepared**: `a31_prompt_http_handler_batch.sh` analyzes `rootApp` `0x0040fae0..0x0040fd20`, the `playPromptUrl` xref, adjacent strings and `system/popen` callsites. This read-only script needs operator execution against extracted Rakoit rootApp on Mac. Output ZIP under `/Users/lab/AI/airALARM`; no direct A31 commands. Script syntax checked with `bash -n`; radare2 run pending.
 
 **Open question:** whether `playPromptUrl` invokes smplayer with direct percentage parameter or inherited zone-volume compensation. Fixed audible alert loudness independent of zone volume remains UNSOLVED.
+
+
+## HTTP Prompt handler branch disassembled (2026-10-20 04:57)
+
+Source: uploaded original `A31_PROMPT_HTTP_HANDLER_20261020_045715.zip`, including `rootApp` r2 disassembly of `sym.GoaheadCmdParsethread`. **STATIC BINARY VERIFIED**, not a runtime trace of a specific request.
+
+- At `0x0040fbc8–0x0040fbe0`, `strncmp(input,"playPromptUrl",13)` selects this HTTP command branch. Code sets `s2=input+14` at `0x0040fc00`.
+- `0x0040fc08–0x0040fc18` calls `strstr(s2,<literal VA 0x0041baec>)`. Exact needle **NOT YET decoded**. This branch's success is required to reach player-spawn code.
+- `0x0040fc20–0x0040fc30` loads field `g_wiimu_shm+0x3C8` and tests `<40` (`slti v0,v0,0x28`). Semantics of field 0x3C8 **UNKNOWN**; do not call it current master volume or priority mode without confirmation.
+- On allowed path, `terminalPidbyName("smplayer")` at `0x0040fc40`, `snprintf(buf,0x3ff,"smplayer %s &",s2)` at `0x0040fc60`, and `system(buf)` at `0x0040fc70`. The invoked shell command therefore incorporates raw argument substring `s2`. It does not append a separately computed gain number in this branch, but the supplied substring can itself include a CLI gain argument.
+- On rejected path, execution writes a short error/response via `UnixSocketServer_write`; the literal has not been fully decoded. The recognized branch returns a 2-byte response after system() at `0x0040fc88`. **Never assert that all playPromptUrl invocations work for every URL string**.
+- Separate hardware tests previously showed some `playPromptUrl:<url>%20<number>` forms do play with software gain and radio resumes; this static analysis clarifies one possible parser path, but actual string value at 0x0041baec must be resolved first.
+- The exact format literal at `0x00420a94` reads `smplayer %s &`; `smplayer` literal at `0x00420a88`, command literal `playPromptUrl` at `0x00420a78`.
+
+Prepared `a31_prompt_http_conditions_batch.sh` (syntax checked with bash -n, device run pending) to extract the `strstr` needle VA 0x0041baec, command bytes and surrounding branch, report under `/Users/lab/AI/airALARM`. It reads only original firmware `rootApp`; no SSH, audio playback or device writes. **Alert independent of master volume remains UNSOLVED.**
