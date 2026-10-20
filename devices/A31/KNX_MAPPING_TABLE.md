@@ -51,3 +51,9 @@ The offline bundle includes an HTML/JS table editor and Python CLI CSV editor. B
 ## Live flash inventory — 2026-10-21
 
 The actual A31 has two writable JFFS2 mounts: `/mnt` on mtd8 (512 KiB raw) and `/vendor` on mtd9 (2 MiB raw); root SquashFS is read-only and `/tmp`, `/etc`, `/var` are ramfs. `/vendor/knx/` is a **candidate** persistent location, not an approved write target until free space and vendor file responsibilities are reviewed. See [read-only A31 storage evidence](STORAGE_LAYOUT_2026-10-21.md). No flash writes, service installation or autostart yet.
+
+## Real A31 auto-start route — validated from live boot scripts (2026-10-21)
+
+Read-only evidence: [A31 flash and boot chain](STORAGE_LAYOUT_2026-10-21.md). `live.sh` mounts `/vendor`, executes `/home/user.sh`, and then runs `rootApp`. `user.sh` launches `daemonize /vendor/user/hdl -d 5 ...` when that file exists, otherwise stock `daemonize /home/bin/hdl`. **This is an override for an essential service, not a KNX hook; never put the KNX executable itself in `/vendor/user/hdl`.** `/vendor/user/user.sh` is deleted at each boot and is unsuitable.
+
+A non-flashable offline design-only stage `A31_KNX_BOOT_INTEGRATION_STAGE_V1.zip` was prepared: proposed data layout in `/vendor/knx`, inert `hdl-wrapper.PREVIEW.txt` forwarding to stock `/home/bin/hdl`, read-only host checker and rollback plan. **No install, no hook activation, no flash writes or reboot conducted.** Confirm v0.11 mapping on real A31 from `/tmp` before any flash staging; then separately review wrapper compatibility, backup/recovery and request explicit permission.
