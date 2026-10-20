@@ -1,7 +1,7 @@
 # A97 presets — hardware readback, 2026-10-20
 
 Canonical ID: QRY-A97-UPNP-KEY-MAPPING.
-Status: **HARDWARE CONFIRMED READ on the tested device**.
+Status: **HARDWARE CONFIRMED READ, KNOB DISPLAY AND PRESET LAUNCH on the tested device**.
 
 ## Device and rejected HTTP API
 - Zone: Кухня; IP192.168.0.99; classified A97 by KNOB and identified as A97 by the user.
@@ -54,9 +54,9 @@ MaxNumber21 describes the returned mapping capacity/structure; it is not the cou
 - The successful read is HTTP SOAP on the UPnP ports, separate from the selected HTTPS443 command endpoint. Do not change normal device control globally to plain HTTP because PlayQueue uses it.
 - Read on explicit menu entry/Refresh, serialize with background player requests and retain bounded response/array handling.
 - Timestamp removal is a display operation; preserve original key identities.
-- This experiment did not launch a preset. HTTPS MCUKeyShortClick:N remains a documented candidate until separately hardware-tested on this A97. No A31 TCP preset command is proven by this readback.
+- The initial terminal experiment only read presets. The subsequent KNOB0.8.21 hardware test confirmed display and launch (see confirmation below): the implemented launch path is HTTPS443 /httpapi.asp?command=MCUKeyShortClick:N. No A31 TCP preset command is established by these tests.
 - A98 PlayQueue/AVTransport/getAllRoutines active-preset correlation is not established for A97 by this experiment.
-- Hardware verification of the corresponding future KNOB list integration remains pending; this record confirms the direct terminal read, not a firmware fix.
+- KNOB0.8.21 list display and preset launch are now hardware-confirmed on this tested A97. This does not establish support for every A97 product/firmware.
 
 Provenance: user terminal output in the airControl KNOB development conversation on2026-10-20, following the read-only advertised-service/SCPD diagnostic. No service tokens, serials or raw media metadata are included here.
 
@@ -68,4 +68,15 @@ Provenance: user terminal output in the airControl KNOB development conversation
 - Existing A31, A33 and A98 paths are preserved; regression tests cover their separate read routes. A97 host tests cover both SOAP ports, fallback, malformed replies, empty/error handling and original slot limits.
 - GitHub Actions build and tests passed: https://github.com/keshman74/airKNOB/actions/runs/39488634901
 - Published OTA version:0.8.21; binary https://raw.githubusercontent.com/keshman74/airKNOB/main/firmware/airControl-KNOB-v0.8.21.bin (1344976 bytes; MD5 afbe7a1cab3cffcfe4632b25e28986e9).
-- Firmware menu behavior on the physical A97 and preset launch still require user verification. The passing build/tests do not change the hardware evidence boundary above.
+- Subsequent user hardware confirmation validates firmware list display and preset launch on the tested A97; see below.
+
+## Hardware confirmation — KNOB0.8.21, 2026-10-20
+The user confirmed after the published0.8.21 update: «работает! Прессеты отображаются и запускаются!».
+
+- Tested setup: A97 zone Кухня,192.168.0.99; KNOB192.168.0.41, firmware0.8.21 in the current test sequence.
+- Confirmed outcome: preset names appear in the KNOB menu and selecting a preset starts playback.
+- Successful integrated scheme: read using PlayQueue GetKeyMapping over HTTP UPnP; launch using the unchanged selected HTTPS443 HTTP API command MCUKeyShortClick:N, preserving the original KeyN slot number.
+- Launch request form: `https://192.168.0.99/httpapi.asp?command=MCUKeyShortClick:N` (N is the original supported preset slot).
+- The user did not enumerate individual tested slots, supply a new packet trace, or report per-command timings. Do not claim every slot1–12 was tested or infer exact response text.
+- Active-preset tracking for changes from other controllers and A98-style routine/input correlation remain unverified for A97.
+- This confirmation supersedes the earlier pending status for KNOB list integration and launch, while retaining the negative getPresetInfo result.
