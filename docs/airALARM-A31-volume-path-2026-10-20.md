@@ -341,3 +341,21 @@ A complete ESP32 **v0.1.28 TEST CANDIDATE** was prepared, based on hardware-conf
 **Open hardware questions for v0.1.28:** whether `setPlayerCmd:pause` actually stops background internet radio on this A31, whether native `playPromptUrl` can still play while radio is paused, whether Prompt auto-resumes radio **despite earlier pause**, whether `setPlayerCmd:play` resumes the previous station correctly, and whether both ~2s leakage intervals disappear. Timer (5–55s) does not observe the actual end of MP3. Tested v0.1.27 remains rollback baseline, not replaceable until experiments pass.
 
 **TEST PLAN:** build on Mac `cd /Users/lab/AI/airALARM/airALARM_v0.1.28 && ~/.platformio/penv/bin/pio run`. Flash only TEST ESP32 with `pio run -t upload` (do not erase flash or uploadfs). Non-emergency short MP3, radio at 10–15%, selected message 25–30%; verify silence before and after MP3 and restoration + radio source resumption. Uncheck user-volume checkbox, save, confirm no volume changes and prompt plays at current master. Capture serial trace 115200. No live safety alerting deployment without validation.
+
+
+## LIVE EVENT DELIVERY DISCOVERY: Ukraine Alert API 3.0 WebHook (2026-10-20)
+
+**Canonical evidence**: project-provided OpenAPI v3 specification (`Ukraine-Alert-API.txt`), authoritative source `https://api.ukrainealarm.com/swagger/index.html`, API v3.0. It explicitly defines:
+- `POST /api/v3/webhook` — subscribe for new siren/alert and clear/cancel notifications.
+- `PATCH /api/v3/webhook` — update callback URL.
+- `DELETE /api/v3/webhook` — unsubscribe.
+- Request model `WebHookModel {webHookUrl: string|null}`; payload schema `WebHookMessageModel` exposes `status`, `regionId` (integer), `alarmType`, `createdAt`, `alertLevel`, `reason`, `activeAlertLevels`. Authorization API key in `Authorization` header.
+- The API docs refer to `/webhook-signature-validation.html` and `/webhook-message-model.html`, but the official detail pages were NOT successfully retrieved; **do not implement a guessed signature algorithm**, verify docs or get a signed sample before deployment.
+- Existing endpoints `GET /api/v3/alerts/{regionId}` and `GET /api/v3/alerts/status` permit periodic reconciliation/check of lastActionIndex. API excerpt does not advertise a general public client WebSocket or SSE subscription; **WebHook is the supported event push interface**.
+
+**Recommended implementation, not yet built/tested:**
+`UkraineAlert API → verified HTTPS WebHook endpoint on internet-accessible relay → authenticated outbound persistent WebSocket (or MQTT-over-TLS) ESP32 → immediate local state machine/event priority and A31 playback → push status to browser over LAN WebSocket/SSE`. ESP32 normally sits behind NAT, so cannot receive unsolicited public WebHook directly without dangerous public exposure. Relay must validate webhook authenticity, verify applicable region/type, filter stale/out-of-order/duplicate events, and use auth/TLS on device push; ESP32 must reconcile with authoritative HTTP API after reconnect/startup. Retain current 30s REST polling as fallback (only modify interval following API rate-limit verification). Time-to-event is subject to the upstream data provider and network transport; **do not claim zero latency or real-time safety guarantees**.
+
+**Priority rule (user-confirmed):** confirmed air alert preempts `Хвилина мовчання` scheduled audio; current ESP32 event queue's ~65s gap must NOT delay urgent alert notification; when alert begins, stop scheduled audio promptly (physical device stop method still to be hardware-tested) and trigger alert. Browser should reflect alert and link/connection status promptly via LAN state updates. A cloud relay will be a new external dependency: failure fallback polling needed.
+
+**Status:** discovery/architecture proposal only, not deployed or tested. Preserve the user hardware-verified v0.1.28 A31 master temporary prompt volume restoration and current-volume mode.
