@@ -36,3 +36,40 @@ Additional static sources:
 Generated **`a31_codec_volume_deep_batch.sh`** as a read-only Mac/radare2 bundle to disassemble `VolumeSetCodec`, `MuteCodec`, `PromptCodec`, `Function_VolumeSet`, `Function_VolumeNotify`, relevant `ioctl` and `open` cross-references; plus `liblpml_alsa.so` gain helper functions and `a01controller` ioctl callsites. Reports and ZIP default under **`/Users/lab/AI/airALARM`**; source extracted firmware under **`/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`**. Tested with `bash -n` and end-to-end mock `radare2`/ZIP invocation, **NOT run on original Rakoit binaries**. Operator: download into project directory and execute `bash a31_codec_volume_deep_batch.sh`, send ZIP. Some `sym.X` lookups may be missing in stripped binaries; inspect `*_symbols.txt` and stderr before treating absence as a negative finding.
 
 **Goal status:** fixed audible airALARM Prompt loudness independent of zone master level still **UNSOLVED**. Preserve working airALARM v0.1.26, device volume, and NVRAM.
+
+
+## Offline deep codec-volume investigation: 2026-10-20 03:58
+
+Operator supplied `A31_CODEC_VOLUME_DEEP_20261020_035829.zip`; inspected its original radare2 outputs:
+- `mv_ioguard` 32-bit MIPS ELF SHA256 `41b127e2dee1ce98d99e6d493a198a4dea7afbee5bc4de2e1deb04b8316f79f3`, report ~52.8 KB.
+- `liblpml_alsa.so` SHA256 `1edfefb68a7be62f2dbcd9b11b2fad8cc6bd431127674c15cf99264806282a7a`, report ~10.9 KB.
+- `a01controller` SHA256 `835d646bb83d3cf8d26c2ce1a3d115aaa323f781e0e2e102a62f8a42520a283b`, symbols ~148 KB.
+This is **static binary evidence**, not live proof of acoustic gain behavior.
+
+### Key confirmation: VolumeSetCodec performs TWO routes
+
+`mv_ioguard` symbol `VolumeSetCodec` at VA `0x0040f0f0`, size 476. Code at `0x0040f118–0x0040f128` calls `MCUCommandSend(9,3, &volume_arg, 4)` (raw argument integer stored on caller stack, argument semantics/MCU frame not yet verified). This is an **explicit separate MCU channel**, rather than purely changing local software gain.
+
+If `g_platform_opt.codec_dev` pointer at `g_platform_opt+4` is nonzero, subsequent `0x0040f140–0x0040f244` code locks `codec_mute_mutex`, opens configured codec-dev pathname using `open(path,O_RDWR)`, reads **40 bytes** into stack struct, modifies a state field, writes **40 bytes**, closes FD, unlocks. It logs `mv_ioguard set the volume(%d) g_wiimu_shm->volume(%d)`; second value is **`*(g_wiimu_shm + 0x3BC)`** (`0x0040f1b8`), thereby giving strong evidence that shared-memory offset `0x3BC` relates to zone volume. If state indicates a force-muted condition and requested volume becomes positive, sends another `MCUCommandSend(10,3,&zero,4)` after 20 ms at `0x0040f28c–0x0040f2a0`; **do not treat this as a harmless command to reproduce** or infer exact mute semantics from integers alone.
+
+This strongly suggests dual volume handling via MCU control and codec driver state, but DOES NOT YET PROVE which of them affects physical final loudness nor what master-independent Prompt gain can be applied.
+
+### Important negative: PromptCodec is a COUNTER, not amplitude setter
+
+`PromptCodec` at VA `0x0040efc4` (size 300): locks the same mutex and opens the configured codec device, reads 40-byte state, manipulates field at stack offset `0x2c` (offset **0x0C** inside state struct at stack base `sp+0x20`): when arg1==1 increments, when arg1==-1 resets to zero, otherwise decrements if >0, then writes state back. Diagnostic `!!!!!!!!!!!!!!PromptCodec %d` references the resulting counter. **No arithmetic for a gain-setting value in this function.** It may activate codec behavior elsewhere when prompt flag/count changes, so this is not proof that codec hardware has no prompt-sensitive gain logic.
+
+`MuteCodec` at VA `0x0040ee60`, size 356 likewise reads/writes a 40-byte state struct, updates a mute-like field and can send `MCUCommandSend(0x23,3,...)`. `PauseCodec` at `0x0040ed48` handles a pause-state field. The meaning of MCU IDs still needs command-send framing and receiver analysis.
+
+### Controller and LPML software-gain paths
+
+`Function_VolumeSet` `0x004068a0` and `Function_VolumeNotify` `0x00406ae8` update `g_vol_save` and send volume-related socket messages (`SocketClientReadWriteMsg`). These are event relay/reporting paths, not evidence of independent Prompt output gain.
+
+`liblpml_alsa.so` `LPML_ALSA_fade` `0x00000cf8`, size 680, is **actual PCM sample-processing logic**, invoked by `LPML_snd_pcm_writei`. It calls helper `LPML_ALSA_helper_mute_flag_get`, `LPML_ALSA_helper_vol_get`, `LPML_ALSA_helper_selfVol_get`, `LPML_ALSA_helper_fade_flag_get`, and `LPML_ALSA_helper_fade_step_get`; implements volume/fade state updates, and reads/writes signed 16-bit PCM samples via `lh/sh` at `0x00000eb8–0x00000ee8` and `0x00000f08–0x00000f34`. Calls scaling helper at `0x00000bd0`. This is a *software/stream PCM path*, separate from MCU/codec control. Need dump the actual scaler and find its runtime users before claiming it affects native Prompt.
+
+`a01controller` report provides symbols and ioctl / `wmrm_sound_write` cross-refs, but **does not identify a codec master gain setter** from this report.
+
+### Targeted next offline batch
+
+Prepared and syntax-checked `a31_codec_mcu_trace_batch.sh`; test run with mock radare2 sources produced a valid ZIP. It dumps `sym.MCUCommandSend`, `VolumeSetCodec`, `PromptCodec`, `MuteCodec`, `SendDataByI2S`, event parser section, `LPML_ALSA_fade`, scale helper `0x00000bd0`, and rootApp startup/state context. Reports and ZIP default to `/Users/lab/AI/airALARM`, original firmware input `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`. Execute on user's Mac `bash a31_codec_mcu_trace_batch.sh` and upload ZIP. **Original binary run pending**.
+
+**Goal remains UNSOLVED:** fixed acoustic air alert volume independent of zone master volume. Preserve working airALARM v0.1.26, no NVRAM changes, no commands to MCU or codec.
