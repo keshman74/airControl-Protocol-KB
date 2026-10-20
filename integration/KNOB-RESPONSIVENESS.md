@@ -73,3 +73,9 @@ A31 and A33 retain existing preset-read paths, including the hardware-confirmed 
 
 Actual deferred-reader host regression passed: no overlapping network read while worker busy, single execution, cancellation, OTA/reboot/volume/scan gates, retry pacing, and A31/A33 isolation. The complete build/test result is tracked at https://github.com/keshman74/airKNOB/actions/runs/39482167685 .
 These changes remove concrete overlap/stack-depth risks; they do not establish the observed panic's root cause or prove a hardware fix. If reproduced, obtain serial exception/Backtrace plus post-boot /health. Do not disable watchdogs or erase settings as a substitute for evidence.
+
+## User hardware confirmation — KNOB0.8.19, 2026-10-20
+
+After receiving0.8.19 for the A98 preset-menu restart, the user replied “исправили!” (“fixed”). Mark the previously reported A98 preset-menu restart as **USER/HARDWARE-VERIFIED RESOLVED on the tested device in this retest**. The exact internal panic cause remains unproven; no serial backtrace was supplied. Do not generalize this short retest to long-running stability or every A98 firmware.
+
+Confirmed checkpoints to preserve: A31 preset list fixed in0.8.18 (MaxNumber21 variant); A98 preset-menu restart resolved in0.8.19 with deferred, serialized preset loading and reduced loop stack use; A33 preset behavior previously reported normal. A97 has no new hardware result in this exchange.
