@@ -26,7 +26,7 @@ mtd3  0x00010000  Factory           (64 KiB)
 mtd4  0x00200000  bkKernel         (2048 KiB)
 mtd5  0x001e039f  Kernel
 mtd6  0x0094fc61  RootFS
-mtd7  0x00b30000  Kernel_RootFS    (11520 KiB aggregate)
+mtd7  0x00b30000  Kernel_RootFS    (11456 KiB aggregate)
 mtd8  0x00080000  user             (512 KiB)  -> /mnt
 mtd9  0x00200000  user2            (2048 KiB) -> /vendor
 erasesize=0x10000 (64 KiB) on all listed MTD records
