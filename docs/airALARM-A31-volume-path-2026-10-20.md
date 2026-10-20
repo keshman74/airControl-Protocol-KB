@@ -285,3 +285,14 @@ Source: operator uploaded `A31_M_MODE_20261020_161720.zip`; extracted original `
 - No gain changes, device SSH commands, or changes to working airALARM v0.1.26 were performed.
 
 **Open problem:** fixed acoustic Prompt loudness regardless of master-volume setting remains unsolved; next highest-value research should avoid overfocus on M_MODE enum and instead trace URL Prompt relative to downstream master gain / codec state or seek noninvasive recordings at different zone levels.
+
+
+## Compensation feasibility model prepared (2026-10-20)
+
+The user agreed to investigate fixed perceived airALARM volume without changing zone/master controls. A standalone **offline, read-only** `a31_prompt_compensation_batch.sh` has been created and locally tested (bash syntax and end-to-end ZIP generation). It embeds the exact 101-entry Q16 `smplayer` table from `docs/data/a31-smplayer-dither-coefficients-2026-10-20.csv`; verifies entry count and sample coefficients.
+
+- For hypothetical zone gain `M(z)`, `smplayer` coefficient `G(n)`, approximate alert output is proportional to `M(z)*G(n)` **only if** the master gain is a multiplicative downstream block without other routing/limiting. To match a reference (zone 30, CLI 50), desired `G=reference_output / M(z)`. Choose closest n in 0..100.
+- Verified Q16 table `G(10)=0.0703125`, `G(50)=0.21875`, `G(100)=1.0`. Because G cannot exceed 1, **digital Prompt gain alone cannot compensate arbitrary master attenuation**, especially master mute/gain=0. This is a mathematical constraint and NOT a hardware proof that true A31 acoustic gain is a linear function of UI percent.
+- Outputs `smplayer_q16_exact.csv`, `ILLUSTRATIVE_linear_master_not_verified.csv`, README and blank `measurements_TEMPLATE.csv`. Optional user-made `zone,relative_gain` amplitude measurements produce `MEASURED_normalized_model.csv` (relative gain normalized at zone 30). Real microphone measurements need controlled conditions; no measurement is auto-collected and no device is commanded.
+- Run on Mac: `cd /Users/lab/AI/airALARM && bash a31_prompt_compensation_batch.sh`; optionally append absolute output folder then measurements CSV filename. Reports ZIP in /Users/lab/AI/airALARM. No SSH, firmware edits or airALARM v0.1.26 modifications.
+- **Research status UNSOLVED**: achieving guaranteed fixed physical loudness across master zone values requires an independent downstream codec/MCU gain bypass, or a precisely characterized alternative path and physical verification. Numerical model alone is not evidence of such mechanism. Do not use these results as emergency alert reliability certification.
