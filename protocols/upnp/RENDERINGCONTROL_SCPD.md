@@ -36,3 +36,6 @@ This confirms advertised endpoint locations, not successful action execution, ev
 The first diagnostic printed only blank errors after the port numbers. Its strict namespace assumption could raise StopIteration with an empty message. The successful follow-up used local XML tag names; it does not prove the exact namespace defect without the original raw XML.
 
 Next diagnostic: inspect this device's SCPD arguments, time GetVolume and submit SetVolume with the just-read current level. Same-level acceptance/readback is weaker evidence than verifying a changed audible/output level. The Linkplay HTTP API transport remains HTTPS443; this separate UPnP service does not authorize a global downgrade of /httpapi.asp.
+
+## A97 action execution — 2026-10-20
+The user tested port49152 GetVolume (12/23/15ms, CurrentVolume94), SetVolume with the same94 (15ms, validated successful response), then GetVolume readback (14ms,94). This promotes GetVolume to HARDWARE-VERIFIED and SetVolume to HARDWARE-VERIFIED SAME-LEVEL ACCEPTANCE/READBACK for this A97 only. Changed-level/audible output, ESP32 timing and event delivery remain unverified. Exact requests, scope and KNOB0.8.23 integration: [A97-VOLUME.md](A97-VOLUME.md).

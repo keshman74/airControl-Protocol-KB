@@ -10,3 +10,9 @@
 - `CMD-ACS2-VOLUME`, `CMD-ACS2-VOL-UP`, `CMD-ACS2-VOL-DOWN`, `CMD-ACS2-MAX-VOLUME` — **DOCUMENTED**
 - `QRY-UPNP-RC-GET-VOLUME` — **SCPD-DOCUMENTED / HARDWARE-ENDPOINT-VERIFIED**
 - `CMD-UPNP-RC-SET-VOLUME` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+
+## A97 RenderingControl execution evidence — 2026-10-20
+- QRY-UPNP-RC-GET-VOLUME [tested A97 HTTP49152] — **HARDWARE-VERIFIED**, CurrentVolume94,12–23ms from Mac.
+- CMD-UPNP-RC-SET-VOLUME [same A97] — **HARDWARE-VERIFIED SAME-LEVEL ACCEPTANCE/READBACK**, DesiredVolume94,15ms; follow-up94 in14ms. Changed-level output and other hardware remain unverified.
+- KNOB0.8.23 implements this volume path with HTTPS fallback; full CI/build passed; KNOB hardware validation pending.
+Canonical request, timing and limits: [A97-VOLUME.md](../../protocols/upnp/A97-VOLUME.md).

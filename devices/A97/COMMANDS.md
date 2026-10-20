@@ -71,3 +71,11 @@ Next read-only candidate: discover the advertised PlayQueue service through the 
 
 ## A97 PlayQueue preset read — confirmed 2026-10-20
 **HARDWARE CONFIRMED on tested A97 Кухня192.168.0.99:** GetKeyMapping succeeds over HTTP on both49152 and59152,3538-byte responses, MaxNumber21, six named Key1..Key6 records. HTTPS443 getPresetInfo is rejected as unknown command. The initial read experiment did not test launch. Subsequent KNOB0.8.21 testing confirmed that preset names display and selections start playback using HTTPS443 `MCUKeyShortClick:N`; user confirmation: «работает! Прессеты отображаются и запускаются!». Individual tested slots were not enumerated. Active-slot tracking remains unverified. Canonical response details, request and limits: [A97-PRESETS.md](../../protocols/upnp/playqueue/A97-PRESETS.md).
+
+## A97 RenderingControl volume — tested 2026-10-20
+On Кухня192.168.0.99, HTTP49152 /upnp/control/rendercontrol1:
+- GetVolume(InstanceID0,ChannelMaster) succeeds;12/23/15ms from Mac,CurrentVolume94.
+- SetVolume(InstanceID0,ChannelMaster,DesiredVolume94) succeeds in15ms, matching GetVolume readback94 in14ms. Status: HARDWARE-VERIFIED SAME-LEVEL ACCEPTANCE, not a changed-level/audible test.
+- Event endpoint is advertised but volume event subscription/payload is not tested here.
+KNOB0.8.23 uses this route for encoder volume with paced HTTPS fallback; build/tests passed, KNOB hardware speed validation pending. Other /httpapi.asp commands remain HTTPS443.
+Canonical: [A97-VOLUME.md](../../protocols/upnp/A97-VOLUME.md).
