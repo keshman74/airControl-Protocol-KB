@@ -144,3 +144,12 @@ Prior binary analysis showed `VolumeSetCodec` calls `MCUCommandSend(9,3,&volume,
 Runtime issue: `reports/format_strings.stderr.txt` emits radare2 hint `Relocs not applied`; raw rodata bytes and direct disassembly validate the literal formats regardless. Future calls may set `-e bin.relocs.apply=true` for symbol readability.
 
 **NEXT FOCUS:** cross-reference call sites and dispatch ID (likely PMT modes, but verify) for `AXX+PMT` and compare with SHM MaxPromptVolume / the URL Prompt entry path. Stay offline/read-only, preserve airALARM v0.1.26; do not confuse fixed digital gain with fixed acoustic loudness.
+
+
+## Next investigation: PMT mode event flow (2026-10-20)
+
+From the **previously uploaded** original MCU routing jump-table CSV (static firmware analysis), dispatch **command ID 18** maps to handler `0x0040cad8` in `mv_ioguard.MCUCommandSend` (50 entries from VA `0x00428840`). Original earlier rodata extraction confirmed that this case selects `AXX+PMT+002\\n` for int 2, `AXX+PMT+001\\n` for int 1, and `AXX+PMT+000\\n` otherwise. **These are internal MCU commands, not documented HTTP API controls.** This is binary-confirmed string generation, not proof of MCU physical effect. `PromptCodec` is independently known to mutate local prompt-state counts and does not itself compute numeric gain. Actual downstream MCU response and alert-volume independence remain unknown.
+
+Prepared **`a31_pmt_trace_batch.sh`** to search static code references to `MCUCommandSend` and `PromptCodec`, fully dump ID18 formatter, rootApp `StartupMusic`, `libmvmsg` prompt helpers, and `smplayer` start/end notices. Defaults to original firmware `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`; report and ZIP under `/Users/lab/AI/airALARM`. Tested with `bash -n` and end-to-end mocked radare2/ZIP workflow, **not yet executed on original firmware**. Mac run: `cd /Users/lab/AI/airALARM && bash a31_pmt_trace_batch.sh`. No SSH/device operations, NVRAM writes, audio play or volume changes.
+
+Research objective remains UNSOLVED: fixed perceived alarm loudness independent of zone/master volume. Preserve airALARM v0.1.26.
