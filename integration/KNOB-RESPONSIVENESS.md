@@ -79,3 +79,16 @@ These changes remove concrete overlap/stack-depth risks; they do not establish t
 After receiving0.8.19 for the A98 preset-menu restart, the user replied “исправили!” (“fixed”). Mark the previously reported A98 preset-menu restart as **USER/HARDWARE-VERIFIED RESOLVED on the tested device in this retest**. The exact internal panic cause remains unproven; no serial backtrace was supplied. Do not generalize this short retest to long-running stability or every A98 firmware.
 
 Confirmed checkpoints to preserve: A31 preset list fixed in0.8.18 (MaxNumber21 variant); A98 preset-menu restart resolved in0.8.19 with deferred, serialized preset loading and reduced loop stack use; A33 preset behavior previously reported normal. A97 has no new hardware result in this exchange.
+
+## A97/A98 volume optimization — KNOB0.8.22, 2026-10-20
+Status: IMPLEMENTED / HOST-TESTED / BUILD-PASSED; A97/A98 hardware speed comparison pending.
+
+The user reports noticeably improved A31 control/feedback and good A33 behavior after previous optimization. This qualitative observation supplies no timing measurements or new exact firmware identification.
+
+A97/A98 encoder volume now runs on the existing background worker, with one request in flight and one latest absolute target. Turns replace that target; an older result cannot clear or delay a newer value. The worker can retain one HTTPS socket for volume/getPlayerStatus if the server permits it, honours closure, and releases it after1500ms idle or before artwork/other-chip work. No automatic HTTP replay is added. Dispatch is paced at120ms; existing error retries remain bounded. A31/A33 TCP paths and all confirmed preset routes/correlation remain unchanged.
+
+Foreground menu/transport requests are still separate synchronous paths; this is not a claim of universal serialization or fully asynchronous controls. External status fallback remains4s; no new A97 or RenderingControl event support is asserted. Health telemetry exposes volume attempt durations and successful worker socket reuse.
+
+Build/tests passed: https://github.com/keshman74/airKNOB/actions/runs/39492189870.
+OTA0.8.22 published; 1348464 bytes; MD5 185eac7b006d2f15700770641e8039b2.
+Full implementation, diagnostics, evidence and limits: [KNOB-WIIM-OPTIMIZATION-v0.8.22.md](KNOB-WIIM-OPTIMIZATION-v0.8.22.md).
