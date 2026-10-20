@@ -201,3 +201,16 @@ Uploaded bundle `A31_PMT_EVENT_STRINGS_20261020_044925.zip`, inspected original 
 **Important correction:** In previously captured start/end handler branches, PMT start sends 0 and end sends 1 when conditions allow. Do NOT claim PMT 002 is sent at start from these branches. Meaning of PMT 002 on MCU and analog output remains unknown. PMT is **mode signaling, not proven separate gain**. Fixed acoustic airALARM loudness across master-zone volume levels is still UNSOLVED.
 
 Prepared next offline script `a31_prompt_url_trace_batch.sh` (bash syntax verified, actual operator execution pending) for consolidated rootApp HTTP command parser, smplayer and notification receiver analysis; output ZIP under `/Users/lab/AI/airALARM`. No live device control, firmware modification or NVRAM changes.
+
+
+## RootApp URL Prompt entrypoint identified, 2026-10-20 04:54
+
+User uploaded original `A31_PROMPT_URL_TRACE_20261020_045428.zip`; extracted and examined `root.txt`, `mv.txt`, `lib.txt` and command scripts. Read-only static analysis.
+
+**Confirmed new linkage:** `rootApp` string `playPromptUrl` at VA `0x00420a78` has a **real code xref from `sym.GoaheadCmdParsethread` at `0x0040fbd4`** (`addiu a1,a1,str.playPromptUrl`). Earlier bundles without a fully analyzed parser returned an empty xref; absence was a tooling limitation, now corrected. `rootApp` adjacent .rodata literals `smplayer` VA `0x00420a88` and `smplayer %s &\\n` VA `0x00420a94`; proximity suggests but does **not yet prove** the URL Prompt branch uses this exact shell formatting or what gain it passes.
+
+`libmvmsg.so` still confirms shared helper `volume_pormpt_direct` calls smplayer with formats `smplayer %s %d %s` and `smplayer %s %s`. `mv_ioguard` confirms receiving `GNOTIFY=volume_prompt_start/end/init` and passing start/end to MCU mode PMT 000/001 under conditions. Their integration with actual URL Prompt needs parser block disassembly.
+
+**Next targeted offline bundle prepared**: `a31_prompt_http_handler_batch.sh` analyzes `rootApp` `0x0040fae0..0x0040fd20`, the `playPromptUrl` xref, adjacent strings and `system/popen` callsites. This read-only script needs operator execution against extracted Rakoit rootApp on Mac. Output ZIP under `/Users/lab/AI/airALARM`; no direct A31 commands. Script syntax checked with `bash -n`; radare2 run pending.
+
+**Open question:** whether `playPromptUrl` invokes smplayer with direct percentage parameter or inherited zone-volume compensation. Fixed audible alert loudness independent of zone volume remains UNSOLVED.
