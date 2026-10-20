@@ -58,3 +58,25 @@ User report in the KNOB development conversation: «на а98 заметно с�
 - A97: encoder volume still lags; treat as an unresolved responsiveness issue. Do not mark A97 speed optimization hardware-verified successful.
 - Need a health snapshot before/after turning with the A97 selected, including firmware, zone_chip, wiim_volume_sends, wiim_volume_last_ms/max_ms, wiim_https_requests/reused, background job/state and memory. Counters are boot-wide, so compare deltas with the same zone selected rather than attributing totals across multiple chips.
 - Root cause remains unproven: separate request/TLS duration from worker contention or UI/rendering symptoms before further transport changes. Do not switch A97 to A31 TCP or plain HTTP on the basis of this report.
+
+## A97 health comparison — firmware0.8.22, 2026-10-20
+KNOB192.168.0.41; selected A97 zone192.168.0.99; zone_epoch3 in both samples.
+| Field | Before | After |
+|---|---:|---:|
+| uptime_s | 388 | 411 |
+| wiim_volume_sends | 68 | 82 |
+| wiim_volume_last_ms | 1305 | 1221 |
+| wiim_volume_max_ms | 1346 | 1346 |
+| wiim_https_requests | 162 | 178 |
+| wiim_https_reused | 46 | 46 |
+| free_heap | 87920 | 84212 |
+| min_free_heap | 37888 | 37888 |
+| largest_free_block | 65524 | 65524 |
+
+Both snapshots: background_poll2/background_job=status, loop stack watermark1600, worker watermark3112, reset_reason3. No reboot is shown between the samples (uptime increases). No memory leak is established by these two heap values.
+
+Over23 seconds:14 volume attempts,16 worker HTTPS attempts,0 additional successful requests on an already-connected worker socket. The earlier46 reused successes are boot-wide and cannot be attributed to A97. Last completed volume attempts took1.305s and1.221s; the1.346s maximum is boot-wide. Attempt counters are not successful player-application acknowledgements.
+
+Conclusion: the measured volume-request duration is sufficient to explain slow command delivery despite asynchronous UI dispatch. No successful socket reuse was recorded in this interval. This does not isolate TLS-handshake time from server response/body/network time or prove the server always forbids keep-alive.
+
+Next evidence needed: inspect the A97-advertised RenderingControl SCPD and time GetVolume over its advertised UPnP HTTP endpoint. The KB currently marks SetVolume as SCPD-documented, not per-action hardware verified. Do not change /httpapi.asp to plain HTTP or use A31 TCP as an assumed substitute. GetVolume diagnostic is read-only; SetVolume and event payload compatibility require separate confirmation before firmware integration.
