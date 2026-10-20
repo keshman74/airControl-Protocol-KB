@@ -67,3 +67,15 @@ Operator supplied `A31_FLASH_BOOT_AUDIT.txt` collected on the actual A31 (`192.1
 - **No writes to Flash, firmware, init scripts, or autostart were performed** in the audit.
 
 Next read-only diagnostic: `A31_BOOT_CHAIN_READONLY.sh` retrieves exact live startup-file metadata and *selected* hook lines from `/etc_ro/rcS`, `/home/user.sh`, `/system/workdir/live.sh`, `/system/workdir/userrestore.sh`, `/system/workdir/evn.sh`, and `/sbin/lan.sh`. This is the final design input before proposing an installation method; avoid modifying existing boot scripts until a rollback/recovery plan exists. If no supported persistent hook exists, evaluate a controlled rootfs repack/stock OTA path rather than hijacking legacy `/vendor/user/hdl` or modifying unrelated services.
+
+## Actual live boot-path discovery — 2026-10-21 (READ-ONLY)
+
+Source: operator's `A31_BOOT_CHAIN_READONLY.txt`. Linux A31 (192.168.0.35), no writes.
+
+- Root mounts: `/dev/root` SquashFS RO; `/vendor` JFFS2 RW with **1836 KiB available**, `/mnt` JFFS2 RW with **296 KiB available**.
+- `/etc_ro/rcS` exists (218 bytes); `/home/user.sh` exists (357 bytes); `/system/workdir/live.sh` exists (3383 bytes); `/system/workdir/userrestore.sh` (153 bytes); `/system/workdir/evn.sh` (950 bytes); `/sbin/lan.sh` (2479 bytes).
+- `/etc_ro/init.d` does NOT exist; `/etc/init.d` symlink points to it, and may be dangling. No `/etc/inittab` identified.
+- `/vendor/user` exists and is **empty**, but no conclusion about its invocation is warranted. Other vendor files must be preserved.
+- The audit's `BOOT_SCRIPT_HOOKS_AND_ORDER` section contains only file headings and **no matched content**, despite nonzero-size startup files; this is inconclusive about control flow (a grep/filter issue or lack of matching lines). **Do not equate empty filtered results with absent boot hooks.**
+- New `A31_BOOT_SCRIPTS_READONLY.sh` safely retrieves the **full contents** of just these six live scripts and a process list to a file on the Mac (review for credentials before sharing), to establish the actual startup chain before proposing autostart.
+- Next design step: determine if a pre-existing supported persistent user hook can be used without editing SquashFS. If no hook exists, do **not** write to `rcS` or raw MTD; consider verified signed OTA or other supported install method and recovery strategy. Autostart remains **UNVERIFIED/NOT INSTALLED**.
