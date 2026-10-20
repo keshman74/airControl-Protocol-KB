@@ -159,7 +159,7 @@ Separate A98 KNOB restart remains unconfirmed as to cause.0.8.18 adds numeric ES
 ### KNOB0.8.20 — A97 preset menu integration
 
 Status: **IMPLEMENTED / HARDWARE TEST PENDING on A97**. Source: https://github.com/keshman74/airKNOB/commit/1360ce68a2acf628b4d56b0820ada1d08ab4762c .
-Build/tests: https://github.com/keshman74/airKNOB/actions/runs/39484592774 .
+Build/tests: https://github.com/keshman74/airKNOB/actions/runs/39485073150 .
 
 A97 uses the selected HTTP80/HTTPS443 endpoint for getPresetInfo and MCUKeyShortClick:N,1..12. Original sparse number values are preserved; empty/invalid rows are not converted to fabricated menu slots.
 
@@ -170,3 +170,7 @@ A97 /health reports actual preset HTTP status and received byte count plus http_
 Tests cover actual A97 list-loading branch with HTTP/HTTPS endpoint snapshots, Cyrillic and sparse slots3/12, transport failure, malformed JSON, invalid list structure, empty list, and existing1..12 launch routing. Deferred-reader tests exercise both chips and preserve A31/A33 isolation. Test/build success must be taken from the completed CI run, not inferred from this implementation note.
 
 A98 PlayQueue+AVTransport+routines active-preset correlation remains A98-specific. It is not copied to A97 without device evidence; A97 external active-preset highlighting and hidden input-slot enumeration are not claimed by this update. API applicability is per product/firmware, not guaranteed by the chip name alone.
+
+#### KNOB0.8.20 build verification
+All26 regression suites and the ESP32-S3 build passed in run39485073150. Final test-source commit b9b0979b1465964d2f5ce13e44ce04e89cbbd3b5. The first run rejected an overly specific syntax-error assertion for a filtered non-object token; the revised test separately verifies truncated-JSON syntax failure and non-object rejection. No test or publication gate was skipped.
+Published main OTA binary: 1343696 bytes, MD5 7cd914bc936684e129b2a93a4ae465ba. A97 hardware result is still pending.
