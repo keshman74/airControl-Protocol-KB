@@ -253,3 +253,19 @@ User uploaded `A31_PROMPT_GATE_20261020_051234.zip`; archive contains `rootApp.t
 - Earlier interpretation of `SHM+0x3BC` as zone volume and `SHM+0x3D8` as MaxPromptVolume is preserved; do not conflate those fields with unknown `0x3C8`.
 - Next static scan `a31_shm_field_scan.sh` (Bash syntax checked, **not run on operator's original binaries**) searches executable MIPS32 ELF segments in rootApp/mv_ioguard/a01controller/wmrmplayer for load/store opcodes using immediates 0x3BC/0x3C8/0x3D0/0x3D8 and emits contextual radare2 dumps, matches CSV and ZIP in `/Users/lab/AI/airALARM`. It excludes SP-relative references; false positives in unrelated structs remain possible. This will help locate actual writes but cannot automatically establish which base pointers are g_wiimu_shm. No device connection or firmware write.
 - Fixed acoustic alarm volume independent of zone master remains UNSOLVED.
+
+
+## SHM field scan: M_MODE discovery (2026-10-20 16:05)
+User uploaded `A31_SHM_FIELD_SCAN_20261020_160549.zip`. Read-only MIPS32 executable ELF scan of `rootApp`, `mv_ioguard`, `a01controller`, `wmrmplayer` found 114 immediate-displacement load/store matches in four fields. Distribution: rootApp 28, mv_ioguard 12, a01controller 70, wmrmplayer 4. These are **instruction matches, not 114 proven references to shared memory**; base-pointer verification is essential, especially in a01controller.
+
+**MAJOR STATIC FINDING: field 0x3C8 is M_MODE (player operating mode), not zone volume.**
+- `a01controller.sym.Get_M_MODE` at 0x0041a170 returns `lh v0,0x3c8(v0)` at 0x0041a188, with base loaded from `g_wiimu_shm` at 0x0041a17c–0x0041a180. This reads the low signed 16 bits of M_MODE.
+- `a01controller.sym.Set_M_MODE` at 0x0041a18c takes an integer mode argument, and near 0x0041a4a8–0x0041a4bc it loads `g_wiimu_shm` and writes `sw s0,0x3c8(v0)` in the delay slot of `process_unlock` call. The stored value is the function's incoming mode (`s0 = a0` at 0x0041a1b8). Subsequent read of the same word at 0x0041a4d0. Thus this is an explicit writer. Another candidate `a01controller.CNodeMan_Init` writer at 0x0041fe4c needs register ancestry verification.
+- `rootApp.GoaheadCmdParsethread` at 0x0040fc28 `lw 0x3c8` and at 0x0040fc2c signed `slti 0x28` means `playPromptUrl` is gated on **operating mode value <40**, not the main-zone volume. The earlier condition for `strstr("mp3")` still applies.
+- `rootApp` has another field read `0x0040b2f8` during status/config report string formatting, potentially enabling the textual name of 0x3C8 by examining adjacent rodata format string in a focused batch.
+- `rootApp SHM+0x3BC` remains zone-volume field, and `SHM+0x3D8` remains MaxPromptVolume. No reason to conflate these with M_MODE.
+- Scan detects unrelated matching offsets in large binary as possible false positives, and scanner explicitly excludes SP-relative operations; therefore completeness is not guaranteed.
+
+**Next targeted offline batch:** created `a31_m_mode_batch.sh` with `radare2` disassembly of full `Get_M_MODE`, `Set_M_MODE`, their xrefs, `CNodeMan_Init` and rootApp guard/status code. `bash -n` syntax checked; **not executed against original user's binaries**. Inputs are original Rakoit extracted firmware at `/Users/lab/AI/A31_Firmware/RAKOIT_EXTRACTED`, outputs ZIP under `/Users/lab/AI/airALARM`. User can run `bash a31_m_mode_batch.sh`. This script is read-only and makes no network/device calls.
+
+**Research goal still unsolved:** independent fixed acoustic alert loudness under variable master zone volume. Preserve airALARM v0.1.26.
