@@ -13,6 +13,9 @@
 
 ## A97 RenderingControl execution evidence — 2026-10-20
 - QRY-UPNP-RC-GET-VOLUME [tested A97 HTTP49152] — **HARDWARE-VERIFIED**, CurrentVolume94,12–23ms from Mac.
-- CMD-UPNP-RC-SET-VOLUME [same A97] — **HARDWARE-VERIFIED SAME-LEVEL ACCEPTANCE/READBACK**, DesiredVolume94,15ms; follow-up94 in14ms. Changed-level output and other hardware remain unverified.
-- KNOB0.8.23 implements this volume path with HTTPS fallback; full CI/build passed; KNOB hardware validation pending.
+- CMD-UPNP-RC-SET-VOLUME [same A97] — **HARDWARE-VERIFIED SAME-LEVEL ACCEPTANCE/READBACK**, DesiredVolume94,15ms; follow-up94 in14ms. The terminal test itself did not change the level; subsequent KNOB0.8.23 volume control and noticeable speed improvement were confirmed by the user on2026-10-21. Other hardware remains unverified.
+- KNOB0.8.23 implements this volume path with HTTPS fallback; full CI/build passed; KNOB A97 volume control and qualitative speed improvement user/hardware-confirmed on2026-10-21.
 Canonical request, timing and limits: [A97-VOLUME.md](../../protocols/upnp/A97-VOLUME.md).
+
+## Reuse decision — 2026-10-21
+Use the hardware-confirmed A97 RenderingControl volume design in future airControl desktop/mobile and other project implementations, with paced HTTPS fallback and latest-target coalescing. These other integrations are planned, not completed. See [cross-project rule](../../integration/A97-VOLUME-REUSE.md).

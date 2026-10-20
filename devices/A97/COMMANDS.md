@@ -79,3 +79,6 @@ On Кухня192.168.0.99, HTTP49152 /upnp/control/rendercontrol1:
 - Event endpoint is advertised but volume event subscription/payload is not tested here.
 KNOB0.8.23 uses this route for encoder volume with paced HTTPS fallback; build/tests passed, KNOB hardware speed validation pending. Other /httpapi.asp commands remain HTTPS443.
 Canonical: [A97-VOLUME.md](../../protocols/upnp/A97-VOLUME.md).
+
+## KNOB0.8.23 volume hardware confirmation — 2026-10-21
+User confirms A97 volume control is noticeably faster after switching to RenderingControl SetVolume. Status: USER/HARDWARE-VERIFIED WORKING on the tested device; numerical ESP32 latency and long-duration stability not measured. Preserve this as the preferred compatible-A97 volume approach for future airControl desktop/mobile and other integrations, with paced HTTPS fallback. Those future integrations are not yet confirmed. See [canonical evidence](../../protocols/upnp/A97-VOLUME.md) and [reuse rule](../../integration/A97-VOLUME-REUSE.md).
