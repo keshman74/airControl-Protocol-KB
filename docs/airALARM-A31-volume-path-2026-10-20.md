@@ -169,3 +169,19 @@ Operator uploaded `A31_PMT_TRACE_20261020_043252.zip`. Its read-only radare2 rep
 **Next focused read-only batch**: `a31_pmt_callpath_batch.sh` created and `bash -n` checked. It dumps wide `cmdSocket_recive` disassembly near 0x00411a80–0x00411e30, PMT handler, smplayer prompt notices and URL string xrefs. Works only with extracted ELF files, creates ZIP under `/Users/lab/AI/airALARM`. It was not yet run on original Mac firmware. Preserve airALARM v0.1.26, do not send direct MCU commands.
 
 **Status:** independent fixed acoustic Prompt volume remains UNSOLVED.
+
+
+## Critical static finding: PromptCodec caller ALSO sends MCU PMT (2026-10-20 04:43)
+Source: user-uploaded `A31_PMT_CALLPATH_20261020_044307.zip` containing original `mv_ioguard`, `smplayer` and `rootApp` radare2 dumps. **STATIC BINARY-CONFIRMED, NOT LIVE MCU CAPTURE.** Corrects the previous incomplete inference that `PromptCodec` calls might not link to MCU ID18: the socket receiver indeed directly sends ID18 after the PromptCodec calls.
+
+**`mv_ioguard.cmdSocket_recive`**:
+- compares incoming socket message (pointer s1) to a 27-byte string at VA `0x00426b78`. On match at `0x00411c50–0x00411c58`, calls `PromptCodec(1)`. If `SHM+0x3D0 != 2` and an auxiliary global flag is zero, writes zero to `SHM+0x3D0`, writes 1 to the auxiliary flag, then `MCUCommandSend(18, 3, &(SHM+0x3D0),4)` at `0x00411ca0` with value 0, yielding `AXX+PMT+000\\n`. If `SHM+0x3D0 == 2` and auxiliary flag is zero, sets auxiliary flag 1, prepares zero in a stack variable and likewise sends PMT 000 at `0x00411cd8`. **In these captured branches the sent value is 0, not 2.** The meaning of preexisting SHM+0x3D0==2 is not yet resolved.
+- compares input to 25-byte string at `0x00426b94`; on match calls `PromptCodec(0)` at `0x00411d0c–0x00411d10`. If additional conditions are satisfied, sets `SHM+0x3D0=1`, auxiliary global flag 0, then `MCUCommandSend(18,3,SHM+0x3D0,4)` at `0x00411d58` (PMT 001). In the SHM+0x3D0==2 branch it prepares 1 on stack and sends PMT 001 at `0x00411d90`. Other branches exit without send.
+- compares input to 26-byte string at `0x00426bb0`; on match calls `PromptCodec(-1)` at `0x00411dc4–0x00411dc8` and exits; no ID18 send directly in that captured branch.
+- `MCUCommandSend` command ID 18 selects `AXX+PMT+002\\n` for argument int=2, `AXX+PMT+001\\n` for int=1, `AXX+PMT+000\\n` for other values. **The captured socket Prompt start/end branches send 0 and 1 respectively; no PMT 002 was observed in these branches**. Correct any earlier summary claiming start could send 002.
+- Exact contents of the incoming socket strings at VA `0x00426b78`, `0x00426b94`, `0x00426bb0` must be extracted in next batch. Candidate matches to smplayer `GNOTIFY=volume_prompt_start/end` are still hypotheses pending literal address decoding.
+- `rootApp` string `playPromptUrl` is present at VA `0x00420a78`, but report `axt @ 0x00420a78` returns no xrefs. Thus do **not** claim that the current report traces actual URL Prompt HTTP dispatch or MaxPromptVolume compensation.
+
+**Implication:** PCM prompt state and MCU PMT notification are coupled at the runtime socket event layer. This is NOT evidence PMT gives independent output amplitude or that it is safe to call on its own. The acoustic fixed-alert-volume requirement remains UNSOLVED.
+
+Next investigation: extract exactly three incoming notification strings, cross-check their payload and senders; separately inspect how `playPromptUrl` reaches `smplayer`. Do NOT send low-level MCU commands or modify airALARM v0.1.26.
