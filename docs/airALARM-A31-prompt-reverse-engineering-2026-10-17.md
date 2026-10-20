@@ -460,3 +460,12 @@ pcm.dmixer {
 **Safe next read-only checks:** `busybox --list` to identify `tr`/other applets; `grep -E 'libasound|alsa' /proc/676/maps` and equivalent for `volumeprompt`/player processes; if `busybox tr` supported, *only show filtered ALSA_CONFIG_* process env values*, not entire `/proc/<pid>/environ` as it could contain secrets. No device write or master-volume adjustment.
 
 The hardware-level independent acoustic alert-loudness requirement **remains UNSOLVED**. Keep airALARM v0.1.26 baseline, no NVRAM changes.
+
+## Live SSH process file descriptors — wmrmplayer (2026-10-20)
+**HARDWARE VERIFIED, read-only** from user-provided output on A31 `192.168.0.35` via SSH. `ls -l /proc/880/fd | grep '/dev/'` for `wmrmplayer` PID 880 shows:
+```
+lrwx------ 1 0 0 64 14 -> /dev/pcmC0D0p
+lr-x------ 1 0 0 64 13 -> /dev/timer
+lr-x------ 1 0 0 64 0 -> /dev/null
+```
+Interpretation: `wmrmplayer` has the ALSA playback PCM node `/dev/pcmC0D0p` open (FD 14); timer and null FDs also open. This is direct hardware/process evidence of a PCM playback handle, but **not proof that this process applies master-zone volume**, nor that it is the only process that opens the device, nor that all Prompt playback routes through it. PID is ephemeral and may change across reboots. User provided only PLAYER AUDIO DEVICES segment, not the other requested maps/FD results. For next step, ask for limited read-only observations of the ALSA-related maps and rootApp FDs, and current `ps`, without changing volume or NVRAM. The goal of fixed acoustic Prompt loudness independent of zone master remains UNSOLVED.
