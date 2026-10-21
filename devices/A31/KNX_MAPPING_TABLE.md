@@ -163,3 +163,22 @@ Package **`A31_KNX_VENDOR_INSTALL_V1_2.zip`** fixes the deployer only:
 - Same authorized scope: only create three files under `/vendor/knx`, no changes to essential `hdl`, /vendor/user/hdl, boot scripts, raw flash or autostart.
 
 Mac next command: `bash A31_KNX_VENDOR_INSTALL_V1_2/INSTALL_TO_A31.sh`. Expected `PERSISTENT_PREFLIGHT_OK`, `INSTALL_OK`, three `BYTE_MATCH`, `SUCCESS`. Stop on error and review the log; never blindly delete the persistent destination.
+
+## Installer v1.2: false-negative BusyBox utility lookup; v1.3 RAM-operation preflight (2026-10-21)
+
+Operator ran approved installer v1.2 against A31 `192.168.0.35:24678`. Existing destination preflight succeeded and all four staged files were uploaded to RAM; Mac backup captured at `/Users/lab/AI/A31_Firmware/A31_KNX_VENDOR_INSTALL_V1_2/backup-20261021-031250-52417`. Remote helper stopped **before any new /vendor writes**:
+```text
+PREFLIGHT_OK
+RAM_SENT knx-audio
+RAM_SENT knx-map.csv
+RAM_SENT knx-audio.conf
+RAM_SENT REMOTE_INSTALL.sh
+ERROR: BusyBox utility not found: chmod; no flash writes.
+INSTALL_STOPPED (code=20).
+```
+
+This message was produced by the installer's `command -v chmod` probe. Since this A31 had previously executed `chmod` successfully, this is evidence of an unreliable utility-discovery check **not proof that chmod itself is absent**. Exact cause (shell builtin support vs PATH) has not been experimentally isolated; do not make a stronger claim.
+
+**Corrected package: `A31_KNX_VENDOR_INSTALL_V1_3.zip`.** Replaces the preflight use of `command -v` with **actual filesystem-operation tests entirely under the unique RAM stage**: `mkdir`, `cp`, `chmod`, `mv`, `ls`, `rm`, `rmdir`, `sync`. If any fails, helper stops before creating anything in `/vendor`. Preserves explicit UID check from `/proc/self/status`, JFFS2 RW validation, >=512KiB free, table `--show-map`, first-install no-overwrite policy, staged JFFS2 directory rename and 3 byte-by-byte Mac `cmp` verifications. Native v0.11 ELF unchanged (SHA-256 `7c7743c43e0b9869eb67c8209f83c8bbed862c683203efe72f15bb2ae4fcd884`). No changes to `hdl`, `/vendor/user/hdl`, init scripts, RootFS, raw MTD or autostart.
+
+Offline tests: `busybox ash -n` remote helper, `bash -n` Mac installer, zip integrity/hashes all pass; simulated **end-to-end remote helper** under BusyBox `ash` using isolated mock mount/df/ELF succeeded writing exactly three files, and repeated run exited with code 13 refusing overwrite. **Physical A31 v1.3 installation NOT YET CONFIRMED.** User can run `bash A31_KNX_VENDOR_INSTALL_V1_3/INSTALL_TO_A31.sh` after unpacking. Wait for `INSTALL_OK`, 3 `BYTE_MATCH` lines and `SUCCESS` before marking deployed.
