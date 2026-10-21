@@ -219,3 +219,11 @@ Mac backup: `/Users/lab/AI/A31_Firmware/A31_KNX_VENDOR_INSTALL_V1_3/backup-20261
 **Non-fatal flaw:** remote BusyBox lacks `rmdir`; the installer emitted a warning while cleaning an isolated **RAM-only** tool-test directory at remote helper line 80, but proceeded to a successful byte-verified install. Future installer versions should replace `rmdir` in RAM-stage cleanup with a carefully scoped supported method; **do not rerun a first-install script** merely to fix the warning.
 
 **Next phase (NOT AUTHORIZED YET):** offline design a reversible autostart mechanism. The only identified live hook, `/vendor/user/hdl`, replaces an essential `/home/bin/hdl` invocation; it is **not** a generic startup script hook. Do not write a shim to it or alter stock player, boot scripts, RootFS, raw MTD or reboot without separate recovery planning and authorization.
+
+## KNX Autostart Stage v1 — prepared offline; NOT ACTIVATED (2026-10-21)
+
+After first physical installation of the three permanent v0.11 files under `/vendor/knx`, the operator requested continuation of the autostart work. Offline stage package `A31_KNX_AUTOSTART_STAGE_V1.zip` has been created, including `hdl-wrapper.sh`, `TEST_OFFLINE.sh`, `VERIFY_A31_READONLY.sh`, `README_RU.md`.
+
+Proposed wrapper (NOT deployed) uses a background subshell: wait 20s, honour `/vendor/knx/disabled`, verify binary/CSV/config, run `knx-audio --config /vendor/knx/knx-audio.conf --map /vendor/knx/knx-map.csv --run-all`, log to volatile `/tmp/knx-boot.log`; foreground path unconditionally `exec /home/bin/hdl "$@"`. This preserves stock HDL process semantics in principle but is **not real-device validated with the bundled `daemonize`**. The `/vendor/user/hdl` hook replaces essential hdl; do not activate it without independent recovery access and dedicated device-side compatibility checks.
+
+Three offline mock tests passed: normal both-service start; `disabled` prevents KNX and starts hdl; missing CSV prevents KNX and starts hdl. ZIP integrity test passed. The stage also includes a **read-only** SSH audit of currently installed files, any existing override, running processes and vendor free space. No hook written, no daemonize changed, no device restart, no MTD/rootfs modifications. Activation remains pending a distinct approval and recovery plan.
