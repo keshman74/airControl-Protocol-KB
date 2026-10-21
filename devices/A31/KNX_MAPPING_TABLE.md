@@ -227,3 +227,18 @@ After first physical installation of the three permanent v0.11 files under `/ven
 Proposed wrapper (NOT deployed) uses a background subshell: wait 20s, honour `/vendor/knx/disabled`, verify binary/CSV/config, run `knx-audio --config /vendor/knx/knx-audio.conf --map /vendor/knx/knx-map.csv --run-all`, log to volatile `/tmp/knx-boot.log`; foreground path unconditionally `exec /home/bin/hdl "$@"`. This preserves stock HDL process semantics in principle but is **not real-device validated with the bundled `daemonize`**. The `/vendor/user/hdl` hook replaces essential hdl; do not activate it without independent recovery access and dedicated device-side compatibility checks.
 
 Three offline mock tests passed: normal both-service start; `disabled` prevents KNX and starts hdl; missing CSV prevents KNX and starts hdl. ZIP integrity test passed. The stage also includes a **read-only** SSH audit of currently installed files, any existing override, running processes and vendor free space. No hook written, no daemonize changed, no device restart, no MTD/rootfs modifications. Activation remains pending a distinct approval and recovery plan.
+
+## Physical autostart preflight — passed, hook remains stock (2026-10-21)
+
+Operator's file `A31_KNX_AUTOSTART_PREFLIGHT.txt` verifies the real A31 192.168.0.35:
+```text
+/home/bin/hdl            executable, 191024 bytes
+/vendor/knx              mode drwx------
+/vendor/knx/knx-audio   executable, 45564 bytes
+/vendor/knx/knx-map.csv 590 bytes
+/vendor/knx/knx-audio.conf 442 bytes
+HOOK STATUS: STOCK_HDL_BRANCH
+processes: daemonize PID667, rootApp PID668, hdl PID670
+/vendor: 2048 KiB, 232 used, 1816 available
+```
+Read-only preflight completed, but **neither any boot wrapper nor autostart is installed**. The current startup uses stock `/home/bin/hdl`, and no KNX process is shown in this process list. No reboot persistence experiment yet. Before touching `/vendor/user/hdl`, verify actual `daemonize` executable semantics with an **isolated disposable /tmp mock**, ensure the original HDL launches once, and define a tested, accessible rollback/recovery route (SSH access after a bad hook is not guaranteed). Do not start a second real HDL merely to test the wrapper. No flash edits authorized solely by this preflight.
