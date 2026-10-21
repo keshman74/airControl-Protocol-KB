@@ -137,3 +137,29 @@ Fixed artifact **`A31_KNX_VENDOR_INSTALL_V1_1.zip`** is staged offline:
 - Avoid rerunning first-install blindly if destination exists: inspect outcome and seek explicit instruction for updates/rollback.
 
 Outcome is **installer v1 failed early; backup confirmed; install not yet confirmed.** Await new v1.1 installation log with `INSTALL_OK` plus 3 `BYTE_MATCH` lines.
+
+## Vendor install v1.1 halted on absent `id`; corrected in v1.2 (2026-10-21)
+
+Operator's lab A31 SSH installer log:
+```text
+PREFLIGHT_OK
+MAC_BACKUP=/Users/lab/AI/A31_Firmware/A31_KNX_VENDOR_INSTALL_V1_1/backup-20261021-030141-52242
+RAM_SENT knx-audio
+RAM_SENT knx-map.csv
+RAM_SENT knx-audio.conf
+RAM_SENT REMOTE_INSTALL.sh
+/tmp/a31-knx-firstinstall-20261021-030141-52242/REMOTE_INSTALL.sh: line 15: id: not found
+ERROR: remote session must run as root (admin UID 0).
+INSTALL_STOPPED (code=11).
+```
+The error arises because stock BusyBox has **no external `id` binary**. It is NOT evidence that the admin account lacks root privileges. The remote script exited at line 15, before any JFFS2 staging/copy; **no installed `/vendor/knx` has been confirmed**, and the next install still fails closed if destination already exists. SSH transfer to /tmp was successful and Mac backups were created.
+
+Package **`A31_KNX_VENDOR_INSTALL_V1_2.zip`** fixes the deployer only:
+- `REMOTE_INSTALL.sh` reads the real UID from `/proc/self/status` with POSIX shell builtin `read`, preserving UID0 enforcement without `id`.
+- Replaces `df ... | awk` with shell built-in parsing of `df -k /vendor` to avoid the possibly absent `awk`; requires numeric available KiB and >=512 KiB free.
+- Verifies availability of `chmod`, `cp`, `mv`, `sync`, `ls`, `mkdir`, `rm` before the first persistent write.
+- The KNX v0.11 MIPS executable remains **byte-for-byte unchanged**, SHA256 `7c7743c43e0b9869eb67c8209f83c8bbed862c683203efe72f15bb2ae4fcd884`.
+- Local `sh -n`, `bash -n`, file hashes, ZIP test passed; unit-simulated UID parser read 0 and simulated A31 `df` output parsed 1836 KiB. **NOT YET RUN ON PHYSICAL A31.**
+- Same authorized scope: only create three files under `/vendor/knx`, no changes to essential `hdl`, /vendor/user/hdl, boot scripts, raw flash or autostart.
+
+Mac next command: `bash A31_KNX_VENDOR_INSTALL_V1_2/INSTALL_TO_A31.sh`. Expected `PERSISTENT_PREFLIGHT_OK`, `INSTALL_OK`, three `BYTE_MATCH`, `SUCCESS`. Stop on error and review the log; never blindly delete the persistent destination.
