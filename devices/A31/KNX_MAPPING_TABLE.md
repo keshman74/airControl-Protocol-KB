@@ -182,3 +182,40 @@ This message was produced by the installer's `command -v chmod` probe. Since thi
 **Corrected package: `A31_KNX_VENDOR_INSTALL_V1_3.zip`.** Replaces the preflight use of `command -v` with **actual filesystem-operation tests entirely under the unique RAM stage**: `mkdir`, `cp`, `chmod`, `mv`, `ls`, `rm`, `rmdir`, `sync`. If any fails, helper stops before creating anything in `/vendor`. Preserves explicit UID check from `/proc/self/status`, JFFS2 RW validation, >=512KiB free, table `--show-map`, first-install no-overwrite policy, staged JFFS2 directory rename and 3 byte-by-byte Mac `cmp` verifications. Native v0.11 ELF unchanged (SHA-256 `7c7743c43e0b9869eb67c8209f83c8bbed862c683203efe72f15bb2ae4fcd884`). No changes to `hdl`, `/vendor/user/hdl`, init scripts, RootFS, raw MTD or autostart.
 
 Offline tests: `busybox ash -n` remote helper, `bash -n` Mac installer, zip integrity/hashes all pass; simulated **end-to-end remote helper** under BusyBox `ash` using isolated mock mount/df/ELF succeeded writing exactly three files, and repeated run exited with code 13 refusing overwrite. **Physical A31 v1.3 installation NOT YET CONFIRMED.** User can run `bash A31_KNX_VENDOR_INSTALL_V1_3/INSTALL_TO_A31.sh` after unpacking. Wait for `INSTALL_OK`, 3 `BYTE_MATCH` lines and `SUCCESS` before marking deployed.
+
+## v0.11 permanent vendor install — HARDWARE-CONFIRMED (2026-10-21)
+
+**Installed successfully on physical A31 at 192.168.0.35** with Mac installer `A31_KNX_VENDOR_INSTALL_V1_3/INSTALL_TO_A31.sh`. This is a permanent-file installation, **not autostart or a whole-firmware flash**. The live log reports:
+
+```text
+PREFLIGHT_OK
+RAM_SENT knx-audio
+RAM_SENT knx-map.csv
+RAM_SENT knx-audio.conf
+RAM_SENT REMOTE_INSTALL.sh
+/tmp/a31-knx-firstinstall-20261021-031854-52532/REMOTE_INSTALL.sh: line 80: rmdir: not found
+PERSISTENT_PREFLIGHT_OK uid=0 available_kib=1836 tools=RAM_TESTED
+MAP_TABLE mode=CSV rows=12 path=/tmp/a31-knx-firstinstall-20261021-031854-52532/knx-map.csv
+INSTALL: /vendor/knx created. Checking installed file paths (read-only)...
+MAP_TABLE mode=CSV rows=12 path=/vendor/knx/knx-map.csv
+CONFIG_FILE=LOADED
+SAFETY max_volume=100 volume_step=2 volume_repeat_ms=90 button_debounce_ms=250
+-rwx------ 1 0 0 45564 knx-audio
+-rw------- 1 0 0   442 knx-audio.conf
+-rw------- 1 0 0   590 knx-map.csv
+/dev/mtdblock9 2048 232 1816 11% /vendor
+INSTALL_OK (persistent files only; no service/hdl changes; no autostart)
+BYTE_MATCH knx-audio
+BYTE_MATCH knx-map.csv
+BYTE_MATCH knx-audio.conf
+SUCCESS: three files installed in /vendor/knx.
+NO AUTOSTART. NO HDL CHANGES. NO REBOOT.
+```
+
+Mac backup: `/Users/lab/AI/A31_Firmware/A31_KNX_VENDOR_INSTALL_V1_3/backup-20261021-031854-52532`. Preserve for recovery.
+
+**Evidence classification:** JFFS2 files written and byte-verified; CSV and config parsed from **installed persistent paths**. Persistence after an actual power cycle has not been physically tested; RAM-driven v0.11 KNX dispatch with actual Mute readback was already confirmed separately in the preceding milestone. New persistent-path active playback is not independently exercised here.
+
+**Non-fatal flaw:** remote BusyBox lacks `rmdir`; the installer emitted a warning while cleaning an isolated **RAM-only** tool-test directory at remote helper line 80, but proceeded to a successful byte-verified install. Future installer versions should replace `rmdir` in RAM-stage cleanup with a carefully scoped supported method; **do not rerun a first-install script** merely to fix the warning.
+
+**Next phase (NOT AUTHORIZED YET):** offline design a reversible autostart mechanism. The only identified live hook, `/vendor/user/hdl`, replaces an essential `/home/bin/hdl` invocation; it is **not** a generic startup script hook. Do not write a shim to it or alter stock player, boot scripts, RootFS, raw MTD or reboot without separate recovery planning and authorization.
