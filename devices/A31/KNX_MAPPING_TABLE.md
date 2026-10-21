@@ -115,3 +115,25 @@ First install only, deliberate fail-closed path:
 No modification of `/vendor/user/hdl`, `/home/user.sh`, `live.sh`, `rcS`, stock audio player, raw MTD, or activation of autostart. On installation error or missing tar/SSH capability, stop and inspect logs; **do not run ad-hoc flash commands**. Read-only verification command is shipped as `VERIFY_INSTALLED.sh`. Until a real installation log is returned, persistent installation is **UNVERIFIED / NOT CLAIMED COMPLETE**.
 
 Next milestone after successful install is to inspect installed persistent files and separately design/review a reversible startup shim. The established boot hook **overrides** essential `hdl`, so it must never be activated without a separate risk assessment, board recovery and explicit approval.
+
+## First install attempt blocked by missing BusyBox tar — v1.1 repair (2026-10-21)
+
+User executed the `A31_KNX_VENDOR_INSTALL_V1/INSTALL_TO_A31.sh` first-install flow on Mac against lab A31 `192.168.0.35:24678`. Step 1 succeeded, retrieving existing `/tmp/knx-audio.conf` and `/tmp/knx-map.csv` into a Mac backup:
+
+```text
+MAC_BACKUP=/Users/lab/AI/A31_Firmware/A31_KNX_VENDOR_INSTALL_V1/backup-20261021-025505
+Step 2: RAM-only stage, validation and first-install to /vendor/knx...
+sh: tar: not found
+```
+
+Root cause: stock BusyBox A31 lacks `tar`. The previous Mac installer streamed a tar archive that the A31 was supposed to extract **under /tmp**, so the failure occurred **before** running `REMOTE_INSTALL.sh` or performing its three-file JFFS2 write. **The log does NOT establish that files were installed to /vendor/knx.** Prior /tmp temp cleanup is separate; do not claim the destination is empty until a read-only check confirms it.
+
+Fixed artifact **`A31_KNX_VENDOR_INSTALL_V1_1.zip`** is staged offline:
+- Same ELF as v1, SHA256 `7c7743c43e0b9869eb67c8209f83c8bbed862c683203efe72f15bb2ae4fcd884`; no changes to KNX mapping engine or protocol.
+- On Mac, back up live tested config/map again, then make remote RAM staging folder. Transfer ELF, config, map and helper one by one via `ssh -T ... 'cat > /tmp/<unique>/name'` — known to work on this BusyBox build.
+- Continue unchanged fail-closed `REMOTE_INSTALL.sh`: require root, JFFS2 RW `/vendor`, >=512 KiB free, absent `/vendor/knx`, successful `--show-map` from RAM; only then write 3 files to uniquely named staging directory and rename it to `/vendor/knx`.
+- Replace tar-based readback with three `ssh cat` reads into temporary Mac folder, compare with `cmp`.
+- Mac ZIP integrity test, `bash -n` and `sh -n` pass; **not run on physical device yet**. Stage v1.1 only within operator-approved `/vendor/knx` scope: no changes to `hdl`, boot, RootFS, raw MTD, autostart, or reboot.
+- Avoid rerunning first-install blindly if destination exists: inspect outcome and seek explicit instruction for updates/rollback.
+
+Outcome is **installer v1 failed early; backup confirmed; install not yet confirmed.** Await new v1.1 installation log with `INSTALL_OK` plus 3 `BYTE_MATCH` lines.
