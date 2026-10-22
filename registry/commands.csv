@@ -1,3 +1,8 @@
+# Historical layout note (this file is prose, not a CSV table)
+
+Current machine inputs: all `registry/records/*.csv`. Current totals: 640 rows / 639 unique IDs. See [COMMANDS.md](COMMANDS.md). The baseline description below is historical, not the current total.
+
+
 # Canonical registry layout
 
 The v0.4.8 baseline contains **204 records**. The lossless machine-readable baseline is stored in four ordered CSV shards under `registry/records/`.

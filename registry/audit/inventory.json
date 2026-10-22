@@ -1,0 +1,922 @@
+[
+  {
+    "path": ".github/workflows/kb-audit.yml",
+    "bytes": 415,
+    "sha256": "ff59672b2c873b4e70720ccf83f8e519a696c5f4b5c3e5935c482b26c0f274ae"
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 23,
+    "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b"
+  },
+  {
+    "path": "AGENTS.md",
+    "bytes": 3953,
+    "sha256": "5697239c0cb929d898522995b001b849527cd9017b720d72daf7d5f5358a2326"
+  },
+  {
+    "path": "AUDIT-v0.4.2.md",
+    "bytes": 1922,
+    "sha256": "e6fddb9da9bad63dd1430f6925c026c1fddae7163699e698d4d08f6392a94de7"
+  },
+  {
+    "path": "CHATS.md",
+    "bytes": 6668,
+    "sha256": "f74f94ec0a4b7c56d4a22ea11306871da7bfae08913c461f7ea680bbaec9073d"
+  },
+  {
+    "path": "INDEX.md",
+    "bytes": 3543,
+    "sha256": "618eda3e78141731258a004f04d5a6545038628b1de4dd3a776d70811ef45f7b"
+  },
+  {
+    "path": "KB_AUDIT_REPORT.md",
+    "bytes": 9981,
+    "sha256": "574c503f6edcefe1b613fbc2c2735287f21e91af6b3454e9574fc3399b44a38c"
+  },
+  {
+    "path": "KB_CHANGELOG.md",
+    "bytes": 2187,
+    "sha256": "5806afe12a4b361623261e0c7f2b42d7d1b2545aac1274883de6e176c8fc18be"
+  },
+  {
+    "path": "KB_CONFLICTS.md",
+    "bytes": 10026,
+    "sha256": "016f838a8438bd7684d96ad7444ebe59812122cb81d9a68ace99689293b8cb86"
+  },
+  {
+    "path": "KB_CROSS_PROJECT_MAP.md",
+    "bytes": 3654,
+    "sha256": "2f4e9b3f57229970972f10ce22866cce6b98bec1b9366358460292c99d7a0f29"
+  },
+  {
+    "path": "KB_MASTER_INDEX.md",
+    "bytes": 4473,
+    "sha256": "af80104fae5b276d6890d11300f9495fa32878d6dc942249aab68d602facb55f"
+  },
+  {
+    "path": "MANIFEST.json",
+    "bytes": 3770,
+    "sha256": "1e441b53f8c604fb5d417a99fe71e69047c62012bc17c062bda20e47b3f3b851"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1934,
+    "sha256": "58354a5827347bbffad760c0d4a96f3cb24ceb6df979cf9e01d24cd9b391f4b8"
+  },
+  {
+    "path": "assets/airALARM/README.md",
+    "bytes": 473,
+    "sha256": "56b33e1613fa69ccf04685020fd86dba0a8baca53e58b2b1841810e973831539"
+  },
+  {
+    "path": "assets/airALARM/airalarm_alert.wav",
+    "bytes": 80326,
+    "sha256": "9f7f4b153045f659cc0e3ec5aca262ae40286a75860bc06f2475823caf356acf"
+  },
+  {
+    "path": "assets/airALARM/airalarm_clear.wav",
+    "bytes": 98716,
+    "sha256": "a106ad1fdada332fa1b7dafd7dac0856bfd223746533c004a4a03ed040b8de8f"
+  },
+  {
+    "path": "devices/A31/COMMANDS.md",
+    "bytes": 19803,
+    "sha256": "d7ae34500d73e3bbe34ea432e9bb1017356829aea98c715637988529ccb217b6"
+  },
+  {
+    "path": "devices/A31/KNX_MAPPING_TABLE.md",
+    "bytes": 23749,
+    "sha256": "9f3b81b120e4ee1527d35a51718aa6c5f13bca4e1bf0ebef31d7c4df602cf8a3"
+  },
+  {
+    "path": "devices/A31/NATIVE_KNX.md",
+    "bytes": 21017,
+    "sha256": "d916aa9084239a41895aef358e89d9eb098a7c523897c92a75e56df73c711a98"
+  },
+  {
+    "path": "devices/A31/README.md",
+    "bytes": 892,
+    "sha256": "5671edbebec0418f87c7501369369b8006ee84e0a4c417a22ac5d8e27b9d8de5"
+  },
+  {
+    "path": "devices/A31/STORAGE_LAYOUT_2026-10-21.md",
+    "bytes": 10983,
+    "sha256": "845e46ec21b0e2530b6c5b612ed11b23f720cef17a6385b01b78d7b5d657ecc3"
+  },
+  {
+    "path": "devices/A33/COMMANDS.md",
+    "bytes": 8231,
+    "sha256": "45410e49a007a4c59d50067182b2c605cead9ba782621213b8116b8744e88a02"
+  },
+  {
+    "path": "devices/A33/README.md",
+    "bytes": 834,
+    "sha256": "01fa4a3708e19f8b75fab45ed713c273fd93b5102f2c4355092c781d8f06ec19"
+  },
+  {
+    "path": "devices/A97/COMMANDS.md",
+    "bytes": 17872,
+    "sha256": "351f4c906f599a8befaae319cd7758af353b2d3ac33ca04e089bc145bd1e965e"
+  },
+  {
+    "path": "devices/A97/README.md",
+    "bytes": 223,
+    "sha256": "38ea4d28f532626ae7d2d964499d7adc50c42b14a5a3eefe0e196d0357a4b205"
+  },
+  {
+    "path": "devices/A98/COMMANDS.md",
+    "bytes": 14708,
+    "sha256": "c8bfb745bb626deb2e74cc97feb2c2489dab7413e5b453b424e08c9c9b77bf9e"
+  },
+  {
+    "path": "devices/A98/README.md",
+    "bytes": 294,
+    "sha256": "c6cbbdf9ad046dca7e39ea39736dfc5d6f6ce6d5652503e097ae55835f7c484e"
+  },
+  {
+    "path": "docs/airALARM-A31-live-audio-2026-10-20.md",
+    "bytes": 2732,
+    "sha256": "abc343c4b4a0743eb1e93946ba7dcc83274da76b52bae545f1c3b373369c9322"
+  },
+  {
+    "path": "docs/airALARM-A31-live-audio-v2-2026-10-20.md",
+    "bytes": 4908,
+    "sha256": "5d13fc5b00408ce8ea64947ea047c1bff63c429476b8c35adf75f5abc7832ba8"
+  },
+  {
+    "path": "docs/airALARM-A31-prompt-reverse-engineering-2026-10-17.md",
+    "bytes": 53017,
+    "sha256": "f860e5b59ef7c6e274786b17729d2e55fd876cf08b8c1f669666c34f00527259"
+  },
+  {
+    "path": "docs/airALARM-A31-volume-path-2026-10-20.md",
+    "bytes": 59250,
+    "sha256": "d9f7b473234125309fb1c344f386816e30ace02d48ecfc2d18f114d3f1ad995e"
+  },
+  {
+    "path": "docs/airALARM-UkraineAlert-API3-audit-2026-10-20.md",
+    "bytes": 31061,
+    "sha256": "d502c512f6f167f7bb1409a80ba2a3e2fc9804d10b68770a389e1c743411a953"
+  },
+  {
+    "path": "docs/airALARM-verified-commands-2026-10-10.md",
+    "bytes": 10279,
+    "sha256": "844ddff38811c394b581a8e0372c8a20c35f2890e3c8ad202299c5513c67bdee"
+  },
+  {
+    "path": "docs/airALARM_PROJECT_HANDOFF.md",
+    "bytes": 8660,
+    "sha256": "5736c9676cbce02c71723eb4e5b0c63691a78b531f58e00013d391f02120524f"
+  },
+  {
+    "path": "docs/data/a31-smplayer-dither-coefficients-2026-10-20.csv",
+    "bytes": 3490,
+    "sha256": "4beb447eb3caa2491b4dab70e902df190aa9beaae4fda3617b578b7ee492dfad"
+  },
+  {
+    "path": "evidence/KB-CONSISTENCY-AUDIT-2026-10-22.md",
+    "bytes": 5322,
+    "sha256": "074dd3fcd8dc02c8abb22674d7c25e25e2f6eefa6c426dd73c1d315afec722f8"
+  },
+  {
+    "path": "evidence/README.md",
+    "bytes": 119,
+    "sha256": "b070415a8d9cd6c1b849896ac1138b4698121b51c1ed060729c476b59035fafa"
+  },
+  {
+    "path": "evidence/application-code/README.md",
+    "bytes": 91,
+    "sha256": "908bd6455df2f89c3e31091d5b9a81cd2355904eef18c7b20593913e9e47fc19"
+  },
+  {
+    "path": "evidence/captures/README.md",
+    "bytes": 66,
+    "sha256": "f6c9a84a90ac583025b8e40980e890b79dcbbf02190b8e517e2ad360373879f6"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-01.md",
+    "bytes": 1319,
+    "sha256": "1e1223a7ee43ebd3c2f269c048d1c7cd160a9f4bda3732c5f63cfb69eff278a2"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-02-DEEP.md",
+    "bytes": 8466,
+    "sha256": "1a88f6921e632a9ab0f550c206c9459cf5382cd6e6b1aba3a7e7103d0ea3692b"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-02-SOURCE-COVERAGE.md",
+    "bytes": 1181,
+    "sha256": "368d9eb0828cc84ddd85eec4a05ef892a7092347f0f0da82cae3496ab61ee001"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-02.md",
+    "bytes": 2240,
+    "sha256": "063102bb23de77d940517490e3da33d53f2c697053016e1a33b685a2b322d9db"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-03-300926.md",
+    "bytes": 1287,
+    "sha256": "9e4aca4b49e820e740660cac86bdaf663c5657496026d1faca02429db913baf0"
+  },
+  {
+    "path": "evidence/chat-audits/CHAT-AUDIT-04-ORIGIN-FULL.md",
+    "bytes": 1703,
+    "sha256": "ed64f9fa2251de6bdd139b71ceffdad0b9801bde7ac54ffcf5df52c3aa37f4b9"
+  },
+  {
+    "path": "evidence/chat-audits/README.md",
+    "bytes": 674,
+    "sha256": "9149218df8c5a50a3d0e296d38f913efbae11c8a20860c458404ce883b03fccd"
+  },
+  {
+    "path": "evidence/chat-audits/TCP8819-FOCUSED-REVIEW.md",
+    "bytes": 774,
+    "sha256": "c2f1417cd22a77a3a5acbba1c2f74e295291e49cc7e4c5026dc17f4231cae0c3"
+  },
+  {
+    "path": "evidence/external-sources/WIIM-HTTPAPI-OPENAPI-V1.2.0-AUDIT.md",
+    "bytes": 1570,
+    "sha256": "ad90ba2a164ee899f5223be4d5fd9435351b5b813ca1fc6e38ca98e477e8be67"
+  },
+  {
+    "path": "evidence/hardware-tests/A31-KEY-MAPPING-2026-10-13.md",
+    "bytes": 935,
+    "sha256": "0224790f78066c59631227252a336b255dc9c1ec04c6aa5978e0c1a897a9228a"
+  },
+  {
+    "path": "evidence/hardware-tests/KNOB-ARTWORK-LIMITS-2026-10-13.md",
+    "bytes": 992,
+    "sha256": "6800c29d264d0bfcc584d99c1d748e2548cb3d18fc7c7491668c685a00d11b8f"
+  },
+  {
+    "path": "evidence/hardware-tests/KNOB-DISCOVERY-v0.8.5-2026-10-12.md",
+    "bytes": 1640,
+    "sha256": "1413254c24f14f008ffa3ef5f6515e80525e610700f7ba8051a1918b520e2ea1"
+  },
+  {
+    "path": "evidence/hardware-tests/README.md",
+    "bytes": 310,
+    "sha256": "5beddd3c3f4f1e20acad3e17b20b0170ead5bf53d3cd3369c7a5c6c6fd035171"
+  },
+  {
+    "path": "evidence/official-docs/A33M-HTTPS-API-V1.2-FULL-AUDIT.md",
+    "bytes": 795,
+    "sha256": "4d5464fec9f46983736b0ebc78df6bb76d72801ea2998d81e2aa1e3aa9c40afa"
+  },
+  {
+    "path": "evidence/official-docs/A33M-HTTPS-API-V1.2.md",
+    "bytes": 2014,
+    "sha256": "758703a6a10b59050c7da0afb03b178d0feb7b96df37059a7d376ae142df47e0"
+  },
+  {
+    "path": "evidence/official-docs/ARYLIC-TCP-API.md",
+    "bytes": 1217,
+    "sha256": "68f62e8b4663767f7807f1cc8b5c9046426309fe0c0c9a40485efb2706cbafc9"
+  },
+  {
+    "path": "evidence/official-docs/ARYLIC-UART-API.md",
+    "bytes": 566,
+    "sha256": "2c5369e96ebfcba59a7208452d3076207ebcba5f8ec4789f0327cacc4f53e91c"
+  },
+  {
+    "path": "evidence/official-docs/CS2-ADAMP-ACAMP-API-2025-08-26.md",
+    "bytes": 5120,
+    "sha256": "851ba5f110cfcdbbaae97631831254700d8895f05c2518511c641a9e6f3a3712"
+  },
+  {
+    "path": "evidence/official-docs/IAUDIOCLOUD-USER-MANUAL-V1.4.md",
+    "bytes": 5185,
+    "sha256": "1b64b8df1f08c493232d2572a1637aaa5d85dfe927b12ad5f06eb5a824392c7d"
+  },
+  {
+    "path": "evidence/official-docs/README.md",
+    "bytes": 1282,
+    "sha256": "527aec96edbdaf7782269eb7f219611b45554ab78542845da2399d28e953b10f"
+  },
+  {
+    "path": "evidence/reverse-engineering/README.md",
+    "bytes": 78,
+    "sha256": "82f391137f632f066ca2d2e6b82a5cef52379431a795e5733b0fdc15045de764"
+  },
+  {
+    "path": "functions/alarm/COMMANDS.md",
+    "bytes": 646,
+    "sha256": "75d723711547125f38e1ae1954303ad7b296d44c7bd12e64e7c093d465b40950"
+  },
+  {
+    "path": "functions/alexa/COMMANDS.md",
+    "bytes": 1592,
+    "sha256": "6671089bfcf1d69e21c0ef94d0b18ec8f7340f5139e607120f6cd9ff2e8e1f58"
+  },
+  {
+    "path": "functions/amazon-music/COMMANDS.md",
+    "bytes": 1200,
+    "sha256": "76e0872a3c2487b57a12bf72082c9f9ed4679bde9244bffff8c88ee04ffd15c3"
+  },
+  {
+    "path": "functions/artwork/README.md",
+    "bytes": 331,
+    "sha256": "32ecda86f57f23bb45f200dc350200f06a141374b7ab4bffa5f4618ff5cdde19"
+  },
+  {
+    "path": "functions/audio-output/COMMANDS.md",
+    "bytes": 1334,
+    "sha256": "dcca97af5a68d1e209c1bd8bc5176cc6f33ff1575170226c82b5aa996ae7fbf6"
+  },
+  {
+    "path": "functions/bluetooth/COMMANDS.md",
+    "bytes": 3612,
+    "sha256": "d1576666de696accbed04b77b524b6ed04cc002bc63085efd824f6ab9e3f2dc7"
+  },
+  {
+    "path": "functions/concurrent-control/README.md",
+    "bytes": 3083,
+    "sha256": "a212bd09b8d16ccd6ff0e579e99bfdfbb6883e069f809a166726f4fb3997ecaa"
+  },
+  {
+    "path": "functions/device-info/COMMANDS.md",
+    "bytes": 936,
+    "sha256": "be96170562c65d8ef2b702a8b76d7b16df80b9de547da322f3e277a6d6a29d4d"
+  },
+  {
+    "path": "functions/discovery/COMMANDS.md",
+    "bytes": 967,
+    "sha256": "d09e0f75f7fd2b1af7f89b1b61a6b4832aab0a553128018c72201f33a460e6ab"
+  },
+  {
+    "path": "functions/discovery/README.md",
+    "bytes": 912,
+    "sha256": "b313f9fcb7d267a10694544790c8499ceb68c8ea952f4d8d0481dd52d60752f7"
+  },
+  {
+    "path": "functions/eq/COMMANDS.md",
+    "bytes": 4551,
+    "sha256": "68701112ec8f632ec388f433803754ad384d796c5b36c19ed17680d36059f2f4"
+  },
+  {
+    "path": "functions/eq/README.md",
+    "bytes": 166,
+    "sha256": "47e14e7152db9013f99d9eb6029c076ce703b422491003d3a93a280399b1a532"
+  },
+  {
+    "path": "functions/eq-preset/COMMANDS.md",
+    "bytes": 248,
+    "sha256": "d7792f83d48e42892a4eaabbf14b052a543dab20c514b73509d97b850bd78fee"
+  },
+  {
+    "path": "functions/maximum-volume/COMMANDS.md",
+    "bytes": 166,
+    "sha256": "127da135a3b8fa822c4016fb37019fbd038ed6a4f47ab102e941f4c719ae880d"
+  },
+  {
+    "path": "functions/media-presets/COMMANDS.md",
+    "bytes": 20121,
+    "sha256": "8dbe59e365d20c621fae497639355ade6f0e183543df7361cd0cf35b6b09913d"
+  },
+  {
+    "path": "functions/metadata/COMMANDS.md",
+    "bytes": 508,
+    "sha256": "25ce7108d20f1077c09f279baa16217cc2521f1562015c6bbbba73ccfb996f89"
+  },
+  {
+    "path": "functions/metadata/README.md",
+    "bytes": 359,
+    "sha256": "81b0f25e13124691afd06687045196bcf93b5575173da9933880877e21305619"
+  },
+  {
+    "path": "functions/multiroom/COMMANDS.md",
+    "bytes": 4931,
+    "sha256": "c417f7035feddcdda5970181e548480350aa454201c59e92c7855bbdf1464a5a"
+  },
+  {
+    "path": "functions/multiroom/README.md",
+    "bytes": 2461,
+    "sha256": "39157b452f1d7cbe0580ab0de165d76d6892585f1e2d3541c57ddde4f2761e47"
+  },
+  {
+    "path": "functions/mute/COMMANDS.md",
+    "bytes": 338,
+    "sha256": "8f9e3239cdf8cdfe057ab998e5c00a3f0681d76e8c18a7f40ae10cd09b802ee8"
+  },
+  {
+    "path": "functions/network/COMMANDS.md",
+    "bytes": 8293,
+    "sha256": "4bff60e644a77c9cb08de58e2457b69be5b15093c089a36bbd7c71ee8b206387"
+  },
+  {
+    "path": "functions/network/README.md",
+    "bytes": 80,
+    "sha256": "cec61ae575a2b5779559728844f54af82e5e6287959fcbfadc14f02db5ae71f8"
+  },
+  {
+    "path": "functions/notifications/README.md",
+    "bytes": 5731,
+    "sha256": "ab652d0d68a5a924b806bc2048d8c570c2573ed513ee5f77736ed140b1896b7e"
+  },
+  {
+    "path": "functions/online-service/COMMANDS.md",
+    "bytes": 397,
+    "sha256": "696d12cdddaa011bba5026901d8b6a75598a787b460861a21040126ee7c4135a"
+  },
+  {
+    "path": "functions/online-services/COMMANDS.md",
+    "bytes": 2415,
+    "sha256": "71512a17b4e3d6983f8d9ed2ff2b0c3c5ef0aed505b825db513626a68da485d8"
+  },
+  {
+    "path": "functions/online-services/README.md",
+    "bytes": 158,
+    "sha256": "ffd910947f8f3fe5e792de4977239b2192ca415fe608c216422793c84859ed6a"
+  },
+  {
+    "path": "functions/playback/COMMANDS.md",
+    "bytes": 2158,
+    "sha256": "01177a96a8d52666ee4d76022a51417e1dac24a44153949d12bbb1ceeeaa3fd9"
+  },
+  {
+    "path": "functions/playback/README.md",
+    "bytes": 509,
+    "sha256": "4a83af8788851f02255e15e43e1fa36a2636f18854e2aacbbe2282abdccc41a2"
+  },
+  {
+    "path": "functions/playback-event/COMMANDS.md",
+    "bytes": 95,
+    "sha256": "d539f9550880364d5ce21ebe5ee297f568933bc3a49c6eb3231f6e9adbf421a3"
+  },
+  {
+    "path": "functions/presets/COMMANDS.md",
+    "bytes": 581,
+    "sha256": "b342012e3929c7fe4cbab17b80ddb71114d6d1776c986b334cdc44301d95d3c1"
+  },
+  {
+    "path": "functions/presets/README.md",
+    "bytes": 555,
+    "sha256": "28b733091eea72984edf9c7c1620bda388d3ef00e5b9fe8a610f6f672dc7b7a7"
+  },
+  {
+    "path": "functions/room-correction/COMMANDS.md",
+    "bytes": 1093,
+    "sha256": "3aa407b845f00825aa1372e51e787113f6fd88440518009ddf67aa2dcd23d98b"
+  },
+  {
+    "path": "functions/seek/COMMANDS.md",
+    "bytes": 216,
+    "sha256": "68ce33deb06945a08988ae0d5ed4718f9dd34fd076f7ce22db49e71c86153c91"
+  },
+  {
+    "path": "functions/source/COMMANDS.md",
+    "bytes": 611,
+    "sha256": "a59c933c89f90675dc0e0bb4b281ee434729ce3b395a4e92a9e5f6da2fdc756b"
+  },
+  {
+    "path": "functions/sources/COMMANDS.md",
+    "bytes": 872,
+    "sha256": "7c30e7838c6bc7a845c181694aa6c3026ea121f8181979b80c67c1b78d102347"
+  },
+  {
+    "path": "functions/sources/README.md",
+    "bytes": 80,
+    "sha256": "ddbca13d616772efa24aa36a3f2b3fb1799e586cc0654e49a22a46a9882c1c77"
+  },
+  {
+    "path": "functions/status/COMMANDS.md",
+    "bytes": 147,
+    "sha256": "014c6f6a2bb4bd9a244c1579e986e1585bbbb38c73c6f5adc2719841c0ef5d74"
+  },
+  {
+    "path": "functions/system/CHAT-AUDIT-03.md",
+    "bytes": 814,
+    "sha256": "e62afed80cd80a2e82b3b235070bc4494403fd397c005b35c467806f44d80ec1"
+  },
+  {
+    "path": "functions/system/COMMANDS.md",
+    "bytes": 2256,
+    "sha256": "d808c54e8565ebf800896d7711467c11f57e20d183a8dc75051e8e59eab44597"
+  },
+  {
+    "path": "functions/unknown/COMMANDS.md",
+    "bytes": 154,
+    "sha256": "fcab137db6d36c54eb5b93a26aa544612fb4f21b1a46a47ace5d54219dbeb1e0"
+  },
+  {
+    "path": "functions/unknown-communication/COMMANDS.md",
+    "bytes": 110,
+    "sha256": "7a9dc2887c42d6a09c52029811d265e48ae3c3b3b4b97cb3d5fd0f97ddc5d4d1"
+  },
+  {
+    "path": "functions/usb/COMMANDS.md",
+    "bytes": 308,
+    "sha256": "b01d083b752dc751b408c967b59abadf0562f913e47e277d65d0783cb9e81d3e"
+  },
+  {
+    "path": "functions/usb/README.md",
+    "bytes": 76,
+    "sha256": "2b869c7adc4b1d2d2922f99ba01abd51113d3d8b913233949970e6a53d496f79"
+  },
+  {
+    "path": "functions/volume/COMMANDS.md",
+    "bytes": 1978,
+    "sha256": "e7169e1f48afd5217952f78a8e54bc5a69be9d3498593a3db91a9c54b7d4250a"
+  },
+  {
+    "path": "functions/volume/README.md",
+    "bytes": 79,
+    "sha256": "1394ac3ff2fef717c282eb170662a84dbe26f65f8c3a22efc35616d786a9b0bb"
+  },
+  {
+    "path": "functions/volume-event/COMMANDS.md",
+    "bytes": 89,
+    "sha256": "8eb558817dc4308fad25b237f1037a1572319d61830b5d17e0f117d46cce4724"
+  },
+  {
+    "path": "functions/wiim-extended/COMMANDS.md",
+    "bytes": 22870,
+    "sha256": "4ce0f50827ea3f1dd6d658b863c5ab5b101cd35414e823c57d429a5f83b2caa3"
+  },
+  {
+    "path": "integration/A97-VOLUME-REUSE.md",
+    "bytes": 4205,
+    "sha256": "9393ac0937cf7bea3a9aa0be0f5b0daa2b7f4612386ce750bbd5954c1ebbc605"
+  },
+  {
+    "path": "integration/KNOB-A98-PRESETS.md",
+    "bytes": 3969,
+    "sha256": "d23742532e79bc9deef776c1a8f289b7e60946b68b36c8b8952b55391b51d919"
+  },
+  {
+    "path": "integration/KNOB-RAM-CAPTURE.md",
+    "bytes": 2294,
+    "sha256": "d4e84b81cd483816c9fbc85c79afc00e6e3c0d4c69a14236d72301af5d3dbaa7"
+  },
+  {
+    "path": "integration/KNOB-RESPONSIVENESS.md",
+    "bytes": 11304,
+    "sha256": "e8ba9b481a31e2bab9dd0321fcbbafff1ca9dc6abe9e9ff65d547ad0d85eb92c"
+  },
+  {
+    "path": "integration/KNOB-WIIM-OPTIMIZATION-v0.8.22.md",
+    "bytes": 8039,
+    "sha256": "bb9a3c7a65e95e30b6a2096824c40fdb52554a9dac319cd69a132358ee57c530"
+  },
+  {
+    "path": "integrations/ATTACH_NEW.md",
+    "bytes": 881,
+    "sha256": "0b71a58cf4987533d763647e7067397a6bea8ddc130f25a0de778b5171e1bbd5"
+  },
+  {
+    "path": "integrations/CHATS.md",
+    "bytes": 1007,
+    "sha256": "e31f2f0d8d9435441f97ef77c47124a1b17dc423392ce915e15557a9b671fedc"
+  },
+  {
+    "path": "integrations/PROJECTS.md",
+    "bytes": 1120,
+    "sha256": "3615d81de0bc61cb4fab996fbbdd05a265d698ec2314e2ceeb45947a1bf8ef75"
+  },
+  {
+    "path": "projects/README.md",
+    "bytes": 4483,
+    "sha256": "4441981eeab6ab5deb240b696de5f5f51ad6a8cb94ba584177eed8b68933f3d7"
+  },
+  {
+    "path": "projects/airALARM/README.md",
+    "bytes": 2794,
+    "sha256": "3e3bdb09f6514c519b6b264f23663c09ed3032c8e21ae3ff3f8874899ac4d031"
+  },
+  {
+    "path": "projects/airControl/README.md",
+    "bytes": 2112,
+    "sha256": "e501380136cb93ad2084173791074fb49c0ca005b4f19a973e583b42b62e4ad6"
+  },
+  {
+    "path": "projects/airKNOB/README.md",
+    "bytes": 2257,
+    "sha256": "cbbf3a413fbc40711a589a4bca92efa2b5cc69d38077f803a13e7be28644604f"
+  },
+  {
+    "path": "projects/knx-gate/README.md",
+    "bytes": 2349,
+    "sha256": "a28de0383839789b143fdf1919980b1c329c4c973cd73bffec72c74caff4fb60"
+  },
+  {
+    "path": "protocols/a33-json-1234/COMMANDS.md",
+    "bytes": 1133,
+    "sha256": "7c98e0982af8f071bc36d14a191536adb9f58a98160ed22528e9161f4e46b3ba"
+  },
+  {
+    "path": "protocols/a33-json-1234/README.md",
+    "bytes": 98,
+    "sha256": "3fb2d71c1e86d7121a5b2ea27b3b05acddcf65eb91ab59bbb8ea09ef1c5ba743"
+  },
+  {
+    "path": "protocols/a33-native-23040/COMMANDS.md",
+    "bytes": 6429,
+    "sha256": "d9de75f4ee6193e476eb1ca4c6a96ee572e7d2bb46c5fd816e213c27004e5dec"
+  },
+  {
+    "path": "protocols/a33-native-23040/README.md",
+    "bytes": 122,
+    "sha256": "200bcc75ba91e9541c40ecbafe2ed70046c21174e79cca5cf34be3e4d4281f63"
+  },
+  {
+    "path": "protocols/acs2/A33M-V1.2-COMPLETE.md",
+    "bytes": 10341,
+    "sha256": "103913344ba90fbde8f87c44f9bb45467762c6b8546e7bfe5b3832a1b10990f0"
+  },
+  {
+    "path": "protocols/acs2/COMMANDS.md",
+    "bytes": 14265,
+    "sha256": "62cdbd1e9e953704e33ff4fa4b6bbd637f0543dd8006e1db953d1302bed3e949"
+  },
+  {
+    "path": "protocols/acs2/README.md",
+    "bytes": 666,
+    "sha256": "df616c966955c4ef3465a73b41569d9ae713ceb44f04817f3eb5937332fc3be9"
+  },
+  {
+    "path": "protocols/communication-8819/CHAT-AUDIT-03.md",
+    "bytes": 1400,
+    "sha256": "c82a0926ef49285a20c9401eadf1b553ad2cb195ce4a7eb1683cc9d41e51c46a"
+  },
+  {
+    "path": "protocols/communication-8819/COMMANDS.md",
+    "bytes": 4154,
+    "sha256": "91a8f3fdaeb5734bb3ab312a7a23678c688054dec0121b1bac2ba31c9d155173"
+  },
+  {
+    "path": "protocols/linkplay-http-https/COMMANDS.md",
+    "bytes": 9197,
+    "sha256": "076c7e389e307e4377216a4340c97c85f02f61781de397f119f4eda9c955a2dd"
+  },
+  {
+    "path": "protocols/linkplay-http-https/README.md",
+    "bytes": 590,
+    "sha256": "40f1ab123b7cb18bf8fd0974b276efa0a83d57141a2d17001b0684d4ec11e7e1"
+  },
+  {
+    "path": "protocols/mcu-8899/CHAT-AUDIT-02.md",
+    "bytes": 589,
+    "sha256": "983ab51fec1233acaaf89525e3709986df4ee58f382bfed2ceae02aad755939d"
+  },
+  {
+    "path": "protocols/mcu-8899/COMMANDS.md",
+    "bytes": 15728,
+    "sha256": "6fdc0846abfc4736113943713a862732aa83939eb07f90ba63f1e92b55df086a"
+  },
+  {
+    "path": "protocols/mcu-8899/README.md",
+    "bytes": 116,
+    "sha256": "a0613d4d8311be773b334555799a08404063f2b6b147dc8d221131d512aa555e"
+  },
+  {
+    "path": "protocols/uart/COMMANDS.md",
+    "bytes": 7855,
+    "sha256": "961806695c3ed9fd94f714b410e888aa5e508a9e3246921f91609bba37747717"
+  },
+  {
+    "path": "protocols/uart/EXTENSIONS.md",
+    "bytes": 1281,
+    "sha256": "f157a7e1eff808d4934bf500ca28c6cacaa20a81cc520acfa1b0d64c85e2e4d5"
+  },
+  {
+    "path": "protocols/upnp/A97-VOLUME.md",
+    "bytes": 6082,
+    "sha256": "7dec36376b2cc6c4bbbeffe88a467cb804a5425334ee4d1f5fd385e05cefe5f0"
+  },
+  {
+    "path": "protocols/upnp/COMMANDS.md",
+    "bytes": 9848,
+    "sha256": "23c5289c273b1039bd3bfc08c467086140e9adc23da14d81cb46377c019c2004"
+  },
+  {
+    "path": "protocols/upnp/PLAYLIST_XML.md",
+    "bytes": 777,
+    "sha256": "c3c3d5510e7dfe7415d108d35eb309f2cd580b5b2e54d474ed28b993dab01c02"
+  },
+  {
+    "path": "protocols/upnp/PLAYQUEUE_REMOTE_MEDIA_SERVER.md",
+    "bytes": 731,
+    "sha256": "c0ba0639470f688887c234e401d233e46e5a829a8304226bbc5df262f71d1aa5"
+  },
+  {
+    "path": "protocols/upnp/QUEUECONTEXT_XML.md",
+    "bytes": 940,
+    "sha256": "fafe78ba3432169b3993061d6ae0cf536bfe95d29b2acd58fb1a1361adc025d0"
+  },
+  {
+    "path": "protocols/upnp/README.md",
+    "bytes": 105,
+    "sha256": "66bd246dd70843dd79df32e4b8e8be8d85c70836b37c6230ddbcb5709ca4e543"
+  },
+  {
+    "path": "protocols/upnp/RENDERINGCONTROL_SCPD.md",
+    "bytes": 2907,
+    "sha256": "3a181b4f3b588ca7c78a01750e2d83bda7b292addbb30d0d4ab877b2d6dd1c80"
+  },
+  {
+    "path": "protocols/upnp/playqueue/A97-PRESETS.md",
+    "bytes": 6953,
+    "sha256": "25dc0febaa3ae2d8004e908aab5b0bdf495168e72f01a2cecb67f2a7fd78127f"
+  },
+  {
+    "path": "protocols/upnp/playqueue/COMMANDS.md",
+    "bytes": 1908,
+    "sha256": "34a8665bf9c3e7f9cb9ef9423c43838cc29e92d60e0b0fb20615ca45feacf2f3"
+  },
+  {
+    "path": "protocols/upnp/playqueue/FULL_SCPD_ACTIONS.md",
+    "bytes": 1142,
+    "sha256": "46272940cae35656274cd2143fb67241e032edb4d75d12875effb396fb97ee07"
+  },
+  {
+    "path": "protocols/upnp/stream-services/COMMANDS.md",
+    "bytes": 580,
+    "sha256": "63705223197b27193607393e2afd7c32b2fd608679bdd9368417624d4e90445e"
+  },
+  {
+    "path": "protocols/wiim-httpapi/A97-A98-TRANSPORT.md",
+    "bytes": 1131,
+    "sha256": "6cb1fda87411b37b30a85e6f77ac735be938d9e8c25ac386645137a0f2e3c1f8"
+  },
+  {
+    "path": "protocols/wiim-httpapi/A98-PRESETS.md",
+    "bytes": 29149,
+    "sha256": "926435ec98ec3ea89ac40594ec511d0599f745b4739b486df4daac9580a44d6d"
+  },
+  {
+    "path": "protocols/wiim-httpapi/OPENAPI-V1.2.0-COMPLETE.md",
+    "bytes": 94054,
+    "sha256": "791ac2ec8c68da35e9095c7d41f6204554c1d12568e6477794a6b968b28c3e76"
+  },
+  {
+    "path": "registry/BEHAVIOR_RULES.md",
+    "bytes": 2029,
+    "sha256": "c20ad247da6a22a724c01136dbdb3e61013d6cc65e19add2afaba239db2cb41b"
+  },
+  {
+    "path": "registry/COMMANDS.md",
+    "bytes": 2035,
+    "sha256": "c471f401d4ec7af99eaecd5a1f8e32c4adbdce3bb3c042dcba13ef5783dd2df4"
+  },
+  {
+    "path": "registry/COMPATIBILITY.md",
+    "bytes": 2970,
+    "sha256": "83e6e4149a6023cf39dd589e4e1361f3273e7c89941c5d184277d4ab331d7fd1"
+  },
+  {
+    "path": "registry/DEVICES.md",
+    "bytes": 461,
+    "sha256": "7d48ff8841476ed34901b57a982cf681e135e34bae09a6a9dd9478b4fbbf70cf"
+  },
+  {
+    "path": "registry/DISCOVERY.md",
+    "bytes": 1640,
+    "sha256": "2cc0dff64bf0d07920e00feb1ee6f3f3512ca27ef3f9a0c0a1eabfa6c34bb9c9"
+  },
+  {
+    "path": "registry/EVIDENCE_POLICY.md",
+    "bytes": 3262,
+    "sha256": "8dff1a7f9a47f87cae6435cae2ae139ec1ad60c6b75040a30ec91e254270ff8d"
+  },
+  {
+    "path": "registry/FAST_ZONE_DISCOVERY.md",
+    "bytes": 9456,
+    "sha256": "533beb63cf839a8f594be3b6f71b2e9b46d17be4472801342f570177a6443b3f"
+  },
+  {
+    "path": "registry/KB_DECISIONS.json",
+    "bytes": 11096,
+    "sha256": "40922ba624cf4962df8e7c8926320e45e44c35ecebbe2b1914821d8eb305dfd6"
+  },
+  {
+    "path": "registry/KNOB_ARTWORK.md",
+    "bytes": 5355,
+    "sha256": "972fdf79aa0eb8caabce386f827e31808e90ed9e8173827e4abbe8c1deba770d"
+  },
+  {
+    "path": "registry/PROTOCOLS.md",
+    "bytes": 1684,
+    "sha256": "1086e8f6256fb186d0ae6e5a237267961a89ecf8cceda6643fa927ec6c747bec"
+  },
+  {
+    "path": "registry/README.md",
+    "bytes": 367,
+    "sha256": "dd1add28ff8705e8a99e068faf00b8fc37cbf230032942975b6f19de35342cc2"
+  },
+  {
+    "path": "registry/REVERSE_ENGINEERING.md",
+    "bytes": 763,
+    "sha256": "87dd0e8d65ebd3a79c774cd0cd4223e7330f74a18ee925117f154a06a13e53c8"
+  },
+  {
+    "path": "registry/SERVICES.md",
+    "bytes": 1407,
+    "sha256": "7d37603aa09da196fe834bcb63f89e3ff5a6627755c65b72530ea320d4df775c"
+  },
+  {
+    "path": "registry/STREAM_CAPABILITIES.md",
+    "bytes": 1395,
+    "sha256": "a8233409e2c1e9b36d9bf34252506c151b12e649e6009e5a85be11bffe8456fb"
+  },
+  {
+    "path": "registry/TRANSPORT_DETECTION.md",
+    "bytes": 327,
+    "sha256": "6a9bd2ae32b6e6dd45ecbdafe431c50714801646874a28f1e2e655bcd3ebfbb4"
+  },
+  {
+    "path": "registry/commands.csv",
+    "bytes": 752,
+    "sha256": "ba8de90cde31c0ff1cff84bc72ae64b4e0bcc4bccdba9fe0c2cad5d580b03f42"
+  },
+  {
+    "path": "registry/records/001-051.csv",
+    "bytes": 6222,
+    "sha256": "cc97433d464a9e358d15f0131e8bdc8822f0df0b69261fc80f75ae8974775781"
+  },
+  {
+    "path": "registry/records/052-102.csv",
+    "bytes": 6935,
+    "sha256": "e0405d2d6b302f47cea322aa51506026e6e66ba6e4cc91c98397e30c53f8c3a8"
+  },
+  {
+    "path": "registry/records/103-153.csv",
+    "bytes": 8598,
+    "sha256": "ad0f6b7e0bea9bfeea0c0350bf1eb91405f7384771144d3d60d7304ffefe8013"
+  },
+  {
+    "path": "registry/records/154-204.csv",
+    "bytes": 11009,
+    "sha256": "a76aca4bd9f717109f7a75390827bb8f6f559ff43dbc75ec36375ac42ea91bb5"
+  },
+  {
+    "path": "registry/records/205-214.csv",
+    "bytes": 3045,
+    "sha256": "b2495f8d62406b7a062845a571d276c72f318bd2acd3dae35f75feeeaa9145e2"
+  },
+  {
+    "path": "registry/records/215-220.csv",
+    "bytes": 2052,
+    "sha256": "346de45b56a80a2c458538a89ec277b012b8a2935360699063c709d5bd9c008f"
+  },
+  {
+    "path": "registry/records/215-221.csv",
+    "bytes": 1625,
+    "sha256": "f9b6daf9fb8c466bea24be1a842d402a1d6a32f21516e4fe99ee6b7468b57fc8"
+  },
+  {
+    "path": "registry/records/222-258.csv",
+    "bytes": 8421,
+    "sha256": "e1f7bbd4d01c2af610c317d893352cadadca58489493eaec41f6a23b5621acfa"
+  },
+  {
+    "path": "registry/records/259-316.csv",
+    "bytes": 12680,
+    "sha256": "dfa0cdb5168915d8fe35bd2ede899176236cf0f1a59ceb9cccc1b8dcf7813667"
+  },
+  {
+    "path": "registry/records/317.csv",
+    "bytes": 346,
+    "sha256": "2281e2b79ba4ca3a43a0569270832b5fd1d06bf06798dca3bceaa3505f41f153"
+  },
+  {
+    "path": "registry/records/318-325.csv",
+    "bytes": 2873,
+    "sha256": "69a66cc53cd9c9c5f6b9ceb15857b90b2c1c4157b01d64bd7340694435da5a93"
+  },
+  {
+    "path": "registry/records/326-634.csv",
+    "bytes": 83959,
+    "sha256": "0318b519a09d492aa36b1c238da2ebbfc93245686d0a11d7dd9beb4e5dda25c1"
+  },
+  {
+    "path": "tests/A33-PRESETS-HW-2026-10-10.md",
+    "bytes": 2551,
+    "sha256": "e32d68e20994c3b6a9c74ef83eace616ee7c1a1e9d2fd2ead0157997c934cc96"
+  },
+  {
+    "path": "tools/airALARM/make_prompts_mac.sh",
+    "bytes": 871,
+    "sha256": "209ca6fcc1283161bfc8822ffe3be92f57252203308c2816cf3602f99dc75784"
+  },
+  {
+    "path": "tools/kb/README.md",
+    "bytes": 2526,
+    "sha256": "07e265929933aa3b0527a06beff90eca3cdb59160f1aa95b325bb19de724f06b"
+  },
+  {
+    "path": "tools/kb/audit.py",
+    "bytes": 10417,
+    "sha256": "cc5adc36b4f8a49c85c7fed4be4707e01fe7af4532c15206d1fd72250dc9461e"
+  },
+  {
+    "path": "tools/kb/test_audit.py",
+    "bytes": 3742,
+    "sha256": "ebab478f3eb5e2e63e01fa6967d3307471627aba1ecc789fecf2f368c6c416f5"
+  },
+  {
+    "path": "workspace.yaml",
+    "bytes": 510,
+    "sha256": "f1c908c9c49cd604e7b7f3b4f15bfefde34c0360e5b47fdf322c36e8e98fe16c"
+  }
+]

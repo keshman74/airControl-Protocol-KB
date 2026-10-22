@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "duplicate_ids": {
+    "RULE-TCP-CONNECTIVITY-FALLBACK-59152": {
+      "reason": "Same generic helper, two historical descriptions. Preserve both raw rows, expose one identity. KB-C01.",
+      "occurrences": [
+        {
+          "path": "registry/records/205-214.csv",
+          "sha256": "46f62f4d45309f2b1b5f113996e5772116ea79c4175c0cc66f5171dc9529ba5f"
+        },
+        {
+          "path": "registry/records/215-220.csv",
+          "sha256": "edcfa714ddc9b193bfd522a507315395f02f8836938a135bf8404c047ef49e6a"
+        }
+      ]
+    }
+  },
+  "contextual_evidence": {
+    "QRY-UPNP-RC-GET-VOLUME": [
+      {
+        "device": "A97 Кухня 192.168.0.99",
+        "firmware": "unknown",
+        "protocol": "HTTP49152 RenderingControl",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/upnp/A97-VOLUME.md"
+        ],
+        "effect": "Mac read12–23ms, same-level write15ms; KNOB0.8.23 changed-volume qualitative user confirmation; no numeric KNOB latency"
+      }
+    ],
+    "CMD-UPNP-RC-SET-VOLUME": [
+      {
+        "device": "A97 Кухня 192.168.0.99",
+        "firmware": "unknown",
+        "protocol": "HTTP49152 RenderingControl",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/upnp/A97-VOLUME.md"
+        ],
+        "effect": "Mac read12–23ms, same-level write15ms; KNOB0.8.23 changed-volume qualitative user confirmation; no numeric KNOB latency"
+      }
+    ],
+    "QRY-WIIM-GET-PRESET-INFO": [
+      {
+        "device": "A97 Кухня 192.168.0.99",
+        "firmware": "unknown",
+        "protocol": "HTTPS443 httpapi.asp",
+        "status": "REJECTED",
+        "sources": [
+          "protocols/upnp/playqueue/A97-PRESETS.md"
+        ],
+        "effect": "HTTP200 unknown command; not all A97 firmware"
+      },
+      {
+        "device": "A98 192.168.0.21",
+        "firmware": "unknown",
+        "protocol": "HTTPS443 httpapi.asp",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/wiim-httpapi/A98-PRESETS.md"
+        ],
+        "effect": "Preset list response; preserve original key/routine distinctions"
+      }
+    ],
+    "QRY-A97-UPNP-KEY-MAPPING": [
+      {
+        "device": "A97 Кухня 192.168.0.99",
+        "firmware": "unknown",
+        "protocol": "HTTP49152/59152 PlayQueue",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/upnp/playqueue/A97-PRESETS.md"
+        ],
+        "effect": "GetKeyMapping read both ports; KNOB0.8.21 list and HTTPS MCUKeyShortClick launch confirmed, slots not enumerated"
+      }
+    ],
+    "CMD-A33M-PRESET-CHOICE": [
+      {
+        "device": "A33 airCloud 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTP8000 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "tests/A33-PRESETS-HW-2026-10-10.md"
+        ],
+        "effect": "List12; choice1/2 selects, slot2 Not and resume needed; not every slot"
+      }
+    ],
+    "QRY-A33M-PRESET-LIST": [
+      {
+        "device": "A33 airCloud 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTP8000 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "tests/A33-PRESETS-HW-2026-10-10.md"
+        ],
+        "effect": "List12; choice1/2 selects, slot2 Not and resume needed; not every slot"
+      }
+    ],
+    "CMD-ACS2-RESUME": [
+      {
+        "device": "A33 airCloud 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTP8000 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "tests/A33-PRESETS-HW-2026-10-10.md"
+        ],
+        "effect": "List12; choice1/2 selects, slot2 Not and resume needed; not every slot"
+      }
+    ],
+    "CMD-A33-PRESET-GET": [
+      {
+        "device": "A33 EC04",
+        "firmware": "unknown",
+        "protocol": "TCP23040 native",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/a33-native-23040/COMMANDS.md"
+        ],
+        "effect": "03 76 list and 03 70 Logo-correlated activation; airControl5.0.0 and artwork verified"
+      }
+    ],
+    "CMD-A33-PRESET-ACTIVE": [
+      {
+        "device": "A33 EC04",
+        "firmware": "unknown",
+        "protocol": "TCP23040 native",
+        "status": "CONFIRMED",
+        "sources": [
+          "protocols/a33-native-23040/COMMANDS.md"
+        ],
+        "effect": "03 76 list and 03 70 Logo-correlated activation; airControl5.0.0 and artwork verified"
+      }
+    ],
+    "CMD-ACS2-PROMPT-TONE": [
+      {
+        "device": "A33 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTPS8443 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "docs/airALARM-verified-commands-2026-10-10.md"
+        ],
+        "effect": "Enable; first download200 OK/repeat400 Exist; WAV :10 audible and radio returned; full volume range untested"
+      }
+    ],
+    "CMD-ACS2-PROMPT-DOWNLOAD": [
+      {
+        "device": "A33 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTPS8443 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "docs/airALARM-verified-commands-2026-10-10.md"
+        ],
+        "effect": "Enable; first download200 OK/repeat400 Exist; WAV :10 audible and radio returned; full volume range untested"
+      }
+    ],
+    "CMD-ACS2-PROMPT-PLAY": [
+      {
+        "device": "A33 192.168.0.31",
+        "firmware": "unknown",
+        "protocol": "HTTPS8443 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "docs/airALARM-verified-commands-2026-10-10.md"
+        ],
+        "effect": "Enable; first download200 OK/repeat400 Exist; WAV :10 audible and radio returned; full volume range untested"
+      }
+    ],
+    "QRY-ACS2-STATUS": [
+      {
+        "device": "Cloudix A33 CL-BOPro 192.168.0.31",
+        "firmware": "2.35.0023.33",
+        "protocol": "HTTP8000 ACS2",
+        "status": "CONFIRMED",
+        "sources": [
+          "devices/A33/COMMANDS.md"
+        ],
+        "effect": "getStatusEx request/response hardware update 2026-10-09"
+      }
+    ],
+    "DISC-FAST-ZONES-001": [
+      {
+        "device": "KNOB ONX2424G013 tested LAN",
+        "firmware": "KNOB0.8.5; player firmware unknown",
+        "protocol": "SSDP + API discovery",
+        "status": "CONFIRMED",
+        "sources": [
+          "registry/FAST_ZONE_DISCOVERY.md",
+          "evidence/hardware-tests/KNOB-DISCOVERY-v0.8.5-2026-10-12.md"
+        ],
+        "effect": "Aggregate faster/all expected zones; no per-chip inventory"
+      }
+    ],
+    "TEST-A31-PROMPT-SOFTWARE-GAIN": [
+      {
+        "device": "A31 Rakoit 192.168.0.35",
+        "firmware": "4.6.415156",
+        "protocol": "HTTP80 playPromptUrl",
+        "status": "CONFIRMED",
+        "sources": [
+          "docs/airALARM-verified-commands-2026-10-10.md"
+        ],
+        "effect": "Subjective levels10/50 and master50/80 matrix; NOT fixed acoustic independence"
+      }
+    ],
+    "TEST-A31-PROMPT-MASTER-RESTORE": [
+      {
+        "device": "A31 Rakoit + ESP32 airALARM",
+        "firmware": "A31 4.6.415156; airALARM0.1.27/28",
+        "protocol": "HTTP80 temporary master",
+        "status": "CONFIRMED",
+        "sources": [
+          "docs/airALARM-A31-volume-path-2026-10-20.md"
+        ],
+        "effect": "v0.1.27 chosen level/restore works; ~2s louder radio leakage before/after; v0.1.28 later labelled hardware-verified"
+      }
+    ],
+    "TEST-A31-PROMPT-PHYSICAL-INDEPENDENCE": [
+      {
+        "device": "A31 Rakoit",
+        "firmware": "4.6.415156",
+        "protocol": "Audio gain path",
+        "status": "EXPERIMENTAL",
+        "sources": [
+          "docs/airALARM-A31-volume-path-2026-10-20.md"
+        ],
+        "effect": "UNSOLVED physical independence; software Q16 model not microphone measurement"
+      }
+    ],
+    "TEST-A31-LIVE-AUDIO-V1-FILTERS": [
+      {
+        "device": "A31 Rakoit",
+        "firmware": "4.6.415156",
+        "protocol": "Read-only SSH",
+        "status": "SUPERSEDED",
+        "sources": [
+          "docs/airALARM-A31-live-audio-2026-10-20.md",
+          "docs/airALARM-A31-live-audio-v2-2026-10-20.md"
+        ],
+        "effect": "Only invalid empty grep-E sections replaced; not all V1 evidence",
+        "superseded_by": "docs/airALARM-A31-live-audio-v2-2026-10-20.md"
+      }
+    ]
+  },
+  "record_relations": [
+    {
+      "ids": [
+        "PROTO-TCP8819-FRAME",
+        "PROTO-TCP8819-FRAME-DETAIL"
+      ],
+      "relation": "refinement",
+      "reason": "One APK framing description, byte order still unresolved; retain both IDs."
+    },
+    {
+      "ids": [
+        "CMD-TCP8819-PROBE",
+        "CMD-TCP8819-PROBE-DETAIL"
+      ],
+      "relation": "refinement",
+      "reason": "Same string-valued action1888; detailed builder is additional evidence."
+    },
+    {
+      "ids": [
+        "QRY-UPNP-STREAM-CAPABILITY",
+        "QRY-UPNP-STREAM-CAPABILITY-EXACT"
+      ],
+      "relation": "refinement",
+      "reason": "Exact instance/version arguments and captured matrix refine earlier generic source discovery."
+    },
+    {
+      "ids": [
+        "CMD-A31-PLAY-URL",
+        "CMD-LP-PLAY"
+      ],
+      "relation": "scoped-specialization",
+      "reason": "A31 confirmed instance vs broad family documented candidate; do not union hardware support."
+    },
+    {
+      "ids": [
+        "RULE-DISCOVERY-ONLINE-001",
+        "RULE-DISCOVERY-ONLINE-RESPONSE"
+      ],
+      "relation": "equivalent-rule",
+      "reason": "Same saved-state-is-not-live principle, distinct historical provenance."
+    },
+    {
+      "ids": [
+        "RULE-CROSS-CHIP-MULTIROOM-001",
+        "RULE-MULTIROOM-FAMILY-SEPARATION"
+      ],
+      "relation": "equivalent-rule",
+      "reason": "Both preserve ACS2/Linkplay separation; not proof of interoperability."
+    }
+  ],
+  "legacy_status_vocabulary": [
+    "APK-VERIFIED",
+    "APK-VERIFIED + HARDWARE-VERIFIED",
+    "APK-VERIFIED / EXACT-BUILDER-RECOVERED",
+    "APK-VERIFIED / NOT-HW-ACTION-VERIFIED",
+    "APK-VERIFIED / NOT-HW-VERIFIED",
+    "CALL-SITE-VERIFIED / NOT-HW-VERIFIED",
+    "CALL-SITE/RESPONSE-HANDLER-VERIFIED",
+    "CAPTURED",
+    "CAPTURED/IMPLEMENTED",
+    "CONFIRMED",
+    "CONFIRMED-A97",
+    "CONFIRMED-IN-AIRCONTROL",
+    "CONFIRMED-WRITE-ONLY",
+    "DOCUMENTED",
+    "DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED",
+    "DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED",
+    "DOCUMENTED / OFFICIAL-ARYLIC-UART-API / NOT-YET-HW-VERIFIED",
+    "DOCUMENTED/IMPLEMENTED",
+    "EXPERIMENTAL",
+    "HARDWARE-VERIFIED",
+    "IMPLEMENTED",
+    "IMPLEMENTED / HARDWARE-OBSERVED",
+    "IMPLEMENTED / OBSERVED-IN-APP",
+    "IMPLEMENTED / OBSERVED-IN-LOG",
+    "IMPLEMENTED / RESPONSE-KNOWN",
+    "IMPLEMENTED / SAFETY-GUARD",
+    "IMPLEMENTED / VERIFIED-BEHAVIOR",
+    "IMPLEMENTED/NEEDS-HW-EVIDENCE",
+    "IMPLEMENTED/VERIFIED-IN-APP",
+    "PARTIAL / SOURCE-CONFIRMED / NOT-HW-VERIFIED",
+    "REJECTED",
+    "SCPD-DOCUMENTED / HARDWARE-ENDPOINT-VERIFIED",
+    "SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED",
+    "SOURCE-CONFIRMED / NOT-HW-VERIFIED",
+    "SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED",
+    "SOURCE-DOCUMENTED / NOT-HW-VERIFIED"
+  ]
+}

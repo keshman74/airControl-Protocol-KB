@@ -1,3 +1,5 @@
+> Каноническая карта зависимостей: [KB_CROSS_PROJECT_MAP](../KB_CROSS_PROJECT_MAP.md). `PRJ-AIRALARM` добавлен там; repo пока unknown. Таблица ниже — прежние локальные пути и подключения, не вторая матрица совместимости.
+
 # Connected Projects
 
 | Project ID | Repository | Local path | Role |

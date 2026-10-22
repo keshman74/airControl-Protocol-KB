@@ -1,0 +1,1702 @@
+{
+  "raw_rows": 640,
+  "unique_ids": 639,
+  "text_files": 182,
+  "files": 184,
+  "legacy_status_counts": {
+    "APK-VERIFIED": 10,
+    "APK-VERIFIED + HARDWARE-VERIFIED": 2,
+    "APK-VERIFIED / EXACT-BUILDER-RECOVERED": 2,
+    "APK-VERIFIED / NOT-HW-ACTION-VERIFIED": 9,
+    "APK-VERIFIED / NOT-HW-VERIFIED": 10,
+    "CALL-SITE-VERIFIED / NOT-HW-VERIFIED": 1,
+    "CALL-SITE/RESPONSE-HANDLER-VERIFIED": 3,
+    "CAPTURED": 12,
+    "CAPTURED/IMPLEMENTED": 4,
+    "CONFIRMED": 19,
+    "CONFIRMED-A97": 2,
+    "CONFIRMED-IN-AIRCONTROL": 2,
+    "CONFIRMED-WRITE-ONLY": 1,
+    "DOCUMENTED": 56,
+    "DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED": 8,
+    "DOCUMENTED / OFFICIAL-ARYLIC-TCP-API / NOT-YET-HW-VERIFIED": 37,
+    "DOCUMENTED / OFFICIAL-ARYLIC-UART-API / NOT-YET-HW-VERIFIED": 58,
+    "DOCUMENTED/IMPLEMENTED": 28,
+    "EXPERIMENTAL": 3,
+    "HARDWARE-VERIFIED": 1,
+    "IMPLEMENTED": 2,
+    "IMPLEMENTED / HARDWARE-OBSERVED": 1,
+    "IMPLEMENTED / OBSERVED-IN-APP": 1,
+    "IMPLEMENTED / OBSERVED-IN-LOG": 2,
+    "IMPLEMENTED / RESPONSE-KNOWN": 1,
+    "IMPLEMENTED / SAFETY-GUARD": 1,
+    "IMPLEMENTED / VERIFIED-BEHAVIOR": 2,
+    "IMPLEMENTED/NEEDS-HW-EVIDENCE": 7,
+    "IMPLEMENTED/VERIFIED-IN-APP": 1,
+    "PARTIAL / SOURCE-CONFIRMED / NOT-HW-VERIFIED": 1,
+    "REJECTED": 2,
+    "SCPD-DOCUMENTED / HARDWARE-ENDPOINT-VERIFIED": 1,
+    "SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED": 38,
+    "SOURCE-CONFIRMED / NOT-HW-VERIFIED": 3,
+    "SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED": 15,
+    "SOURCE-DOCUMENTED / NOT-HW-VERIFIED": 294
+  },
+  "findings": [
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-BALANCE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-DHCP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-EQ-PRESET",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-HTTP-VOL-DOWN-REL",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-HTTP-VOL-UP-REL",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-MUTE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-NEXT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-PAUSE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-PLAY",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-PRESET",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-PREV",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MCU-VOLUME",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MID",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MUTE-OFF",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MUTE-ON",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-MXV",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-PLAY-URL",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-SOURCE-AUX",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-SOURCE-LINEIN-AUX",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-SOURCE-USB",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-STATIC-IP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-LED",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-MAXVOL",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-PROMPT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-SENDKEY",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-VB",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-VB-ENH",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-VB-INT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-AP8064-VB-TOGGLE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-EQ-TONE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-FACTORY",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-LAST-PLAYLIST",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-NAME",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-PLAY-TOGGLE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-PLAYMODE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-PRESET-NEXT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-PRESET-PREV",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-PRESET-SAVE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-REBOOT-WIFI",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TCP-STOP",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-TREBLE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-APL",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-ASW",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-AUD",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-BAL",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-BAS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-BEP",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-BTC",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-CFE",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-CFF",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-COD",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-COE",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-DLY",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-EQE",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-EQS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-LED",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-LPM",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-MID",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-MUT",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-MXV",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-NAM",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-NXT",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-PMT",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-POM",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-POP",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-PRE",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-PST",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-SOP",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-SRC",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-STP",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-SYS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-TRE",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VBS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VOF",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VOG",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VOL",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VOS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-VST",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-UART-WRS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-VBI",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-VIRTUAL-BASS",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A31-VOLUME",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-MUTE-ON",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-NEXT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-PAUSE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-PLAY",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-PREV",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-SEEK",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33-VOLUME",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-ADD",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-CHOICE",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-DELETE",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-MOVE",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-NEXT",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-A33M-PRESET-PREV",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-BT-CLEAR",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-BT-DISCOVERY",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-BT-NAME",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-BT-RESET",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-CHANNEL",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-CONNECT-AP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-DEVICE-NAME",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-ADD",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-DELETE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-ENABLE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-HILO",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-PARAM",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-EQ-PRESET",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-FACTORY",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-LOOP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MAX-VOLUME",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MR-BREAK",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MR-DISCONNECT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MR-HOST",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MR-SLAVE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-MUTE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-NEXT",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PAUSE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PLAY-URL",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PLAYLIST",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PREV",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PROMPT-DELETE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PROMPT-DOWNLOAD",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PROMPT-PLAY",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-PROMPT-TONE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-REBOOT",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-RESUME",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-SEEK-HTTP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-SHUTDOWN",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-SOURCE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-STATIC-IP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-STATIC-SWITCH",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-STOP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-TOGGLE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-USB-PLAY",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-USB-SELECT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-VOL-DOWN",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-VOL-UP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-ACS2-VOLUME",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-CHANNEL",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-CONNECT-AP",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-FACTORY",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-LOOP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MAX-VOL",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-JOIN",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-KICK",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-LEAVE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-SLAVE-CHANNEL",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-SLAVE-MUTE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-SLAVE-VOL",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-MR-UNGROUP",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-NEXT",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-PAUSE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-PLAY",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-PLAYLIST",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-PREV",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-REBOOT",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-RESUME",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-SEEK",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-SET-MV-REMOTE-SILENCE-UPDATE-TIME",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-SET-TIMEZONE-EX",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-SHUTDOWN",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-STOP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-TOGGLE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-VOL-DOWN",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-LP-VOL-UP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-TCP8819-PROBE",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-TCP8819-PROBE-DETAIL",
+      "path": "registry/records/215-220.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-AVT-NEXT",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-AVT-PAUSE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-AVT-PLAY",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-AVT-PREV",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-AVT-SEEK",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-APPEND",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-APPEND-EX",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-APPEND-EX-EXACT",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-APPEND-QUEUE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-APPEND-TRACKS",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-BACKUP",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-CREATE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-DELETE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-MOVE-TRACKS",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-PLAY-INDEX",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-PLAY-INDEX-EXACT",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-REMOVE-TRACKS",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-REPLACE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-KEY-MAPPING",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-LOOP",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-MEDIA-SERVER",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-POLICY",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-QUEUE-RECORD",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-RATING",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-SET-SONGS-RECORD",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-STREAM-SET-QUALITY",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-TAKE-CONTROL",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-USER-LOGIN",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-USER-LOGOUT",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-PQ-USER-REGISTER",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-AIRPLAY-AUTOSYNC",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-AUTOSYNC-SUB",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-DELETE-ALARM-QUEUE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-MULTIPLAY-SLAVE-MASK",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SELECT-PRESET",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-ALARM-QUEUE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-CHANNEL",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-DEVICE-NAME",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-EQ",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-MUTE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "CMD-UPNP-RC-SET-VOLUME",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-EQ-TREBLE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-MCU-VOLUME",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-PLAYBACK",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-TCP-SPOTIFY",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-UART-ALB",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-UART-ART",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-UART-ELP",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-UART-TIT",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A31-UART-VND",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A33-QOBUZ-CONTEXT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "EVT-A33-TUNEIN-CONTEXT",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "OBS-DLNA-QUEUE-NEXT-AUTONEXT",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "OBS-LP-GET-SLEEP-TIMER",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "OBS-LP-GET-UPDATE-SERVER",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "OBS-LP-SET-UPDATE-SERVER",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "OBS-TCP8819-READ-MEASUREMENT",
+      "path": "registry/records/215-220.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-A31-8819",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-LINKPLAY-HTTP-GETSTATUSEX-SECURE",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-TCP8819-DIAGNOSTIC",
+      "path": "registry/records/215-220.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-TCP8819-FRAME",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-TCP8819-FRAME-DETAIL",
+      "path": "registry/records/215-220.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-UPNP-PLAYQUEUE-ENDPOINT",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-UPNP-QUEUECONTEXT-XML",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "PROTO-WIIM-PLAYLIST-XML",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-BALANCE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-CFE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-EQ-PRESET",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-EQ-PRESET-LIST",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-EQ-TONE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-LST",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-MCU-VERSION",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-MCU-VOLUME",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-MCU-VOLUME-NATIVE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-METAINFO",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-MXV",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-PLAYER-STATUS",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-STATIC-IP",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-STATUS-EX",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-API",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-BOARD",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-COMMIT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-MAXVOL",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-PROMPT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-AP8064-VB",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-BP10XX-VOL",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-DEVICE-BASIC",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-DEVICE-INFO",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-INPUT",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-INTERNET",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-MEDIA",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-MUTE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-NOWPLAYING",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-PLAYMODE",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-PROGRESS",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TCP-USB",
+      "path": "registry/records/222-258.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-TREBLE",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-BSS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-CHN",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-ETH",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-IPA",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-LST",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-MRM",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-PEQ",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-PLA",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-PLI",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-STA",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-TME",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-VER",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-WIF",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-WSS",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-UART-WWW",
+      "path": "registry/records/259-316.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A31-USB-LIST",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A33M-EQ-SWITCH",
+      "path": "registry/records/317.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A33M-PRESET-LIST",
+      "path": "registry/records/215-221.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-A98-METAINFO-ARTWORK",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-BT-NAME",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-EQ-INFO",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-EQ-TYPE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-META",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-MR-INFO",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-PLAYER-STATUS",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-POSITION",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-PROMPT-DEVICE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-PROMPT-SERVER",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-SCAN-APS",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-STATUS",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-USB-LIST",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-ACS2-WIFI-STATE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-LP-MR-SLAVES",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-LP-POSITION",
+      "path": "registry/records/001-051.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-LP-SCAN-APS",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-LP-WIFI-STATE",
+      "path": "registry/records/052-102.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-AVT-INFOEX",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-AVT-MEDIAINFO",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-BROWSE",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-BROWSE-EX",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-GET-KEY-MAPPING",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-GET-LOOP",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-GET-ONLINE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-INDEX",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-SEARCH-ONLINE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-PQ-STREAM-GET-QUALITY",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-CONTROL-DEVICE-INFO",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-GET-ALARM-QUEUE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-GET-CHANNEL",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-GET-EQ",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-GET-MUTE",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-GET-VOLUME",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-LIST-PRESETS",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-RC-SIMPLE-DEVICE-INFO",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-STREAM-CAPABILITY",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "QRY-UPNP-STREAM-CAPABILITY-EXACT",
+      "path": "registry/records/103-153.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-DEVICE-REPORT-NET-STATUS-TIMEOUT",
+      "path": "registry/records/215-220.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-DISCOVERY-ONLINE-RESPONSE",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-LOCAL-LIBRARY-PLAYBACK-OWNERSHIP",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-LP-MR-ROLE-PARSING",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-LP-TRANSPORT-BY-HARDWARE",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-MULTIROOM-FAMILY-SEPARATION",
+      "path": "registry/records/318-325.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-TCP-CONNECTIVITY-FALLBACK-59152",
+      "path": "registry/records/205-214.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "RULE-XML-ESCAPING-WIIM",
+      "path": "registry/records/154-204.csv"
+    },
+    {
+      "kind": "missing_explicit_row_source",
+      "id": "TEST-A31-UPNP-SEEK-REL-TIME",
+      "path": "registry/records/318-325.csv"
+    }
+  ],
+  "limitations": [
+    "Markdown links checked, not bare code paths or remote URLs.",
+    "Semantic contradictions require human review; context equality is exact, not inferred.",
+    "Legacy classification is conservative, not a new hardware verification.",
+    "Source existence is checked; authenticity and cited content require review."
+  ]
+}

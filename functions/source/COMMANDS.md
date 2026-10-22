@@ -1,3 +1,5 @@
+> Исторический alias. Актуальная функция: [sources/COMMANDS](../sources/COMMANDS.md). Строки ниже сохранены для provenance; не вести новые параллельные записи здесь.
+
 # Source command view
 
 - `CMD-A31-SOURCE-AUX` [A31] `setPlayerCmd:switchmode:AUX%20In` — **CONFIRMED**

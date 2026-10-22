@@ -13,3 +13,10 @@
 | PROTO-UPNP | A31/A33 observed | SSDP/UPnP | discovery/rendering | PARTIAL |
 
 | PROTO-WIIM-HTTPAPI | WiiM/Linkplay; A97/A98 candidates | HTTPS :443 | `/httpapi.asp?command=<command>`; self-signed TLS on WiiM | SOURCE-DOCUMENTED / A97-A98 NOT-HW-VERIFIED |
+
+
+## Scoped follow-up
+
+- PROTO-ACS2-HTTPS: конкретные A33 Prompt-команды HTTPS8443 аппаратно проверены: [test](../docs/airALARM-verified-commands-2026-10-10.md). Общая командная совместимость не доказана.
+- RenderingControl A97 HTTP49152 SetVolume/GetVolume: [CONFIRMED scoped](../protocols/upnp/A97-VOLUME.md). Объявление 59152 само по себе не подтверждает SetVolume.
+- [Карта потребителей](../KB_CROSS_PROJECT_MAP.md).

@@ -12,3 +12,9 @@ Seed page. Add commands through the registry and link evidence here.
 - `getNewAudioOutputHardwareMode` reports `audiocast: 0|1` independently of hardware output and Bluetooth-source output. `getActiveSoundCardOutputMode` likewise exposes `audioCast` separately from the active hardware sound-card mode.
 - **USER-OBSERVED / PROTOCOL-UNVERIFIED:** the native WiiM application presents AudioCast as sending audio to compatible UPnP/DLNA devices. This observation is useful evidence of intended function, but the current OpenAPI does not itself prove the target transport is DLNA/UPnP.
 - **RESEARCH CANDIDATE:** investigate AudioCast as a possible interoperability bridge for cross-family multiroom, especially A97/A98 -> A33 if A33 can act as a compatible DLNA/UPnP renderer. This is **NOT CONFIRMED MULTIROOM SUPPORT** and must not override `RULE-MULTIROOM-FAMILY-SEPARATION` until hardware/capture tests prove discovery, target selection, stream transport, synchronization/latency and control behavior.
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

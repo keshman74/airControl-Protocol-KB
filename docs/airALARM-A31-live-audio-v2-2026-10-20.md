@@ -1,3 +1,5 @@
+> Продолжение V1; следующий [volume-path audit](airALARM-A31-volume-path-2026-10-20.md) уже содержит последующие выполненные batches. Формулировки «next/pending» ниже относятся к моменту записи, не ко всей цепочке. [Сводка и потребители](../functions/notifications/README.md).
+
 # airALARM A31: live audio batch V2 — 2026-10-20
 
 Source: user-provided original `A31_LIVE_AUDIO_V2_20261020_034559.zip`. Executed from Mac against user's Rakoit A31 at `192.168.0.35` through a read-only SSH session. Hardware evidence from `a31_live_audio_v2.txt` and `ssh_stderr.txt`, not from offline code alone. No user credentials, SSH process environment or device secrets archived.

@@ -12,3 +12,8 @@
 - `CMD-UPNP-PQ-USER-REGISTER` — **online account register** — `UserRegister(QueueName, UserName, PassWord) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 - `CMD-UPNP-PQ-USER-LOGIN` — **online account login** — `UserLogin(AccountSource, Version, UserName, PassWord, SavePass, Code, CodeVerifier, Token, Proxy) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 - `CMD-UPNP-PQ-USER-LOGOUT` — **online account logout** — `UserLogout(AccountSource) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
+
+
+## A33 captured service context
+
+`EVT-A33-TUNEIN-CONTEXT` — StreamMediaName=tunein; `EVT-A33-QOBUZ-CONTEXT` — StreamMediaName=qobuz. CAPTURED, не API browsing/auth proof. [Канонический TCP 23040](../../protocols/a33-native-23040/COMMANDS.md).

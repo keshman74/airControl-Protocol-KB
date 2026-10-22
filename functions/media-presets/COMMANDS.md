@@ -188,3 +188,24 @@ Next read-only candidate: discover the advertised PlayQueue service through the 
 
 ## A97 PlayQueue preset read — confirmed 2026-10-20
 **HARDWARE CONFIRMED on tested A97 Кухня192.168.0.99:** GetKeyMapping succeeds over HTTP on both49152 and59152,3538-byte responses, MaxNumber21, six named Key1..Key6 records. HTTPS443 getPresetInfo is rejected as unknown command. Preset launch and active-slot tracking remain unverified by this experiment. Canonical response details, request and limits: [A97-PRESETS.md](../../protocols/upnp/playqueue/A97-PRESETS.md).
+
+
+## Current consolidated routing — 2026-10-22
+
+Исторические стадии выше сохранены. Классифицированные A97/A98 `/httpapi.asp` используют HTTPS443; ранняя фраза HTTP80/HTTPS443 не разрешает автоматический HTTP downgrade. UPnP HTTP — отдельный канал.
+
+| Семейство | Чтение | Запуск / текущее подтверждение |
+|---|---|---|
+| A31 | UPnP GetKeyMapping, KeyN; MaxNumber21 не count | Отдельный MCU/key механизм; native KNX slots1/2 проверены, не все slots |
+| A97 | [GetKeyMapping HTTP49152/59152](../../protocols/upnp/playqueue/A97-PRESETS.md) | HTTPS MCUKeyShortClick:N; KNOB0.8.21 display/launch CONFIRMED; active tracking unknown |
+| A98 | [getPresetInfo + GetKeyMapping/routines](../../protocols/wiim-httpapi/A98-PRESETS.md) | HTTPS MCUKeyShortClick; PlayQueue/AVTransport correlation подтверждена в desktop |
+| A33 ACS2 | [getPresetListInfo](../../tests/A33-PRESETS-HW-2026-10-10.md) | choicePreset1/2 выбор; slot2 resume; Not не достаточный failure |
+| A33 native | [03 76 → preset_list.txt](../../protocols/a33-native-23040/COMMANDS.md) | 03 70 + Logo; wait by cmd+Logo, не первый async frame |
+
+`QRY-WIIM-GET-PRESET-INFO` остаётся DOCUMENTED в общем import; scoped REJECTED A97 и CONFIRMED A98 не противоречат друг другу. [Все проекты](../../KB_CROSS_PROJECT_MAP.md).
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

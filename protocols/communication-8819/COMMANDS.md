@@ -80,3 +80,20 @@ This is a **generic TCP-connectivity helper**. It is **not evidence that the TCP
 - No exact semantic response body for `action:"1888"` is decoded; this code measures received byte count/time.
 - A31/A97/A98 per-device hardware support still requires direct testing.
 - Byte order of the three 32-bit header fields remains unresolved until `vob.a` and `mg0.f` are decoded.
+
+
+## Canonical identity coverage
+
+| ID | Значение / связь |
+|---|---|
+| PROTO-TCP8819-DIAGNOSTIC | APK diagnostic channel, не hardware support |
+| PROTO-TCP8819-FRAME | раннее описание framing |
+| PROTO-TCP8819-FRAME-DETAIL | уточнение того же framing; byte order unresolved |
+| CMD-TCP8819-PROBE | раннее описание probe |
+| CMD-TCP8819-PROBE-DETAIL | JSON string action1888, не новый wire protocol |
+| OBS-TCP8819-READ-MEASUREMENT | 4096 bytes / 10000 ms, APK observation |
+| RULE-DEVICE-REPORT-NET-STATUS-TIMEOUT | application orchestration 20000 ms |
+| RULE-TCP-CONNECTIVITY-FALLBACK-59152 | generic connectivity helper; не wire fallback |
+| PROTO-LINKPLAY-HTTP-GETSTATUSEX-SECURE | отдельный Linkplay secure status routing, не ACS2 |
+
+[Исходный разбор](CHAT-AUDIT-03.md), [происхождение](../../evidence/chat-audits/TCP8819-FOCUSED-REVIEW.md), [все строки](../../registry/audit/catalog.json). IDs не удалены; старое PROTO-A31-8819 остаётся EXPERIMENTAL для аппаратной применимости.

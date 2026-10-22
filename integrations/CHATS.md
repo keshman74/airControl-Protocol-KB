@@ -1,3 +1,5 @@
+> Главный реестр конкретных исследовательских источников — [CHATS.md](../CHATS.md). Общие CHAT-* метки ниже — исторические тематические контейнеры, не придуманные URL разговоров.
+
 # Research Chat Registry
 
 Chats are research sources, not the canonical truth. Findings become canonical only after being entered into the KB with evidence/status.

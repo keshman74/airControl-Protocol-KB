@@ -115,3 +115,9 @@ Host mocks verify logic, not ESP32 radio timing. For future ports/releases, test
 - [KNOB worker regression test](https://github.com/keshman74/airKNOB/blob/efeccb316fb041da5872c48ace92db60429e85ef/tests/worker.test.py)
 - [Successful build and checks](https://github.com/keshman74/airKNOB/actions/runs/38297173264)
 - [Desktop progressive discovery reference](https://github.com/keshman74/airControl/blob/16f8436a2ad9364c0457cf75ce066f452b5d8dec/electron/main.cjs)
+
+
+## Использующие проекты / навигация
+
+[airControl](../projects/airControl/README.md) · [airALARM](../projects/airALARM/README.md) · [KNX Gate](../projects/knx-gate/README.md) · [airKNOB](../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

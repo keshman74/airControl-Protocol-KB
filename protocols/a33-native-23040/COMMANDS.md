@@ -133,3 +133,9 @@ Use tag `v5.0.0` / commit `3e898c2a011c39e103919f51079abdcbeaeae038` as the roll
 - **Verification result:** installed macOS application was launched and user confirmed the packaged airControl v5.0.0 works correctly. This verifies that the stable v5.0.0 baseline survives Electron packaging into the ARM64 DMG.
 
 Preserve this DMG hash as the reference for the hardware-tested macOS ARM64 v5.0.0 artifact.
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

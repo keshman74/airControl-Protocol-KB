@@ -1,3 +1,5 @@
+> **Уточнение аудита 22.10.2026:** этот файл — ранняя реконструкция. Поздний [API3 audit: Stable baseline reset](airALARM-UkraineAlert-API3-audit-2026-10-20.md) закрепляет по явному решению пользователя **0.1.29_MENU_TEST** с SHA исходника как rollback; **1.4 WiFi — source candidate**, не stable. HTTPS A33 download/play уже подтверждены в [аппаратных командах](airALARM-verified-commands-2026-10-10.md); 400 Exist — повторная загрузка, не отсутствие поддержки. [Актуальная страница проекта](../projects/airALARM/README.md). Исходный текст сохранён ниже.
+
 # airALARM — передача контекста разработки
 
 **Дата составления:** 22 октября 2026 г.  

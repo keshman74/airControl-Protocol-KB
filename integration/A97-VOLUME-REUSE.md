@@ -29,3 +29,9 @@ These measurements/observations are distinct. Do not claim15ms KNOB or phone lat
 | Other project controllers/gateways | Reuse protocol and scheduling design with compatible-device detection, fallback and project-specific validation |
 
 Before marking each new integration hardware-verified, check volume changes and reversals, last-target behavior, external-controller synchronization, zone switching and error fallback. Preserve the distinction between protocol evidence, implementation tests and user hardware confirmation.
+
+
+## Использующие проекты / навигация
+
+[airControl](../projects/airControl/README.md) · [airALARM](../projects/airALARM/README.md) · [KNX Gate](../projects/knx-gate/README.md) · [airKNOB](../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

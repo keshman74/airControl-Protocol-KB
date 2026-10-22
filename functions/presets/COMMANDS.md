@@ -1,3 +1,5 @@
+> Исторический alias. Каноническая функция: [media-presets](../media-presets/COMMANDS.md). Для A97 getPresetInfo аппаратно REJECTED на тестовом устройстве; для A98 CONFIRMED. Source import ниже сохранён как DOCUMENTED candidate.
+
 # Presets
 
 
