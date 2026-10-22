@@ -80,3 +80,9 @@ The user confirmed after the published0.8.21 update: «работает! Пре�
 - The user did not enumerate individual tested slots, supply a new packet trace, or report per-command timings. Do not claim every slot1–12 was tested or infer exact response text.
 - Active-preset tracking for changes from other controllers and A98-style routine/input correlation remain unverified for A97.
 - This confirmation supersedes the earlier pending status for KNOB list integration and launch, while retaining the negative getPresetInfo result.
+
+
+## Использующие проекты / навигация
+
+[airControl](../../../projects/airControl/README.md) · [airALARM](../../../projects/airALARM/README.md) · [KNX Gate](../../../projects/knx-gate/README.md) · [airKNOB](../../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

@@ -1,3 +1,5 @@
+> Текущие уточнения 22.10.2026: A33 HTTP presets уже имеют [аппаратный тест](tests/A33-PRESETS-HW-2026-10-10.md); A33 native presets — [отдельный подтверждённый канал](protocols/a33-native-23040/COMMANDS.md). Исторические pending формулировки таблицы ниже не отменяют этих результатов. [Проекты](KB_CROSS_PROJECT_MAP.md) · [ID → все упоминания](registry/audit/occurrences.md).
+
 # Research Chat Registry
 
 This registry links research conversations to the canonical KB. A chat is **provenance/evidence**, never a parallel command database.

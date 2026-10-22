@@ -1,3 +1,5 @@
+> HTTPS8443 — не только документация: [A33 airALARM test](../../docs/airALARM-verified-commands-2026-10-10.md) подтверждает prompttone/download/play на конкретном устройстве. Это не подтверждение всех ACS2-команд через HTTPS.
+
 # ACS2 API
 
 Two API transports are documented:

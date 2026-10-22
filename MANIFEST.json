@@ -100,5 +100,13 @@
       "hardware_scope": "Overall KNOB v0.8.5 discovery user-confirmed; no per-chip inventory or measured duration",
       "note": "Mechanism/rule update; historical command CSV totals unchanged"
     }
-  ]
+  ],
+  "historical_snapshot_note": "Existing version/count/status fields describe v0.4.8, not current ledger; preserved for provenance.",
+  "audit_2026_10_22": {
+    "raw_rows": 640,
+    "unique_ids": 639,
+    "command_registry": "registry/COMMANDS.md",
+    "generated_catalog": "registry/audit/catalog.json",
+    "decisions": "registry/KB_DECISIONS.json"
+  }
 }

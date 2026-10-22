@@ -701,3 +701,12 @@ Status: **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**. The official 
 
 ## Family-separation rule from origin-chat audit
 - `RULE-MULTIROOM-FAMILY-SEPARATION`: A33 ACS2 multiroom must remain separate from Linkplay native `JoinGroup/LeaveGroup`. Cross-family A33 ↔ A31/A97/A98 grouping is not hardware-verified.
+
+
+## Scoped hardware updates (historical DOCUMENTED entries above retained)
+
+- `CMD-A33M-PRESET-CHOICE`, `QRY-A33M-PRESET-LIST`, `CMD-ACS2-RESUME`: [A33 HTTP8000 hardware test](../../tests/A33-PRESETS-HW-2026-10-10.md). Choice1/2/list confirmed; остальные preset writes DOCUMENTED.
+- `CMD-ACS2-PROMPT-TONE`, `CMD-ACS2-PROMPT-DOWNLOAD`, `CMD-ACS2-PROMPT-PLAY`: [A33 HTTPS8443 test](../../docs/airALARM-verified-commands-2026-10-10.md). Confirmed конкретные команды/эффекты, не весь диапазон.
+- `QRY-ACS2-STATUS`: [A33 command page](../../devices/A33/COMMANDS.md) содержит hardware update 2026-10-09.
+
+[Все проекты](../../KB_CROSS_PROJECT_MAP.md).

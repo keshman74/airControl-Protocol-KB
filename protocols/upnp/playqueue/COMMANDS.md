@@ -58,3 +58,8 @@ Do not invent parameter value domains or device compatibility until captured/tes
 
 ## GetKeyMapping — A97 hardware-confirmed read
 The tested A97 supports advertised GetKeyMapping on both HTTP49152 and59152. See [A97 presets readback and limits](A97-PRESETS.md). This confirmation is specific to GetKeyMapping; it does not promote the other actions above to hardware-confirmed status.
+
+
+## CMD-UPNP-PQ-MOVE-TRACKS
+
+`MoveTracksInQueue(QueueName, IndexList, ToIndex)` — APK-VERIFIED / NOT-HW-ACTION-VERIFIED. [Recovered callback](../../communication-8819/CHAT-AUDIT-03.md). Не является подтверждением исполнения на всех A31/A97/A98.

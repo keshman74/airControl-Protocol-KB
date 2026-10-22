@@ -428,3 +428,9 @@ Status: **IMPLEMENTED / HOST-TESTED; KNOB hardware verification pending**.
 Source: airKNOB experimental/multichip-v0.8.0 commit a12f4507f4f32e1136cb1498df1e000acd7322cd.
 The existing A98 hardware evidence above remains the canonical protocol description; passing host tests does not promote the KNOB firmware to hardware verified.
 See [KNOB implementation and validation](../../integration/KNOB-A98-PRESETS.md).
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

@@ -16,3 +16,9 @@
 
 This table records captured capability responses, not universal chip-family guarantees.
 Always prefer runtime `StreamServicesCapability`.
+
+
+## Использующие проекты / навигация
+
+[airControl](../projects/airControl/README.md) · [airALARM](../projects/airALARM/README.md) · [KNX Gate](../projects/knx-gate/README.md) · [airKNOB](../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

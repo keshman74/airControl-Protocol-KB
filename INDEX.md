@@ -1,3 +1,5 @@
+> Главная точка входа — [KB_MASTER_INDEX.md](KB_MASTER_INDEX.md). Этот файл остаётся тематическим представлением. Актуальный машинный итог: **640 исторических строк / 639 уникальных ID**; 204 ниже — только v0.4.8 baseline.
+
 # INDEX
 
 Canonical knowledge is organized by **device**, **protocol**, and **function**. Audit files are evidence/provenance only; no technical finding may exist only in an audit index.

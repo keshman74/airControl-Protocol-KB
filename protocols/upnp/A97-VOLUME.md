@@ -70,3 +70,9 @@ Promote the tested A97 KNOB volume-control path to **USER/HARDWARE-VERIFIED WORK
 Project reuse decision: for a compatible A97, prefer the separate RenderingControl SetVolume path with HTTPS fallback, latest-target coalescing and paced per-zone failure handling. Preserve HTTPS for other Linkplay commands. Apply this design to future airControl desktop/mobile and other project integrations; those integrations are planned, not already implemented or hardware-verified by this KNOB result.
 
 Reusable implementation requirements and evidence boundaries: [A97 volume reuse rule](../../integration/A97-VOLUME-REUSE.md).
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

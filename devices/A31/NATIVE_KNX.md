@@ -192,3 +192,9 @@ The operator explicitly chose **configurable maximum volume with 100% as the fac
 ## v0.11 — firmware-stage editable KNX group table (HOST-TESTED, A31 PENDING)
 
 A complete native **in-memory 64-entry KNX mapping** and external `GA,ACTION,PARAM,TRIGGER` CSV were built as `A31_KNX_NATIVE_V11.zip`, with an offline HTML editor, Python CLI editor and read-only storage inventory script. Full specification and current limitations: **[KNX_MAPPING_TABLE.md](KNX_MAPPING_TABLE.md)**. `/tmp` is **volatile**; the persistent writable partition has not been identified from the device yet. This package is not a flashable OTA image and does not install autostart. Previous working v0.10 remains the hardware baseline. Offline unit tests pass, physical validation for v0.11 is pending. No repeat tests of already known Linkplay commands are needed; next check is the external table parsing/mapping and real flash layout.
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.

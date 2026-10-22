@@ -1,3 +1,5 @@
+> Текущее уточнение: [v0.11 mapping/install](KNX_MAPPING_TABLE.md) — файлы `/vendor/knx` записаны и byte-verified, CSV/Mute dispatch проверены отдельно. Старое «только /tmp» ниже — ранний milestone. **Autostart не установлен, power-cycle persistence не проверена.**
+
 # DEV-A31
 Known stack: Linkplay HTTP :80 + MCU TCP :8899. Confirmed functions include status, volume, mute, URL playback, source switching, USB list, network configuration and native multiroom. EQ has its own MCU/TCP backend; do not merge it blindly with A98 EQ.
 

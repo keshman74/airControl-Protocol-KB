@@ -1,3 +1,5 @@
+> **Начало работы:** [KB_MASTER_INDEX](KB_MASTER_INDEX.md) · [правила доказательств](registry/EVIDENCE_POLICY.md) · [конфликты](KB_CONFLICTS.md). Сравнивайте доказательства только в одном контексте устройства/прошивки/канала; CONFIRMED другого устройства не заменяет DOCUMENTED для вашего.
+
 # airControl Protocol Knowledge Base
 
 Canonical shared knowledge base for airControl-compatible devices, protocols, services, projects and research chats.
@@ -21,3 +23,8 @@ Before researching or implementing a device function:
 
 ## Security
 Never commit real tokens, passwords, cookies, session credentials or private identifiers. Use `<REDACTED>`.
+
+
+## Дополнение статусов
+
+`APK-VERIFIED` — анализ приложения, не аппаратная проверка. `SUPERSEDED` — конкретный вывод заменён со ссылкой и причиной. CAPTURED/IMPLEMENTED сохраняются как отдельные квалификаторы. [Полная политика](registry/EVIDENCE_POLICY.md).

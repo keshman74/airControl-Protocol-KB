@@ -1,3 +1,5 @@
+> Актуальные проектные страницы и двусторонняя матрица: [KB_CROSS_PROJECT_MAP](../KB_CROSS_PROJECT_MAP.md). [airControl](airControl/README.md) · [airALARM](airALARM/README.md) · [KNX Gate](knx-gate/README.md) · [airKNOB](airKNOB/README.md). Таблицы ниже сохранены как предварительная карта.
+
 # airControl KB — единая карта проектов и перекрёстных исследований
 
 **Статус:** навигационный индекс. Канонические протоколы, команды и доказательства остаются в существующих `devices/`, `protocols/`, `functions/`, `registry/`, `evidence/`. Не дублируйте их в проектных папках.

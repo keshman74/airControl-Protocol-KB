@@ -1,3 +1,5 @@
+> **Частично SUPERSEDED:** пустые maps/FD/filter результаты из-за неподдерживаемого grep -E недействительны. [V2](airALARM-A31-live-audio-v2-2026-10-20.md) реально выполнен и заменяет только эти разделы; остальные V1 наблюдения сохранены. См. [общую функцию](../functions/notifications/README.md).
+
 # A31 live audio SSH diagnostics — 2026-10-20
 
 Source: user-provided A31_LIVE_AUDIO_20261020_033238.zip. Evidence is hardware-observed unless explicitly qualified. The session was read-only.

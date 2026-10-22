@@ -242,3 +242,9 @@ processes: daemonize PID667, rootApp PID668, hdl PID670
 /vendor: 2048 KiB, 232 used, 1816 available
 ```
 Read-only preflight completed, but **neither any boot wrapper nor autostart is installed**. The current startup uses stock `/home/bin/hdl`, and no KNX process is shown in this process list. No reboot persistence experiment yet. Before touching `/vendor/user/hdl`, verify actual `daemonize` executable semantics with an **isolated disposable /tmp mock**, ensure the original HDL launches once, and define a tested, accessible rollback/recovery route (SSH access after a bad hook is not guaranteed). Do not start a second real HDL merely to test the wrapper. No flash edits authorized solely by this preflight.
+
+
+## Использующие проекты / навигация
+
+[airControl](../../projects/airControl/README.md) · [airALARM](../../projects/airALARM/README.md) · [KNX Gate](../../projects/knx-gate/README.md) · [airKNOB](../../projects/airKNOB/README.md).
+Состояние переноса, проверки и применимости: [KB_CROSS_PROJECT_MAP](../../KB_CROSS_PROJECT_MAP.md). Наличие ссылки не означает реализацию или аппаратное подтверждение в каждом проекте.
