@@ -26,3 +26,15 @@ Thus the externally observed WiiM file path is not available at the tested A31 o
 
 Native application cover visibility remains user-confirmed, while KNOB and airControl show text only. The native app's image source is still unproven (player-local, event metadata, application cache or online lookup are possibilities).
 Next bounded read-only test: inspect the actual AVTransport SCPD inputs and read advertised GetPositionInfo/GetMediaInfo/GetInfoEx actions, preserving returned metadata/URLs. Existing KNOB code uses GetPositionInfo only, so another advertised metadata response could identify a missing resolver path. No fix is claimed yet.
+
+## A98 terminal result and scope correction — 2026-10-24
+User tested A98 at192.168.0.21 with AirPlay:
+- getPlayerStatus mode1,statusplay,Title Ultra,artist Bicep/Eartheater/Saskia,album Gas / Ultra / Equarium.
+- getMetaInfo returns metaData.albumArtURI=https://192.168.0.21/data/AirplayArtWorkData.jpeg.
+- GET that URL: HTTP200, Content-Type absent, Content-Length180224, first bytes JPEG true, PNG false. Only a32-byte prefix was read; no full-file dimensions/decoder inspection was performed.
+- User then clarified: **A98 AirPlay artwork DOES display on KNOB0.8.23, but DOES NOT display in airControl**. Promote A98 KNOB AirPlay artwork to USER/HARDWARE-VERIFIED WORKING in this session. Do not continue treating it as a missing-cover KNOB regression.
+- The separate A31 AirPlay missing-artwork issue and404 path result remain unresolved.
+
+Source review: KNOB0.8.23 decodes image format using bytes, so absent Content-Type is not an established rejection cause. The size180224 is below its350KiB compressed-image limit; dimensions were not supplied.
+The inspected airControl main4.4.54 and feature/v5.0.x-active-presets-a98 version5.0.0 share fetchArtworkDataUrl. Its HTTPS image request lacks the rejectUnauthorized:false setting used by local player control requests. This is a concrete source inconsistency and plausible cause for player-local self-signed HTTPS artwork failure; no installed-app TLS error trace was supplied. MIME fallback already defaults to image/jpeg, so absence of Content-Type alone is not established as its cause either.
+Installed desktop version/project path still needs identification: GitHub main and feature package versions do not establish which local desktop source the user runs. Scope a fix to the selected player's local HTTPS artwork certificate handling, keep public CDN certificate checks and per-track cache identity, and validate against the actual desktop version before claiming the issue fixed.
