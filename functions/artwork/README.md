@@ -11,3 +11,6 @@ User reports native-app cover visible, KNOB/airControl cover missing while text 
 
 ## A98 AirPlay cover flicker follow-up — 2026-10-24
 The user reports the cover briefly flashes in airControl5.0.0 but does not remain visible after the TLS resolver patch. Source review found that a transient resolver miss could leave the raw self-signed player URL in metadata; renderer parsing could then expose it to Chromium, while poll updates could repeatedly replace a valid data URL. Implemented AirPlayArtworkStability-v1 in the same feature branch to filter this exact selected-player endpoint and retain last-good decoded artwork for the same track. See [evidence and validation status](../../evidence/hardware-tests/AIRPLAY-ARTWORK-2026-10-24.md#aircontrol500-airplay-cover-stability-follow-up---2026-10-24).
+
+## A31 AirPlay relative artwork path — 2026-10-24
+A31 GetPositionInfo exposes albumArtURI as a relative per-track URL (/data/airplay_<32 hex>.jpg), so the resolver must join it to the selected device origin. airControl implements this without sending the relative URL to Chromium. The selected device's scheme, IP and port are carried into Electron; public artwork/CDN handling is unchanged. See [A31 response, source patch and validation limits](../../evidence/hardware-tests/AIRPLAY-ARTWORK-2026-10-24.md#a31-relative-airplay-artwork-uri---2026-10-24).

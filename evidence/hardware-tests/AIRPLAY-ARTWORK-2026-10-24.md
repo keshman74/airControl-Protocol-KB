@@ -63,3 +63,20 @@ https://github.com/keshman74/airControl/commit/ff3ae4a351c19443006af98f7888705a4
 The Linkplay parser filters the raw /data/AirplayArtWorkData.jpeg URL only when its host equals the selected device IP. That self-signed player-local URL must first be fetched by Electron and represented as a data: URL; it must not fall through to Chromium on a transient resolver miss. A failed fetch for the same media keeps the previous successfully resolved data URL. When the media title changes and no new artwork is resolved, the previous art is cleared to avoid showing the old album. Other local routes and public CDN URLs are unaffected.
 
 Validation: parser tests passed for transient failure retaining last-good artwork, raw player URL rejection, clearing stale artwork on new track, and replacing the old data URL with a newly resolved image. The guarded installer applied successfully to a fixture containing the canonical parser source and 5.0.0 package-version metadata, was idempotent on a repeated run, and saved a backup. This validates parsing/installer logic only. The user has not yet confirmed this second patch on the A98 hardware; the full Electron/Vite build has not run in this environment. KNOB0.8.23 continues to be user-confirmed working for AirPlay cover on A98; A31 path issue remains separate.
+
+
+## A31 relative AirPlay artwork URI — 2026-10-24
+User's terminal call to A31 192.168.0.35 GetPositionInfo returned HTTP200. Parsing TrackMetaData yielded:
+- title: Air
+- artist: Bicep, soarr
+- album: Gas / Ultra / Equarium
+- albumArtURI: /data/airplay_f67a80954965fd2f79a144f41d4bbe38.jpg
+
+This is a confirmed relative image path in the A31's AVTransport response. It differs from /data/AirplayArtWorkData.jpeg, which had returned 404 on A31. The user has not yet run a direct GET against the relative URI, so image HTTP status/content/decoder success remain unverified.
+
+airControl implementation AirPlayArtworkPath-v1 was added to feature/v5.0.x-active-presets-a98:
+https://github.com/keshman74/airControl/commit/027172efe822a8f565de181951ccf9aaab363be9
+
+Electron now resolves only the known /data/airplay_<32 hex>.jpg relative form against the selected target's protocol, IP and port. The renderer passes the selected zone context to the artwork resolver. The Linkplay parser rejects both raw relative and raw absolute selected-player AirPlay image URLs, preserving the last successfully resolved data URL during transient failures and clearing it when the media title changes without a new image. Existing fixed A98 path support remains.
+
+An all-in-one archive airControl-AirPlay-complete-v1.zip applies the TLS, stability and relative-path changes in sequence to airControl5.0.0; per-step backups are made. Regression tests passed against local synthetic HTTPS/HTTP servers for TLS scope, relative path URL building and byte-exact image fetch, parser fallback behavior, redirect checks, timeout, and installer idempotence on a canonical source fixture. Full Vite/Electron app build and real A31 GET/render test remain pending. Do not mark A31 artwork as hardware-verified visible until the user confirms the image endpoint returns an image and renders after this patch.
