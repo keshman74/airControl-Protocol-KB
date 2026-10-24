@@ -66,3 +66,6 @@
 - `CMD-UPNP-PQ-USER-LOGOUT` — **online account logout** — `UserLogout(AccountSource) -> Result` — **SCPD-DOCUMENTED / NOT-PER-ACTION-HW-VERIFIED**
 
 - `TEST-A31-UPNP-SEEK-REL-TIME` — **A31 seek hardware evidence** — `AVTransport Seek(Unit=REL_TIME)` — **HARDWARE-VERIFIED**; exact request/response bytes were not preserved in the audited origin chat, so only the action/unit/result are promoted.
+
+## 4STREAM source variants — 2026-10-24
+The inspected 4STREAM SetVolume callback uses InstanceID=0, Channel=Single, DesiredVolume; SetMute/SetChannel use Channel=Master. StreamServicesCapability includes AppVersion=1.0. PlayQueueWithIndex sets QueueName/Index but no InstanceID. Preserve the existing A97 hardware-tested Master volume request. [Exact constructors](../linkplay-http-https/4STREAM-2026-10-24.md#upnp-recovered-argument-differences). **APK-VERIFIED / NOT-HW-VERIFIED**.

@@ -11,3 +11,6 @@
 | Online Qobuz | artwork/playback evidence | — | artwork confirmed | CONFIRMED/CAPTURED |
 | Spotify Connect | — | — | — | ADVERTISED |
 | Discovery | Linkplay discovery/status | Linkplay | Linkplay | UDP + SSDP + mDNS captured |
+
+## 4STREAM static scope — 2026-10-24
+REV-4STREAM-001 adds client-code evidence, not new confirmed cells. A31 is explicitly legacy; R328 has explicit gates; isA98 covers every non-A28/non-A31 hardware string. Feature flags, project identity, security and wmrm_version affect routing. [Conditional matrix and exact formats](../protocols/linkplay-http-https/4STREAM-2026-10-24.md). Existing hardware negatives are preserved.

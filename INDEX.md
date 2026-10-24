@@ -58,3 +58,10 @@ v0.4.8 contains **204 canonical records**. Original lossless CSV shards remain u
 - [Responsiveness, background work and resource use](integration/KNOB-RESPONSIVENESS.md) — v0.8.17, host-tested and build-passed; hardware validation pending.
 - [RAM and screenshot capture](integration/KNOB-RAM-CAPTURE.md)
 - [A98 preset integration](integration/KNOB-A98-PRESETS.md)
+
+## 4STREAM APK research — 2026-10-24
+- [Canonical A31/A97/A98 command and routing audit](protocols/linkplay-http-https/4STREAM-2026-10-24.md)
+- [142 source builder expressions](protocols/linkplay-http-https/4STREAM-BUILDERS-2026-10-24.md)
+- [Provenance and retained evidence](evidence/reverse-engineering/4STREAM-2026-10-24.md)
+- [Eight source/routing records, sequence 635–642](registry/records/635-642.csv)
+Static evidence only; device hardware statuses are unchanged.

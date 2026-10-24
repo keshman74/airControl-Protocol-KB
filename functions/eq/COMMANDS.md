@@ -66,3 +66,7 @@ Recovered from the original airControl development chat:
 The supplied Codex chat-history contains A97 HTTPS/discovery/PlayQueue evidence, but this audit found no explicit A97 EQ/PEQ hardware write + readback sequence. Keep A97 EQ capability isolated until directly verified.
 
 Provenance: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10-24.md`.
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. HTTP EQ/EQv2 and MCU+PAS+EQSet families are separate. Width formats are not range validation, and OEM controls are not universal chip capabilities.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#eq-and-mcu-control).

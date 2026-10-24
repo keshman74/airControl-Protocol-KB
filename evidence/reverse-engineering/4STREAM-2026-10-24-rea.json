@@ -1,0 +1,709 @@
+{
+  "artifact_sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b",
+  "package_evidence_id": "ev_eb5a5762b2a12e10d9eef9118d39d703b3577a7af97c2c0452f5536c5b740880",
+  "records": [
+    {
+      "evidence_id": "ev_0e4add874df9e68cfdaba2cf3cd8c494200234e5c4b0d02a5e83ae05337364c5",
+      "subject": {
+        "name": "4STREAM.apk",
+        "digest": {
+          "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+        },
+        "local_path": "/Users/lab/AI/4STREAM.apk",
+        "format": "apk",
+        "architecture": null
+      },
+      "provider": {
+        "id": "jadx",
+        "name": "JADX headless",
+        "version": "0.7.1"
+      },
+      "analysis_profile": null,
+      "predicate_type": "rea.analysis",
+      "operation": "inspect_android_method",
+      "parameters": {
+        "path": "/Users/lab/AI/4STREAM.apk",
+        "class_name": "com.wifiaudio.model.DeviceProperty",
+        "method_name": "isA98"
+      },
+      "raw_result": {
+        "server": {
+          "name": "rea-jadx-bridge",
+          "version": "4"
+        },
+        "bridge_sha256": "a02b1ef0a4a40abd1ae310b9ee686ca163e0b59a3256df524c35b90ed17e9e63",
+        "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "loaded": {
+          "state": "LOADED",
+          "apk_path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-sf9gVu/target.apk",
+          "class_count": 12853,
+          "resource_count": 5707,
+          "threads": 1,
+          "resources": "full"
+        },
+        "calls": [
+          {
+            "operation": "rea_jvm_status",
+            "input": {},
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"max_heap_bytes\":4294967296,\"java_version\":\"27\",\"available_processors\":8,\"engine_reported_version\":\"0.7.1\",\"metadata_scope\":\"parsed_members\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "load_apk",
+            "input": {
+              "path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-sf9gVu/target.apk",
+              "threads": 1,
+              "resources": "full"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"state\":\"LOADED\",\"apk_path\":\"/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-sf9gVu/target.apk\",\"class_count\":12853,\"raw_class_count\":12853,\"resource_count\":5707,\"load_duration_ms\":5189,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_class_summary",
+            "input": {
+              "class_name": "com.wifiaudio.model.DeviceProperty"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"methods\":[{\"def_pos\":0,\"name\":\"\\u003cinit\\u003e\",\"is_constructor\":true,\"dex_descriptor\":\"()V\",\"signature\":\"\\u003cinit\\u003e(): void\"},{\"def_pos\":0,\"name\":\"convertPsk\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;\",\"signature\":\"convertPsk(java.lang.String, java.lang.String): java.lang.String\"},{\"def_pos\":0,\"name\":\"dealWithDeviceName\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Ljava/lang/String;\",\"signature\":\"dealWithDeviceName(java.lang.String): java.lang.String\"},{\"def_pos\":0,\"name\":\"dealWithGroupName\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Ljava/lang/String;\",\"signature\":\"dealWithGroupName(java.lang.String): java.lang.String\"},{\"def_pos\":0,\"name\":\"getDeviceName\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Ljava/lang/String;\",\"signature\":\"getDeviceName(java.lang.String): java.lang.String\"},{\"def_pos\":0,\"name\":\"getGroupName\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Ljava/lang/String;\",\"signature\":\"getGroupName(java.lang.String): java.lang.String\"},{\"def_pos\":0,\"name\":\"getInternet\",\"is_constructor\":false,\"dex_descriptor\":\"()I\",\"signature\":\"getInternet(): int\"},{\"def_pos\":0,\"name\":\"getNumFirmware\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\",\"signature\":\"getNumFirmware(): java.lang.String\"},{\"def_pos\":0,\"name\":\"getRelease\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\",\"signature\":\"getRelease(): java.lang.String\"},{\"def_pos\":0,\"name\":\"hasNewVersion\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"hasNewVersion(): boolean\"},{\"def_pos\":0,\"name\":\"hasVersionControl\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"hasVersionControl(): boolean\"},{\"def_pos\":0,\"name\":\"isA98\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isA98(): boolean\"},{\"def_pos\":0,\"name\":\"isBuildBackup\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isBuildBackup(): boolean\"},{\"def_pos\":0,\"name\":\"isCancelClick\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isCancelClick(): boolean\"},{\"def_pos\":0,\"name\":\"isCopenhagenProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isCopenhagenProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isHALLAUDIO\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isHALLAUDIO(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isHSKProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isHSKProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isInternetAccessed\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isInternetAccessed(): boolean\"},{\"def_pos\":0,\"name\":\"isMUZOHomeProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMUZOHomeProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isMUZOMiniWithShortPid\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMUZOMiniWithShortPid(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isMuzoMiniProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMuzoMiniProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isMuzoProPlusProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMuzoProPlusProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isMuzoProProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMuzoProProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isMuzoProWithShortPid\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isMuzoProWithShortPid(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isOSLOProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isOSLOProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isPantheone2Project\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isPantheone2Project(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isPureProject\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isPureProject(): boolean\"},{\"def_pos\":0,\"name\":\"isRoberts95iProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isRoberts95iProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isRobertsProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isRobertsProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isRobertsRevivalProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isRobertsRevivalProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isSupportAmazonAlexa\",\"is_constructor\":false,\"dex_descriptor\":\"()Z\",\"signature\":\"isSupportAmazonAlexa(): boolean\"},{\"def_pos\":0,\"name\":\"isSupportChromeCast\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isSupportChromeCast(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMAMP\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMAMP(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMAMPWithShortPid\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMAMPWithShortPid(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMCIAMP\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMCIAMP(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMCIAMPWithShortPid\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMCIAMPWithShortPid(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMLightProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMLightProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isWiiMLightWithShortPid\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isWiiMLightWithShortPid(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isZEB200AProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isZEB200AProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"isZEB3820AProject\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\",\"signature\":\"isZEB3820AProject(java.lang.String): boolean\"},{\"def_pos\":0,\"name\":\"setCancelClick\",\"is_constructor\":false,\"dex_descriptor\":\"(Z)V\",\"signature\":\"setCancelClick(boolean): void\"},{\"def_pos\":0,\"name\":\"setInternet\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"setInternet(int): void\"},{\"def_pos\":0,\"name\":\"setInternetAccessed\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"setInternetAccessed(int): void\"},{\"def_pos\":0,\"name\":\"supportCapacity\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;I)Z\",\"signature\":\"supportCapacity(com.wifiaudio.model.DeviceItem, int): boolean\"},{\"def_pos\":0,\"name\":\"toString\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\",\"signature\":\"toString(): java.lang.String\"},{\"def_pos\":0,\"name\":\"withJsonConvert\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/model/DeviceProperty;\",\"signature\":\"withJsonConvert(java.lang.String): com.wifiaudio.model.DeviceProperty\"}],\"method_count\":46,\"inner_class_count\":5,\"inner_classes\":[\"com.wifiaudio.model.DeviceProperty.a\",\"com.wifiaudio.model.DeviceProperty.b\",\"com.wifiaudio.model.DeviceProperty.c\",\"com.wifiaudio.model.DeviceProperty.d\",\"com.wifiaudio.model.DeviceProperty.e\"],\"name\":\"DeviceProperty\",\"full_name\":\"com.wifiaudio.model.DeviceProperty\",\"field_count\":122,\"fields\":[{\"type\":\"int\",\"def_pos\":0,\"name\":\"BleRemoteBatterylevel\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemoteConnected\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemoteControl\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemoteNewVersion\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemoteVersion\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemote_dev_state\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"BleRemote_has_new\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"DEV_STATE_OTA\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"DeviceName\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"EQ_support\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"ETH_MAC\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"GroupName\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"HiFiSRC_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"LightApiVersion\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"NewVer\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"SSIDStrategy\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"VersionUpdate\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"WifiChannel\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"alexaLanguage\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"alexa_beta_enable\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"alexa_ver\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"apcli0\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"app_timezone_id\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"audio_channel_config\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"audio_output_type\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"audio_type_support\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"auth\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"autoSenseVersion\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"bChecked\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"bHasgc4aVer\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"bleActiveStatus\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"bssid\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"build\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"cancelClick\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"cap1\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"capability\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"cast_enable\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"cast_usage_report\"},{\"type\":\"java.lang.Integer\",\"def_pos\":0,\"name\":\"communication_port\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"date\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"dev_state\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"deviceSN\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"disconnectedCount\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"doorMode\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"dueros_ver\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"encry\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"eq_sync\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"essid\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"eth0\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"eth2\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"expired\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"external\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"firmware\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"gc4aRelease\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"gc4aVer\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"group\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"group_prefer\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"hardware\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"hasAudioChannelConfig\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"hideSSID\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"hm_sn\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"iheartradio_new\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"indicator_light\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"initialConfiguration\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"internet\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"isRemoteBatteryLow\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"isSecurity3\"},{\"type\":\"boolean\",\"def_pos\":0,\"name\":\"iscommunication\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"language\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"languages\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"lbc_support\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"lwa_support\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"mac\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"master_uuid\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"max_volume\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"mcu_ver\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"mcu_ver_new\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"mqtt_support\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"netstat\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"new_iheart_podcast\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"new_tunein_preset_and_alarm\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"ota_interface_ver\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"plm_support\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"preset_key\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"privacy_mode\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"project\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"prompt_status\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"psk\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"region\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"release\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"rssi\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"securemode\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"security\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"security_capabilities\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"security_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"service_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"set_dns_enable\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"silenceUpgradeTime\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"ssid\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"streamAll\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"streamAllStr\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"streams\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"tidal_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"time\"},{\"type\":\"java.lang.Double\",\"def_pos\":0,\"name\":\"timeZone\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"tvs_ver\"},{\"type\":\"float\",\"def_pos\":0,\"name\":\"tz\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"tz_info_ver\"},{\"type\":\"java.lang.Integer\",\"def_pos\":0,\"name\":\"uart_pass_port\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"update_check_count\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"upnp_uuid\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"upnp_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"usb\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"uuid\"},{\"type\":\"int\",\"def_pos\":0,\"name\":\"volum_control\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wifiMode\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wlanDataRate\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wlanFreq\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wlanNoise\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wlanSnr\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"wmrm_version\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"zipcode\"}]}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_method_body",
+            "input": {
+              "class_name": "com.wifiaudio.model.DeviceProperty",
+              "method_name": "isA98",
+              "overload_index": 0,
+              "smali_fallback": true
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"fell_back\":false,\"full_name\":\"com.wifiaudio.model.DeviceProperty.isA98\",\"overload_index\":0,\"method_name\":\"isA98\",\"overload_count\":1,\"dex_descriptor\":\"()Z\",\"class_name\":\"com.wifiaudio.model.DeviceProperty\",\"mode\":\"java\",\"body\":\"    public boolean isA98() {\\n        return (TextUtils.equals(this.hardware.toUpperCase(), \\\"A28\\\") || TextUtils.equals(this.hardware.toUpperCase(), \\\"A31\\\")) ? false : true;\\n    }\",\"markers\":[]}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ]
+      },
+      "normalized_result": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "class_name": "com.wifiaudio.model.DeviceProperty",
+        "method": {
+          "name": "isA98",
+          "reported_signature": "isA98(): boolean",
+          "overload_index": 0,
+          "is_constructor": false,
+          "dex_descriptor": "()Z"
+        },
+        "overload_count": 1,
+        "representation": "java",
+        "body_status": "available",
+        "fell_back": false,
+        "markers": [],
+        "source": {
+          "status": "complete",
+          "text": "    public boolean isA98() {\n        return (TextUtils.equals(this.hardware.toUpperCase(), \"A28\") || TextUtils.equals(this.hardware.toUpperCase(), \"A31\")) ? false : true;\n    }",
+          "reported_total_bytes": null
+        }
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_42c7941fef494f66308b262e28d3a80447c8576842f80e3005b45edeb0605e63",
+      "subject": {
+        "name": "4STREAM.apk",
+        "digest": {
+          "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+        },
+        "local_path": "/Users/lab/AI/4STREAM.apk",
+        "format": "apk",
+        "architecture": null
+      },
+      "provider": {
+        "id": "jadx",
+        "name": "JADX headless",
+        "version": "0.7.1"
+      },
+      "analysis_profile": null,
+      "predicate_type": "rea.analysis",
+      "operation": "inspect_android_method",
+      "parameters": {
+        "path": "/Users/lab/AI/4STREAM.apk",
+        "class_name": "com.wifiaudio.utils.e1.g",
+        "method_name": "E"
+      },
+      "raw_result": {
+        "server": {
+          "name": "rea-jadx-bridge",
+          "version": "4"
+        },
+        "bridge_sha256": "a02b1ef0a4a40abd1ae310b9ee686ca163e0b59a3256df524c35b90ed17e9e63",
+        "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "loaded": {
+          "state": "LOADED",
+          "apk_path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-KctxXZ/target.apk",
+          "class_count": 12853,
+          "resource_count": 5707,
+          "threads": 1,
+          "resources": "full"
+        },
+        "calls": [
+          {
+            "operation": "rea_jvm_status",
+            "input": {},
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":4294967296,\"java_version\":\"27\",\"available_processors\":8,\"engine_reported_version\":\"0.7.1\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "load_apk",
+            "input": {
+              "path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-KctxXZ/target.apk",
+              "threads": 1,
+              "resources": "full"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"state\":\"LOADED\",\"apk_path\":\"/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-KctxXZ/target.apk\",\"class_count\":12853,\"raw_class_count\":12853,\"resource_count\":5707,\"load_duration_ms\":5430,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_class_summary",
+            "input": {
+              "class_name": "com.wifiaudio.utils.e1.g"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"methods\":[{\"signature\":\"\\u003cinit\\u003e(): void\",\"def_pos\":0,\"name\":\"\\u003cinit\\u003e\",\"is_constructor\":true,\"dex_descriptor\":\"()V\"},{\"signature\":\"A(java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"A\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"B(java.lang.String, boolean, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"B\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;ZLcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"C(java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"C\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/util/List;Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"D(java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, boolean, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"D\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/util/List;ZLjava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"E(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"E\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"F(com.wifiaudio.model.DeviceItem): java.lang.String\",\"def_pos\":0,\"name\":\"F\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Ljava/lang/String;\"},{\"signature\":\"G(com.wifiaudio.model.DeviceItem): com.wifiaudio.utils.e1.g\",\"def_pos\":0,\"name\":\"G\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Lcom/wifiaudio/utils/e1/g;\"},{\"signature\":\"H(java.lang.String): com.wifiaudio.utils.e1.g\",\"def_pos\":0,\"name\":\"H\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/utils/e1/g;\"},{\"signature\":\"I(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"I\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"J(java.lang.String): boolean\",\"def_pos\":0,\"name\":\"J\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Z\"},{\"signature\":\"K(int): boolean\",\"def_pos\":0,\"name\":\"K\",\"is_constructor\":false,\"dex_descriptor\":\"(I)Z\"},{\"signature\":\"L(okhttp3.Response): com.wifiaudio.utils.e1.j\",\"def_pos\":0,\"name\":\"L\",\"is_constructor\":false,\"dex_descriptor\":\"(Lokhttp3/Response;)Lcom/wifiaudio/utils/e1/j;\"},{\"signature\":\"M(java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"M\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"N(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"N\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;)V\"},{\"signature\":\"O(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): void\",\"def_pos\":0,\"name\":\"O\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/lang/String;)V\"},{\"signature\":\"P(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"P\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/util/List;)V\"},{\"signature\":\"Q(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"Q\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;)V\"},{\"signature\":\"R(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): void\",\"def_pos\":0,\"name\":\"R\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/lang/String;)V\"},{\"signature\":\"S(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"S\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/util/List;)V\"},{\"signature\":\"T(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"T\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;)V\"},{\"signature\":\"U(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): void\",\"def_pos\":0,\"name\":\"U\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/lang/String;)V\"},{\"signature\":\"V(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"V\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/util/List;)V\"},{\"signature\":\"W(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"W\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;)V\"},{\"signature\":\"X(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): void\",\"def_pos\":0,\"name\":\"X\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/lang/String;)V\"},{\"signature\":\"Y(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"Y\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;Ljava/util/List;)V\"},{\"signature\":\"Z(com.wifiaudio.utils.e1.g$p, java.lang.Exception): void\",\"def_pos\":0,\"name\":\"Z\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g$p;Ljava/lang/Exception;)V\"},{\"signature\":\"a(com.wifiaudio.utils.e1.g, boolean, com.wifiaudio.utils.e1.g$p, java.lang.Exception): void\",\"def_pos\":0,\"name\":\"a\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;ZLcom/wifiaudio/utils/e1/g$p;Ljava/lang/Exception;)V\"},{\"signature\":\"a0(boolean, com.wifiaudio.utils.e1.g$p, java.lang.Exception): void\",\"def_pos\":0,\"name\":\"a0\",\"is_constructor\":false,\"dex_descriptor\":\"(ZLcom/wifiaudio/utils/e1/g$p;Ljava/lang/Exception;)V\"},{\"signature\":\"b(com.wifiaudio.utils.e1.g, okhttp3.Response): com.wifiaudio.utils.e1.j\",\"def_pos\":0,\"name\":\"b\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;Lokhttp3/Response;)Lcom/wifiaudio/utils/e1/j;\"},{\"signature\":\"b0(com.wifiaudio.utils.e1.g$p, java.lang.Object): void\",\"def_pos\":0,\"name\":\"b0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g$p;Ljava/lang/Object;)V\"},{\"signature\":\"c(com.wifiaudio.utils.e1.g, int): boolean\",\"def_pos\":0,\"name\":\"c\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;I)Z\"},{\"signature\":\"c0(boolean, com.wifiaudio.utils.e1.g$p, java.lang.Object): void\",\"def_pos\":0,\"name\":\"c0\",\"is_constructor\":false,\"dex_descriptor\":\"(ZLcom/wifiaudio/utils/e1/g$p;Ljava/lang/Object;)V\"},{\"signature\":\"d(com.wifiaudio.utils.e1.g, boolean, com.wifiaudio.utils.e1.g$p, java.lang.Object): void\",\"def_pos\":0,\"name\":\"d\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;ZLcom/wifiaudio/utils/e1/g$p;Ljava/lang/Object;)V\"},{\"signature\":\"e(com.wifiaudio.utils.e1.g, com.wifiaudio.utils.e1.g$p, java.lang.Exception): void\",\"def_pos\":0,\"name\":\"e\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;Lcom/wifiaudio/utils/e1/g$p;Ljava/lang/Exception;)V\"},{\"signature\":\"f(com.wifiaudio.utils.e1.g, com.wifiaudio.utils.e1.g$p, java.lang.Object): void\",\"def_pos\":0,\"name\":\"f\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/utils/e1/g;Lcom/wifiaudio/utils/e1/g$p;Ljava/lang/Object;)V\"},{\"signature\":\"g(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"g\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"h(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"h\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"i(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"i\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"j(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): okhttp3.Request\",\"def_pos\":0,\"name\":\"j\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;Ljava/lang/String;)Lokhttp3/Request;\"},{\"signature\":\"k(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"k\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"l(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"l\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"m(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String): okhttp3.Request\",\"def_pos\":0,\"name\":\"m\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;Ljava/lang/String;)Lokhttp3/Request;\"},{\"signature\":\"n(java.lang.String, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): okhttp3.Request\",\"def_pos\":0,\"name\":\"n\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lokhttp3/Request;\"},{\"signature\":\"o(java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"o\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"p(java.lang.String, com.wifiaudio.utils.e1.g$p, java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e): void\",\"def_pos\":0,\"name\":\"p\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;Ljava/util/List;)V\"},{\"signature\":\"q(java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"q\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"r(java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"r\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/util/List;Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"s(java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"s\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"t(java.lang.String, boolean, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"t\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;ZLcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"u(java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"u\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/util/List;Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"v(java.util.List\\u003ccom.wifiaudio.utils.e1.g$o\\u003e, boolean, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"v\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/util/List;ZLjava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"w(boolean, java.lang.String, com.wifiaudio.utils.e1.g$p): void\",\"def_pos\":0,\"name\":\"w\",\"is_constructor\":false,\"dex_descriptor\":\"(ZLjava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\"},{\"signature\":\"x(java.lang.String): com.wifiaudio.utils.e1.j\",\"def_pos\":0,\"name\":\"x\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/utils/e1/j;\"},{\"signature\":\"y(java.lang.String): com.wifiaudio.utils.e1.j\",\"def_pos\":0,\"name\":\"y\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/utils/e1/j;\"},{\"signature\":\"z(java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"z\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/String;)Ljava/lang/String;\"}],\"method_count\":56,\"inner_class_count\":16,\"inner_classes\":[\"com.wifiaudio.utils.e1.g.a\",\"com.wifiaudio.utils.e1.g.b\",\"com.wifiaudio.utils.e1.g.c\",\"com.wifiaudio.utils.e1.g.d\",\"com.wifiaudio.utils.e1.g.e\",\"com.wifiaudio.utils.e1.g.f\",\"com.wifiaudio.utils.e1.g.RunnableC0472g\",\"com.wifiaudio.utils.e1.g.h\",\"com.wifiaudio.utils.e1.g.i\",\"com.wifiaudio.utils.e1.g.j\",\"com.wifiaudio.utils.e1.g.k\",\"com.wifiaudio.utils.e1.g.l\",\"com.wifiaudio.utils.e1.g.m\",\"com.wifiaudio.utils.e1.g.n\",\"com.wifiaudio.utils.e1.g.o\",\"com.wifiaudio.utils.e1.g.p\"],\"name\":\"g\",\"full_name\":\"com.wifiaudio.utils.e1.g\",\"field_count\":5,\"fields\":[{\"type\":\"okhttp3.MediaType\",\"def_pos\":0,\"name\":\"a\"},{\"type\":\"android.os.Handler\",\"def_pos\":0,\"name\":\"e\"},{\"type\":\"okhttp3.MediaType\",\"def_pos\":0,\"name\":\"f6191b\"},{\"type\":\"okhttp3.OkHttpClient\",\"def_pos\":0,\"name\":\"f6192c\"},{\"type\":\"okhttp3.OkHttpClient\",\"def_pos\":0,\"name\":\"f6193d\"}]}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_method_body",
+            "input": {
+              "class_name": "com.wifiaudio.utils.e1.g",
+              "method_name": "E",
+              "overload_index": 0,
+              "smali_fallback": true
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"fell_back\":false,\"full_name\":\"com.wifiaudio.utils.e1.g.E\",\"overload_index\":0,\"method_name\":\"E\",\"overload_count\":1,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\",\"class_name\":\"com.wifiaudio.utils.e1.g\",\"mode\":\"java\",\"body\":\"    public static String E(DeviceInfoParam deviceInfoParam) {\\n        if (!J(deviceInfoParam.security)) {\\n            return \\\"http://\\\" + deviceInfoParam.IP + \\\"/httpapi.asp?command\\u003d\\\";\\n        }\\n        DeviceItem deviceItemF \\u003d com.wifiaudio.service.l.o().f(deviceInfoParam.IP);\\n        if (deviceItemF \\u003d\\u003d null) {\\n            deviceItemF \\u003d com.wifiaudio.service.k.m().f(deviceInfoParam.IP);\\n        }\\n        if (deviceItemF \\u003d\\u003d null || !deviceItemF.devStatus.bHasgc4aVer) {\\n            return \\\"https://\\\" + deviceInfoParam.IP + \\\"/httpapi.asp?command\\u003d\\\";\\n        }\\n        return \\\"https://\\\" + deviceInfoParam.IP + \\\":4443/httpapi.asp?command\\u003d\\\";\\n    }\",\"markers\":[]}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ]
+      },
+      "normalized_result": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "class_name": "com.wifiaudio.utils.e1.g",
+        "method": {
+          "name": "E",
+          "reported_signature": "E(com.wifiaudio.model.DeviceInfoParam): java.lang.String",
+          "overload_index": 0,
+          "is_constructor": false,
+          "dex_descriptor": "(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;"
+        },
+        "overload_count": 1,
+        "representation": "java",
+        "body_status": "available",
+        "fell_back": false,
+        "markers": [],
+        "source": {
+          "status": "complete",
+          "text": "    public static String E(DeviceInfoParam deviceInfoParam) {\n        if (!J(deviceInfoParam.security)) {\n            return \"http://\" + deviceInfoParam.IP + \"/httpapi.asp?command=\";\n        }\n        DeviceItem deviceItemF = com.wifiaudio.service.l.o().f(deviceInfoParam.IP);\n        if (deviceItemF == null) {\n            deviceItemF = com.wifiaudio.service.k.m().f(deviceInfoParam.IP);\n        }\n        if (deviceItemF == null || !deviceItemF.devStatus.bHasgc4aVer) {\n            return \"https://\" + deviceInfoParam.IP + \"/httpapi.asp?command=\";\n        }\n        return \"https://\" + deviceInfoParam.IP + \":4443/httpapi.asp?command=\";\n    }",
+          "reported_total_bytes": null
+        }
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_500bcb7cb8df355a406d55fa7f4f7f6c20014632e61c33453e8f50f9375e549e",
+      "subject": {
+        "name": "4STREAM.apk",
+        "digest": {
+          "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+        },
+        "local_path": "/Users/lab/AI/4STREAM.apk",
+        "format": "apk",
+        "architecture": null
+      },
+      "provider": {
+        "id": "jadx",
+        "name": "JADX headless",
+        "version": "0.7.1"
+      },
+      "analysis_profile": null,
+      "predicate_type": "rea.analysis",
+      "operation": "inspect_android_method",
+      "parameters": {
+        "path": "/Users/lab/AI/4STREAM.apk",
+        "class_name": "com.wifiaudio.action.s.b",
+        "method_name": "Y"
+      },
+      "raw_result": {
+        "server": {
+          "name": "rea-jadx-bridge",
+          "version": "4"
+        },
+        "bridge_sha256": "a02b1ef0a4a40abd1ae310b9ee686ca163e0b59a3256df524c35b90ed17e9e63",
+        "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "loaded": {
+          "state": "LOADED",
+          "apk_path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-KctxXZ/target.apk",
+          "class_count": 12853,
+          "resource_count": 5707,
+          "threads": 1,
+          "resources": "full"
+        },
+        "calls": [
+          {
+            "operation": "rea_jvm_status",
+            "input": {},
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":4294967296,\"java_version\":\"27\",\"available_processors\":8,\"engine_reported_version\":\"0.7.1\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_class_summary",
+            "input": {
+              "class_name": "com.wifiaudio.action.s.b"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"methods\":[{\"signature\":\"A(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"A\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"B(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"B\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"C(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"C\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"D(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"D\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"E(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"E\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"F(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"F\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"G(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"G\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"H(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"H\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"I(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"I\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"J(com.wifiaudio.model.DeviceInfoParam, boolean): java.lang.String\",\"def_pos\":0,\"name\":\"J\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Z)Ljava/lang/String;\"},{\"signature\":\"K(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"K\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"L(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"L\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"M(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"M\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"N(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"N\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"O(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"O\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"P(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"P\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"Q(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"Q\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"R(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"R\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"S(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"S\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"T(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"T\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"U(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"U\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"V(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"V\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"W(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"W\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"X(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"X\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"Y(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"Y\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"Z(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"Z\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"a(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"a\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"a0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"a0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"b(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"b\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"b0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"b0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"c(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"c\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"c0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"c0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"d(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"d\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"d0(com.wifiaudio.model.DeviceInfoParam, int, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"d0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;ILjava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"e(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"e\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"e0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"e0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"f(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"f\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"f0(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"f0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"g(com.wifiaudio.model.DeviceInfoParam, boolean): java.lang.String\",\"def_pos\":0,\"name\":\"g\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Z)Ljava/lang/String;\"},{\"signature\":\"g0(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"g0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"h(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"h\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"h0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"h0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"i(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"i\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"i0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"i0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"j(com.wifiaudio.model.DeviceInfoParam, java.lang.String, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"j\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"j0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"j0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"k(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"k\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"k0(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"k0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"l(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"l\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"l0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"l0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"m(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"m\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"m0(com.wifiaudio.model.DeviceInfoParam, int, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"m0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;ILjava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"n(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"n\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"n0(com.wifiaudio.model.DeviceInfoParam, java.lang.String, int): java.lang.String\",\"def_pos\":0,\"name\":\"n0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;I)Ljava/lang/String;\"},{\"signature\":\"o(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"o\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"o0(com.wifiaudio.model.DeviceInfoParam, java.lang.String, int): java.lang.String\",\"def_pos\":0,\"name\":\"o0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;I)Ljava/lang/String;\"},{\"signature\":\"p(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"p\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"p0(com.wifiaudio.model.DeviceInfoParam, java.lang.String, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"p0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"q(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"q\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"q0(com.wifiaudio.model.DeviceInfoParam, java.lang.String, int): java.lang.String\",\"def_pos\":0,\"name\":\"q0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;I)Ljava/lang/String;\"},{\"signature\":\"r(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"r\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"r0(com.wifiaudio.model.DeviceInfoParam, float): java.lang.String\",\"def_pos\":0,\"name\":\"r0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;F)Ljava/lang/String;\"},{\"signature\":\"s(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"s\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"s0(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"s0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"t(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"t\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"t0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"t0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"u(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"u\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"u0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"u0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"v(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"v\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"v0(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"v0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"w(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"w\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"w0(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String\",\"def_pos\":0,\"name\":\"w0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\"},{\"signature\":\"x(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"x\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"x0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"x0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"y(com.wifiaudio.model.DeviceInfoParam): java.lang.String\",\"def_pos\":0,\"name\":\"y\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;)Ljava/lang/String;\"},{\"signature\":\"y0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"y0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"z(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"z\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"},{\"signature\":\"z0(com.wifiaudio.model.DeviceInfoParam, java.lang.String): java.lang.String\",\"def_pos\":0,\"name\":\"z0\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;Ljava/lang/String;)Ljava/lang/String;\"}],\"method_count\":78,\"inner_class_count\":0,\"inner_classes\":[],\"name\":\"b\",\"full_name\":\"com.wifiaudio.action.s.b\",\"field_count\":0,\"fields\":[]}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_method_body",
+            "input": {
+              "class_name": "com.wifiaudio.action.s.b",
+              "method_name": "Y",
+              "overload_index": 0,
+              "smali_fallback": true
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"fell_back\":false,\"full_name\":\"com.wifiaudio.action.s.b.Y\",\"overload_index\":0,\"method_name\":\"Y\",\"overload_count\":1,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;\",\"class_name\":\"com.wifiaudio.action.s.b\",\"mode\":\"java\",\"body\":\"    public static String Y(DeviceInfoParam deviceInfoParam, int i) {\\n        String str \\u003d g.E(deviceInfoParam) + \\\"setShutdown:%d\\\";\\n        if (i \\u003d\\u003d 0) {\\n            i \\u003d -1;\\n        }\\n        return String.format(str, Integer.valueOf(i));\\n    }\",\"markers\":[]}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ]
+      },
+      "normalized_result": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "class_name": "com.wifiaudio.action.s.b",
+        "method": {
+          "name": "Y",
+          "reported_signature": "Y(com.wifiaudio.model.DeviceInfoParam, int): java.lang.String",
+          "overload_index": 0,
+          "is_constructor": false,
+          "dex_descriptor": "(Lcom/wifiaudio/model/DeviceInfoParam;I)Ljava/lang/String;"
+        },
+        "overload_count": 1,
+        "representation": "java",
+        "body_status": "available",
+        "fell_back": false,
+        "markers": [],
+        "source": {
+          "status": "complete",
+          "text": "    public static String Y(DeviceInfoParam deviceInfoParam, int i) {\n        String str = g.E(deviceInfoParam) + \"setShutdown:%d\";\n        if (i == 0) {\n            i = -1;\n        }\n        return String.format(str, Integer.valueOf(i));\n    }",
+          "reported_total_bytes": null
+        }
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_e959a0ff3648ef875c6ebb18a35304439b66c9fd87668b91bb5aab857d15c489",
+      "subject": {
+        "name": "4STREAM.apk",
+        "digest": {
+          "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+        },
+        "local_path": "/Users/lab/AI/4STREAM.apk",
+        "format": "apk",
+        "architecture": null
+      },
+      "provider": {
+        "id": "jadx",
+        "name": "JADX headless",
+        "version": "0.7.1"
+      },
+      "analysis_profile": null,
+      "predicate_type": "rea.analysis",
+      "operation": "inspect_android_method",
+      "parameters": {
+        "path": "/Users/lab/AI/4STREAM.apk",
+        "class_name": "com.linkplay.mrm.j",
+        "method_name": "d"
+      },
+      "raw_result": {
+        "server": {
+          "name": "rea-jadx-bridge",
+          "version": "4"
+        },
+        "bridge_sha256": "a02b1ef0a4a40abd1ae310b9ee686ca163e0b59a3256df524c35b90ed17e9e63",
+        "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "loaded": {
+          "state": "LOADED",
+          "apk_path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-KctxXZ/target.apk",
+          "class_count": 12853,
+          "resource_count": 5707,
+          "threads": 1,
+          "resources": "full"
+        },
+        "calls": [
+          {
+            "operation": "rea_jvm_status",
+            "input": {},
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":4294967296,\"java_version\":\"27\",\"available_processors\":8,\"engine_reported_version\":\"0.7.1\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_class_summary",
+            "input": {
+              "class_name": "com.linkplay.mrm.j"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"methods\":[{\"signature\":\"\\u003cclinit\\u003e(): void\",\"def_pos\":0,\"name\":\"\\u003cclinit\\u003e\",\"is_constructor\":false,\"dex_descriptor\":\"()V\"},{\"signature\":\"\\u003cinit\\u003e(): void\",\"def_pos\":0,\"name\":\"\\u003cinit\\u003e\",\"is_constructor\":true,\"dex_descriptor\":\"()V\"},{\"signature\":\"a(): java.lang.String\",\"def_pos\":0,\"name\":\"a\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\"},{\"signature\":\"b(): java.lang.String\",\"def_pos\":0,\"name\":\"b\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\"},{\"signature\":\"c(): java.lang.String\",\"def_pos\":0,\"name\":\"c\",\"is_constructor\":false,\"dex_descriptor\":\"()Ljava/lang/String;\"},{\"signature\":\"d(com.wifiaudio.model.DeviceItem): boolean\",\"def_pos\":0,\"name\":\"d\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Z\"},{\"signature\":\"e(com.wifiaudio.model.DeviceItem, com.wifiaudio.model.DeviceItem): boolean\",\"def_pos\":0,\"name\":\"e\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;Lcom/wifiaudio/model/DeviceItem;)Z\"},{\"signature\":\"f(com.wifiaudio.model.DeviceItem): java.util.List\\u003ccom.wifiaudio.model.DeviceItem\\u003e\",\"def_pos\":0,\"name\":\"f\",\"is_constructor\":false,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Ljava/util/List;\"}],\"method_count\":8,\"inner_class_count\":0,\"inner_classes\":[],\"name\":\"j\",\"full_name\":\"com.linkplay.mrm.j\",\"field_count\":5,\"fields\":[{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"a\"},{\"type\":\"com.linkplay.mrm.j\",\"def_pos\":0,\"name\":\"e\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"f3560b\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"f3561c\"},{\"type\":\"java.lang.String\",\"def_pos\":0,\"name\":\"f3562d\"}]}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_method_body",
+            "input": {
+              "class_name": "com.linkplay.mrm.j",
+              "method_name": "d",
+              "overload_index": 0,
+              "smali_fallback": true
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"fell_back\":false,\"full_name\":\"com.linkplay.mrm.j.d\",\"overload_index\":0,\"method_name\":\"d\",\"overload_count\":1,\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Z\",\"class_name\":\"com.linkplay.mrm.j\",\"mode\":\"java\",\"body\":\"    public final boolean d(DeviceItem device) {\\n        r.e(device, \\\"device\\\");\\n        if (!config.a.A2) {\\n            String str \\u003d device.devStatus.wmrm_version;\\n            return str !\\u003d null \\u0026\\u0026 str.length() \\u003e 0;\\n        }\\n        DeviceProperty deviceProperty \\u003d device.devStatus;\\n        r.d(deviceProperty, \\\"device.devStatus\\\");\\n        return deviceProperty.isA98();\\n    }\",\"markers\":[]}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ]
+      },
+      "normalized_result": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "class_name": "com.linkplay.mrm.j",
+        "method": {
+          "name": "d",
+          "reported_signature": "d(com.wifiaudio.model.DeviceItem): boolean",
+          "overload_index": 0,
+          "is_constructor": false,
+          "dex_descriptor": "(Lcom/wifiaudio/model/DeviceItem;)Z"
+        },
+        "overload_count": 1,
+        "representation": "java",
+        "body_status": "available",
+        "fell_back": false,
+        "markers": [],
+        "source": {
+          "status": "complete",
+          "text": "    public final boolean d(DeviceItem device) {\n        r.e(device, \"device\");\n        if (!config.a.A2) {\n            String str = device.devStatus.wmrm_version;\n            return str != null && str.length() > 0;\n        }\n        DeviceProperty deviceProperty = device.devStatus;\n        r.d(deviceProperty, \"device.devStatus\");\n        return deviceProperty.isA98();\n    }",
+          "reported_total_bytes": null
+        }
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_aada68a5aa94943d26a15b7f0a8cf36a22469e39ad04c92f1c2231cabdf3ef28",
+      "subject": {
+        "name": "4STREAM.apk",
+        "digest": {
+          "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+        },
+        "local_path": "/Users/lab/AI/4STREAM.apk",
+        "format": "apk",
+        "architecture": null
+      },
+      "provider": {
+        "id": "jadx",
+        "name": "JADX headless",
+        "version": "0.7.1"
+      },
+      "analysis_profile": null,
+      "predicate_type": "rea.analysis",
+      "operation": "inspect_android_method",
+      "parameters": {
+        "path": "/Users/lab/AI/4STREAM.apk",
+        "class_name": "com.wifiaudio.service.l",
+        "method_name": "l"
+      },
+      "raw_result": {
+        "server": {
+          "name": "rea-jadx-bridge",
+          "version": "4"
+        },
+        "bridge_sha256": "a02b1ef0a4a40abd1ae310b9ee686ca163e0b59a3256df524c35b90ed17e9e63",
+        "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "loaded": {
+          "state": "LOADED",
+          "apk_path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-yQssOp/target.apk",
+          "class_count": 12853,
+          "resource_count": 5707,
+          "threads": 1,
+          "resources": "full"
+        },
+        "calls": [
+          {
+            "operation": "rea_jvm_status",
+            "input": {},
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"engine_reported_version\":\"0.7.1\",\"available_processors\":8,\"java_version\":\"27\",\"max_heap_bytes\":4294967296,\"metadata_scope\":\"parsed_members\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "load_apk",
+            "input": {
+              "path": "/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-yQssOp/target.apk",
+              "threads": 1,
+              "resources": "full"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"state\":\"LOADED\",\"apk_path\":\"/var/folders/t6/zc9lth5s6nz1qxbg6ld_yzxm0000gn/T/rea-android-yQssOp/target.apk\",\"class_count\":12853,\"raw_class_count\":12853,\"resource_count\":5707,\"load_duration_ms\":7117,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_class_summary",
+            "input": {
+              "class_name": "com.wifiaudio.service.l"
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"fields\":[{\"name\":\"a\",\"def_pos\":0,\"type\":\"com.wifiaudio.service.l\"},{\"name\":\"e\",\"def_pos\":0,\"type\":\"java.util.concurrent.ConcurrentHashMap\\u003cjava.lang.String, java.lang.String\\u003e\"},{\"name\":\"f\",\"def_pos\":0,\"type\":\"java.util.concurrent.ConcurrentHashMap\\u003cjava.lang.String, java.lang.String\\u003e\"},{\"name\":\"f6052b\",\"def_pos\":0,\"type\":\"boolean\"},{\"name\":\"f6053c\",\"def_pos\":0,\"type\":\"java.util.concurrent.ConcurrentHashMap\\u003cjava.lang.String, java.lang.String\\u003e\"},{\"name\":\"f6054d\",\"def_pos\":0,\"type\":\"java.util.concurrent.ConcurrentHashMap\\u003cjava.lang.String, com.wifiaudio.model.DeviceItem\\u003e\"},{\"name\":\"g\",\"def_pos\":0,\"type\":\"java.util.LinkedHashMap\\u003cjava.lang.String, com.wifiaudio.model.DeviceItem\\u003e\"},{\"name\":\"h\",\"def_pos\":0,\"type\":\"java.util.concurrent.locks.ReentrantLock\"},{\"name\":\"i\",\"def_pos\":0,\"type\":\"com.wifiaudio.service.l$c\"}],\"field_count\":9,\"full_name\":\"com.wifiaudio.service.l\",\"name\":\"l\",\"inner_classes\":[\"com.wifiaudio.service.l.a\",\"com.wifiaudio.service.l.b\",\"com.wifiaudio.service.l.c\"],\"inner_class_count\":3,\"method_count\":26,\"methods\":[{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"\\u003cclinit\\u003e\",\"def_pos\":0,\"signature\":\"\\u003cclinit\\u003e(): void\"},{\"dex_descriptor\":\"()V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0,\"signature\":\"\\u003cinit\\u003e(): void\"},{\"dex_descriptor\":\"(Ljava/lang/String;Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"a\",\"def_pos\":0,\"signature\":\"a(java.lang.String, com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"b\",\"def_pos\":0,\"signature\":\"b(com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"c\",\"def_pos\":0,\"signature\":\"c(): void\"},{\"dex_descriptor\":\"()Ljava/util/List;\",\"is_constructor\":false,\"name\":\"d\",\"def_pos\":0,\"signature\":\"d(): java.util.List\\u003ccom.wifiaudio.model.DeviceItem\\u003e\"},{\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"e\",\"def_pos\":0,\"signature\":\"e(): int\"},{\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/model/DeviceItem;\",\"is_constructor\":false,\"name\":\"f\",\"def_pos\":0,\"signature\":\"f(java.lang.String): com.wifiaudio.model.DeviceItem\"},{\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/model/DeviceItem;\",\"is_constructor\":false,\"name\":\"g\",\"def_pos\":0,\"signature\":\"g(java.lang.String): com.wifiaudio.model.DeviceItem\"},{\"dex_descriptor\":\"(Ljava/lang/String;)Lcom/wifiaudio/model/DeviceItem;\",\"is_constructor\":false,\"name\":\"h\",\"def_pos\":0,\"signature\":\"h(java.lang.String): com.wifiaudio.model.DeviceItem\"},{\"dex_descriptor\":\"()Ljava/util/List;\",\"is_constructor\":false,\"name\":\"i\",\"def_pos\":0,\"signature\":\"i(): java.util.List\\u003ccom.wifiaudio.model.DeviceItem\\u003e\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)Z\",\"is_constructor\":false,\"name\":\"j\",\"def_pos\":0,\"signature\":\"j(com.wifiaudio.model.DeviceItem): boolean\"},{\"dex_descriptor\":\"()Z\",\"is_constructor\":false,\"name\":\"k\",\"def_pos\":0,\"signature\":\"k(): boolean\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"l\",\"def_pos\":0,\"signature\":\"l(com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"m\",\"def_pos\":0,\"signature\":\"m(com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"n\",\"def_pos\":0,\"signature\":\"n(): void\"},{\"dex_descriptor\":\"()Lcom/wifiaudio/service/l;\",\"is_constructor\":false,\"name\":\"o\",\"def_pos\":0,\"signature\":\"o(): com.wifiaudio.service.l\"},{\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"p\",\"def_pos\":0,\"signature\":\"p(java.lang.String): void\"},{\"dex_descriptor\":\"(Lorg/teleal/cling/model/meta/Device;)V\",\"is_constructor\":false,\"name\":\"q\",\"def_pos\":0,\"signature\":\"q(org.teleal.cling.model.meta.Device): void\"},{\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"r\",\"def_pos\":0,\"signature\":\"r(java.lang.String): void\"},{\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"s\",\"def_pos\":0,\"signature\":\"s(java.lang.String): void\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"t\",\"def_pos\":0,\"signature\":\"t(com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"u\",\"def_pos\":0,\"signature\":\"u(com.wifiaudio.model.DeviceItem): void\"},{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"v\",\"def_pos\":0,\"signature\":\"v(): void\"},{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"w\",\"def_pos\":0,\"signature\":\"w(): void\"},{\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"is_constructor\":false,\"name\":\"x\",\"def_pos\":0,\"signature\":\"x(com.wifiaudio.model.DeviceItem): void\"}]}"
+                }
+              ],
+              "isError": false
+            }
+          },
+          {
+            "operation": "get_method_body",
+            "input": {
+              "class_name": "com.wifiaudio.service.l",
+              "method_name": "l",
+              "overload_index": 0,
+              "smali_fallback": true
+            },
+            "response": {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"markers\":[\"java_body_unavailable\"],\"body\":\".method private synthetic l(Lcom/wifiaudio/model/DeviceItem;)V\\n    .registers 5\\n\\n    if-eqz p1, :cond_28\\n\\n    .line 1\\n    iget-object v0, p1, Lcom/wifiaudio/model/DeviceItem;-\\u003edevStatus:Lcom/wifiaudio/model/DeviceProperty;\\n\\n    if-eqz v0, :cond_28\\n\\n    iget-object v0, v0, Lcom/wifiaudio/model/DeviceProperty;-\\u003ehardware:Ljava/lang/String;\\n\\n    const-string v1, \\\"AmlogicA113\\\"\\n\\n    .line 2\\n    invoke-virtual {v0, v1}, Ljava/lang/String;-\\u003eequals(Ljava/lang/Object;)Z\\n\\n    move-result v0\\n\\n    if-nez v0, :cond_1c\\n\\n    iget-object v0, p1, Lcom/wifiaudio/model/DeviceItem;-\\u003edevStatus:Lcom/wifiaudio/model/DeviceProperty;\\n\\n    iget-object v0, v0, Lcom/wifiaudio/model/DeviceProperty;-\\u003ehardware:Ljava/lang/String;\\n\\n    const-string v1, \\\"ALLWINNER-R328\\\"\\n\\n    .line 3\\n    invoke-virtual {v0, v1}, Ljava/lang/String;-\\u003eequals(Ljava/lang/Object;)Z\\n\\n    move-result v0\\n\\n    if-eqz v0, :cond_28\\n\\n    .line 4\\n    :cond_1c\\n    new-instance v0, Lcom/wifiaudio/service/l$a;\\n\\n    invoke-direct {v0, p0}, Lcom/wifiaudio/service/l$a;-\\u003e\\u003cinit\\u003e(Lcom/wifiaudio/service/l;)V\\n\\n    const-string v1, \\\"2:0\\\"\\n\\n    const-string v2, \\\"5:0\\\"\\n\\n    invoke-static {p1, v1, v2, v0}, Lcom/wifiaudio/action/j0/b;-\\u003ec(Lcom/wifiaudio/model/DeviceItem;Ljava/lang/String;Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\\n\\n    :cond_28\\n    return-void\\n.end method\",\"mode\":\"smali\",\"class_name\":\"com.wifiaudio.service.l\",\"dex_descriptor\":\"(Lcom/wifiaudio/model/DeviceItem;)V\",\"overload_count\":1,\"method_name\":\"l\",\"overload_index\":0,\"full_name\":\"com.wifiaudio.service.l.l\",\"fell_back\":true}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ]
+      },
+      "normalized_result": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "class_name": "com.wifiaudio.service.l",
+        "method": {
+          "name": "l",
+          "reported_signature": "l(com.wifiaudio.model.DeviceItem): void",
+          "overload_index": 0,
+          "is_constructor": false,
+          "dex_descriptor": "(Lcom/wifiaudio/model/DeviceItem;)V"
+        },
+        "overload_count": 1,
+        "representation": "smali",
+        "body_status": "available",
+        "fell_back": true,
+        "markers": [
+          "java_body_unavailable"
+        ],
+        "source": {
+          "status": "complete",
+          "text": ".method private synthetic l(Lcom/wifiaudio/model/DeviceItem;)V\n    .registers 5\n\n    if-eqz p1, :cond_28\n\n    .line 1\n    iget-object v0, p1, Lcom/wifiaudio/model/DeviceItem;->devStatus:Lcom/wifiaudio/model/DeviceProperty;\n\n    if-eqz v0, :cond_28\n\n    iget-object v0, v0, Lcom/wifiaudio/model/DeviceProperty;->hardware:Ljava/lang/String;\n\n    const-string v1, \"AmlogicA113\"\n\n    .line 2\n    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z\n\n    move-result v0\n\n    if-nez v0, :cond_1c\n\n    iget-object v0, p1, Lcom/wifiaudio/model/DeviceItem;->devStatus:Lcom/wifiaudio/model/DeviceProperty;\n\n    iget-object v0, v0, Lcom/wifiaudio/model/DeviceProperty;->hardware:Ljava/lang/String;\n\n    const-string v1, \"ALLWINNER-R328\"\n\n    .line 3\n    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z\n\n    move-result v0\n\n    if-eqz v0, :cond_28\n\n    .line 4\n    :cond_1c\n    new-instance v0, Lcom/wifiaudio/service/l$a;\n\n    invoke-direct {v0, p0}, Lcom/wifiaudio/service/l$a;-><init>(Lcom/wifiaudio/service/l;)V\n\n    const-string v1, \"2:0\"\n\n    const-string v2, \"5:0\"\n\n    invoke-static {p1, v1, v2, v0}, Lcom/wifiaudio/action/j0/b;->c(Lcom/wifiaudio/model/DeviceItem;Ljava/lang/String;Ljava/lang/String;Lcom/wifiaudio/utils/e1/g$p;)V\n\n    :cond_28\n    return-void\n.end method",
+          "reported_total_bytes": null
+        }
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ]
+}

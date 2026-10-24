@@ -99,6 +99,26 @@
       "evidence_path": "evidence/hardware-tests/KNOB-DISCOVERY-v0.8.5-2026-10-12.md",
       "hardware_scope": "Overall KNOB v0.8.5 discovery user-confirmed; no per-chip inventory or measured duration",
       "note": "Mechanism/rule update; historical command CSV totals unchanged"
+    },
+    {
+      "date": "2026-10-24",
+      "topic": "4STREAM APK command formats and conditional A31/A97/A98 routing",
+      "canonical_ids": [
+        "REV-4STREAM-001",
+        "RULE-4STREAM-FAMILY-CLASSIFIER",
+        "RULE-4STREAM-HTTP-SECURITY",
+        "RULE-4STREAM-MRM-ROUTING",
+        "RULE-4STREAM-RC-CHANNELS",
+        "RULE-4STREAM-STATIC-IP-FORMAT",
+        "RULE-4STREAM-SHUTDOWN-ZERO",
+        "PROTO-4STREAM-MCU-FRAME"
+      ],
+      "canonical_path": "protocols/linkplay-http-https/4STREAM-2026-10-24.md",
+      "evidence_path": "evidence/reverse-engineering/4STREAM-2026-10-24.md",
+      "record_shard": "registry/records/635-642.csv",
+      "builder_observation_count": 142,
+      "hardware_scope": "No hardware tests; APK static evidence only",
+      "note": "Historical baseline version and counts preserved; new records are source/routing observations, not 142 new commands"
     }
   ]
 }

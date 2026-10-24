@@ -180,3 +180,7 @@ Physical UART: **115200/8/N/1, no flow control, semicolon terminator**. Availabi
 - `RULE-LP-TRANSPORT-BY-HARDWARE` — A31 / UP2STREAM_PRO_V4 uses Linkplay HTTP :80 in the verified airControl transport map — **IMPLEMENTED / HARDWARE-OBSERVED**
 - `RULE-LP-MR-ROLE-PARSING` — `master_ip` / `master_uuid` are retained for native topology; a populated `master_ip` identifies a slave — **IMPLEMENTED / OBSERVED-IN-APP**
 - `TEST-A31-UPNP-SEEK-REL-TIME` — AVTransport `Seek(Unit=REL_TIME)` — **HARDWARE-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. Explicit legacy branch exists. Mixed groups can promote a legacy master; MCU/OEM EQ applicability is not universally established. Existing getMetaInfo and LineIn negative hardware findings remain authoritative.
+[Command formats, chip conditions and limitations](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md); [142 central builder observations](../../protocols/linkplay-http-https/4STREAM-BUILDERS-2026-10-24.md). New source/routing records 635–642 supplement existing IDs without changing their hardware status.

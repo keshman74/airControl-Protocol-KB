@@ -515,3 +515,7 @@ multiroom:SlaveChannel:<...>
 ```
 
 **Notes:** Exact parameterization requires source-specific entry.
+
+## 4STREAM source evidence — 2026-10-24
+[Exact request formats and routing](4STREAM-2026-10-24.md) · [central builder catalogue](4STREAM-BUILDERS-2026-10-24.md).
+142 observed builder expressions, plus conditional timer/static-IP/audio-output formats. Status: **APK-VERIFIED / NOT-HW-VERIFIED**. Existing command identities and model-specific hardware negatives remain unchanged.

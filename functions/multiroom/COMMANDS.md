@@ -53,3 +53,7 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `QRY-WIIM-GET-SUB-LPF` — `getSubLPF` — Get subwoofer LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-SET-SUB-LPF` — `setSubLPF:{str}` — Set subwoofer LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `QRY-WIIM-GET-MRMSUB-LPF` — `getMRMSubLPF:{str}` — Get multi-room sub LPF — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-MRM-ROUTING adds request direction, legacy-master promotion, classic vs MRM4 leave differences and event-based completion.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#multiroom-direction-and-branch-matter).

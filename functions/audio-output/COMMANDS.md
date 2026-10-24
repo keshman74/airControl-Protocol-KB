@@ -12,3 +12,7 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `CMD-WIIM-SET-CHANNEL-BALANCE` — `setChannelBalance:{n}` — Set left/right channel balance — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `QRY-WIIM-GET-FADE-FEATURE` — `GetFadeFeature` — Get fade in/out feature status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-SET-FADE-FEATURE` — `SetFadeFeature:{n}` — Set fade in/out feature — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. E.n selects setAudioOutputHardwareMode for isMuzoProProject, otherwise GNOTIFY=KeyEvent. Output capability and voltage builders are listed without invented value ranges.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).

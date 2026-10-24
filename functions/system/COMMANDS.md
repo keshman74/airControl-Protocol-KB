@@ -21,3 +21,7 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `CMD-WIIM-SET-HEX-DEVICE-NAME` — `setHexDeviceName:{str}` — Set hex device name — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-NO-SEND-MORE-DEVICE-EVENT` — `noSendMoreDeviceEvent:1` — Disable sending more device events — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `QRY-WIIM-GET-HW-ERROR-INFO` — `getHwErrorInfo` — Get hardware error information — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-SHUTDOWN-ZERO: setShutdown input 0 becomes -1. A callback log named getSleepTimer actually calls getMvRemoteSilenceUpdateTime.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).

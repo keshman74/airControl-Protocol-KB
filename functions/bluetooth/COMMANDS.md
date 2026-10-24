@@ -33,3 +33,7 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `QRY-WIIM-GET-BLE-HID-STATUS` — `getblehidstatus` — Get BLE HID status — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-START-BLE-SCAN` — `startblescan:{n}` — Start BLE scan — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `QRY-WIIM-GET-BLE-DISCOVERY-RESULT` — `getblediscoveryresult` — Get BLE discovery result — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. Exact lowercase Bluetooth command builders are recovered, including the original synk spelling. No per-chip transmitter capability is established.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).

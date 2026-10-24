@@ -554,3 +554,6 @@ Transport rules: persistent bidirectional TCP socket on **8899**; at least **200
 
 ## Existing records strengthened by official documentation
 The official TCP API also documents existing canonical records for absolute volume `MCU+VOL+NNN`, volume query `MCU+VOL+GET`, mute `MCU+MUT+000|001`, pause `MCU+PLY-PUS`, resume `MCU+PLY-PLA`, next `MCU+PLY+NXT`, previous `MCU+PLY+PRV`, numbered presets `MCU+KEY+001..010`, and `MCU+PAS+EQGet&`. Preserve any stronger CAPTURED/IMPLEMENTED/CONFIRMED status already present.
+
+## 4STREAM frame and EQ builders — 2026-10-24
+PROTO-4STREAM-MCU-FRAME records a 20-byte little-endian header in MCUDispatchThread: magic 0x20189618, payload byte length, 12 zero bytes, then payload. The sender takes a caller-supplied port; this does not independently establish port 8899 or 8819 for a device. Exact EQ strings and OEM limitations: [MCU source audit](../linkplay-http-https/4STREAM-2026-10-24.md#eq-and-mcu-control). **APK-VERIFIED / NOT-HW-VERIFIED**.

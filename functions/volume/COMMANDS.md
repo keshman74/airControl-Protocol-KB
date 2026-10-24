@@ -19,3 +19,7 @@ Canonical request, timing and limits: [A97-VOLUME.md](../../protocols/upnp/A97-V
 
 ## Reuse decision — 2026-10-21
 Use the hardware-confirmed A97 RenderingControl volume design in future airControl desktop/mobile and other project implementations, with paced HTTPS fallback and latest-target coalescing. These other integrations are planned, not completed. See [cross-project rule](../../integration/A97-VOLUME-REUSE.md).
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-RC-CHANNELS; setMaxVolume and setVolumeControl are separate HTTP configuration builders. Preserve hardware-tested A97 volume behavior.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#upnp-recovered-argument-differences).

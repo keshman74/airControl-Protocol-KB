@@ -58,3 +58,7 @@ Source: cvdlinden/wiim-httpapi OpenAPI v1.2.0. These entries are imported as **S
 
 ## AudioCast interoperability candidate
 WiiM-source AudioCast commands are candidate functionality for A98. User observation from the native WiiM app indicates AudioCast is presented as audio transmission to compatible UPnP/DLNA devices. The OpenAPI does not itself identify the target protocol, and A98 hardware support is not yet verified. Preserve this as a test candidate for possible DLNA/UPnP bridging to otherwise incompatible multiroom families (including A33), not as confirmed compatibility.
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. isA98() is a broad non-A28/non-A31 branch, not exact A98 detection. HTTPS4443 depends on gc4aVer and secure status; do not assume it for all A98 devices.
+[Command formats, chip conditions and limitations](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md); [142 central builder observations](../../protocols/linkplay-http-https/4STREAM-BUILDERS-2026-10-24.md). New source/routing records 635–642 supplement existing IDs without changing their hardware status.

@@ -1,6 +1,6 @@
 # Master Command Registry
 
-Current canonical ledger: **634 records**.
+Historical canonical record sequence before the 4STREAM increment: **1–634**. Current sequence endpoint: **642** (see the increment below; retained shard row counts differ).
 
 - v0.4.8 baseline: records **1–204**
 - saved-chat audit increment: records **205–214**
@@ -17,3 +17,8 @@ The CSV shards under `registry/records/` are the lossless source table, while us
 Vendor documentation is documentary evidence only. Commands are promoted to CAPTURED/CONFIRMED only by corresponding device/capture evidence.
 
 Original record IDs and evidence statuses are preserved. Do not renumber IDs or silently promote evidence levels.
+
+## 4STREAM APK source increment — 2026-10-24
+Historical record sequence **635–642** adds eight source/routing records in [635-642.csv](records/635-642.csv); current sequence endpoint is **642**. The 142 source builder observations are not 142 new commands. Existing command IDs and hardware evidence remain unchanged.
+The earlier 634 figure denotes the historical record sequence, not a deduplicated total over every retained shard (215-220.csv and 215-221.csv overlap historically). No historical rows are renumbered or removed here.
+See [canonical 4STREAM report](../protocols/linkplay-http-https/4STREAM-2026-10-24.md).

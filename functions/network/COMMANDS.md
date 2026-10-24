@@ -69,3 +69,7 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `CMD-WIIM-WPSCANNEL` — `wpscannel` — WPS Channel — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-WPSCLIENTMODE` — `wpsclientmode` — WPS Client Mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-WPSSERVERMODE` — `wpsservermode` — WPS Server Mode — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-STATIC-IP-FORMAT retains ipAddr=<IP>/<prefix>:gateWay=<gateway>; security/gc4aVer determines HTTPAPI endpoint.
+[Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).

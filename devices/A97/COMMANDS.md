@@ -82,3 +82,7 @@ Canonical: [A97-VOLUME.md](../../protocols/upnp/A97-VOLUME.md).
 
 ## KNOB0.8.23 volume hardware confirmation — 2026-10-21
 User confirms A97 volume control is noticeably faster after switching to RenderingControl SetVolume. Status: USER/HARDWARE-VERIFIED WORKING on the tested device; numerical ESP32 latency and long-duration stability not measured. Preserve this as the preferred compatible-A97 volume approach for future airControl desktop/mobile and other integrations, with paced HTTPS fallback. Those future integrations are not yet confirmed. See [canonical evidence](../../protocols/upnp/A97-VOLUME.md) and [reuse rule](../../integration/A97-VOLUME-REUSE.md).
+
+## 4STREAM APK evidence — 2026-10-24
+**APK-VERIFIED / NOT-HW-VERIFIED**. The APK explicitly checks ALLWINNER-R328 for quiet-update and optional 5-GHz UI paths; it does not label those checks A97. Existing getPresetInfo rejection and hardware-tested RenderingControl Master volume remain authoritative.
+[Command formats, chip conditions and limitations](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md); [142 central builder observations](../../protocols/linkplay-http-https/4STREAM-BUILDERS-2026-10-24.md). New source/routing records 635–642 supplement existing IDs without changing their hardware status.
