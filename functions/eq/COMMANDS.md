@@ -40,3 +40,29 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 - `QRY-WIIM-EQ-GET-LV2BAND-EX` — `EQGetLV2BandEx:{pluginURI}` — Get LV2 band with extra parameters — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `QRY-WIIM-EQ-GET-SOURCE-MODES` — `EQGetSourceModes` — Get the EQ source modes — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
 - `CMD-WIIM-EQ-SAVE-CUSTOM` — `EQSave:Custom` — Save the current EQ setting as "Custom" — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+
+## Recovered hardware evidence from Codex chat-history audit (2026-10-24)
+
+### A33 / ACS2 — hardware confirmed
+Recovered from the original airControl development chat:
+- `getEqType` → `EQ type: 0111`.
+- `getEqInfo:1` → Bass/Treble object.
+- `getEqInfo:2` → 10-band Graphic EQ object.
+- `getEqInfo:3` → 10-band Parametric EQ object (`Index/Filter/Freq/Q/Gain`), observed profile `AutoRoomEQ`.
+- `eqEnable:0001` and `eqEnable:0010` returned `OK` with `getStatusEx` readback; `0100` was observed as Parametric EQ mode.
+- `setParameterEq:{...}` is **HW-CONFIRMED** for writing a named 10-band PEQ profile on the tested A33/CS-8 path. A write using `Custom:"1"` returned `OK` and `getEqInfo:3` read back the changed band and profile name.
+- Firmware quirk: `Custom:"1"` was normalized to `Custom:"0"` on readback; do not use `Custom` alone as a reliable user-profile flag.
+- Attempting to write the system `AutoRoomEQ` object with `Custom:""` returned `Custom error`.
+
+### A98 / WiiM — hardware confirmed application path
+Recovered from the original airControl development chat:
+- 10-band Graphic EQ read/write via `EQGetBand/EQSetBand` was reported working on hardware.
+- EqNp/LV2 exposed ten active bands A–J with `mode/freq/q/gain`; K/L were observed disabled in the captured response.
+- A per-band PEQ write through the airControl implementation using `EQSetLV2SourceBand` was confirmed by the tester to change the value on the physical A98; read path used `EQGetLV2SourceBandEx / EQGetLV2BandEx`.
+- Scope warning: this hardware evidence applies to the tested A98 path. It does not automatically promote every WiiM LV2/EQv2 command in the OpenAPI import.
+
+### A97
+The supplied Codex chat-history contains A97 HTTPS/discovery/PlayQueue evidence, but this audit found no explicit A97 EQ/PEQ hardware write + readback sequence. Keep A97 EQ capability isolated until directly verified.
+
+Provenance: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10-24.md`.
