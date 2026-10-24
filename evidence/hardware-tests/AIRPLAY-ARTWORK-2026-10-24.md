@@ -38,3 +38,17 @@ User tested A98 at192.168.0.21 with AirPlay:
 Source review: KNOB0.8.23 decodes image format using bytes, so absent Content-Type is not an established rejection cause. The size180224 is below its350KiB compressed-image limit; dimensions were not supplied.
 The inspected airControl main4.4.54 and feature/v5.0.x-active-presets-a98 version5.0.0 share fetchArtworkDataUrl. Its HTTPS image request lacks the rejectUnauthorized:false setting used by local player control requests. This is a concrete source inconsistency and plausible cause for player-local self-signed HTTPS artwork failure; no installed-app TLS error trace was supplied. MIME fallback already defaults to image/jpeg, so absence of Content-Type alone is not established as its cause either.
 Installed desktop version/project path still needs identification: GitHub main and feature package versions do not establish which local desktop source the user runs. Scope a fix to the selected player's local HTTPS artwork certificate handling, keep public CDN certificate checks and per-track cache identity, and validate against the actual desktop version before claiming the issue fixed.
+
+## airControl5.0.0 targeted fix — 2026-10-24
+User identified the active local project as /Users/lab/AI/airControl/airControl-v5.0.0.
+Implemented AirPlayArtworkTLS-v1 in airControl branch feature/v5.0.x-active-presets-a98:
+https://github.com/keshman74/airControl/commit/2fceb06544620192443f1458248dc3bc2fb3f094
+Package version remains5.0.0; this patch identifier distinguishes the fix without replacing the complete local application.
+
+The Electron artwork resolver is extracted to electron/artwork-fetch.cjs. Four metadata/UPnP artwork call sites pass selected target.ip through IPC. Certificate verification is relaxed only for HTTPS /data/AirplayArtWorkData.jpeg on the exact selected player's RFC1918 IPv4. Public CDN/other-host/other-path requests retain normal verification. The selected-IP context is retained across redirects, and the rule is re-evaluated at every hop. No global TLS disable is introduced. Existing image/jpeg fallback already handles this confirmed missing Content-Type case.
+
+Actual local HTTPS tests use a self-signed certificate: baseline resolver request fails, selected-player patched request succeeds, exact image bytes/data URL and missing Content-Type fallback verified. Other selected-IP mismatch, public/other-path certificate rejection, same-player and external redirects, timeout and normal HTTP paths tested.
+Installer was applied to a canonical5.0.0 fixture; backup and repeat-install detection verified; wrong-version refusal leaves files unchanged. node --check passed patched Electron main. Full Vite/Electron GUI build was not run; an attempted JSX parser check was unavailable in this environment. Four call-site changes only add the selected-IP argument; no JSX structure was changed.
+The ZIP patch includes the module, guarded standard-library Python installer, test and README; installer modifies only the verified old fetcher and four call sites, preserving other local edits and saving backups.
+
+Status: IMPLEMENTED / NODE HTTPS-TESTED / INSTALLER-TESTED. Mac AirPlay hardware verification in airControl after applying the patch remains pending. A98 KNOB is already hardware-confirmed working; separate A31 image-source issue remains unresolved.
