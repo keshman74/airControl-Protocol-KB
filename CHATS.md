@@ -48,3 +48,22 @@ Every future hardware test should carry:
 - date/evidence artifact.
 
 This makes both directions navigable: **chat → canonical records** and **canonical record → chat/evidence**.
+
+
+## Codex export identity recovery — 2026-10-24
+
+A user-supplied Codex chat export recovered exact archive identities for several previously descriptive/overlapping research sources. Full cross-project audit: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10-24.md`.
+
+Key recovered files:
+- `airControl/2026-09-11_Приложение-управления-устройствами_6aa467fe.md` — CHAT-AIRCONTROL-ORIGIN; includes A33 EQ/PEQ hardware tests and original Room EQ/Auto EQ development, plus later A98 EQ/PEQ work.
+- `airControl/2026-09-15_Продолжение-разработки-airControl_6aa97e9d.md` — cross-family A31/A33/A97/A98 application development.
+- `KNX-Gateway/2026-09-16_Прошивка-KNX-HTTP-Gateway_6aab1694.md` — KNX gateway cross-family protocol use.
+- `airKNOB/2026-09-26_KNOB-Управление-громкостью-ESP32_6ab8586b.md` — airKNOB A31/A97/A98/A33 integration, including A97/A98 discovery/preset work.
+- `airControl/2026-09-30_Продолжение-разработки-airControl-300926_6abd7450.md` — WiiM/A31/A97/A98 reverse engineering.
+- `airControl/2026-10-02_Продолжение-разработки-airControl-041026_6abef5ff.md` — continued protocol normalization and adapter work.
+- `airControl/2026-10-06_Git-Hub-Объединение-исследований-протокола_6ac55469.md` — KB merge/OpenAPI audit.
+- `airControl/2026-10-07_Команды-пресетов-A33_6ac62f6b.md` — dedicated A33 preset chat.
+- `airControl/2026-10-12_Продолжение-разработки-airControl--121026_6acd6bbe.md` — later A98 preset/eventing development.
+- `airControl/2026-10-14_Разбор-прошивки-A31_6acfd281.md` — A31 firmware research.
+
+These file identities improve provenance only; technical claims still require promotion into canonical device/protocol/function views at the evidence level actually supported.
