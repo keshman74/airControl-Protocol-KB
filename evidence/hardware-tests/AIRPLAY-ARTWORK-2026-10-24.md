@@ -52,3 +52,14 @@ Installer was applied to a canonical5.0.0 fixture; backup and repeat-install det
 The ZIP patch includes the module, guarded standard-library Python installer, test and README; installer modifies only the verified old fetcher and four call sites, preserving other local edits and saving backups.
 
 Status: IMPLEMENTED / NODE HTTPS-TESTED / INSTALLER-TESTED. Mac AirPlay hardware verification in airControl after applying the patch remains pending. A98 KNOB is already hardware-confirmed working; separate A31 image-source issue remains unresolved.
+
+
+## airControl5.0.0 AirPlay cover stability follow-up — 2026-10-24
+After the AirPlayArtworkTLS-v1 patch, the user reported the cover flashed briefly but did not remain visible in airControl. This symptom suggests the first image fetch/render may succeed and a later refresh may substitute a failed raw URL. It does not by itself prove the exact failing request because the desktop log was not captured.
+
+Source-level fix AirPlayArtworkStability-v1 was added to feature/v5.0.x-active-presets-a98:
+https://github.com/keshman74/airControl/commit/ff3ae4a351c19443006af98f7888705a4cf3191e
+
+The Linkplay parser filters the raw /data/AirplayArtWorkData.jpeg URL only when its host equals the selected device IP. That self-signed player-local URL must first be fetched by Electron and represented as a data: URL; it must not fall through to Chromium on a transient resolver miss. A failed fetch for the same media keeps the previous successfully resolved data URL. When the media title changes and no new artwork is resolved, the previous art is cleared to avoid showing the old album. Other local routes and public CDN URLs are unaffected.
+
+Validation: parser tests passed for transient failure retaining last-good artwork, raw player URL rejection, clearing stale artwork on new track, and replacing the old data URL with a newly resolved image. The guarded installer applied successfully to the full source parser fixture, was idempotent on a repeated run, and saves a backup. This validates parsing/installer logic only. The user has not yet confirmed this second patch on the A98 hardware; the full Electron/Vite build has not run in this environment. KNOB0.8.23 continues to be user-confirmed working for AirPlay cover on A98; A31 path issue remains separate.
