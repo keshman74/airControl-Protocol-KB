@@ -140,6 +140,23 @@
       "sender_observation_count": 109,
       "hardware_scope": "No new hardware tests;previous tested native presets/seek preserved",
       "note": "Aggregate source/rule records,not141 new hardware-supported commands;historical baseline counts preserved"
+    },
+    {
+      "date": "2026-10-25",
+      "topic": "4STREAM AirPlay / Network / DLNA metadata and artwork flow",
+      "canonical_ids": [
+        "REV-4STREAM-AIRPLAY-ART-001",
+        "RULE-4STREAM-AIRPLAY-DETECT",
+        "RULE-4STREAM-AIRPLAY-ART-URL",
+        "RULE-4STREAM-AIRPLAY-ART-FAILURE",
+        "RULE-4STREAM-METADATA-ARBITRATION",
+        "RULE-4STREAM-METADATA-CADENCE"
+      ],
+      "canonical_path": "protocols/linkplay-http-https/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md",
+      "evidence_path": "evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md",
+      "record_shard": "registry/records/651-656.csv",
+      "hardware_scope": "No hardware tests; static APK evidence only",
+      "note": "Existing hardware-confirmed facts and historical baseline counts preserved"
     }
   ]
 }

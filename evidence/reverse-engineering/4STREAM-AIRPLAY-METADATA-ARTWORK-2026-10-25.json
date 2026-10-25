@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0",
+  "source_id": "REV-4STREAM-AIRPLAY-ART-001",
+  "status": "APK-VERIFIED / NOT-HW-VERIFIED",
+  "artifact": {
+    "package": "com.wifiaudio.Stream",
+    "version_name": "3.1.20.230912",
+    "version_code": "2023091217",
+    "sha256": "08fea6dd95e7ce763609435edad3030d41a4d7d94ba0ca928e9c4b1e8fce201b"
+  },
+  "engine": {
+    "name": "jadx-headless-mcp",
+    "version": "0.7.1",
+    "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75"
+  },
+  "rea_evidence": [
+    {
+      "subject": "isAirPlay",
+      "evidence_id": "ev_58a5b8366ab39e72bdf31ecd5a88f5cbfee3533f39fdb9b25917330102f712fb"
+    },
+    {
+      "subject": "setDlnaTrackMetaData",
+      "evidence_id": "ev_7b2c8fe0e339447bb0d19247afd3ff5f271b1d6f2e4434acf6864e9c87a77f3e"
+    },
+    {
+      "subject": "DIDL parser",
+      "evidence_id": "ev_feee07c2e9a0b7613f12d05d6031f40bfb627f51f7cb15429c4328da9deb4024"
+    },
+    {
+      "subject": "NewPlayControlFragment.R2",
+      "evidence_id": "ev_ba604e2f4c58196c5d1ecf8f3bbe79645c0c38bc3e70077c116f76f33a1062b9"
+    },
+    {
+      "subject": "NewPlayControlFragment.S2",
+      "evidence_id": "ev_d4b4bada27f3c8d8a4485b1bb4137690754ff1d2e076e4a5d9e5e52b9717ae7b"
+    },
+    {
+      "subject": "FragMenuContentCT.v1",
+      "evidence_id": "ev_65ff94a0cb04559d2bdc90730a174da8df8296a1ecd5ce79150b230ed4cd6404"
+    },
+    {
+      "subject": "HTTP exact URL builder",
+      "evidence_id": "ev_b0856be179c6f6fd071d28a420e19aa8575fa6a3df68d3e76fbed609849dab7c"
+    },
+    {
+      "subject": "HTTP client selection",
+      "evidence_id": "ev_37c92353a07866e5f70950d9c81d0fe3812f814ffde77600d3588c0d80f9ce3c"
+    },
+    {
+      "subject": "HTTP accepted codes",
+      "evidence_id": "ev_e368b8bf6319b382829364151b8383a0e9cc5406150ebee1a75c2bb401466ae9"
+    },
+    {
+      "subject": "GetInfoEx cadence",
+      "evidence_id": "ev_17738e9f536688e231c277854a75b05a0f2033dbf4bbb3b9dc44a1091a9d06d1"
+    }
+  ],
+  "dex_anchors": [
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$c1;->onSuccess(Ljava/util/Map;)V",
+      "code_unit": 28,
+      "reference": "const-string TrackMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$c1;->onSuccess(Ljava/util/Map;)V",
+      "code_unit": 1074,
+      "reference": "DeviceInfoExt.setDlnaTrackMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$c1;->onSuccess(Ljava/util/Map;)V",
+      "code_unit": 1271,
+      "reference": "DeviceInfoExt.setDlnaTrackMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$y0;->k(Lorg/teleal/cling/model/gena/a;)V",
+      "code_unit": 85,
+      "reference": "const-string CurrentTrackMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$y0;->k(Lorg/teleal/cling/model/gena/a;)V",
+      "code_unit": 504,
+      "reference": "DeviceInfoExt.setDlnaTrackMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$b;->onSuccess(Ljava/util/Map;)V",
+      "code_unit": 96,
+      "reference": "const-string CurrentURIMetaData"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/service/d$b;->onSuccess(Ljava/util/Map;)V",
+      "code_unit": 112,
+      "reference": "DeviceInfoExt.setDlnaTrackMetaData"
+    },
+    {
+      "dex": "classes3.dex",
+      "method": "Lorg/teleal/cling/c/a/a/z/e;->a(Ljava/lang/String;)Lcom/wifiaudio/model/AlbumInfo;",
+      "code_unit": 103,
+      "reference": "albumArtURI normalization regex"
+    },
+    {
+      "dex": "classes3.dex",
+      "method": "Lorg/teleal/cling/c/a/a/z/e;->a(Ljava/lang/String;)Lcom/wifiaudio/model/AlbumInfo;",
+      "code_unit": 352,
+      "reference": "const-string <upnp:albumArtURI>"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/model/DeviceInfoExt;->setDlnaTrackMetaData(Ljava/lang/String;)V",
+      "code_unit": 284,
+      "reference": "generic DIDL parser invoke"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/model/DeviceInfoExt;->setDlnaTrackMetaData(Ljava/lang/String;)V",
+      "code_unit": 702,
+      "reference": "setDlnaAlbumArtURI"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/view/pagesmsccenter/NewPlayControlFragment;->d4()V",
+      "code_unit": 359,
+      "reference": "S3"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/view/pagesmsccenter/NewPlayControlFragment;->S3(Lcom/wifiaudio/model/DeviceInfoExt;)V",
+      "code_unit": 129,
+      "reference": "S2"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/view/pagesmsccenter/NewPlayControlFragment;->S2(Ljava/lang/String;)V",
+      "code_unit": 224,
+      "reference": "R2"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/view/pagesmsccenter/NewPlayControlFragment$v;->b(Ljava/lang/Object;)V",
+      "code_unit": 12,
+      "reference": "BitmapFactory.decodeByteArray"
+    },
+    {
+      "dex": "classes2.dex",
+      "method": "Lcom/wifiaudio/view/pagesmsccenter/NewPlayControlFragment$w;->run()V",
+      "code_unit": 24,
+      "reference": "ImageView.setImageBitmap"
+    }
+  ],
+  "get_position_info_direct_references": [
+    {
+      "dex": "classes3.dex",
+      "class": "Lorg/teleal/cling/support/avtransport/callback/GetPositionInfo;",
+      "method": "<clinit>()V",
+      "code_unit": 0,
+      "reference": "CONST_CLASS self"
+    },
+    {
+      "dex": "classes3.dex",
+      "class": "Lorg/teleal/cling/support/avtransport/callback/GetPositionInfo;",
+      "method": "<clinit>()V",
+      "code_unit": 10,
+      "reference": "SPUT_OBJECT own logger"
+    },
+    {
+      "dex": "classes3.dex",
+      "class": "Lorg/teleal/cling/support/avtransport/callback/GetPositionInfo;",
+      "method": "h(Lorg/teleal/cling/model/action/c;)V",
+      "code_unit": 9,
+      "reference": "INVOKE_VIRTUAL own i callback"
+    }
+  ],
+  "requested_string_pool_results": {
+    "AirplayArtWorkData.jpeg": 0,
+    "/data/airplay_": 0,
+    "airplay_": "6 UI/localization identifiers; 0 artwork paths",
+    "/data/": "41 matches; 0 AirPlay artwork paths",
+    "artwork": "3 generic cloud model accessors; 0 AirPlay endpoints"
+  },
+  "conclusions": {
+    "airplay_detection": "trim(PlayMedium).toUpperCase() == AIRPLAY",
+    "relative_album_art_uri": "not resolved; non-http prefix selects default cover",
+    "request_url": "metadata URL passed verbatim",
+    "default_ports": {
+      "http": 80,
+      "https": 443
+    },
+    "http_404": "error callback; default cover; no fallback endpoint",
+    "airplay_cache": "no Glide and no configured OkHttp Cache; same-URL suppression only",
+    "stale_source_guard": "none found around shared DeviceInfoExt metadata setter",
+    "update_cadence": "LastChange event-driven or next gated 5000 ms GetInfoEx cycle; artwork on distinct URL"
+  },
+  "limitations": [
+    "Static bytecode evidence; no hardware or runtime execution.",
+    "Literal absence does not exclude server-generated or dynamically loaded values.",
+    "DEX code-unit offsets are method-relative instruction offsets, not file offsets."
+  ]
+}

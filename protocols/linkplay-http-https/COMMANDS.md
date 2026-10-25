@@ -519,3 +519,10 @@ multiroom:SlaveChannel:<...>
 ## 4STREAM source evidence — 2026-10-24
 [Exact request formats and routing](4STREAM-2026-10-24.md) · [central builder catalogue](4STREAM-BUILDERS-2026-10-24.md).
 142 observed builder expressions, plus conditional timer/static-IP/audio-output formats. Status: **APK-VERIFIED / NOT-HW-VERIFIED**. Existing command identities and model-specific hardware negatives remain unchanged.
+
+
+## 4STREAM AirPlay metadata/artwork evidence — 2026-10-25
+
+[End-to-end CurrentTrackMetaData / DIDL-Lite to ImageView report](4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md).
+
+The APK recognizes AirPlay from PlayMedium == AIRPLAY. Its AirPlay UI requests only an absolute albumArtURI beginning with http and sends the URL verbatim; a relative /data/airplay_<hash>.jpg is not expanded. A 404 selects the default cover, and no AirplayArtWorkData.jpeg fallback is present in the reviewed DEX path. Status: **APK-VERIFIED / NOT-HW-VERIFIED**; no device transport or firmware fact is promoted.

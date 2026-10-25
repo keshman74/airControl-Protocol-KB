@@ -73,3 +73,13 @@ Static evidence only; device hardware statuses are unchanged.
 - [Evidence and reproducibility](evidence/reverse-engineering/IAUDIOCLOUD-2026-10-25.md)
 
 Discovery, framing, presets, EQ/RoomFit/subwoofer and firmware-dependent volume; APK evidence only. Existing hardware confirmation is retained separately.
+
+
+## 4STREAM AirPlay metadata/artwork audit — 2026-10-25
+
+- [Canonical metadata-to-ImageView report](protocols/linkplay-http-https/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md)
+- [Provenance and reproduction selectors](evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md)
+- [REA and DEX evidence](evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.json)
+- [Six aggregate source/rule records, sequence 651–656](registry/records/651-656.csv)
+
+Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork is not expanded; full HTTP/S artwork URLs are fetched verbatim. Status **APK-VERIFIED / NOT-HW-VERIFIED**. Existing hardware-confirmed facts are unchanged.
