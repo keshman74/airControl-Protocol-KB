@@ -32,3 +32,7 @@ Canonical algorithm, API routing, bounded ESP32 profile, desktop comparison, sou
 Supporting rules: **RULE-DISCOVERY-NONBLOCKING-001** and **RULE-DISCOVERY-CANCEL-GENERATION-001** — IMPLEMENTED + HOST-TESTED. Continuously receive SSDP/LOCATION/NOTIFY and A33 IP hints, queue candidates, validate separately, emit verified zones immediately, bound retries and ignore stale results after cancellation. Cache entries remain hints, not Online evidence.
 
 [Hardware/practical report](../evidence/hardware-tests/KNOB-DISCOVERY-v0.8.5-2026-10-12.md).
+
+## A33 discovery port decoding — APK corroboration
+
+`DeviceTmpModel.getRealPort()` in iAudioCloud 2.0.260728 decodes the announcement port as hexadecimal then shifts right 2 bits: `16800` -> `0x16800 >> 2` -> TCP23040. An absent announcement port falls back to58803. This resolves the earlier warning about the raw value16800: never use it directly as a decimal port. Later status `TCPport` is decimal. This corroborates existing native-preset hardware evidence, without proving one fixed port across all products. [Source audit](../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

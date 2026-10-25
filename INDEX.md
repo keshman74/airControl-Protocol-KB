@@ -65,3 +65,11 @@ v0.4.8 contains **204 canonical records**. Original lossless CSV shards remain u
 - [Provenance and retained evidence](evidence/reverse-engineering/4STREAM-2026-10-24.md)
 - [Eight source/routing records, sequence 635–642](registry/records/635-642.csv)
 Static evidence only; device hardware statuses are unchanged.
+
+## iAudioCloud A33 native audit — 2026-10-25
+
+- [Detailed native command analysis](protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md)
+- [141 opcode constants and 109 send-site observations](protocols/a33-native-23040/IAUDIOCLOUD-OPCODES-2026-10-25.md)
+- [Evidence and reproducibility](evidence/reverse-engineering/IAUDIOCLOUD-2026-10-25.md)
+
+Discovery, framing, presets, EQ/RoomFit/subwoofer and firmware-dependent volume; APK evidence only. Existing hardware confirmation is retained separately.

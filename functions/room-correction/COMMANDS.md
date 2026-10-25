@@ -41,3 +41,9 @@ Keep these mechanisms distinct:
 No A97 native RoomCorr or application Room EQ hardware test was found in the supplied Codex history during the 2026-10-24 audit.
 
 Provenance: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10-24.md`.
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native RoomFit 04 40 requests sound with zero payload; 04 41 sends EqBand filter objects. Frequency/gain/Q are formatted strings; no hardware support, units or safe range is newly established.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

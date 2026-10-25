@@ -37,3 +37,9 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. Exact lowercase Bluetooth command builders are recovered, including the original synk spelling. No per-chip transmitter capability is established.
 [Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).
+
+## iAudioCloud APK evidence — 2026-10-25
+
+A33-specific provisioning: AB00 service, AB01 write / AB02 notify, EC CE frame with length LE16, terminator 26 selected by firmwareVersion=a33. Native reset opcode 04 30 is separately observed; neither was executed.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

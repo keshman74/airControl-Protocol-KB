@@ -57,3 +57,9 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-MRM-ROUTING adds request direction, legacy-master promotion, classic vs MRM4 leave differences and event-based completion.
 [Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#multiroom-direction-and-branch-matter).
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native 00 50 sends StreamSource pipe, Host and Slave array; 00 52 requests status. Target/group branch behavior is documented separately from Linkplay JoinGroup and ACS2 HTTP.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

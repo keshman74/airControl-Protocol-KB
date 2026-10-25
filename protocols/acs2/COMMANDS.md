@@ -701,3 +701,9 @@ Status: **DOCUMENTED / OFFICIAL-A33M-V1.2 / NOT-YET-HW-VERIFIED**. The official 
 
 ## Family-separation rule from origin-chat audit
 - `RULE-MULTIROOM-FAMILY-SEPARATION`: A33 ACS2 multiroom must remain separate from Linkplay native `JoinGroup/LeaveGroup`. Cross-family A33 ↔ A31/A97/A98 grouping is not hardware-verified.
+
+## iAudioCloud APK evidence — 2026-10-25
+
+The new APK audit describes native binary control. It does not promote native opcodes to HTTP Instruct commands or supersede the 63 documented ACS2 APIs.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

@@ -23,3 +23,9 @@ Use the hardware-confirmed A97 RenderingControl volume design in future airContr
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-RC-CHANNELS; setMaxVolume and setVolumeControl are separate HTTP configuration builders. Preserve hardware-tested A97 volume behavior.
 [Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#upnp-recovered-argument-differences).
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native old 00 40 vs new 00 47 selection parses the second firmware version component >=33. DeviceModel.setMute sends both 00 40 and 00 48 asynchronously. Keep these distinct from HTTP and TCP1234 volume commands.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

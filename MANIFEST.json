@@ -119,6 +119,27 @@
       "builder_observation_count": 142,
       "hardware_scope": "No hardware tests; APK static evidence only",
       "note": "Historical baseline version and counts preserved; new records are source/routing observations, not 142 new commands"
+    },
+    {
+      "date": "2026-10-25",
+      "topic": "iAudioCloud A33 native command schemas and endpoint decoding",
+      "canonical_ids": [
+        "REV-IAUDIOCLOUD-001",
+        "RULE-IAUDIOCLOUD-PORT-DECODE",
+        "RULE-IAUDIOCLOUD-NATIVE-FRAME",
+        "RULE-IAUDIOCLOUD-VOLUME-VERSION",
+        "RULE-IAUDIOCLOUD-PRESET-SCHEMA",
+        "RULE-IAUDIOCLOUD-EQ-SCHEMA",
+        "PROTO-IAUDIOCLOUD-BLE-A33",
+        "RULE-IAUDIOCLOUD-CONTROL-SCHEMAS"
+      ],
+      "canonical_path": "protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md",
+      "evidence_path": "evidence/reverse-engineering/IAUDIOCLOUD-2026-10-25.md",
+      "record_shard": "registry/records/643-650.csv",
+      "opcode_constant_count": 141,
+      "sender_observation_count": 109,
+      "hardware_scope": "No new hardware tests;previous tested native presets/seek preserved",
+      "note": "Aggregate source/rule records,not141 new hardware-supported commands;historical baseline counts preserved"
     }
   ]
 }

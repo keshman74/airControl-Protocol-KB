@@ -70,3 +70,9 @@ Provenance: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. HTTP EQ/EQv2 and MCU+PAS+EQSet families are separate. Width formats are not range validation, and OEM controls are not universal chip capabilities.
 [Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#eq-and-mcu-control).
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native EQ 02 51–58, subwoofer 02 59 / 03 20 / 03 21, exact JSON/filter string serialization and device-dependent ranges. sendTypeSync uses 02 54; 02 50 is a receive-side observation.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

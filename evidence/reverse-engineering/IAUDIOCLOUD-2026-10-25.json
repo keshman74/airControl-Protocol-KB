@@ -1,0 +1,450 @@
+[
+  {
+    "evidence_id": "ev_367bb66faa3ec7dde107b982c0335039d50797728b72aea7620ae9d7ea0fb346",
+    "subject": {
+      "name": "iAudioCloud_2.0.260728_apkcombo.com.xapk",
+      "digest": {
+        "sha256": "7c7111112c224d65584440e085c2832330efa431bf7b91ea32f8c343513e65b9"
+      },
+      "local_path": "/Users/lab/AI/iAudioCloud_2.0.260728_apkcombo.com.xapk",
+      "format": "zip",
+      "architecture": null
+    },
+    "provider": {
+      "id": "rea-analysis-view",
+      "name": "REA analysis view projection",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis-view",
+    "operation": "inspect_analysis_view",
+    "parameters": {
+      "parent_evidence_id": "ev_9b29ea5b540c13ac302a8d35b5be9163ca5423b4e763899460c51e127d45484d",
+      "view": {
+        "kind": "summary"
+      }
+    },
+    "normalized_result": {
+      "kind": "summary",
+      "view": {
+        "kind": "summary"
+      },
+      "parent_evidence_id": "ev_9b29ea5b540c13ac302a8d35b5be9163ca5423b4e763899460c51e127d45484d",
+      "parent_operation": "inspect_artifact",
+      "parent_digest": "9b29ea5b540c13ac302a8d35b5be9163ca5423b4e763899460c51e127d45484d",
+      "view_digest": "73efa484b75c5de5933fc1753b8fdac5b1f845ac9ef9e608414cf7fd0d91b9ee",
+      "artifact": {
+        "path": "/Users/lab/AI/iAudioCloud_2.0.260728_apkcombo.com.xapk",
+        "sha256": "7c7111112c224d65584440e085c2832330efa431bf7b91ea32f8c343513e65b9"
+      },
+      "coverage": {
+        "status": "complete-within-view",
+        "examined": 68,
+        "total": 68,
+        "next_offset": null,
+        "exhausted": true
+      },
+      "limitations": [
+        "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+        "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+      ],
+      "unknowns": [
+        "Inventory does not establish application runtime behavior or complete format-specific analysis."
+      ],
+      "summary": {
+        "manifest": {
+          "manifest_id": "agm_94f657553c73e60678d1d1342ff80675e3bfcef83d36700b097dc97633e0ea25",
+          "root_artifact_id": "art_f46aa0d713c56f7e163af553f2b6abed98f68e5ec2705412e9ecb44e8c534d8a",
+          "root_sha256": "7c7111112c224d65584440e085c2832330efa431bf7b91ea32f8c343513e65b9",
+          "root_format": "zip",
+          "graph_sha256": "4728a6353807ff8fc1e82ab6a3b705720f75c66826e1e3267f4e77d2171fa966",
+          "node_count": 23,
+          "occurrence_count": 23,
+          "edge_count": 22
+        },
+        "available_counts": {
+          "nodes": 23,
+          "occurrences": 23,
+          "edges": 22,
+          "integrity_contradictions": 0
+        },
+        "observed_entry_kind_counts": {
+          "file": 23,
+          "directory": 0,
+          "symlink": 0,
+          "slice": 0
+        },
+        "source_complete": true,
+        "inventory_evidence_ids": [
+          "ev_90837d5c8344e1f334ab4ee3ffcd3f582e68a9f930f5e70942a9562d05e65c63"
+        ],
+        "inspection": {
+          "coverage": {
+            "status": "complete-within-substeps",
+            "substeps_completed": 1,
+            "observations_retained": 1,
+            "observations_omitted": 0,
+            "hypotheses_retained": 0,
+            "hypotheses_omitted": 0,
+            "unexplored_branches_retained": 0,
+            "unexplored_branches_omitted": 0,
+            "next_probes_retained": 0,
+            "next_probes_omitted": 0
+          },
+          "unexplored_branches": []
+        },
+        "limitation_count": 2
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+      "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+    ],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Users/lab/AI/iAudioCloud_2.0.260728_apkcombo.com.xapk"
+      }
+    ],
+    "evidence_links": [
+      "ev_9b29ea5b540c13ac302a8d35b5be9163ca5423b4e763899460c51e127d45484d"
+    ]
+  },
+  {
+    "evidence_id": "ev_c31e92293d5fa01d8408ec1b95fe0e0ab8fca19389ebf5605098125f7a23c6cf",
+    "subject": {
+      "name": "com.cloudyx.multimediaplayer.apk",
+      "digest": {
+        "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb"
+      },
+      "local_path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "format": "apk",
+      "architecture": null
+    },
+    "provider": {
+      "id": "rea-analysis-view",
+      "name": "REA analysis view projection",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis-view",
+    "operation": "inspect_analysis_view",
+    "parameters": {
+      "parent_evidence_id": "ev_ee0a1aee5500a96777227a0ab4c44f3fe456a0e519b8aaabf901fa9055bf34aa",
+      "view": {
+        "kind": "summary"
+      }
+    },
+    "normalized_result": {
+      "kind": "summary",
+      "view": {
+        "kind": "summary"
+      },
+      "parent_evidence_id": "ev_ee0a1aee5500a96777227a0ab4c44f3fe456a0e519b8aaabf901fa9055bf34aa",
+      "parent_operation": "inspect_android_package",
+      "parent_digest": "ee0a1aee5500a96777227a0ab4c44f3fe456a0e519b8aaabf901fa9055bf34aa",
+      "view_digest": "971d2ddc1f0964f8452328496433b0aab6be6912083d33fde8ed70d7e4c90993",
+      "artifact": {
+        "path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+        "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb"
+      },
+      "coverage": {
+        "status": "complete-within-view",
+        "examined": 1,
+        "total": 1,
+        "next_offset": null,
+        "exhausted": true
+      },
+      "limitations": [
+        "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+        "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+        "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+        "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+        "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+      ],
+      "unknowns": [
+        "APK signatures were not verified; package declarations do not establish authenticity or runtime behavior."
+      ],
+      "summary": {
+        "engine": {
+          "name": "jadx-headless-mcp",
+          "version": "0.7.1",
+          "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+          "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "worker_count": 1,
+          "heap_limit_mib": 4096
+        },
+        "package_name": "com.cloudyx.multimediaplayer",
+        "version_name": "2.0.260728",
+        "version_code": "43",
+        "min_sdk": "23",
+        "target_sdk": "36",
+        "permissions": [
+          "android.permission.BLUETOOTH",
+          "android.permission.BLUETOOTH_ADMIN",
+          "android.permission.BLUETOOTH_CONNECT",
+          "android.permission.BLUETOOTH_SCAN",
+          "android.permission.BLUETOOTH_ADVERTISE",
+          "android.permission.ACCESS_NETWORK_STATE",
+          "android.permission.ACCESS_WIFI_STATE",
+          "android.permission.CHANGE_WIFI_STATE",
+          "android.permission.CHANGE_WIFI_MULTICAST_STATE",
+          "android.permission.ACCESS_FINE_LOCATION",
+          "android.permission.ACCESS_COARSE_LOCATION",
+          "android.permission.ACCESS_BACKGROUND_LOCATION",
+          "android.permission.READ_MEDIA_AUDIO",
+          "android.permission.WRITE_EXTERNAL_STORAGE",
+          "android.permission.READ_EXTERNAL_STORAGE",
+          "android.permission.READ_MEDIA_AUDIO",
+          "android.permission.FOREGROUND_SERVICE",
+          "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+          "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+          "android.permission.POST_NOTIFICATIONS",
+          "android.permission.READ_MEDIA_AUDIO",
+          "android.permission.INTERNET",
+          "android.permission.MEDIA_PROJECTION",
+          "android.permission.WAKE_LOCK",
+          "android.permission.RECORD_AUDIO",
+          "android.permission.SYSTEM_ALERT_WINDOW",
+          "android.permission.MANAGE_OVERLAY_PERMISSION",
+          "android.permission.RECORD_BACKGROUND_AUDIO",
+          "com.cloudyx.multimediaplayer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+          "android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
+          "com.android.vending.CHECK_LICENSE"
+        ],
+        "manifest": {
+          "status": "complete",
+          "reported_total_bytes": null,
+          "text_code_units": 10907,
+          "text_included": false
+        },
+        "class_count": 8308,
+        "resource_count": 1375,
+        "signature_verification": "not_performed"
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+      "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+      "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+      "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+      "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+    ],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk"
+      }
+    ],
+    "evidence_links": [
+      "ev_ee0a1aee5500a96777227a0ab4c44f3fe456a0e519b8aaabf901fa9055bf34aa"
+    ]
+  },
+  {
+    "evidence_id": "ev_f60319249805b2da525a81225e5251ee422be5fda1692c521b162db42dc84fca",
+    "subject": {
+      "name": "com.cloudyx.multimediaplayer.apk",
+      "digest": {
+        "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb"
+      },
+      "local_path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "format": "apk",
+      "architecture": null
+    },
+    "provider": {
+      "id": "jadx",
+      "name": "JADX headless",
+      "version": "0.7.1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_android_method",
+    "parameters": {
+      "path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "class_name": "com.cloudyx.multimediaplayer.model.DeviceTmpModel",
+      "method_name": "getRealPort"
+    },
+    "normalized_result": {
+      "engine": {
+        "name": "jadx-headless-mcp",
+        "version": "0.7.1",
+        "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+        "worker_count": 1,
+        "heap_limit_mib": 4096
+      },
+      "class_name": "com.cloudyx.multimediaplayer.model.DeviceTmpModel",
+      "method": {
+        "name": "getRealPort",
+        "reported_signature": "getRealPort(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      "overload_count": 1,
+      "representation": "java",
+      "body_status": "available",
+      "fell_back": false,
+      "markers": [],
+      "source": {
+        "status": "complete",
+        "text": "    public int getRealPort() {\n        if (StringUtils.isEmpty(getPort())) {\n            return DevicesInteracter.PORT_TCP_DEVICE;\n        }\n        return Integer.decode(\"0x\" + getPort()).intValue() >> 2;\n    }",
+        "reported_total_bytes": null
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+      "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+      "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+      "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+      "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_ad91d405f3ab9c65d23e753d34a7ebb15aeae09b6159ecfc1024aed630701d0e",
+    "subject": {
+      "name": "com.cloudyx.multimediaplayer.apk",
+      "digest": {
+        "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb"
+      },
+      "local_path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "format": "apk",
+      "architecture": null
+    },
+    "provider": {
+      "id": "jadx",
+      "name": "JADX headless",
+      "version": "0.7.1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_android_method",
+    "parameters": {
+      "path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "class_name": "com.cloudyx.multimediaplayer.interacter.DevicesInteracter",
+      "method_name": "makeSendDataBLE"
+    },
+    "normalized_result": {
+      "engine": {
+        "name": "jadx-headless-mcp",
+        "version": "0.7.1",
+        "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+        "worker_count": 1,
+        "heap_limit_mib": 4096
+      },
+      "class_name": "com.cloudyx.multimediaplayer.interacter.DevicesInteracter",
+      "method": {
+        "name": "makeSendDataBLE",
+        "reported_signature": "makeSendDataBLE(byte, byte[], com.cloudyx.multimediaplayer.model.BluetoothDeviceModel): byte[]",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(B[BLcom/cloudyx/multimediaplayer/model/BluetoothDeviceModel;)[B"
+      },
+      "overload_count": 1,
+      "representation": "java",
+      "body_status": "available",
+      "fell_back": false,
+      "markers": [],
+      "source": {
+        "status": "complete",
+        "text": "    public static byte[] makeSendDataBLE(byte b, byte[] bArr, BluetoothDeviceModel bluetoothDeviceModel) {\n        try {\n            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();\n            byteArrayOutputStream.write(236);\n            byteArrayOutputStream.write(ComposerKt.referenceKey);\n            byteArrayOutputStream.write(b);\n            byteArrayOutputStream.write(StringUtils.shortToByteLittle(bArr != null ? (short) bArr.length : (short) 0));\n            if (bArr != null && bArr.length != 0) {\n                byteArrayOutputStream.write(bArr);\n            }\n            if (\"a33\".equalsIgnoreCase(bluetoothDeviceModel.getFirmwareVersion())) {\n                byteArrayOutputStream.write(38);\n            } else {\n                byteArrayOutputStream.write(251);\n            }\n            byte[] byteArray = byteArrayOutputStream.toByteArray();\n            byteArrayOutputStream.close();\n            return byteArray;\n        } catch (IOException e) {\n            e.printStackTrace();\n            return null;\n        }\n    }",
+        "reported_total_bytes": null
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+      "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+      "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+      "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+      "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  {
+    "evidence_id": "ev_83f42bc8dcbe1fb8a229a8a454a518eff1b3d66172b966b0e05f65ce51f0ee18",
+    "subject": {
+      "name": "com.cloudyx.multimediaplayer.apk",
+      "digest": {
+        "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb"
+      },
+      "local_path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "format": "apk",
+      "architecture": null
+    },
+    "provider": {
+      "id": "jadx",
+      "name": "JADX headless",
+      "version": "0.7.1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_android_method",
+    "parameters": {
+      "path": "/Users/lab/Documents/Codex/2026-10-23/mcp-rea-ghidra-12-1-4/work/iaudiocloud/com.cloudyx.multimediaplayer.apk",
+      "class_name": "com.cloudyx.multimediaplayer.model.DeviceModel",
+      "method_name": "makeSendParams",
+      "overload_index": 1
+    },
+    "normalized_result": {
+      "engine": {
+        "name": "jadx-headless-mcp",
+        "version": "0.7.1",
+        "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+        "worker_count": 1,
+        "heap_limit_mib": 4096
+      },
+      "class_name": "com.cloudyx.multimediaplayer.model.DeviceModel",
+      "method": {
+        "name": "makeSendParams",
+        "reported_signature": "makeSendParams(byte[], java.lang.String): byte[]",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "([BLjava/lang/String;)[B"
+      },
+      "overload_count": 2,
+      "representation": "java",
+      "body_status": "available",
+      "fell_back": false,
+      "markers": [],
+      "source": {
+        "status": "complete",
+        "text": "    public byte[] makeSendParams(byte[] bArr, String str) {\n        try {\n            if (this.seqNo > 255) {\n                this.seqNo = (byte) 0;\n            }\n            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();\n            byteArrayOutputStream.write(163);\n            byteArrayOutputStream.write(191);\n            byteArrayOutputStream.write(this.seqNo);\n            byte[] bytes = str != null ? str.getBytes(StandardCharsets.UTF_8) : new byte[0];\n            short length = (short) bytes.length;\n            byteArrayOutputStream.write(StringUtils.shortToByteLittle(length));\n            byteArrayOutputStream.write(bArr);\n            if (bytes.length > 0) {\n                byteArrayOutputStream.write(bytes);\n            }\n            byteArrayOutputStream.write(251);\n            this.seqNo = (byte) (this.seqNo + 1);\n            byte[] byteArray = byteArrayOutputStream.toByteArray();\n            byteArrayOutputStream.close();\n            if (byteArray.length >= 7) {\n                StringBuilder sb = new StringBuilder();\n                sb.append(!StringUtils.isEmpty(getName()) ? getName() : getIp());\n                sb.append(\" Send: \");\n                sb.append(String.format(\"startTag:0x%02X%02X, seqNo:%02X, length:%02X%02X(%d), commandID:0x%02X%02X, data:\\\"%s\\\", endTag:0x%02X\", Byte.valueOf(byteArray[0]), Byte.valueOf(byteArray[1]), Byte.valueOf(byteArray[2]), Byte.valueOf(byteArray[3]), Byte.valueOf(byteArray[4]), Short.valueOf(length), Byte.valueOf(byteArray[5]), Byte.valueOf(byteArray[6]), str, Byte.valueOf(byteArray[byteArray.length - 1])));\n                LogUtils.debug(sb.toString());\n                return byteArray;\n            }\n            LogUtils.debug(\"make send data: \".concat(new String(byteArray, StandardCharsets.UTF_8)));\n            return byteArray;\n        } catch (Exception e) {\n            e.printStackTrace();\n            return null;\n        }\n    }",
+        "reported_total_bytes": null
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+      "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+      "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+      "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+      "Manifest summary fields are extracted by the upstream engine; decoded XML is retained for verification. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  }
+]

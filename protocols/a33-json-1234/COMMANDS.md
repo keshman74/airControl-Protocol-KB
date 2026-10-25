@@ -71,3 +71,9 @@
 ```
 
 **Notes:** Hardware-confirmed.
+
+## iAudioCloud APK evidence — 2026-10-25
+
+The new APK audit describes native A3 BF frames on discovered ports. It does not establish those byte opcodes or JSON schemas on TCP1234.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

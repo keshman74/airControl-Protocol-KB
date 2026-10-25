@@ -23,3 +23,9 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 
 - `CMD-WIIM-SET-PLAYER-CMD-HEX-PLAYLIST-URL` — `setPlayerCmd:hex_playlist:url:{index}` — Play a specific track from a playlist by URL and index [DEPRECATED in source] — **SOURCE-DOCUMENTED / DEPRECATED / NOT-HW-VERIFIED**
 - `CMD-WIIM-SET-PLAYER-CMD-SEEK-POSITION` — `setPlayerCmd:seek:position` — Seek — **SOURCE-DOCUMENTED / NOT-HW-VERIFIED**
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native 00 32 uses raw plays/pause; 00 33 carries index +1/-1 and SongPlay string null; 00 34 carries raw decimal seek position. TuneIn resume can take a service-specific path.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

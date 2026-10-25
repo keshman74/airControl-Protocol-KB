@@ -89,3 +89,9 @@ A97/A98 WiiM-source AudioCast exposes network-speaker discovery/list, transcode-
 - Observed values: `DevName=Cloudix`, `NetworkMode=eth0`, `PlayState=stop`, `MultiroomType=none`, `MultiroomStatus=free`.
 - Verification source: direct device curl response supplied by hardware tester in airALARM development conversation.
 - Scope: confirms `getStatusEx` on this specific A33 firmware over HTTP port 8000. Does not verify prompt-sound commands, automatic discovery, or HTTPS port 8443.
+
+## iAudioCloud APK evidence — 2026-10-25
+
+141 native opcode constants and 109 sender observations; exact framing and seek, discovery port decoding, version-dependent volume, presets, EQ/RoomFit/subwoofer, timers and provisioning. These app-side observations do not establish support on every A33 device.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

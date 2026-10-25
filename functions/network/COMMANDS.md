@@ -73,3 +73,9 @@ Applicability to A97/A98: **candidate / NOT-HW-VERIFIED** unless separately prom
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. RULE-4STREAM-STATIC-IP-FORMAT retains ipAddr=<IP>/<prefix>:gateWay=<gateway>; security/gc4aVer determines HTTPAPI endpoint.
 [Exact formats and source selectors](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md#exact-http-formats-and-parameter-behavior).
+
+## iAudioCloud APK evidence — 2026-10-25
+
+Native 03 85 selects EStatic* or WStatic* fields and sends StaticIpStatus string 1; 03 86 requests status. BLE Wi-Fi provisioning uses hex-encoded UTF-8 essid/passwd. No network-setting action was executed.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

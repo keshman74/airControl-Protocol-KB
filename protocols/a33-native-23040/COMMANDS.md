@@ -133,3 +133,9 @@ Use tag `v5.0.0` / commit `3e898c2a011c39e103919f51079abdcbeaeae038` as the roll
 - **Verification result:** installed macOS application was launched and user confirmed the packaged airControl v5.0.0 works correctly. This verifies that the stable v5.0.0 baseline survives Electron packaging into the ARM64 DMG.
 
 Preserve this DMG hash as the reference for the hardware-tested macOS ARM64 v5.0.0 artifact.
+
+## iAudioCloud APK evidence — 2026-10-25
+
+The APK confirms A3 BF framing and port=hex(discovery port)>>2. TCP23040 remains a discovered/tested endpoint; 58803 is the app fallback. Seek 00 34 carries raw decimal position (the historical ASCII 4 is the opcode byte). Existing preset IDs 03 76 and 03 70 are reused, with their hardware status preserved.
+
+Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).

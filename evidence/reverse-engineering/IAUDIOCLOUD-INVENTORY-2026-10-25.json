@@ -1,0 +1,109 @@
+[
+  {
+    "name": "com.cloudyx.multimediaplayer.apk",
+    "sha256": "c2efb0d153fd1005b4819dc358922ae7972f7d1b646e11a41ec4725096b0cefb",
+    "code": [
+      "classes.dex",
+      "classes2.dex",
+      "classes3.dex",
+      "classes4.dex"
+    ]
+  },
+  {
+    "name": "config.hi.apk",
+    "sha256": "8982f7efc0452470596db5bb35edbd3ee43df1ac3c61c9d5e8abfc6791dd3e1f",
+    "code": []
+  },
+  {
+    "name": "config.it.apk",
+    "sha256": "e8cd95538b028f640d7f534367fb61e38e60cc54fed56a053db7f15f7059c151",
+    "code": []
+  },
+  {
+    "name": "config.ja.apk",
+    "sha256": "20dcd91f0de6f8cbc72d1c8d3b4d98722a69c2ead6d722d4c472783b7b81af61",
+    "code": []
+  },
+  {
+    "name": "config.my.apk",
+    "sha256": "28469bfbd42b3b7fc89cfcf12005b6b7ea820b25f2c38bec14bf38f69fa756f7",
+    "code": []
+  },
+  {
+    "name": "config.fr.apk",
+    "sha256": "53a9d2e2000f1f41aedc3ba4c63ac28fb7e0172817070a34ef418139e9969a3e",
+    "code": []
+  },
+  {
+    "name": "config.es.apk",
+    "sha256": "8c3957f8ad4f671f9fb26a915c79910969f34257f3803b43196b422eca793005",
+    "code": []
+  },
+  {
+    "name": "config.pt.apk",
+    "sha256": "0806f983ef2d6682a1e2fc1ffa4d5fda898ea7518183167237e26b7aedbd3b6e",
+    "code": []
+  },
+  {
+    "name": "config.vi.apk",
+    "sha256": "a19ad24acecf25309a046b08ee52b80ffd4099a63efd214aa8baa9a19c31a7eb",
+    "code": []
+  },
+  {
+    "name": "config.zh.apk",
+    "sha256": "9c326fb521e3b3e73a2636f0a973a5de84c75ddf152c3d541d6ae2bf686da6c6",
+    "code": []
+  },
+  {
+    "name": "config.armeabi_v7a.apk",
+    "sha256": "4663817e4adc2d3917c65d23e8f4fab597677d498b422fd61d46b104c20cc6e7",
+    "code": [
+      "lib/armeabi-v7a/libandroidx.graphics.path.so"
+    ]
+  },
+  {
+    "name": "config.de.apk",
+    "sha256": "e2da1c29b94d8d1c8c4b840ec342a9064c3b2eee80c23138997254d0cc712575",
+    "code": []
+  },
+  {
+    "name": "config.in.apk",
+    "sha256": "509dfad74c37cfad442a36daff130cc422c82652f6c95bb708552708f8d122cd",
+    "code": []
+  },
+  {
+    "name": "config.th.apk",
+    "sha256": "38b406397adae0d8161940bc0a26bab6890a7213768ba107e1bc800dc786f31a",
+    "code": []
+  },
+  {
+    "name": "config.ar.apk",
+    "sha256": "1d7e393b7531514c7c2196cf72c6f75d01532c87dfcbe2d97009c7f3fcd5e02e",
+    "code": []
+  },
+  {
+    "name": "config.hdpi.apk",
+    "sha256": "acc1d078919b1ec46fbf59f5617a9ce09fa56e6aea86df52e29c26ee9123f6ba",
+    "code": []
+  },
+  {
+    "name": "config.ko.apk",
+    "sha256": "5be749fdbd682066ce1c95f10380cce6a4f8c3f6ea3368aa698cf1df4a86f026",
+    "code": []
+  },
+  {
+    "name": "config.ru.apk",
+    "sha256": "7991f4dee40a296a17e4c8c42ec8245550544a47e2014f58933359bdd54c88ee",
+    "code": []
+  },
+  {
+    "name": "config.tr.apk",
+    "sha256": "7531b06972f1b8f721431eb2bf4ea0f8ec9cef1b415a77d3023db101f5463b12",
+    "code": []
+  },
+  {
+    "name": "config.en.apk",
+    "sha256": "10211bf3f4b432631482cf19785ed1a4d970e70332600b1e9f99477fe3f9ae52",
+    "code": []
+  }
+]
