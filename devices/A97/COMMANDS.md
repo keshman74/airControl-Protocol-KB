@@ -110,3 +110,14 @@ Room-correction implication: direct 10-band read/write is now a confirmed A97 co
 On the same tested A97 (ALLWINNER-R328 / a97_rakoit / Linkplay.4.6.437434 / HTTPS :443), `EQLoad:Flat` returned `status=OK`, `EQStat=On`, `Name=Flat`, and all ten EQ bands at raw `value=50`. A subsequent `EQGetBand` returned the same state. The prior ten-band values were then restored individually with the already verified `EQSetBand`; every write returned `status=OK` and final readback matched the original vector exactly: [41,29,35,38,46,50,54,62,69,79].
 
 This hardware-verifies `EQLoad:Flat` and establishes raw 50 as the **neutral/Flat center value** for this Eq10HP implementation. Do not yet label raw 50 as numerically 0 dB or infer raw-unit-to-dB scaling until that conversion is separately established. Direct `EQSetBand` restore leaves `Name` empty, consistent with direct manual-band editing observed above.
+
+
+### A97 factory booster/reducer EQ vectors — hardware confirmation 2026-10-26
+Same tested A97 (ALLWINNER-R328 / a97_rakoit / Linkplay.4.6.437434 / HTTPS :443). `EQLoad:<name>` and immediate `EQGetBand` produced matching factory vectors:
+- Bass Booster: [73,67,65,59,55,50,50,50,50,50]
+- Treble Booster: [50,50,50,50,50,55,59,65,67,73]
+- Bass Reducer: [27,33,35,39,45,50,50,50,50,50]
+- Treble Reducer: [50,50,50,50,50,45,39,35,33,27]
+Flat center is 50. The booster/reducer vectors are symmetric around 50 except the observed 250 Hz bass pair is 59/39 (offsets +9/-11), so do not assume exact mathematical symmetry for every factory preset coefficient. After testing, the prior custom vector [41,29,35,38,46,50,54,62,69,79] was restored via `EQSetBand` and verified by `EQGetBand`.
+
+These observations hardware-verify `EQLoad:Bass Booster`, `EQLoad:Treble Booster`, `EQLoad:Bass Reducer`, and `EQLoad:Treble Reducer` on this firmware. They still do not establish raw-unit-to-dB conversion; factory preset raw values alone are insufficient to claim a dB scale.
