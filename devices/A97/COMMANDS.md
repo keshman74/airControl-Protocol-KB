@@ -86,3 +86,21 @@ User confirms A97 volume control is noticeably faster after switching to Renderi
 ## 4STREAM APK evidence — 2026-10-24
 **APK-VERIFIED / NOT-HW-VERIFIED**. The APK explicitly checks ALLWINNER-R328 for quiet-update and optional 5-GHz UI paths; it does not label those checks A97. Existing getPresetInfo rejection and hardware-tested RenderingControl Master volume remain authoritative.
 [Command formats, chip conditions and limitations](../../protocols/linkplay-http-https/4STREAM-2026-10-24.md); [142 central builder observations](../../protocols/linkplay-http-https/4STREAM-BUILDERS-2026-10-24.md). New source/routing records 635–642 supplement existing IDs without changing their hardware status.
+
+
+## A97 10-band EQ hardware confirmation — 2026-10-26
+**HARDWARE-VERIFIED on tested A97:** ALLWINNER-R328, project `a97_rakoit`, firmware `Linkplay.4.6.437434`, HTTPS :443, test address 192.168.0.105.
+
+Read commands confirmed:
+- `EQGetStat` -> `{"EQStat":"On"}`.
+- `EQGetList` -> stock profiles plus user/custom names; exact observed list included `Custom`, `рр`, `124`, `1`.
+- `EQGetBand` -> `status=OK`, 10 bands at 31, 63, 125, 250, 500 Hz, 1, 2, 4, 8, 16 kHz. Device reports `EQ_support=Eq10HP_ver_1.0` in `getStatusEx`.
+
+Write command confirmed:
+- `EQSetBand:{"EQBand":[{"index":N,"param_name":"<band label>","value":V}]}` -> `{"status":"OK"}`.
+- Safe changed-value/readback test on index 0 / `00. 31 Hz`: 41 -> 42 was accepted and immediately visible via `EQGetBand`; restore 42 -> 41 was accepted and read back as 41. Other nine band values remained unchanged.
+- Writing a band clears the returned preset `Name` from `Custom` to an empty string in the observed session. Preserve this behavior in clients; do not assume a named preset remains selected after direct band editing.
+
+Negative probe (same hardware/firmware): the tested forms `EQGetLV2Band:Eq10HP`, `EQGetLV2Band:http://eq10q`, `EQGetLV2SourceBand:wifi`, `EQGetLV2SourceBandEx:wifi`, `EQv2GetList:0`, and `EQv2GetNewList:0` all returned `{"status":"Failed"}`. This does **not** prove LV2/PEQ is absent; only these exact parameterizations are hardware-observed failing.
+
+Room-correction implication: direct 10-band read/write is now a confirmed A97 control surface suitable for a first room-correction implementation. The mapping of raw `value` units to dB is **not yet hardware-confirmed** and must be measured before treating values as acoustic gain in dB.
