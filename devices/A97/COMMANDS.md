@@ -104,3 +104,9 @@ Write command confirmed:
 Negative probe (same hardware/firmware): the tested forms `EQGetLV2Band:Eq10HP`, `EQGetLV2Band:http://eq10q`, `EQGetLV2SourceBand:wifi`, `EQGetLV2SourceBandEx:wifi`, `EQv2GetList:0`, and `EQv2GetNewList:0` all returned `{"status":"Failed"}`. This does **not** prove LV2/PEQ is absent; only these exact parameterizations are hardware-observed failing.
 
 Room-correction implication: direct 10-band read/write is now a confirmed A97 control surface suitable for a first room-correction implementation. The mapping of raw `value` units to dB is **not yet hardware-confirmed** and must be measured before treating values as acoustic gain in dB.
+
+
+### A97 EQLoad:Flat and neutral raw value — hardware confirmation 2026-10-26
+On the same tested A97 (ALLWINNER-R328 / a97_rakoit / Linkplay.4.6.437434 / HTTPS :443), `EQLoad:Flat` returned `status=OK`, `EQStat=On`, `Name=Flat`, and all ten EQ bands at raw `value=50`. A subsequent `EQGetBand` returned the same state. The prior ten-band values were then restored individually with the already verified `EQSetBand`; every write returned `status=OK` and final readback matched the original vector exactly: [41,29,35,38,46,50,54,62,69,79].
+
+This hardware-verifies `EQLoad:Flat` and establishes raw 50 as the **neutral/Flat center value** for this Eq10HP implementation. Do not yet label raw 50 as numerically 0 dB or infer raw-unit-to-dB scaling until that conversion is separately established. Direct `EQSetBand` restore leaves `Name` empty, consistent with direct manual-band editing observed above.
