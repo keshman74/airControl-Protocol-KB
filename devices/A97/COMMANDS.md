@@ -121,3 +121,14 @@ Same tested A97 (ALLWINNER-R328 / a97_rakoit / Linkplay.4.6.437434 / HTTPS :443)
 Flat center is 50. The booster/reducer vectors are symmetric around 50 except the observed 250 Hz bass pair is 59/39 (offsets +9/-11), so do not assume exact mathematical symmetry for every factory preset coefficient. After testing, the prior custom vector [41,29,35,38,46,50,54,62,69,79] was restored via `EQSetBand` and verified by `EQGetBand`.
 
 These observations hardware-verify `EQLoad:Bass Booster`, `EQLoad:Treble Booster`, `EQLoad:Bass Reducer`, and `EQLoad:Treble Reducer` on this firmware. They still do not establish raw-unit-to-dB conversion; factory preset raw values alone are insufficient to claim a dB scale.
+
+
+### A97 Eq10HP raw value vs native-app dB observations — 2026-10-26
+**HARDWARE/UI-OBSERVED on the same tested A97.** With the native EQ UI open, direct `EQSetBand` writes to index 0 (31 Hz) produced these displayed gain values:
+- raw 25 -> -6.0 dB
+- raw 40 -> -2.6 dB
+- raw 50 -> 0.0 dB (also confirmed by factory Flat)
+- raw 60 -> +2.2 dB
+- raw 75 -> +6.0 dB
+
+Therefore the raw scale must not be modeled as a single symmetric linear coefficient around 50: equal raw offsets of +/-10 produced +2.2/-2.6 dB in the native UI. Endpoints +/-25 both display +/-6.0 dB. These are observed mapping points, not yet a complete conversion formula. Preserve exact observed points and derive/interpolate only after additional measurements if needed.
