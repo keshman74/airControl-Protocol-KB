@@ -311,7 +311,7 @@ This addendum qualifies the broad cloud-processing wording above: the APK contai
 
 `DataController.P0(MeasureType, DeviceItem, callback)` selects remote `pink_file`/sweep paths from `CloudRCConfig`. `R0` concatenates the configured result domain and path; `T0` formats that URL with numeric substitutions 16 and 48, creates an `LPPlayItem.trackUrl`, sets media source `AudioAnalysis`, and submits it through the Linkplay SDK playback path. Evidence: `ev_4e1dd8288f7c2479000dfaf07a72858315b28d238855dad54855be81812b3660`, `ev_e431a8a90662e9b5f8a904408ea01a953418475ffc169f81d0783dd2fe3e66d2`, `ev_918dad2ed5a1c3cc974d5ddf04f89ae7348363df6f218ae9bba714de9ff2b889`.
 
-**Verified:** configured remote media URLs are handed to the device as playback items; duration comes from cloud config, not one universal hard-coded sweep. The XAPK archive contains no obvious WAV/PCM/MP3/FLAC/OGG track files.
+**Verified:** configured remote media URLs are handed to the device as playback items; duration comes from cloud config, not one universal hard-coded sweep. The nested base APK contains Room Correction WAV resources under `res/raw`; they are not direct top-level entries of the outer XAPK ZIP.
 
 **Unknown:** waveform samples/type, media rate/bit depth, amplitude/fades, sync-marker layout, generation timing, and LAN fetch protocol. The URL substitutions 16/48 have no proven semantics. This is evidence of configured file-URL playback, not handset real-time synthesis.
 
@@ -384,3 +384,17 @@ All findings remain **APK-VERIFIED / NOT-HW-VERIFIED**. No device hardware statu
 ### Existing airControl capture symptom to use as a regression case
 
 The user-provided AVFoundation experiment recorded 115 PTS discontinuities in 10 seconds, totaling 58,880 samples (1.227 s). Applying `aresample=async=1000:first_pts=0` produced the requested 55.000 s file but still showed deep 1 kHz signal dips of roughly 44–46 dB. These are airControl capture observations, not WiiM behavior; causation is not established and cannot be assigned to A97. Treat this as a required regression fixture: retain original PTS/frame diagnostics, expose every discontinuity, and verify that duration normalization has not masked signal loss.
+
+### Embedded Room Correction fallback files extracted from the base APK
+
+The base APK has these `res/raw` resources; `DataController.g0(String)` maps the app's runtime filenames to their raw resource IDs, and `DataController.P(File, String)` copies the mapped resource to the app's Room Correction cache when the file is missing. `DataController.i1(...)` then compares the configured/server MD5 and determines whether a remote refresh is needed. Evidence: `ev_c314b7b15426b2e9210aab504c219852eee728642910777051a7c5cdb7824f73`, `ev_66c4da75aa8643128fb12cc9ae341b8243927257767d9bad97cf74fa5707f0cd`, `ev_9947f6dea4a6987789f82e273ea031e3cd576c59f47e63dd086c64623e891968`.
+
+| Runtime fallback name | APK resource entry | Format / duration | Extracted SHA-256 | Extracted MD5 |
+|---|---|---|---|---|
+| `room_correction_sweep-3.wav` | `res/raw/room_correction_sweep_3.wav` | mono PCM16, 48 kHz, 6.500 s | `61064aff234e6cc83dcf58033c1db86682eec0e9e3fa2b7834a9f0671bab1a8e` | `c625a28e75ae16159ca22a6b353f33a6` |
+| `refpink_-3dB.wav` | `res/raw/refpink__3db.wav` | mono PCM16, 48 kHz, 42.960 s | `abb6769e99d7156d5472c4899015a1a200e6cbc3f1e682bcf700a95024e6992d` | `bcedfd477a7f7512c0da1fc69e388399` |
+| auxiliary `mmpsilence.wav` | `res/raw/mmpsilence.wav` | mono PCM16, 8 kHz, 0.18575 s | `2af9f700506e672316c91ed21c8d36bc5375af88e8d35303dd045e199464b5ea` | `4946e7f71c31b1d194f6604914703d15` |
+
+Byte-extracted copies and a ZIP bundle are available locally under `/Users/lab/AI/WiiM-RC-test-assets/` and `/Users/lab/AI/WiiM-RC-test-assets.zip`. The names of the two measurement WAVs are normalized to the app's runtime fallback names; resource bytes are unchanged. The pink WAV is approximately 42.96 s, while its model/config can report a different active pink duration; do not assume the entire file is always played.
+
+The app's current remote paths and current live cloud versions are **not** embedded as fixed URLs: `CloudRCConfig.Result` supplies `domain`, file paths, and MD5 values at runtime. Without that response, only the embedded fallback copies can be identified and extracted; no claim is made that they are byte-identical to current CDN files.
