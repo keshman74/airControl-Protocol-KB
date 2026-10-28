@@ -47,3 +47,16 @@ Provenance: `evidence/chat-audits/CODEX-CHAT-HISTORY-CROSS-PROJECT-AUDIT-2026-10
 Native RoomFit 04 40 requests sound with zero payload; 04 41 sends EqBand filter objects. Frequency/gain/Q are formatted strings; no hardware support, units or safe range is newly established.
 
 Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.0.260728 static audit](../../protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md).
+
+
+## WiiM Home APK static implementation findings — 2026-10-28
+
+**Status: APK-VERIFIED / NOT-HW-VERIFIED.** This section describes the Android app's measurement workflow, not device support for the documented `RoomCorr*` commands above.
+
+- The app reads test-media paths and durations from `CloudRCConfig`, creates a Linkplay SDK media item with `AudioAnalysis`, and plays the configured URL on the device.
+- The phone captures via Android `AudioRecord` or Oboe. Default recording config is mono PCM16 WAV at 48 kHz, 6500 ms; the measured sweep duration is config-driven.
+- Local `libwiimundk.so` includes post-capture pink/sweep alignment, sample-rate validation, RTA and PEQ/biquad routines. The inspected sweep aligner rejects mismatched WAV rates. Continuous drift correction is not established.
+- The app also uploads recordings and downloads a cloud task result archive. The local/cloud boundary for final EQ coefficients remains unknown.
+- See the [full static report](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md) for class/method/address evidence, clock-domain limits, airControl design comparison, and proposed validation plan.
+
+No hardware-confirmed command or device capability is changed by these APK findings.
