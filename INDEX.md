@@ -86,7 +86,7 @@ Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork i
 
 
 ## WiiM Home Room Correction static audit — 2026-10-28
-- [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md#wiim-home-apk-static-implementation-findings-2026-10-28)
+- [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md)
 - [APK/native reverse-engineering report](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md)
 
 Static evidence only. Status **APK-VERIFIED / NOT-HW-VERIFIED**; existing device hardware statuses are unchanged.
