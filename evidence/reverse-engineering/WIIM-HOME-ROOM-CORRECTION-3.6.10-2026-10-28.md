@@ -302,3 +302,80 @@ A compatible implementation should separate these modules:
 12. Verification and rollback.
 
 For airControl, do not treat this as a replacement for Eq10HP raw values. WiiM’s correction result is a parametric-EQ profile applied through a separate RC path.
+
+## Additional static findings — signal delivery, native DSP, and synchronization (2026-10-28)
+
+This addendum qualifies the broad cloud-processing wording above: the APK contains substantial local validation, alignment, RTA and PEQ-related DSP as well as a cloud upload/result stage. The exact partition of final coefficient optimization remains unresolved.
+
+### Stimulus generation and playback
+
+`DataController.P0(MeasureType, DeviceItem, callback)` selects remote `pink_file`/sweep paths from `CloudRCConfig`. `R0` concatenates the configured result domain and path; `T0` formats that URL with numeric substitutions 16 and 48, creates an `LPPlayItem.trackUrl`, sets media source `AudioAnalysis`, and submits it through the Linkplay SDK playback path. Evidence: `ev_4e1dd8288f7c2479000dfaf07a72858315b28d238855dad54855be81812b3660`, `ev_e431a8a90662e9b5f8a904408ea01a953418475ffc169f81d0783dd2fe3e66d2`, `ev_918dad2ed5a1c3cc974d5ddf04f89ae7348363df6f218ae9bba714de9ff2b889`.
+
+**Verified:** configured remote media URLs are handed to the device as playback items; duration comes from cloud config, not one universal hard-coded sweep. The XAPK archive contains no obvious WAV/PCM/MP3/FLAC/OGG track files.
+
+**Unknown:** waveform samples/type, media rate/bit depth, amplitude/fades, sync-marker layout, generation timing, and LAN fetch protocol. The URL substitutions 16/48 have no proven semantics. This is evidence of configured file-URL playback, not handset real-time synthesis.
+
+### Capture, effects, and buffering
+
+`RecordConfig.<init>` defaults to WAV, Android mono input config `0x10`, PCM16 encoding `2`, 48 kHz (`0xbb80`), duration 6500 ms (`0x1964`). `FragRCStepMeasure.m1` overrides duration with cloud-config values, adds a wait margin, and assigns channel/position filenames. Evidence: `ev_91fb6b7cc095b98f148034f1ca7336750d0b2063056dfb80e6c77b5b620c2af5`, `ev_ed54e40ace82513b73ae60aa3034f8d0875bb72c5ad0badbc55ad19d1235258c`.
+
+`AudioRecorder.t()` checks `RECORD_AUDIO`, creates Android `AudioRecord`, and applies a selected input using `setPreferredDevice` (`ev_aa5a562a45a610589e37e43a5836c09a372af4d2e212b3bd76d05661e1cc93e0`). `AudioRecorder.z(sessionId)` attempts to disable AEC, AGC and NoiseSuppressor and reports any still-enabled effect (`ev_dc8ae715d0c7b2e20346d8a42b4489d7bbafdd8c8c8bca8dc1561ba4fd1f8d25`); this cannot guarantee vendor audio-HAL compliance.
+
+`OboeRecorderImpl.b` calls JNI `nativeStartRecording(path, rate, config, nativeWriteToFile)` (`ev_b248146ac94da5f8a9680c8f379593a8e168b660b62b48fad6f43f0681e43ed3`). Java `onOboeData(byte[])` buffers into fixed-size byte chunks; if an incoming block exceeds remaining capacity it resets its buffered index, potentially discarding queued bytes without an explicit loss counter (`ev_a7e12aeb405c10532a3579edf541d4ab28db2fe98f0a05fef499b3a64506c228`).
+
+Native `OboeAudioRecorder::startRecording` (`libwiimundk.so + 0x1471ec`) attempts the AAudio Unprocessed preset, falls back to Oboe default, checks input direction, optionally opens a WAV writer, and logs actual final sample rate (`ev_e311395c4347d50fb43f2d571a8f25492ca2b39e2f3a74b19cf9e69da552799b`). `onAudioReady` (`0x1479c8`) writes callback bytes and/or forwards data to Java (`ev_cb6fa41bde415d1727c7e1e33fab1ab10ab105cfea4cf858b05f84342f7b6a8a`). No capture timestamp is visibly forwarded there.
+
+### Local native alignment and DSP
+
+`libwiimundk.so` is stripped ARM64, SHA-256 `4e3159c5ed28490e7502692071da1e6bfeb1c2c592361492464f8fd74cd510ab`. Ghidra 12.1.4 addresses are in its analysis image (base `0x100000`); pseudocode is decompiler output.
+
+| Function | Address | Decompiled behavior / evidence |
+|---|---:|---|
+| `align_pink` | `0x143514` | Reads reference and recording WAVs, validates rates/length/level, detects clipping, correlation-delay failure and excessive delay. `ev_678658814adc09264c67efc5149f5b90d168f4fde98b67ed114138dc5455f45c` |
+| `time_align` | `0x148a2c` | Reads sweep and recording WAVs; rejects unequal sample rates; recovers main/sub sweeps and IR windows; invokes correlation/noise, coherence and reference-end routines; emits delay in ms and checks prompt score and delay limit. Has integer `delay method` input. `ev_62a55e23795a86c7a165eb434e188ee023b4eceb331ccb864cc6bc4fc6ec240e` |
+| `spl_sweep` | `0x13991c` | Requires record length from 1× to 3× reference; uses `calrir_new`, `apply_ir_windows`, `tfplots_new`. `ev_725c08af508c02c95164a05a3dd4f8b9d1dec4f062a94edfc2055fc383e5278e` |
+| `process_group_sweep` | `0x139f1c` | Reads multiple WAVs, checks sample rate/length, calls `spl_sweep` and accumulates arrays. `ev_9e3bbdd280c4088c68a6d8039053aef861cf280c05b43aa3667ea299d3e08455` |
+| `measured_test_rta` | `0x1348e0` | Calls `rta_method`, reads target/calibration data, validates response ranges, computes preference score and writes JSON. `ev_0e5eb97319e9f4ed5b4d949144877e9a0094b04638bd0aa1168dcd1f4ebecb52` |
+| `auto_adjust_rc_freq_rta` | `0x1368c8` | Calls `rta_method` and `eq_frequency_bounds` using calibration-aware inputs. `ev_e96246d95e23319d2a1f9f5955be5b197f95fbc61778322dd04d40f2c31b356c` |
+| `calculate_autoeq_biquads` | `0x152cd4` | Reads target/sweep/record data, calls `spl_sweep`, generates EQ frequencies and optimizes multiple PEQs/biquads. `ev_4b6e8ece3d3d67023060fdd20cc5dbd559b493a413b90611fbfe27fa2fe97503` |
+
+JNI wrappers include `WiimuNDK.timeAlign` (`0x11c094`, `ev_e0749704062156d85c09bd7f70f9a6629b3d8ccbf8bc4c5595d979c14dcfc4f6`), `measuredTestRta` (`0x11baf0`, `ev_b8edb193e0d741ff1c579aca08bf29291922956447ebf7207704c7fcb9aaf1fc`), `measureTest` (`0x11a7a0`, `ev_e6b98cb0586e2a0e11e31406b56803f83a6006e81bc16927dfa5597562481e08`) and `alignPink` (`0x11ac94`, `ev_2290572be4fc4aef18cc323c04184a7fdf18a9442222245fbb04ade486700c98`). These establish local file/array DSP entry points; no evident playback timestamp is an argument.
+
+`DataController.Y0` calls `WiimuNDK.checkVideoIsValid`, parses `DetectData`, and can request retries for SNR/length/coherence results (`ev_bd517bf1bf9b1500dde87e8c542b4b384cb0d3772df362b39e49b1c418e09881`). Record directory uploads go through `DataController.p1` (`ev_8314beecd17eb8189eb9c16847f717d486420ad2eb4177baa6d07cd37c12ce62`); the cloud task/output-archive path remains present. Thus local validation/alignment/measurement and cloud analysis both exist; final coefficient-calculation ownership remains unresolved.
+
+### Independent clock domains: evidence-based conclusion
+
+- **SOURCE-VERIFIED:** post-capture acoustic/data alignment uses WAV references/recordings; pink and sweep paths have correlation-based alignment and quality checks.
+- **SOURCE-VERIFIED:** sweep alignment rejects unequal reference/capture sample rates. Oboe logs actual opened rate; a request for 48 kHz does not prove AudioRecord produced that rate.
+- **INFERRED:** prompt/main/sub-sweep markers or coded regions exist because native code reports missing prompt tone, main/sub sweep, recovered sweep check and prompt score. Exact structure/frequencies remain unknown.
+- **UNKNOWN:** continuous drift tracking, playback/capture timestamps, sample insertion/deletion, async resampling, periodic markers and end-to-end dropout accounting. The inspected aligner processes completed files; it does not establish continuous drift compensation. Absence in these functions does not prove absence elsewhere.
+- **SOURCE-VERIFIED:** error categories include clipping, level, rate/length, low prompt score, delay limit and SNR/coherence. Complete retry policy is not mapped.
+
+### airControl comparison and implementation direction
+
+The A33 prototype in `airControl-v5.0.0/docs/A33_ROOM_CORRECTION.md` serves desktop test media, captures with browser `getUserMedia`, uses a browser analyser/local preview PEQ and requires explicit apply. Its notes identify missing mic calibration, acoustic alignment/deconvolution and multi-position averaging. This differs from WiiM Home and is not end-to-end hardware verified.
+
+| Area | WiiM Home | airControl prototype | Recommendation |
+|---|---|---|---|
+| Stimulus | Configured remote media URL passed to Linkplay SDK | Desktop test-media server | Device-specific playback adapters; confirm actual transport/readiness with a sanitized trace. |
+| Capture | Android AudioRecord/Oboe WAV | Browser analyser/getUserMedia | Native CoreAudio (macOS) and WASAPI (Windows) measurement capture; preserve actual rate and monotonic sample frames. |
+| Alignment | Saved-WAV correlation, sweep/IR windows and delay checks | No acoustic alignment/deconvolution | Matched-filter offset plus marker-pair drift slope; never use UI start time for sample-zero. |
+| Clock domains | Offline alignment; live drift correction unproven | No independent-clock timeline model | Separate fixed latency and drift; resample only within measured limits, otherwise reject; preserve every discontinuity. |
+| Quality | Clip/level/rate/length/SNR/coherence/prompt checks | Basic status/RTA | Add continuity, SNR/coherence, alignment confidence, drift and repeatability checks. |
+| EQ | Native profile JSON and cloud output path | Local PEQ preview, explicit apply | Retain preview/apply, backend-specific bounds, readback and rollback. |
+
+Desktop engine specification: (1) native CoreAudio/WASAPI capture with device selection, actual rate, monotonic frames, gap/overrun counters and lossless raw storage; (2) deterministic versioned sweep/coded-noise references with exact hash, onset and repeated markers; (3) isolated A31/A97/A98/A33 playback adapters; (4) matched-filter onset plus marker slope to estimate offset and clock ratio; (5) sweep deconvolution/IR, documented window and FFT; Welch cross/auto spectra for noise; (6) mic calibration identity/units/sign, and no absolute SPL claim without sensitivity; (7) quality gate for gaps, clipping, SNR/coherence, alignment/drift and repeatability; (8) explicit preview/apply, preserved prior EQ, device readback and rollback.
+
+### Proposed validation plan (not run)
+
+- Synthetic incrementing samples: detect dropped/duplicated frames and verify exact saved sample count/duration.
+- Inject callback stalls and PTS gaps; require explicit counters/rejection, never silent time stretching.
+- Measure playback latency/jitter electrically and acoustically; separate fixed delay from room delay.
+- Simulate independent clocks at ±25/50/100 ppm for 60–180 s; validate drift slope and post-correction residual.
+- Test acoustic alignment with known offsets, reverb, low SNR, ambiguous peaks, clipping, truncated sweep and absent marker.
+- Verify stimulus sample count, spectrum, crest factor, onset/fades, distortion and hash.
+- Repeat one mic/speaker position 3–5 times and compare transfer curves.
+- Test calibration sign/units/extrapolation; compare with calibrated analyzer.
+- Test EQ stability, limits, serialization, readback and rollback on mocks before device writes.
+
+All findings remain **APK-VERIFIED / NOT-HW-VERIFIED**. No device hardware status was changed. Unknowns include exact stimulus bytes, device fetch protocol, full cloud/local coefficient split, and clock-drift correction in any uninspected code path.
