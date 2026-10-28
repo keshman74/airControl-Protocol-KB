@@ -379,3 +379,8 @@ Desktop engine specification: (1) native CoreAudio/WASAPI capture with device se
 - Test EQ stability, limits, serialization, readback and rollback on mocks before device writes.
 
 All findings remain **APK-VERIFIED / NOT-HW-VERIFIED**. No device hardware status was changed. Unknowns include exact stimulus bytes, device fetch protocol, full cloud/local coefficient split, and clock-drift correction in any uninspected code path.
+
+
+### Existing airControl capture symptom to use as a regression case
+
+The user-provided AVFoundation experiment recorded 115 PTS discontinuities in 10 seconds, totaling 58,880 samples (1.227 s). Applying `aresample=async=1000:first_pts=0` produced the requested 55.000 s file but still showed deep 1 kHz signal dips of roughly 44–46 dB. These are airControl capture observations, not WiiM behavior; causation is not established and cannot be assigned to A97. Treat this as a required regression fixture: retain original PTS/frame diagnostics, expose every discontinuity, and verify that duration normalization has not masked signal loss.
