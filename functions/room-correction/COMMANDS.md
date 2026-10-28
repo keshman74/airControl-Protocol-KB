@@ -60,3 +60,8 @@ Status: **APK-VERIFIED / NOT-HW-VERIFIED** for new observations. [iAudioCloud 2.
 - See the [full static report](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md) for class/method/address evidence, clock-domain limits, airControl design comparison, and proposed validation plan.
 
 No hardware-confirmed command or device capability is changed by these APK findings.
+
+
+### Embedded WiiM measurement resources
+
+The base APK bundles fallback test WAVs: `room_correction_sweep-3.wav` (mono PCM16/48 kHz/6.5 s) and `refpink_-3dB.wav` (mono PCM16/48 kHz/42.96 s). `DataController.g0/P/i1` maps/copies these resources and checks the configured MD5 for remote refresh. These are APK fallback assets, not proof of current CDN versions. Exact source hashes and extracted files are listed in the [static report](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md#embedded-room-correction-fallback-files-extracted-from-the-base-apk). Status: **APK-VERIFIED / NOT-HW-VERIFIED**.
