@@ -137,3 +137,18 @@ The proposed readback test was performed on hardware and resolved the discrepanc
 - **HW-VERIFIED:** requested raw 40 -> readback raw 39 -> native 4STREAM **-2.6 dB**; requested raw 60 -> readback raw 59 -> native 4STREAM **+2.2 dB**, verified 2026-10-28.
 - **RESOLVED:** the observed dB discrepancy is explained by the difference between requested and firmware readback raw values.
 - **UNKNOWN:** the complete firmware quantisation/normalisation rule for all requested raw values remains uncharacterized.
+
+## Full requested -> readback sweep — HW-VERIFIED 2026-10-28
+
+A complete automated sweep was performed on A97 index 0 (31 Hz): requested raw values 0 through 100 were written one at a time with `EQSetBand`, followed by `EQGetBand` readback. The test restored requested raw 50 at the end and confirmed `readback=50`.
+
+Results establish:
+
+- The accepted/readback domain spans raw 0..100, corresponding under the APK-verified display formula to -12.0..+12.0 dB.
+- 76 of 101 requested values read back unchanged.
+- 25 requested values read back exactly one count lower; no tested value read back higher and no tested delta exceeded -1.
+- Changed requested->readback pairs: 1→0, 2→1, 5→4, 6→5, 10→9, 11→10, 14→13, 20→19, 22→21, 30→29, 40→39, 43→42, 44→43, 49→48, 53→52, 59→58, 60→59, 61→60, 80→79, 81→80, 86→85, 87→86, 88→87, 89→88, 98→97.
+- The changed values are irregularly distributed across 0..100. This sweep does **not** establish a simple periodic quantisation rule, so the internal firmware mapping mechanism remains UNKNOWN.
+- For exact room-correction control, the implementation must treat `EQGetBand` readback as authoritative after a write. Effective gain is `readback_raw * 0.24 - 12` dB for the verified 4STREAM display mapping.
+
+This sweep also independently reproduces the discrepancy-resolution points `40→39` and `60→59`.
