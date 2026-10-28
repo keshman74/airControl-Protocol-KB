@@ -83,3 +83,10 @@ Discovery, framing, presets, EQ/RoomFit/subwoofer and firmware-dependent volume;
 - [Six aggregate source/rule records, sequence 651–656](registry/records/651-656.csv)
 
 Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork is not expanded; full HTTP/S artwork URLs are fetched verbatim. Status **APK-VERIFIED / NOT-HW-VERIFIED**. Existing hardware-confirmed facts are unchanged.
+
+
+## WiiM Home Room Correction static audit — 2026-10-28
+- [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md#wiim-home-apk-static-implementation-findings-2026-10-28)
+- [APK/native reverse-engineering report](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md)
+
+Static evidence only. Status **APK-VERIFIED / NOT-HW-VERIFIED**; existing device hardware statuses are unchanged.
