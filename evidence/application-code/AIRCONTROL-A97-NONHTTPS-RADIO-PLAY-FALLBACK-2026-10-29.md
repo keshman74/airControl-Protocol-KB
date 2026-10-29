@@ -36,5 +36,4 @@ The UI now treats a successful TCP send as an accepted playback request so it wi
 
 - [A97 command view](../../devices/A97/COMMANDS.md) — playback support and fallback status.
 - [MCU TCP :8899 command view](../../protocols/mcu-8899/COMMANDS.md)
-- [A97 command view](../../devices/A97/COMMANDS.md)
 - airControl implementation: `/Users/lab/AI/airControl/airControl-v5.0.11/`
