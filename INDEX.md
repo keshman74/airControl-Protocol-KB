@@ -96,8 +96,9 @@ All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hard
 - [Arylic UPnP PlayQueue correction and v5.0.12 implementation](evidence/application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md)
 - [Canonical UPnP PlayQueue actions and Arylic radio QueueContext evidence](protocols/upnp/playqueue/COMMANDS.md)
 - [H50 captured newTuneIn queue and 4STREAM custom URL route](evidence/captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md)
+- [H50 RTL: SetAVTransportURI on 49152, successful WiiM Home Play on 59152](evidence/captures/H50-RTL-DUAL-UPNP-PLAY-2026-10-30.md)
 
-Arylic forum-documented sequence: `CreateQueue(QueueContext, QueuePolicy)` → `PlayQueueWithIndex(QueueName, Index=1)`. Source/code documented; **NOT-HW-VERIFIED** on the user's H50. The prior v5.0.11 TCP `MCU+PLY-PLA` fallback did not solve playback per the user's report and is superseded for starting radio streams. Existing hardware-confirmed records remain unchanged.
+The user's H50 rejected the direct `OnlineMusic` queue in v5.0.13 (`socket hang up`, state `STOPPED`, no native artwork). A separate 653-packet capture **HW-VERIFIES** that WiiM Home's `Play` over TCP/59152 started the RTL URI and artwork metadata previously set by airControl over TCP/49152. Port, `ControlSource`, and keep-alive differences are recorded; their individual necessity is not isolated. A v5.0.14 implementation remains **NOT-HW-VERIFIED** until app testing. The v5.0.11 TCP `MCU+PLY-PLA` fallback did not start playback. Existing hardware-confirmed records remain unchanged.
 
 
 ## A31 Rakoit Silent + Native KNX V6E — 2026-10-30
