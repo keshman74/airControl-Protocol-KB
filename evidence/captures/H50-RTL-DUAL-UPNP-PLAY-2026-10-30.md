@@ -1,0 +1,21 @@
+# H50 radio: dual UPnP endpoint Play capture (2026-10-30)
+
+**Evidence:** USER-HW-OBSERVED packet capture / APP-CODE-CORRELATED. The H50 was at `192.168.0.106` during this session (previously `192.168.0.100`). Capture: `/private/tmp/h50-rtl-play-106.pcap`, SHA-256 `19aff509a01806774d8423feede4dc5de42e1f0c88860b5be42c215dffb5265a`, 653 packets. The Mac was `192.168.0.104`. Stream URL path tokens and artwork hashes are omitted here.
+
+## Chronological evidence
+
+| Step | Wire evidence | Outcome |
+|---|---|---|
+| airControl v5.0.11 selects RTL | `POST /upnp/control/rendertransport1` to H50 TCP/49152, `AVTransport#SetAVTransportURI`. DIDL has RTL title, an `upnp:albumArtURI` pointing to airControl's local `/radio-cover/...` proxy and an HLS `TrackURI`. | H50 returns HTTP 200. WiiM Home's later `GetInfoEx` on TCP/59152 reads the same RTL URI and metadata while transport is `STOPPED`. This proves the two endpoints see shared player state. |
+| airControl Play | `AVTransport#Play` to TCP/49152, `<InstanceID>0</InstanceID><Speed>1</Speed>`, `Connection: close`, no `ControlSource`. The client sends TCP FIN immediately after the request body. | No successful Play response is visible; subsequent transport state is `STOPPED`. v5.0.11 also attempted `MCU+PLY-PLA` on TCP/8899 without reaching playback. |
+| WiiM Home Play on the same loaded RTL URI | `POST /upnp/control/rendertransport1` to TCP/59152 at 01:46:41.833, `AVTransport#Play`, `Connection: keep-alive`, body `<InstanceID>0</InstanceID><Speed>1</Speed><ControlSource>WiiMApp</ControlSource>`. | H50 returns HTTP 200 `PlayResponse` at 01:46:41.840. Later state changes through `TRANSITIONING` to `PLAYING`; user heard RTL. |
+
+The capture demonstrates a **working Play request over TCP/59152 after airControl's SetAVTransportURI over TCP/49152**. It does not isolate whether the different port, `ControlSource`, keep-alive, or their combination is required. A correct implementation should mirror the captured working request, resolve/verify the TCP/59152 AVTransport service before use, and confirm `PLAYING` by readback. It should preserve `SetAVTransportURI` for the previously observed native-app artwork behavior. The direct `OnlineMusic` PlayQueue attempt in v5.0.13 failed with socket hang up and `STOPPED`, and its artwork did not appear; it must not be considered a verified H50 radio path.
+
+This capture contains no proof that the same dual-endpoint behavior applies to every A97 firmware. No firmware or device settings were changed by the analysis. A v5.0.14 source candidate mirrors the observed sequence; its app-driven result remains **NOT-HW-VERIFIED** until tested.
+
+## Related evidence
+
+- [H50 accepted newTuneIn queue](H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md)
+- [H50 fallback profile](../../devices/A97-NON-HTTPS.md)
+- [airControl PlayQueue attempts](../application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md)
