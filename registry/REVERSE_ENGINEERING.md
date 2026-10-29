@@ -39,3 +39,12 @@ Focused 4STREAM 3.1.20.230912 metadata/artwork audit from UPnP AVTransport LastC
 [Canonical report](../protocols/linkplay-http-https/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md), [provenance](../evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md), [machine evidence](../evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.json), [records 651–656](records/651-656.csv).
 
 Key result: a relative AirPlay albumArtURI is not resolved by this APK; only a full http/https URI reaches the artwork GET. No AirplayArtWorkData.jpeg fallback or AirPlay stale-source guard was found. Existing hardware-confirmed facts are preserved.
+
+
+## REV-WIIM-ROOMCORR-DSP-001 — 2026-10-29
+
+WiiM Home 3.6.10.260924 native Room Correction DSP analysis of ARM64 `libwiimundk.so`. Status **APK-VERIFIED / NOT-HW-VERIFIED**. Entry points `time_align` (`0x148a2c`), `calrir_new` (`0x127a0c`), `apply_ir_windows` (`0x129a50`), `spl_sweep` (`0x13991c`); separately traced `tfplots_new` (`0x127e2c`) and RTA path `rta_method` (`0x13392c`) / `measured_test_rta` (`0x1348e0`).
+
+[Report](../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-STATIC-3.6.10-2026-10-29.md) · [call graph](../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-CALLGRAPH-2026-10-29.md) · [argument/error table](../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-ARGUMENTS-ERRORS-2026-10-29.md) · [REA Evidence manifest](../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-REA-EVIDENCE-MANIFEST-2026-10-29.md).
+
+The RTA route is separate from `spl_sweep`; no sample-rate drift correction is demonstrated in the analyzed functions. Hardware facts remain untouched.

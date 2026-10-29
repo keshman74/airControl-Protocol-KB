@@ -65,3 +65,19 @@ No hardware-confirmed command or device capability is changed by these APK findi
 ### Embedded WiiM measurement resources
 
 The base APK bundles fallback test WAVs: `room_correction_sweep-3.wav` (mono PCM16/48 kHz/6.5 s) and `refpink_-3dB.wav` (mono PCM16/48 kHz/42.96 s). `DataController.g0/P/i1` maps/copies these resources and checks the configured MD5 for remote refresh. These are APK fallback assets, not proof of current CDN versions. Exact source hashes and extracted files are listed in the [static report](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md#embedded-room-correction-fallback-files-extracted-from-the-base-apk). Status: **APK-VERIFIED / NOT-HW-VERIFIED**.
+
+
+## WiiM Home native DSP internals — 2026-10-29
+
+**Status: APK-VERIFIED / NOT-HW-VERIFIED.** Detailed native analysis of WiiM Home 3.6.10.260924 `libwiimundk.so`:
+
+- `time_align` at image address `0x148a2c` rejects sample-rate mismatch and record lengths outside 1–3× reference; prompt/sweep detections return distinct -2/-3 statuses; successful delay is clamped to -250…+2500 ms.
+- `calrir_new` at `0x127a0c` computes `Y/X` using KISS real FFT, inverse transforms, divides by N and peak-normalizes the requested IR prefix.
+- `apply_ir_windows` at `0x129a50` peak-centers a fixed crop and applies half-Tukey edge tapers; code does not separately classify direct sound and reflections.
+- `spl_sweep` at `0x13991c` uses derived 125 ms / 800 ms extents and a 262144-sample IR; window failure falls back to raw IR. It calls `tfplots_new` and normalizes output against the nearest 1 kHz point.
+- `rta_method` (`0x13392c`) is part of the separate `measured_test_rta` path, not a callee of `spl_sweep`.
+- No drift estimator/resampler is demonstrated in the analyzed paths; this does not exclude other APK modules.
+
+[Full report](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-STATIC-3.6.10-2026-10-29.md) · [Call graph](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-CALLGRAPH-2026-10-29.md) · [Arguments/errors](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-ARGUMENTS-ERRORS-2026-10-29.md) · [REA Evidence manifest](../../evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-REA-EVIDENCE-MANIFEST-2026-10-29.md).
+
+These static observations do not change hardware-confirmed device statuses or the separate documented `RoomCorr*` command applicability.

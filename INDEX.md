@@ -85,8 +85,13 @@ Discovery, framing, presets, EQ/RoomFit/subwoofer and firmware-dependent volume;
 Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork is not expanded; full HTTP/S artwork URLs are fetched verbatim. Status **APK-VERIFIED / NOT-HW-VERIFIED**. Existing hardware-confirmed facts are unchanged.
 
 
-## WiiM Home Room Correction static audit — 2026-10-28
-- [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md)
-- [APK/native reverse-engineering report](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md)
 
-Static evidence only. Status **APK-VERIFIED / NOT-HW-VERIFIED**; existing device hardware statuses are unchanged.
+## WiiM Home Room Correction static audit — 2026-10-28/29
+- [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md)
+- [End-to-end APK/native report](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-3.6.10-2026-10-28.md)
+- [Native DSP reverse-engineering report](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-STATIC-3.6.10-2026-10-29.md)
+- [Native DSP call graph](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-CALLGRAPH-2026-10-29.md)
+- [Arguments and error codes](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-ARGUMENTS-ERRORS-2026-10-29.md)
+- [REA Evidence manifest](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-REA-EVIDENCE-MANIFEST-2026-10-29.md)
+
+All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hardware statuses remain unchanged.
