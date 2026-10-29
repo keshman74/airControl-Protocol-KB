@@ -39,3 +39,12 @@ The Arylic radio `<PlayList>` schema is distinct from the generic WiiM `<QueueCo
 - PlayQueue support, accepted stream MIME/codec, audible playback, and native artwork on this specific H50 remain **NOT-HW-VERIFIED**.
 - Isolated source folder: `/Users/lab/AI/airControl/airControl-v5.0.12/`.
 
+
+
+## Follow-up 2026-10-30: v5.0.12 did not respond to radio selection
+
+The user reports that v5.0.12 radio selection did not respond, while other airControl commands and the native app continued to control H50. The v5.0.12 direct-radio PlayQueue route is therefore **not a working H50 result** in this run. The code could send up to twelve sequential queue sequences for one click, each with network and state-read timeouts. Its DIDL layout also differed from Arylic's published direct URL radio example. These are identified client-side defects; without a v5.0.12 packet capture, the exact SOAP reply and causation of the user-visible delay remain unknown.
+
+The existing WiiM Home PCAP on this H50 actually shows accepted `newTuneIn` queue traffic: `QueuePolicy=0`, `SourceName=newTuneIn`, `Radio=0`, `TrackNumber=0`, TuneIn `SearchUrl`, empty `Tracks`. It does not verify that H50 accepts the older Arylic direct URL `OnlineMusic` example. [Capture and APK evidence](../captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md).
+
+v5.0.13-rc1 is an isolated candidate that sends one direct URL queue sequence per click, matches the vendor example's DIDL layout, and returns an explicit error if playback is not confirmed after two state reads. Its audible result remains **NOT-HW-VERIFIED**. Do not promote direct URL PlayQueue support from this source correction.
