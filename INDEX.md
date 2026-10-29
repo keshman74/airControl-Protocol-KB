@@ -91,7 +91,9 @@ Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork i
 
 All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hardware statuses remain unchanged.
 
-## airControl A97 UPnP radio fallback — 2026-10-29
-- [v5.0.11 source review and TCP/8899 play fallback](evidence/application-code/AIRCONTROL-A97-NONHTTPS-RADIO-PLAY-FALLBACK-2026-10-29.md)
+## airControl A97/H50 radio playback correction — 2026-10-29
+- [v5.0.11 fallback review and user-observed failure](evidence/application-code/AIRCONTROL-A97-NONHTTPS-RADIO-PLAY-FALLBACK-2026-10-29.md)
+- [Arylic UPnP PlayQueue correction and v5.0.12 implementation](evidence/application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md)
+- [Canonical UPnP PlayQueue actions and Arylic radio QueueContext evidence](protocols/upnp/playqueue/COMMANDS.md)
 
-The `MCU+PLY-PLA` recovery action is protocol-documented but **NOT-HW-VERIFIED** on A97/H50. Do not alter the existing hardware-confirmed status.
+Arylic forum-documented sequence: `CreateQueue(QueueContext, QueuePolicy)` → `PlayQueueWithIndex(QueueName, Index=1)`. Source/code documented; **NOT-HW-VERIFIED** on the user's H50. The prior v5.0.11 TCP `MCU+PLY-PLA` fallback did not solve playback per the user's report and is superseded for starting radio streams. Existing hardware-confirmed records remain unchanged.
