@@ -22,7 +22,7 @@ The UPnP-only radio route now:
 
 1. Keeps the existing artwork proxy and metadata preparation.
 2. Locates the device-advertised `urn:schemas-wiimu-com:service:PlayQueue:1` service and uses its discovered control URL and service URN.
-3. Builds an Arylic Linkplay radio `<PlayList>` QueueContext with `Radio=1`, `SourceName=OnlineMusic`, one track, the selected URL and escaped DIDL-Lite metadata; queue policy is 1.
+3. Builds an Arylic Linkplay radio `<PlayList>` QueueContext with `Radio=1`, `SourceName=OnlineMusic`, one track, the selected URL and escaped DIDL-Lite metadata; the DIDL `res` advertises the selected audio MIME and the queue policy is 1.
 4. Sends `CreateQueue`, then `PlayQueueWithIndex` with the same queue name and `Index=1`.
 5. Reports SOAP faults by action and does not send `MCU+PLY-PLA` to start the URL.
 6. Reads the advertised AVTransport state for diagnostics; state readback is reported separately from SOAP action acceptance.
@@ -34,7 +34,7 @@ The Arylic radio `<PlayList>` schema is distinct from the generic WiiM `<QueueCo
 - No command was sent to the user's device during this code change.
 - No firmware, device settings, stable v5.0.1 files, or existing hardware-confirmed KB facts were changed.
 - v5.0.12 arm64 ZIP: `release/airControl-5.0.12-rc1-arm64.zip`.
-- SHA-256: `3144d30ac96a56a327324c5db36928a0ce1eef15a409f2191b13f6a5d298da80`.
+- SHA-256: `7441dcbaf5f742d3fffad600ee9346255e02e95f1de1d83e4e8872aae623a67e`.
 - Node syntax checks, `git diff --check`, Vite production build, Electron arm64 ZIP packaging, and `unzip -t` passed. No device playback test was run.
 - PlayQueue support, accepted stream MIME/codec, audible playback, and native artwork on this specific H50 remain **NOT-HW-VERIFIED**.
 - Isolated source folder: `/Users/lab/AI/airControl/airControl-v5.0.12/`.
