@@ -48,3 +48,9 @@ The user reports that v5.0.12 radio selection did not respond, while other airCo
 The existing WiiM Home PCAP on this H50 actually shows accepted `newTuneIn` queue traffic: `QueuePolicy=0`, `SourceName=newTuneIn`, `Radio=0`, `TrackNumber=0`, TuneIn `SearchUrl`, empty `Tracks`. It does not verify that H50 accepts the older Arylic direct URL `OnlineMusic` example. [Capture and APK evidence](../captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md).
 
 v5.0.13-rc1 is an isolated candidate that sends one direct URL queue sequence per click, matches the vendor example's DIDL layout, and returns an explicit error if playback is not confirmed after two state reads. Its audible result remains **NOT-HW-VERIFIED**. Do not promote direct URL PlayQueue support from this source correction.
+
+## Follow-up 2026-10-30: v5.0.13-rc1 failed on H50
+
+The user tested v5.0.13-rc1 by selecting RTL. airControl reported `PlayQueueWithIndex: socket hang up; playback was not confirmed (stop)`. The selected station's artwork also did not appear in the native app; in earlier airControl versions the artwork did appear, although playback still required pressing Play in the native app. This is **USER-HW-OBSERVED** failure of the v5.0.13 direct URL `OnlineMusic` queue path on this H50. Do not present the old Arylic forum example as a verified working recipe for this firmware.
+
+The existing WiiM Home PCAP shows a separate successful `newTuneIn` queue (`QueuePolicy=0`, `Radio=0`, `TrackNumber=0`, populated TuneIn `SearchUrl`, empty `Tracks`) with `PlayQueueWithIndex` HTTP 200 and subsequent `GetInfoEx` state `PLAYING`. This is **CAPTURE-OBSERVED** on the same H50. The differing source schema is the strongest lead; the capture does not establish a general Radio Browser URL route. Preserve the earlier `SetAVTransportURI` artwork behavior while investigating the exact start mechanism. No new command was sent to the device for this report.
