@@ -37,3 +37,12 @@ The UI now treats a successful TCP send as an accepted playback request so it wi
 - [A97 command view](../../devices/A97/COMMANDS.md) — playback support and fallback status.
 - [MCU TCP :8899 command view](../../protocols/mcu-8899/COMMANDS.md)
 - airControl implementation: `/Users/lab/AI/airControl/airControl-v5.0.11/`
+
+
+## Follow-up correction — user test invalidates the v5.0.11 fallback, 2026-10-29
+
+The user reports that v5.0.11 removed the red error banner but **radio playback still did not start**. This means the earlier TCP/8899 fallback's “accepted send” was not sufficient to start the URL stream on the user's H50. The source report above records the original implementation and is retained for provenance; its proposed fallback must not be described as a fix.
+
+Arylic staff's H50 guidance explicitly says a URL cannot be started by TCP MCU alone and directs clients to UPnP `CreateQueue` and `PlayQueueWithIndex`. The corrected v5.0.12 candidate replaces the SetAVTransportURI/TCP-play route for UPnP-only radio with the Arylic PlayQueue flow. Details and source links: [corrected PlayQueue report](AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md).
+
+**Evidence status:** user-confirmed failure of the v5.0.11 fallback; Arylic forum-documented protocol guidance; v5.0.12 source implemented. v5.0.12 playback remains **NOT-HW-VERIFIED** until the user tests it on the H50.
