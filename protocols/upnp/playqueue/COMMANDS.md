@@ -81,3 +81,12 @@ Sources:
 - [Arylic radio PlayQueue example](https://forum.arylic.com/t/http-control-multiroom-tunein/241) — SOAP action/argument example and legacy radio PlayList QueueContext.
 
 The user's latest report says v5.0.11's `MCU+PLY-PLA` fallback removed the red error but did not start playback. This is direct evidence that the prior fallback was insufficient in that run, not proof of PlayQueue success. v5.0.12 implementation is documented separately and remains NOT-HW-VERIFIED pending user playback confirmation.
+
+
+## H50 `newTuneIn` queue — captured acceptance 2026-10-29
+
+**CAPTURE-OBSERVED HTTP 200 responses on the tested H50** for `CreateQueue` and `PlayQueueWithIndex` using the `newTuneIn` schema below. This observation does **not** verify audible playback or the separate direct-URL `OnlineMusic` schema above.
+
+Existing `/private/tmp/wiim-a97.pcap` (SHA-256 `71aaebfc2987d0bd99e47e75d0191ea9eb7c6f528acb9a87b69d3947ffa03fb4`) records requests to `192.168.0.100:59152/upnp/control/PlayQueue1` at 14:18:23 local. `CreateQueue` used `QueuePolicy=0`; its escaped `PlayList` had `ListName=Kiss FM Ukraine`, `SourceName=newTuneIn`, `TrackNumber=0`, `SearchUrl` pointing to a TuneIn profile media endpoint, `Radio=0`, `ContentType=radio`, `PicUrl`, and empty `Tracks`. `PlayQueueWithIndex` used the same name and `Index=1`. Both returned HTTP 200 SOAP action responses.
+
+See [packet-level evidence and 4STREAM static URL path](../../evidence/captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md). Keep this specific observed queue distinct from the older Arylic direct-stream example (`OnlineMusic`, `Radio=1`, one `Track1/URL`, `QueuePolicy=1`).
