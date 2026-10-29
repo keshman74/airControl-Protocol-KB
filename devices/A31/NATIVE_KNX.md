@@ -192,3 +192,15 @@ The operator explicitly chose **configurable maximum volume with 100% as the fac
 ## v0.11 — firmware-stage editable KNX group table (HOST-TESTED, A31 PENDING)
 
 A complete native **in-memory 64-entry KNX mapping** and external `GA,ACTION,PARAM,TRIGGER` CSV were built as `A31_KNX_NATIVE_V11.zip`, with an offline HTML editor, Python CLI editor and read-only storage inventory script. Full specification and current limitations: **[KNX_MAPPING_TABLE.md](KNX_MAPPING_TABLE.md)**. `/tmp` is **volatile**; the persistent writable partition has not been identified from the device yet. This package is not a flashable OTA image and does not install autostart. Previous working v0.10 remains the hardware baseline. Offline unit tests pass, physical validation for v0.11 is pending. No repeat tests of already known Linkplay commands are needed; next check is the external table parsing/mapping and real flash layout.
+
+
+## V6E Rakoit Silent + Native KNX v0.11 — firmware-installed, HW VERIFIED (2026-10-30)
+
+**Update superseding the earlier v0.11 host-only/pending status for this specific device and image.** Native MIPS32 static `knx-audio` v0.11 is now packaged in modified Rakoit RootFS and **automatically started after cold power-on** on spare A31 `192.168.0.29`. The earlier v0.11 paragraph remains historical build-stage evidence; it is no longer the latest hardware status.
+
+- Verified V6E image: `A31-Rakoit-4.6.415156-Silent-KNX-V6E-20261029-215907-NOT-FLASHABLE.bin`, SHA-256 `886b13056eb3bc721fffb5c78e921ccb87f6cc46796754ae2202756423aad431`.
+- V6E startup: `/home/user.sh` invokes `/usr/share/a31-knx/boot-hook.sh`; supervised delayed retry of `knx-audio --config ... --map ... --run-all`; preserves stock `hdl`, no external ESP32 gateway. Boot log: `/tmp/a31-rootfs-knx-boot.log`.
+- Boot and runtime logs: `V6E_SUPERVISOR_STARTED`, `V6E_KNX_ATTEMPT=1`, `API_OK endpoint=127.0.0.1`, `JOIN_OK group=224.0.23.12:3671 on 192.168.0.29`. KNX MUTE `3/1/6` ON/OFF both have `READBACK_MATCH`.
+- **Operator hardware-confirmed:** KNX VOL+ `3/1/0`, VOL− `3/1/1`, Presets 1–4 `3/2/0..3`, and actual PLAY/PAUSE `3/0/0`. For PLAY/PAUSE, log `HTTP_ACTION_RC=0` is acceptance only; physical effect is independently operator-confirmed. Autostart after full power-off/on without SSH is operator-confirmed.
+- Scope: one spare A31, specific Rakoit `4.6.415156` build. Does not imply stability over weeks, support on other hardware, verified recovery from failed flash, or mass-release certification.
+- **Reproducible build inputs, patch mechanism, physical log, SHA, preservation rules:** [V6E HW evidence](../../evidence/hardware/A31-RAKOIT-SILENT-NATIVE-KNX-V6E-HW-VERIFIED-2026-10-30.md).
