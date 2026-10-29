@@ -67,24 +67,19 @@ v0.4.8 contains **204 canonical records**. Original lossless CSV shards remain u
 Static evidence only; device hardware statuses are unchanged.
 
 ## iAudioCloud A33 native audit — 2026-10-25
-
 - [Detailed native command analysis](protocols/a33-native-23040/IAUDIOCLOUD-2026-10-25.md)
 - [141 opcode constants and 109 send-site observations](protocols/a33-native-23040/IAUDIOCLOUD-OPCODES-2026-10-25.md)
 - [Evidence and reproducibility](evidence/reverse-engineering/IAUDIOCLOUD-2026-10-25.md)
 
 Discovery, framing, presets, EQ/RoomFit/subwoofer and firmware-dependent volume; APK evidence only. Existing hardware confirmation is retained separately.
 
-
 ## 4STREAM AirPlay metadata/artwork audit — 2026-10-25
-
 - [Canonical metadata-to-ImageView report](protocols/linkplay-http-https/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md)
 - [Provenance and reproduction selectors](evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.md)
 - [REA and DEX evidence](evidence/reverse-engineering/4STREAM-AIRPLAY-METADATA-ARTWORK-2026-10-25.json)
 - [Six aggregate source/rule records, sequence 651–656](registry/records/651-656.csv)
 
 Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork is not expanded; full HTTP/S artwork URLs are fetched verbatim. Status **APK-VERIFIED / NOT-HW-VERIFIED**. Existing hardware-confirmed facts are unchanged.
-
-
 
 ## WiiM Home Room Correction static audit — 2026-10-28/29
 - [Canonical Room Correction function notes](functions/room-correction/COMMANDS.md)
@@ -95,3 +90,8 @@ Static evidence: AirPlay is recognized from PlayMedium; relative /data artwork i
 - [REA Evidence manifest](evidence/reverse-engineering/WIIM-HOME-ROOM-CORRECTION-DSP-REA-EVIDENCE-MANIFEST-2026-10-29.md)
 
 All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hardware statuses remain unchanged.
+
+## airControl A97 UPnP radio fallback — 2026-10-29
+- [v5.0.11 source review and TCP/8899 play fallback](evidence/application-code/AIRCONTROL-A97-NONHTTPS-RADIO-PLAY-FALLBACK-2026-10-29.md)
+
+The `MCU+PLY-PLA` recovery action is protocol-documented but **NOT-HW-VERIFIED** on A97/H50. Do not alter the existing hardware-confirmed status.
