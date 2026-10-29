@@ -97,3 +97,10 @@ All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hard
 - [Canonical UPnP PlayQueue actions and Arylic radio QueueContext evidence](protocols/upnp/playqueue/COMMANDS.md)
 
 Arylic forum-documented sequence: `CreateQueue(QueueContext, QueuePolicy)` → `PlayQueueWithIndex(QueueName, Index=1)`. Source/code documented; **NOT-HW-VERIFIED** on the user's H50. The prior v5.0.11 TCP `MCU+PLY-PLA` fallback did not solve playback per the user's report and is superseded for starting radio streams. Existing hardware-confirmed records remain unchanged.
+
+
+## A31 Rakoit Silent + Native KNX V6E — 2026-10-30
+- [Reproducible hardware-verified V6E image/build/boot evidence](evidence/hardware/A31-RAKOIT-SILENT-NATIVE-KNX-V6E-HW-VERIFIED-2026-10-30.md).
+- [Canonical A31 Native KNX status and mappings](devices/A31/NATIVE_KNX.md).
+
+**CONFIRMED on spare A31 192.168.0.29:** custom OTA boots with stock playback/SSH/HTTP; delayed boot supervisor autonomously starts v0.11 native KNX even after full power-cycle; MUTE ON/OFF (readback), volume +/−, presets 1–4, PLAY/PAUSE (physical observation). Single tested image SHA-256 `886b13056eb3bc721fffb5c78e921ccb87f6cc46796754ae2202756423aad431`; this is not mass-production certification. Preserve original OTA kernel, SquashFS device nodes, KNX ELF and known-good startup mechanism.
