@@ -95,6 +95,7 @@ All static findings are **APK-VERIFIED / NOT-HW-VERIFIED**. Existing device hard
 - [v5.0.11 fallback review and user-observed failure](evidence/application-code/AIRCONTROL-A97-NONHTTPS-RADIO-PLAY-FALLBACK-2026-10-29.md)
 - [Arylic UPnP PlayQueue correction and v5.0.12 implementation](evidence/application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md)
 - [Canonical UPnP PlayQueue actions and Arylic radio QueueContext evidence](protocols/upnp/playqueue/COMMANDS.md)
+- [H50 captured newTuneIn queue and 4STREAM custom URL route](evidence/captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md)
 
 Arylic forum-documented sequence: `CreateQueue(QueueContext, QueuePolicy)` → `PlayQueueWithIndex(QueueName, Index=1)`. Source/code documented; **NOT-HW-VERIFIED** on the user's H50. The prior v5.0.11 TCP `MCU+PLY-PLA` fallback did not solve playback per the user's report and is superseded for starting radio streams. Existing hardware-confirmed records remain unchanged.
 
@@ -104,3 +105,4 @@ Arylic forum-documented sequence: `CreateQueue(QueueContext, QueuePolicy)` → `
 - [Canonical A31 Native KNX status and mappings](devices/A31/NATIVE_KNX.md).
 
 **CONFIRMED on spare A31 192.168.0.29:** custom OTA boots with stock playback/SSH/HTTP; delayed boot supervisor autonomously starts v0.11 native KNX even after full power-cycle; MUTE ON/OFF (readback), volume +/−, presets 1–4, PLAY/PAUSE (physical observation). Single tested image SHA-256 `886b13056eb3bc721fffb5c78e921ccb87f6cc46796754ae2202756423aad431`; this is not mass-production certification. Preserve original OTA kernel, SquashFS device nodes, KNX ELF and known-good startup mechanism.
+
