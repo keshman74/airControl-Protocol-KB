@@ -141,3 +141,10 @@ The v5.0.11 implementation sent framed TCP/8899 `MCU+PLY-PLA` after AVTransport 
 Arylic's H50 guidance says URL playback uses UPnP PlayQueue: `CreateQueue` with a radio `PlayList` QueueContext, followed by `PlayQueueWithIndex` for the same queue. See [canonical PlayQueue details](../../protocols/upnp/playqueue/COMMANDS.md) and the [v5.0.12 implementation report](../../evidence/application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md).
 
 Status: **ARYLIC-FORUM-DOCUMENTED / SOURCE-IMPLEMENTED / NOT-HW-VERIFIED** on the user's H50. Do not change existing HTTPS-confirmed A97 command facts.
+
+
+## H50 PlayQueue capture and direct URL limitation — 2026-10-30
+
+On the tested H50 `192.168.0.100`, the existing WiiM Home PCAP records `CreateQueue` and `PlayQueueWithIndex` over HTTP/59152 with HTTP 200 SOAP responses. The accepted context is **`newTuneIn` with a TuneIn SearchUrl and no Track URL**, not Arylic's separate published `OnlineMusic` direct-URL example. Status: **CAPTURE-OBSERVED ACTION ACCEPTANCE** for that exact TuneIn shape; audible playback and arbitrary direct URL queue support remain unverified. [Detailed packet and APK evidence](../../evidence/captures/H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md).
+
+The user reports that airControl v5.0.12 did not respond when selecting radio, while its other H50 commands and the native app worked. v5.0.12's repeated direct-URL queue attempts and divergent DIDL are source-observed defects; v5.0.13 corrects those client behaviors but remains **NOT-HW-VERIFIED**. The H50 separately advertises HTTPS security 3.0, and 4STREAM's analyzed custom-radio path builds `setPlayerCmd:play:<encoded-url>` through its secure HTTP API client. Do not infer that this device's firmware lacks HTTPS merely from airControl's fallback profile. Existing HTTPS-tested A97 facts are unchanged.
