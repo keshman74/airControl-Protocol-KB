@@ -1,38 +1,41 @@
-# A97/H50 Non-HTTPS radio: use PlayQueue, not MCU play
+# airControl v5.0.12: A97/H50 radio playback via UPnP PlayQueue
 
-**Status:** Arylic-forum-protocol documented; airControl change implemented in v5.0.12-rc1; **NOT-HW-VERIFIED** on this user's H50/A97. The user tested v5.0.11 and reported: the red error disappeared, but playback still did not start.
+**Status: SOURCE-IMPLEMENTED / ARYLIC-FORUM-DOCUMENTED / NOT-HW-VERIFIED.** No playback claim is made for the user's H50 until tested on the device.
 
-## The correction
+## User-observed result
 
-The H50 firmware's HTTPAPI is disabled for security. This does not mean that all device control is unavailable: the vendor UPnP services and framed TCP/8899 channel are separate interfaces. For starting a new stream URL, however, Arylic support says a TCP/8899 MCU command cannot do it. Their documented approach is a PlayQueue SOAP sequence:
+The user reports that v5.0.11 removed the red error banner but radio playback still did not start. v5.0.11 tried AVTransport `SetAVTransportURI` and `Play`, then sent framed TCP/8899 `MCU+PLY-PLA`. A successful TCP write was therefore not a valid playback confirmation and did not fix the reported H50 run.
 
-1. Send `CreateQueue` to the advertised PlayQueue service.
-2. Put one radio item in an Arylic Linkplay `<PlayList>` QueueContext. Its fields include `ListName`, `ListInfo/Radio=1`, `SourceName=OnlineMusic`, and `Tracks/Track1` with `URL`, `Source`, and DIDL-Lite `Metadata`.
-3. Pass `QueuePolicy=1`.
-4. Send `PlayQueueWithIndex` with the same `QueueName` and one-based `Index=1`.
+## Arylic protocol evidence
 
-The DIDL-Lite metadata includes the station title, artist, album, stream URL, and artwork URL. The queue context itself is passed as escaped XML inside the SOAP argument; the DIDL-Lite in `Metadata` is escaped as text inside the PlayList XML.
+Arylic staff's H50 guidance says TCP MCU commands cannot start a URL and points to UPnP `CreateQueue` followed by `PlayQueueWithIndex`. Their radio example sends a SOAP `CreateQueue` whose `QueueContext` contains a legacy Linkplay `<PlayList>` document with radio source fields and track URL/metadata, then invokes `PlayQueueWithIndex` with the same queue name and index 1. A separate H50 API answer says HTTPAPI is disabled for security while UPnP and TCP/8899 are available.
 
-This Arylic radio `<PlayList>` format is distinct from the generic WiiM `<QueueContext><Name>...<Tracks>...</Tracks></QueueContext>` builder documented at [QUEUECONTEXT_XML.md](../../protocols/upnp/QUEUECONTEXT_XML.md). Do not substitute one schema for the other.
+- [Arylic H50 MCU command discussion](https://forum.arylic.com/t/arylic-h50-mcu-command/5026)
+- [Arylic H50 API discussion](https://forum.arylic.com/t/api-for-the-h50/3832/14)
+- [Arylic radio PlayQueue example](https://forum.arylic.com/t/http-control-multiroom-tunein/241)
 
-## Why the v5.0.11 fix was wrong
-
-v5.0.11 sent `MCU+PLY-PLA` after AVTransport URI/metadata setup. Arylic states that TCP commands cannot initiate playback from a supplied URL. The user's real-device result confirms that this fallback only removed the UI error; it did not start the stream. A successful TCP write is not evidence of audible playback.
+This is vendor-forum documentation, not a packet capture or proof that the user's firmware accepts the request or stream codec.
 
 ## v5.0.12 implementation
 
-airControl v5.0.12-rc1 replaces the UPnP-only radio AVTransport `SetAVTransportURI` + `Play` path with the vendor PlayQueue flow above. It uses the PlayQueue control URL and service type discovered from SSDP/description.xml, checks SOAP faults, and reads AVTransport state after the queue action. It does not send HTTPAPI/HTTPS or TCP play commands for this route. API-enabled routes remain on their prior flow.
+The UPnP-only radio route now:
 
-## Evidence limits
+1. Keeps the existing artwork proxy and metadata preparation.
+2. Locates the device-advertised `urn:schemas-wiimu-com:service:PlayQueue:1` service and uses its discovered control URL and service URN.
+3. Builds an Arylic Linkplay radio `<PlayList>` QueueContext with `Radio=1`, `SourceName=OnlineMusic`, one track, the selected URL and escaped DIDL-Lite metadata; queue policy is 1.
+4. Sends `CreateQueue`, then `PlayQueueWithIndex` with the same queue name and `Index=1`.
+5. Reports SOAP faults by action and does not send `MCU+PLY-PLA` to start the URL.
+6. Reads the advertised AVTransport state for diagnostics; state readback is reported separately from SOAP action acceptance.
 
-- The user confirms v5.0.11 failed to start playback; this is hardware evidence for that failed implementation only.
-- The PlayQueue sequence and wire-level field structure are documented by Arylic forum posts. They are not a packet capture from this device.
-- v5.0.12-rc1 playback and native artwork remain **NOT-HW-VERIFIED** pending the user's test.
-- Do not change existing A97 HTTPS hardware-confirmed records; the non-HTTPS behavior is a separate transport profile.
+The Arylic radio `<PlayList>` schema is distinct from the generic WiiM `<QueueContext><Name>…` schema. See the [canonical PlayQueue page](../../protocols/upnp/playqueue/COMMANDS.md).
 
-## References
+## Scope, build, and limits
 
-- Arylic, [API for the H50](https://forum.arylic.com/t/api-for-the-h50/3832) — HTTPAPI disabled for security; UPnP and TCP/8899 remain available.
-- Arylic, [H50 MCU command discussion](https://forum.arylic.com/t/arylic-h50-mcu-command/5026) — TCP cannot execute URL playback; use UPnP PlayQueue.
-- Arylic, [HTTP control multiroom & tunein](https://forum.arylic.com/t/http-control-multiroom-tunein/241) — `CreateQueue` radio context followed by `PlayQueueWithIndex`.
-- Canonical command details: [UPnP PlayQueue](../../protocols/upnp/playqueue/COMMANDS.md), [A97 commands](../../devices/A97/COMMANDS.md).
+- No command was sent to the user's device during this code change.
+- No firmware, device settings, stable v5.0.1 files, or existing hardware-confirmed KB facts were changed.
+- v5.0.12 arm64 ZIP: `release/airControl-5.0.12-rc1-arm64.zip`.
+- SHA-256: `3144d30ac96a56a327324c5db36928a0ce1eef15a409f2191b13f6a5d298da80`.
+- Node syntax checks, `git diff --check`, Vite production build, Electron arm64 ZIP packaging, and `unzip -t` passed. No device playback test was run.
+- PlayQueue support, accepted stream MIME/codec, audible playback, and native artwork on this specific H50 remain **NOT-HW-VERIFIED**.
+- Isolated source folder: `/Users/lab/AI/airControl/airControl-v5.0.12/`.
+
