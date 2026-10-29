@@ -12,4 +12,4 @@ Known stack: Linkplay HTTP :80 + MCU TCP :8899. Confirmed functions include stat
 - **Security:** do not expose TCP/24678 to the Internet; restrict service/debug SSH to a trusted local/service network.
 
 ## Native KNX integration
-- [A31 native KNXnet/IP multicast receiver + verified Mute readback](NATIVE_KNX.md) — **CONFIRMED on A31 hardware (v0.6/v0.7)**. Standalone manually launched MIPS32 ELF from `/tmp`; no permanent firmware installation or autostart yet.
+- [A31 native KNXnet/IP multicast receiver + verified Mute readback](NATIVE_KNX.md) — **CONFIRMED on A31 hardware**, including [V6E firmware-installed autonomous cold-boot Native KNX v0.11](../../evidence/hardware/A31-RAKOIT-SILENT-NATIVE-KNX-V6E-HW-VERIFIED-2026-10-30.md) on spare A31 `192.168.0.29`. Earlier v0.6–v0.10 manual `/tmp` tests remain historical baselines.
