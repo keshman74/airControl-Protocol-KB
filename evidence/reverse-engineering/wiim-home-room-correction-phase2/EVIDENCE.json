@@ -1,0 +1,33 @@
+{
+  "schema": "aircontrol-wiim-dsp-phase2-evidence-v1",
+  "assessment": "static binary analysis plus isolated synthetic fixtures; NOT-HW-VERIFIED",
+  "artifacts": {
+    "apk": {"version": "WiiM Home 3.6.10.260924", "sha256": "99ebfac7f76ecb6c33b6988ab8ca11bb0833e22329e323f7299546cdc5da490a"},
+    "xapk_sha256": "b2d474f4048d416b08deeae915cceb4b157b78a5778019d71e6084b92c9c5b9a",
+    "native": {"name": "libwiimundk.so", "sha256": "4e3159c5ed28490e7502692071da1e6bfeb1c2c592361492464f8fd74cd510ab", "build_id": "a68007e72b0db19a91b9a6b6761fa9c20647e427", "architecture": "AArch64", "image_base": "0x100000", "analyzer": "Ghidra 12.1.4"},
+    "calibration_curve": {"name": "imm6-99-03503.txt", "sha256": "170036dbd1a7466c2a796259c31524fe612f42e4708bd169ddbd6216e73beaa9", "rows": 256, "frequency_range_hz": [20, 20000], "db_range": [-3.3, 0.8], "read_only": true}
+  },
+  "claim_statuses": {
+    "time_align_prompt_ncc_floor_0_1": {"status": "BINARY-VERIFIED / DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_32f1eca84a38e69ac5b264cb61dff656c0ba838c8a8f118854e605bc558a927c", "state_init_evidence": "ev_5cdad1de588f90d106588e7a06e0444d2d07a1bf89edd88d036df19c5bbf4f4a"},
+    "correlation_peak_noise_formula": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_f4fea1e42703fcfbcd4c719a95e449ec5ba06f138895044d8638ff6d6976ffec"},
+    "time_align_call_order": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_5cdad1de588f90d106588e7a06e0444d2d07a1bf89edd88d036df19c5bbf4f4a"},
+    "detect_ref_end_envelope": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_a6356586cf885c529a845839482475eb7d86dd4eeffa11a89166b10e9f32228e"},
+    "bandpass_2_has_two_three_sos_banks": {"status": "BINARY-VERIFIED / semantics partial / NOT-HW-VERIFIED", "evidence_id": "ev_79e4fba0ddf3267a7f8c665ff14cf654c7e0a1fecf72918851682d57cd63afca"},
+    "sub_lowpass_500_hz": {"status": "BINARY-VERIFIED / NOT-HW-VERIFIED", "evidence_id": "ev_f4173414fa0ccc9f59b7cca5d797c69ef566fc7100e46b7c162af4261bf400ce"},
+    "main_sub_highpass_15_hz": {"status": "BINARY-VERIFIED / NOT-HW-VERIFIED", "evidence_id": "ev_1b86bbba9f1dc5ddba4f27b1001cb250b833106796184b2939bcce3b1eef27cd"},
+    "mode_alignment_window_extent": {"status": "BINARY-VERIFIED caller values / DECOMPILER-INFERRED semantics / NOT-HW-VERIFIED", "evidence_id": "ev_9ba90eeb57345c98ff66af4fccf633504f46fbf173569a01e3349036b6f71a66"},
+    "alignment_cosine_window_formula": {"status": "BINARY-VERIFIED formula / DECOMPILER-INFERRED role / NOT-HW-VERIFIED", "evidence_id": "ev_b4d64eb517c05a0a93dea34f5e95219255424eeb9c21e8a66c3a3523c30f926f"},
+    "fft_linear_correlation_helper": {"status": "BINARY-VERIFIED / DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_cdca4dc9b87779e478413beb73b3759ce616c2d5b4de4100962854581724e7b8"},
+    "calibration_parser": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_c98001351f3255c6a31e7264b814efd69c141044456189684554a8f8ed1b551f"},
+    "calibration_range_and_clamp": {"status": "BINARY-VERIFIED / NOT-HW-VERIFIED", "evidence_id": "ev_146c8ef216826b187b71f3994b4c932fce59b20cc954328c8f30f44aba23fa9c"},
+    "calibration_sign_and_grid": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_e96246d95e23319d2a1f9f5955be5b197f95fbc61778322dd04d40f2c31b356c"},
+    "rta_fft_log_grid": {"status": "BINARY-VERIFIED / DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_ab735770840bb1470a2e58a81d92a7b384e6a1f6db6429bfe1ab3130001f0608"},
+    "measured_test_rta_calls_rta": {"status": "DECOMPILER-INFERRED / NOT-HW-VERIFIED", "evidence_id": "ev_0e5eb97319e9f4ed5b4d949144877e9a0094b04638bd0aa1168dcd1f4ebecb52"},
+    "autoeq_local_optimizer": {"status": "BINARY-VERIFIED existence / DECOMPILER-INFERRED algorithm / NOT-HW-VERIFIED", "evidence_id": "ev_6fce07828d352a9e50f9c01b6459de42dc8c5d609b94be946938c2ebe9171228", "optimizer_evidence": "ev_b4577b65a27316f1abe67452a6a604125002ea82123d04354ec59b7b76ff7c67", "objective_evidence": "ev_063cdcf9c6a24cc1ec87917266cbfc48815429c26a0cae21cd064ece5453aab1", "coefficient_evidence": "ev_c1e88b6d20cd1ffaee40c05e7150c286202dd180742375c53382e4a40b89f014", "app_jni_binding": "UNKNOWN"},
+    "jni_onload": {"status": "BINARY-VERIFIED limited function; app binding unresolved", "evidence_id": "ev_d1491ac5fa8f38886608854397df2d4993008172aa02d3cd93534bc760d37b3d"},
+    "independent_clock_drift_compensation_in_scoped_path": {"status": "NOT FOUND in inspected call path; UNKNOWN globally; NOT-HW-VERIFIED"},
+    "synthetic_suite": {"status": "SYNTHETIC-VERIFIED fixtures only; not WiiM clone", "path": "tests/synthetic_phase2.py", "result": "PASS", "hardware": false}
+  },
+  "canonical_kb_base": {"repository": "keshman74/airControl-Protocol-KB", "commit": "cc77e7e5da9f9139ff177e261003ae7b8e64a95b", "integration": "separate PR requested; no direct main write"},
+  "coverage_limits": ["No hardware validation", "No device or firmware mutation", "No actual acoustic playback", "Function reports include prior snapshot-backed dossiers", "JNI association of local AutoEQ not proven", "Cloud solver math unknown", "Some detector state units and complete onset-selection semantics unknown"]
+}
