@@ -134,6 +134,10 @@ These observations hardware-verify `EQLoad:Bass Booster`, `EQLoad:Treble Booster
 Therefore the raw scale must not be modeled as a single symmetric linear coefficient around 50: equal raw offsets of +/-10 produced +2.2/-2.6 dB in the native UI. Endpoints +/-25 both display +/-6.0 dB. These are observed mapping points, not yet a complete conversion formula. Preserve exact observed points and derive/interpolate only after additional measurements if needed.
 
 
-## A97 Non-HTTPS radio start fallback candidate — 2026-10-29
+## A97/H50 non-HTTPS radio playback correction — 2026-10-29
 
-After airControl v5.0.10 static review, v5.0.11 adds a guarded fallback for the UPnP-only profile: if AVTransport `Play` fails after `SetAVTransportURI` has set radio metadata/artwork, send `MCU+PLY-PLA` over framed TCP/8899 and read transport state. This command is **PROTOCOL-DOCUMENTED / NOT-HW-VERIFIED** on A97/H50; the full source review and user symptom are recorded in [the evidence report](../../evidence/application-code/AIRCONTROL-A97-NONHTTPS-RADIO-PLAY-FALLBACK-2026-10-29.md). Keep existing A97 HTTPS facts unchanged.
+The v5.0.11 implementation sent framed TCP/8899 `MCU+PLY-PLA` after AVTransport `Play` failed. The user reports the error banner disappeared but playback still did not begin. That implementation is therefore **NOT A WORKING FIX in the reported run** and must not be treated as evidence that TCP/8899 can start an arbitrary radio URL.
+
+Arylic's H50 guidance says URL playback uses UPnP PlayQueue: `CreateQueue` with a radio `PlayList` QueueContext, followed by `PlayQueueWithIndex` for the same queue. See [canonical PlayQueue details](../../protocols/upnp/playqueue/COMMANDS.md) and the [v5.0.12 implementation report](../../evidence/application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md).
+
+Status: **ARYLIC-FORUM-DOCUMENTED / SOURCE-IMPLEMENTED / NOT-HW-VERIFIED** on the user's H50. Do not change existing HTTPS-confirmed A97 command facts.
