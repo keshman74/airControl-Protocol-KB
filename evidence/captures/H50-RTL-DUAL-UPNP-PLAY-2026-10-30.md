@@ -17,5 +17,5 @@ This capture contains no proof that the same dual-endpoint behavior applies to e
 ## Related evidence
 
 - [H50 accepted newTuneIn queue](H50-PLAYQUEUE-NEW-TUNEIN-2026-10-30.md)
-- [H50 fallback profile](../../devices/A97-NON-HTTPS.md)
+- [A97 command view](../../devices/A97/COMMANDS.md)
 - [airControl PlayQueue attempts](../application-code/AIRCONTROL-A97-PLAYQUEUE-RADIO-CORRECTION-2026-10-29.md)
