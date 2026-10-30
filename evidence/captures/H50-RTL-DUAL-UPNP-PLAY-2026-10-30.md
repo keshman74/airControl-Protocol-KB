@@ -12,7 +12,12 @@
 
 The capture demonstrates a **working Play request over TCP/59152 after airControl's SetAVTransportURI over TCP/49152**. It does not isolate whether the different port, `ControlSource`, keep-alive, or their combination is required. A correct implementation should mirror the captured working request, resolve/verify the TCP/59152 AVTransport service before use, and confirm `PLAYING` by readback. It should preserve `SetAVTransportURI` for the previously observed native-app artwork behavior. The direct `OnlineMusic` PlayQueue attempt in v5.0.13 failed with socket hang up and `STOPPED`, and its artwork did not appear; it must not be considered a verified H50 radio path.
 
-This capture contains no proof that the same dual-endpoint behavior applies to every A97 firmware. No firmware or device settings were changed by the analysis. A v5.0.14 source candidate mirrors the observed sequence; its app-driven result remains **NOT-HW-VERIFIED** until tested.
+This capture contains no proof that the same dual-endpoint behavior applies to every A97 firmware. No firmware or device settings were changed by the analysis. A v5.0.14 source candidate mirrors the observed sequence. Its RTL result is recorded below.
+
+
+## airControl v5.0.14 RC1 user hardware result
+
+After the capture-based change, the user tested v5.0.14 RC1 on the H50 and answered that **both RTL sound and its artwork work**. The test question specifically asked whether audio starts without pressing Play in WiiM Home and whether the artwork appears there. This is **USER-HW-VERIFIED for RTL on this H50**. It is independent of the earlier WiiM Home PCAP; no v5.0.14 packet capture was supplied. The release ZIP SHA-256 is `46df441571713a59f338966d8d366e3de1c58041e5c64e23f7de0b6d6029b431`; local source commit `e31e65c`. The capture and user result still do not isolate whether port 59152, `ControlSource`, keep-alive, or their combination is required. Other stations, codecs and devices are **NOT-HW-VERIFIED** for this release.
 
 ## Related evidence
 
